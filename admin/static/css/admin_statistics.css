@@ -1,0 +1,52 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css');
+body {
+
+    font-family: 'Pretendard', 'sans-serif';
+}
+
+/* ----- HEADER ----- */
+
+
+
+/*----- MAIN -----*/
+
+
+.main-box{
+    /* border: 5px solid red; */
+}
+
+.left-nav{
+
+
+
+    /* border: 3px solid red; */
+}
+
+.left-nav a {
+    margin-top: 20%;
+    border: 1px solid black;
+}
+
+
+
+
+
+.content-box{
+    /* border: 3px solid green; */
+    
+
+}
+
+
+
+/* .content-box #donutChart{
+    width: 50%;
+    border: 1px solid green;
+}
+
+.content-box #secondDonutChart{
+    width: 50%;
+    border: 1px solid red;
+} */
+
+/*----- FOOTER -----*/
