@@ -1,0 +1,36 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css');
+
+
+body {
+
+    font-family: 'Pretendard', 'sans-serif';
+}
+
+/* ----- HEADER ----- */
+
+
+
+/*----- MAIN -----*/
+
+
+
+
+/* 좌측 네비바 */
+
+.left-nav a {
+    margin-top: 20%;
+}
+
+
+
+
+#donutChart{
+    width: 50%;
+}
+
+#secondDonutChart{
+    width: 50%;
+}
+
+
+/*----- FOOTER -----*/
