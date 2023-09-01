@@ -1,0 +1,86 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css');
+* {
+    margin: 0;
+    margin-top: 0;
+    list-style: none;
+    font-family: 'Pretendard', 'sans-serif';
+}
+body {
+    margin-top: 8px;
+    margin-left: 9px;
+}
+/* <--------- header ---------> */
+.inline-div {
+    display: inline-block;
+}
+
+.sub-header {
+    outline: 0px solid red;
+    width: 1200px;
+    font-size: 0;
+    display: flex;
+}
+.sub-header :nth-child(2) {
+    color: white;
+}
+.sub-header .sub-menu {
+    outline: 1px solid black;
+    height: 100px;
+    width: 400px;
+    font-size: 32px;
+    text-align: center;
+    line-height: 100px;
+    font-weight: bold;
+}
+
+/* <--------- content ---------> */
+.content {
+    height: 690px;
+    width: 1200px;
+    display : inline-block;
+    outline: 1px solid black;
+}
+/* <--------- confirm - left ---------> */
+.content-left {
+    width : 800px;
+    height : 690px;
+    float : left;
+    border-right : 1px dotted black;
+    padding-top: 20px; 
+}
+.left-upper {
+    outline: 3px solid purple;
+    width: 800px;
+    height: 280px;
+    position: relative;
+    display: flex;
+}
+
+.poster {
+    outline: 0px solid red;
+    width : 205px;
+    height : 280px;
+}
+.poster img {
+    width : 100%;
+}
+
+.left-upper .concert-info {
+    border: 2px solid red;
+    width: 265px;
+    height : 280px;
+}
+.about-concert {
+    font-size: 1.2rem;
+}
+.concert-info p {
+    border: 1px solid green;
+}
+
+/* <----------------------- right ---------------------> */
+.content-right {
+    width : 400px;
+    height : 100%;
+    float : right;  
+    background-color: #ccc;
+}
