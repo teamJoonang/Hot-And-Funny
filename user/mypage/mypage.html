@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- font awesome cdn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+    <!-- bootstrap cdn -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- common.css -->
+    <link rel="stylesheet" href="../static/css/common.css">
+    <!-- login.css -->
+    <link rel="stylesheet" href="../static/css/login.css">
+    <!-- mypage.css -->
+    <link rel="stylesheet" href="../static/css/mypage.css">
+    
+    <title>내 정보</title>
+</head>
+<body>
+    <header class="mx-0 px-0 bg-black">
+        <div class="container-fluid d-flex justify-content-between">
+            <div class="col-3">
+                <a href="#!" class="d-flex">
+                    <img src="../../static/img/concert_logo_final2.png" class="img-fluid" alt="콘서트_이미지_로고">
+                </a>
+            </div>
+            <nav class="col-4 d-flex navbar justify-content-center">
+                <ul class="nav fw-semibold">
+                    <li class="nav-item">
+                        <a href="" class="nav-link text-decoration-none text-white">ABOUT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link text-decoration-none text-white">TICKET</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link text-decoration-none text-white">NOTICE</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link text-decoration-none text-white">QNA</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link text-decoration-none text-white">EVENT</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="col-3 navbar justify-content-center">
+                <div class="d-flex">
+                    <a href="#" class="nav-link text-decoration-none text-white fw-semibold">예매확인</a>
+                    <a href="#" class="nav-link text-decoration-none text-white fw-semibold mx-2">로그인</a>
+                    <a href="#" class="nav-link text-decoration-none text-white fw-semibold">회원가입</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="vh-100">
+        <div class="container px-5 h-100">
+            <div class="row d-flex py-5 h-100">
+                
+                <div class="col-xl-3">
+                    <div class="card">
+                        
+                        <div class="card-header">메뉴</div>
+
+                        <div class="card-body">
+                            <ul id="mypage_menu">
+                                <li class="my-3"><a href="#">회원정보</a></li>
+                                <li class="my-3"><a href="#">구매내역</a></li>
+                                <li class="my-3"><a href="#">문의내역</a></li>
+                                <li class="my-3"><a href="#">회원탈퇴</a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-xl-9">
+
+                    <div class="card mb-4">
+                        <div class="card-header" id="mypage_header">회원 정보</div>
+                        <div class="card-body">
+
+                            <!-- 회원정보 -->
+                            <form action="">
+                                <!-- user email -->
+                                <div class="mb-3">
+                                    <label class="small mb-1" for="user_login_id">이메일 ( Login ID )</label>
+                                    <input class="form-control" id="user_login_id" type="text" readonly="readonly" 
+                                    placeholder="이메일을 입력해주세요" value="test@gmail.com">
+                                </div>
+                                <!-- Form Row-->
+                                <div class="row gx-3 mb-3">
+                                    <!-- name -->
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="user_name">이름</label>
+                                        <input class="form-control" id="user_name" type="text" value="홍길동" readonly
+                                        placeholder="이름을 입력해주세요.">
+                                    </div>
+                                    <!-- nickname -->
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="user_nickname">별명</label>
+                                        <input class="form-control" id="user_nickname" type="text" value="Denma5319" readonly
+                                        placeholder="별명은 다른 사용자와 소통하는 이름입니다.">
+                                    </div>
+                                </div>
+                                <!-- 주소 -->
+                                <div class="mb-3">
+                                    <label class="small mb-1" for="user_addr">주소</label>
+                                    <input class="form-control" id="user_addr" type="text" readonly
+                                    value="서울특별시 마포구 만리재로 99길 4-5" placeholder="주소를 입력해주세요.">
+                                </div>
+                                <!-- 연락처 -->
+                                <div class="mb-3">
+                                    <label class="small mb-1" for="user_tel">연락처</label>
+                                    <input class="form-control" id="user_tel" type="text" readonly
+                                    value="010-0000-0000" placeholder="연락처를 입력해주세요.">
+                                </div>
+                                <!-- row -->
+                                <div class="row gx-3 mb-3">
+                                    <!-- name -->
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="user_age">나이</label>
+                                        <input class="form-control" id="user_age" type="text" value="17" readonly
+                                        placeholder="나이를 입력해주세요.">
+                                    </div>
+                                    <!-- nickname -->
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="user_gender">성별</label><br>
+                                        <input class="chk_input" type="radio" name="chk_gender" id="user_gender" value="M"> 남자
+                                        <input class="chk_input" type="radio" name="chk_gender" id="user_gender" value="W" checked> 여자
+                                    </div>
+                                </div>
+                                <hr>
+                                <!-- 광고 승인여부 -->
+                                <div class="my-3 text-center">
+                                    <label for="chk_marketing">Hot and Funny의 다양한 이벤트 소식을 전해드립니다.</label><br>
+                                    <input class="chk_input" type="radio" name="chk_marketing" value="y"> 수신
+                                    <input class="chk_input" type="radio" name="chk_marketing" value="n" checked> 수신거부
+                                </div>
+
+                            
+                                <button class="btn btn-primary" type="button">수정</button>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-black">
+        <div class="container-fluid">
+            <div class="d-flex">
+                <div class="d-flex col-3 text-white align-items-center justify-content-center">
+                    <div class="align-items-center">
+                        <div class="fs-6 fw-semibold">콘서트 주체 회사명</div>
+                        <div class="d-flex">
+                            <div>주소:</div>
+                            <div class="ms-1">서울시 마포구 신촌로 176</div>
+                        </div>
+                        <div class="d-flex">
+                            <div>대표전화:</div>
+                            <div class="ms-1">010-0000-0000</div>
+                        </div>
+                        <div class="d-flex">
+                            <div>이메일:</div>
+                            <div class="ms-1">example@example.com</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-block col-6 text-center">
+                    <div class="d-flex justify-content-center">
+                        <ul class="nav fw-semibold">
+                            <li class="nav-item">
+                                <a href="" class="nav-link text-decoration-none text-white">ABOUT</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="" class="nav-link text-decoration-none text-white">TICKET</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="" class="nav-link text-decoration-none text-white">NOTICE</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="" class="nav-link text-decoration-none text-white">QNA</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="" class="nav-link text-decoration-none text-white">EVENT</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <img src="../../static/img/concert_logo_final2.png" alt="">
+                    </div>
+                </div>
+                <div class="d-flex col-3 text-white align-items-center justify-content-center">
+                    <div>
+                        <div class="fs-5 fw-semibold">고객센터</div>
+                        <div class="d-flex">
+                            <div>전화:</div>
+                            <div class="ms-1">000-0000-0000</div>
+                        </div>
+                        <div class="d-flex">
+                            <div>카톡ID:</div>
+                            <div class="ms-1">jaehoon</div>
+                        </div>
+                        <div class="d-flex">
+                            <div>이메일:</div>
+                            <div class="ms-1">example@example.com</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+        <!-- bootstrap js -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
