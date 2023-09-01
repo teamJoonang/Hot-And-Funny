@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./static/purchase.css">
+    <title>Purchase</title>
+</head> 
+<body>
+    <header class="bg-black mx-0 px-0">
+        <div class="container-fluid d-flex justify-content-between">
+            <div class="col-3">
+                <a href="#!" class="d-flex">
+                    <img src="./static/img/concert_logo_final2.png" class="img-fluid" alt="콘서트_이미지_로고">
+                </a>
+            </div>
+            <nav class="col-4 d-flex navbar justify-content-center">
+                <ul class="nav fw-semibold">
+                    <li class="nav-item">
+                        <a href="" class="nav-link text-decoration-none text-white">ABOUT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link text-decoration-none text-white">TICKET</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link text-decoration-none text-white">NOTICE</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link text-decoration-none text-white">QNA</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link text-decoration-none text-white">EVENT</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="col-3 navbar justify-content-center">
+                <div class="d-flex">
+                    <a href="#" class="nav-link text-decoration-none text-white fw-semibold">예매확인</a>
+                    <a href="#" class="nav-link text-decoration-none text-white fw-semibold mx-2">로그인</a>
+                    <a href="#" class="nav-link text-decoration-none text-white fw-semibold">회원가입</a>
+                </div>
+            </div>
+        </div>
+    </header>    
+    <div class="container-fruid row">
+        <div class="col-lg-4 .col-md-12">
+            <img class="post-img" src="./static/img/concert_ticket2.png" alt="">
+        </div>
+        <div class="col-lg-7 .col-md-12 offset-lg-1 mt-5">
+            <h1>콘서트 타이틀</h1>
+            <hr>
+            <div>
+                <ul class="list-unstyled row offset-xs-1 concert-list">
+                    <li class="col-lg-7 .col-md-5">&lt;콘서트 장소&gt;<p class="concert-site offset-lg-1">• 서울시 강서구 양천로 125 서울문화예관 B1F</p></li>
+                    <li class="col-lg-3 .col-sm-1 ">&lt;관람 시간&gt;<p class="concert-time offset-lg-2">• 180분</p></li>
+                    <li class="col-lg-7 .col-sm-5 mt-lg-5 ">&lt;콘서트 기간&gt;<p class="concert-date offset-lg-1">• 2023-01-01 ~ 2023-01-08</p></li>
+                    <li class="col-lg-3 .c0l-sm-1 mt-lg-5">&lt;관람 등급&gt;<p class="concert-grade offset-lg-2">• 18등급</p></li>
+                </ul>
+            </div>
+            <div class="row mt-5">
+                <div class="col-lg-5 .col-md-12 calendar-form">
+                    <div class="calendar">
+                        <div class="calendar-header">
+                            <div class="year-month"></div>
+                            <div class="c-nav">
+                                <button class="c-nav-btn go-prev" onclick="prevMonth()">&lt;</button>
+                                <button class="c-nav-btn go-today" onclick="goToday()">Today</button>
+                                <button class="c-nav-btn go-next" onclick="nextMonth()">&gt;</button>
+                            </div>
+                        </div>
+                        <div class="calendar-main">
+                            <div class="days">
+                                <div class="day">일</div>
+                                <div class="day">월</div>
+                                <div class="day">화</div>
+                                <div class="day">수</div>
+                                <div class="day">목</div>
+                                <div class="day">금</div>
+                                <div class="day">토</div>
+                            </div>
+                        </div>
+                        <div class="dates"></div>
+                    </div>
+                </div>
+                <div class="col-lg-5 .col-md-7 offset-md-1 mt-4">
+                    <table class="table">
+                        <h3>예매 가능 좌석</h3>
+                        <thead>
+                            <tr>
+                                <th>좌석등급</th>
+                                <th>잔여석</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="col-lg-5">VIP-CLASS</td>
+                                <td class="col-lg-5">0석</td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-5"><span>R-CLASS</span></td>
+                                <td class="col-lg-5"><span>100석</span></td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-5"><span>S-CLASS</span></td>
+                                <td class="col-lg-5"><span>15석</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table" >
+                        <h3 class="mt-5">가격표</h3>
+                        <tbody>
+                            <tr>
+                                <td class="col-lg-7">VIP-CLASS</td>
+                                <td class="col-lg-1">KRW</td>
+                                <td class="col-lg-4">100,000</td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-7">R-CLASS</td>
+                                <td class="col-lg-1">KRW</td>
+                                <td class="col-lg-4">50,000</td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-7">S-CLASS</td>
+                                <td class="col-lg-1">KRW</td>
+                                <td class="col-lg-4">30,000</td>
+                            </tr>
+                        </tbody>
+                    </table> 
+                    <button class="btn btn-sm offset-md-8 mt-2 btn-reservation">예매하기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="bg-black">
+        <div class="container-fluid">
+            <div class="d-flex">
+                <div class="d-flex col-3 text-white align-items-center justify-content-center">
+                    <div class="align-items-center">
+                        <div class="fs-6 fw-semibold">콘서트 주체 회사명</div>
+                        <div class="d-flex">
+                            <div>주소:</div>
+                            <div class="ms-1">서울시 마포구 신촌로 176</div>
+                        </div>
+                        <div class="d-flex">
+                            <div>대표전화:</div>
+                            <div class="ms-1">010-0000-0000</div>
+                        </div>
+                        <div class="d-flex">
+                            <div>이메일:</div>
+                            <div class="ms-1">example@example.com</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-block col-6 text-center">
+                    <div class="d-flex justify-content-center">
+                        <ul class="nav fw-semibold">
+                            <li class="nav-item">
+                                <a href="" class="nav-link text-decoration-none text-white">ABOUT</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="" class="nav-link text-decoration-none text-white">TICKET</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="" class="nav-link text-decoration-none text-white">NOTICE</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="" class="nav-link text-decoration-none text-white">QNA</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="" class="nav-link text-decoration-none text-white">EVENT</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <img src="./static/img/concert_logo_final2.png" alt="">
+                    </div>
+                </div>
+                <div class="d-flex col-3 text-white align-items-center justify-content-center">
+                    <div>
+                        <div class="fs-5 fw-semibold">고객센터</div>
+                        <div class="d-flex">
+                            <div>전화:</div>
+                            <div class="ms-1">000-0000-0000</div>
+                        </div>
+                        <div class="d-flex">
+                            <div>카톡ID:</div>
+                            <div class="ms-1">jaehoon</div>
+                        </div>
+                        <div class="d-flex">
+                            <div>이메일:</div>
+                            <div class="ms-1">example@example.com</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="./static/purchase.js"></script>
+    </body>
+    </html>
