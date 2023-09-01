@@ -1,0 +1,64 @@
+/* 제목 내용 Search */
+.center-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float: none;
+}
+
+/* EventNotice.html   <- css  */
+/* style.css */
+
+/* Card Styles */
+.card {
+    width: 20rem;
+    margin-bottom: 1.25rem; /* 20px to 1.25rem */
+}
+
+.card-title {
+    font-size: 1.25rem; /* 20px to 1.25rem */
+    font-weight: bold;
+    margin-top: 1rem;
+}
+
+.card-img-top {
+    max-height: 12.5rem; /* 200px to 12.5rem */
+    object-fit: cover;
+}
+
+.card-text {
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Pagination Styles */
+.pagination {
+    margin: 1.25rem 0; /* 20px to 1.25rem */
+}
+
+.pagination-sm .page-link {
+    color: black;
+}
+
+/* Search Form Styles */
+#search_type {
+    border-color: black;
+    color: black;
+}
+
+.search-bar {
+    border-color: black;
+    color: black;
+}
+
+.custom-button {
+    color: black;
+    border-color: black;
+}
+
+/* Centered Content */
+.center-content {
+    float: none;
+    margin: 0 auto;
+}

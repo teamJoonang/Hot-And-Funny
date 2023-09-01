@@ -3,62 +3,64 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-        <link rel="stylesheet" href="style.css">
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
             rel="stylesheet"
             integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
             crossorigin="anonymous">
-
+            <link rel="stylesheet" href="../static/common.css">
+            <link rel="stylesheet" href="../static/style.css">
+        <title>Document</title>
 
     </head>
-
     <body>
-
         <header class="mx-0 px-0 bg-black">
-            <div class="container-fluid d-flex justify-content-between">
+            <div class="container-fluid d-flex justify-content-between navbar">
                 <div class="col-3">
-                    <a href="#!" class="d-flex">
-                        <img
-                            src="static/img/concert_logo_final2.png"
-                            class="img-fluid"
-                            alt="콘서트_이미지_로고">
+                    <a href="" class="d-flex">
+                        <img src="/static/img/concert_logo.png" class="img-fluid" alt="콘서트_이미지_로고">
                     </a>
                 </div>
-                <nav class="col-4 d-flex navbar justify-content-center">
-                    <ul class="nav fw-semibold g">
+                <nav class="col-6 d-flex justify-content-center">
+                    <ul class="nav fw-semibold justify-content-center">
                         <li class="nav-item">
-                            <a href="" class="nav-link text-decoration-none text-white">ABOUT</a>
+                            <a href="/about.html" class="nav-link custom-atag fs-6">ABOUT</a>
                         </li>
                         <li class="nav-item">
-                            <a href="" class="nav-link text-decoration-none text-white">TICKET</a>
+                            <a href="/ticket" class="nav-link custom-atag">TICKET</a>
                         </li>
                         <li class="nav-item">
-                            <a href="" class="nav-link text-decoration-none text-white">NOTICE</a>
+                            <a href="/notice" class="nav-link custom-atag">NOTICE</a>
                         </li>
                         <li class="nav-item">
-                            <a href="" class="nav-link text-decoration-none text-white">QNA</a>
+                            <a href="/qna" class="nav-link custom-atag">QNA</a>
                         </li>
                         <li class="nav-item">
-                            <a href="" class="nav-link text-decoration-none text-white">EVENT</a>
+                            <a href="/event" class="nav-link custom-atag">EVENT</a>
                         </li>
                     </ul>
                 </nav>
-                <div class="col-3 navbar justify-content-center">
+                <div class="col-3 navbar justify-content-center user-nav">
                     <div class="d-flex">
-                        <a href="#" class="nav-link text-decoration-none text-white fw-semibold">예매확인</a>
-                        <a href="#" class="nav-link text-decoration-none text-white fw-semibold mx-2">로그인</a>
-                        <a href="#" class="nav-link text-decoration-none text-white fw-semibold">회원가입</a>
+                        <a href="/ticket" class="nav-link text-decoration-none text-white fw-semibold">
+                            <i class="bi bi-ticket-detailed custom-atag fs-4"></i>
+                        </a>
+                        <a
+                            href="/accounts/login.html"
+                            class="nav-link text-decoration-none text-white fw-semibold mx-2">
+                            <i class="bi bi-person custom-atag fs-4"></i>
+                        </a>
+                        <!-- <a href="#" class="nav-link text-decoration-none text-white fw-semibold
+                        custom-atag">회원가입</a> -->
                     </div>
                 </div>
             </div>
         </header>
 
-
-
-        
-        <main class="vh-100">
+        <main>
 
             <div class="container pt-5 mt-5 ">
                 <table class="table text-center custom-table">
@@ -80,7 +82,6 @@
                         </tr>
                     </thead>
                 </table>
-
 
                 <table class="table">
                     <tbody>
@@ -144,70 +145,61 @@
                 <hr>
 
                 <div class="text-center mt-5">
-                    <div class="d-flex justify-content-end">
-                        <a class="btn btn-dark custom-button">글쓰기</a>
-                    </div>
-                </div>
-                
-
-
-                <div class="text-center mt-3 mr-4">
                     <ul class="pagination pagination-sm justify-content-center">
                         <li class="page-item">
-                            <a class="page-link" href="#" style="color: black;">Previous</a>
+                            <a class="page-link text-black" href="#">Previous</a>
                         </li>
                         <li class="page-item">
-                            <a class="page-link" href="#" style="color: black;">1</a>
+                            <a class="page-link text-black" href="#">1</a>
                         </li>
                         <li class="page-item">
-                            <a class="page-link" href="#" style="color: black;">2</a>
+                            <a class="page-link text-black" href="#">2</a>
                         </li>
                         <li class="page-item">
-                            <a class="page-link" href="#" style="color: black;">3</a>
+                            <a class="page-link text-black" href="#">3</a>
                         </li>
                         <li class="page-item">
-                            <a class="page-link" href="#" style="color: black;">4</a>
+                            <a class="page-link text-black" href="#">4</a>
                         </li>
                         <li class="page-item">
-                            <a class="page-link" href="#" style="color: black;">5</a>
+                            <a class="page-link text-black" href="#">5</a>
                         </li>
                         <li class="page-item">
-                            <a class="page-link" href="#" style="color: black;">Next</a>
+                            <a class="page-link text-black" href="#">Next</a>
                         </li>
                     </ul>
                 </div>
 
-                <div class="col-md-5 center-content mt-5" style="float: none; margin: 0 auto;">
-                    <div class='box-body'>
-                        <form class="d-flex">
-                            <select
-                                id='search_type'
-                                class="form-select me-1 w-auto"
-                                style="border-color: black; color: black;">
-                                <option value="title">제목</option>
-                                <option value="content">내용</option>
-                            </select>
-                            <input
-                                class="form-control me-2 search-bar w-auto"
-                                type="search"
-                                placeholder="Search"
-                                aria-label="Search"
-                                style="border-color: black; color: black;">
-                            <button
-                                class="btn btn-outline-success custom-button"
-                                type="submit"
-                                style="border-color: black; color: black;">Search</button>
-                        </form>
-
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-15 mt-5 mb-5">
+                            <div class="box-body ml-4">
+                                <form class="d-flex justify-content-center">
+                                    <select id='search_type' class="form-select me-1 w-auto border">
+                                        <option value="title">제목</option>
+                                        <option value="content">내용</option>
+                                    </select>
+                                    <input
+                                        class="form-control me-1 search-bar w-auto border"
+                                        type="search"
+                                        placeholder="Search"
+                                        aria-label="Search">
+                                    <button
+                                        class="btn btn-outline-success custom-button btn-outline-dark border"
+                                        type="submit">Search
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </main>
 
         <footer class="bg-black">
-            <div class="container-fluid">
+            <div class="container-fluid row">
                 <div class="d-flex">
-                    <div class="d-flex col-3 text-white align-items-center justify-content-center">
+                    <div class="d-flex col-4 align-items-center justify-content-start corp-content">
                         <div class="align-items-center">
                             <div class="fs-6 fw-semibold">콘서트 주체 회사명</div>
                             <div class="d-flex">
@@ -224,43 +216,46 @@
                             </div>
                         </div>
                     </div>
-                    <div class="d-block col-6 text-center">
+                    <div class="d-block col-4 text-center">
+                        <div>
+                            <img src="/static/img/concert_logo.png" class="footer-logo-img" alt="">
+                        </div>
                         <div class="d-flex justify-content-center">
-                            <ul class="nav fw-semibold">
+                            <ul class="nav fw-semibold justify-content-center">
                                 <li class="nav-item">
-                                    <a href="" class="nav-link text-decoration-none text-white">ABOUT</a>
+                                    <a href="/about" class="nav-link custom-atag">ABOUT</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="" class="nav-link text-decoration-none text-white">TICKET</a>
+                                    <a href="/ticket" class="nav-link custom-atag">TICKET</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="" class="nav-link text-decoration-none text-white">NOTICE</a>
+                                    <a href="/notice" class="nav-link custom-atag">NOTICE</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="" class="nav-link text-decoration-none text-white">QNA</a>
+                                    <a href="/qna" class="nav-link custom-atag">QNA</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="" class="nav-link text-decoration-none text-white">EVENT</a>
+                                    <a href="/event" class="nav-link custom-atag">EVENT</a>
                                 </li>
                             </ul>
                         </div>
-                        <div>
-                            <img src="static/img/concert_logo_final2.png" alt="">
-                        </div>
                     </div>
-                    <div class="d-flex col-3 text-white align-items-center justify-content-center">
+                    <div class="d-flex col-4 align-items-center justify-content-end corp-content">
                         <div>
-                            <div class="fs-5 fw-semibold">고객센터</div>
+                            <div class="fs-6 fw-semibold">고객센터</div>
                             <div class="d-flex">
-                                <div>전화:</div>
+                                <div>전화:
+                                </div>
                                 <div class="ms-1">000-0000-0000</div>
                             </div>
                             <div class="d-flex">
-                                <div>카톡ID:</div>
+                                <div>카톡ID:
+                                </div>
                                 <div class="ms-1">jaehoon</div>
                             </div>
                             <div class="d-flex">
-                                <div>이메일:</div>
+                                <div>이메일:
+                                </div>
                                 <div class="ms-1">example@example.com</div>
                             </div>
                         </div>
@@ -269,8 +264,7 @@
             </div>
         </footer>
 
-        <!-- <style> .footer { position: fixed; bottom: 0; width: 100%;
-        background-color: black; } </style> -->
+        
         <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"

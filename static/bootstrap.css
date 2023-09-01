@@ -3968,26 +3968,12 @@ textarea.form-control-lg {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  justify-content: space-between;
-  justify-content: space-between;
-  padding: var(--bs-navbar-padding-y) var(--bs-navbar-padding-x);
-  padding: var(--bs-navbar-padding-y) var(--bs-navbar-padding-x);
   padding: var(--bs-navbar-padding-y) var(--bs-navbar-padding-x);
 }
 .navbar > .container,
-.navbar > .container,
-.navbar > .container,
-.navbar > .container-fluid,
-.navbar > .container-fluid,
 .navbar > .container-fluid,
 .navbar > .container-sm,
-.navbar > .container-sm,
-.navbar > .container-sm,
 .navbar > .container-md,
-.navbar > .container-md,
-.navbar > .container-md,
-.navbar > .container-lg,
-.navbar > .container-lg,
 .navbar > .container-lg,
 .navbar > .container-xl,
 .navbar > .container-xxl {
