@@ -12,164 +12,65 @@
     <!-- login.css -->
     <link rel="stylesheet" href="../static/css/login.css">
     
-    <title>로그인</title>
+    <title>Login</title>
 </head>
 <body>
-    <header class="mx-0 px-0 bg-black">
-        <div class="container-fluid d-flex justify-content-between">
-            <div class="col-3">
-                <a href="#!" class="d-flex">
-                    <img src="../../static/img/concert_logo_final2.png" class="img-fluid" alt="콘서트_이미지_로고">
-                </a>
-            </div>
-            <nav class="col-4 d-flex navbar justify-content-center">
-                <ul class="nav fw-semibold">
-                    <li class="nav-item">
-                        <a href="" class="nav-link text-decoration-none text-white">ABOUT</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link text-decoration-none text-white">TICKET</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link text-decoration-none text-white">NOTICE</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link text-decoration-none text-white">QNA</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link text-decoration-none text-white">EVENT</a>
-                    </li>
-                </ul>
-            </nav>
-            <div class="col-3 navbar justify-content-center">
-                <div class="d-flex">
-                    <a href="#" class="nav-link text-decoration-none text-white fw-semibold">예매확인</a>
-                    <a href="#" class="nav-link text-decoration-none text-white fw-semibold mx-2">로그인</a>
-                    <a href="#" class="nav-link text-decoration-none text-white fw-semibold">회원가입</a>
-                </div>
-            </div>
-        </div>
-    </header>
 
-    <section class="vh-100">
-        <div class="container py-5">
-          <div class="row d-flex justify-content-center align-items-center">
-            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-              <div class="card shadow-lg" >
-                <div class="card-body p-4 text-center shadow-lg" style="border-radius: 1rem;">
-      
-                  <h1 class="mb-5" style="color:#ea10ac;">Sign in</h1>
-                  <a href="#">
-                    <img src="../static/img/concert_logo_final2_black1.png" alt="logo">
-                  </a>
-                  <p class="mb-5 text-white" style="font-size: 1.2rem;">Hot and Funny에 오신 것을 환영합니다.</p>
 
-                    <form action="/login" method="POST" id="loginForm">
-                        <!-- 나중에 까먹으니 추가 -->
-                        <input type="hidden" th:name="${}" th:value="${}" />
+    <section class="" id="securityBody">
+        <div class="container w-100 py-5">
+            <div class="row d-flex justify-content-center align-items-center">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                    <div class="card shadow-lg" >
+                        <div class="card-body p-4 text-center shadow-lg" style="border-radius: 1rem;">
+                            <h1 class="mb-5" style="color:#ea10ac;">Sign in</h1>
+                            <a href="#">
+                                <img src="../static/img/concert_logo_final2_black1.png" alt="logo">
+                            </a>
+                            <p class="mb-4 mt-3" style="font-size: 1.2rem;">Hot and Funny에 오신 것을 환영합니다.</p>
                         
-                        <div>
-                            <label class="form-label m-2 fs-5" for="login_id">Email</label>
-                            <input type="email" class="form-control form-control-lg input" id="login_id" 
-                            autocomplete="off" required placeholder="user@gmail.com" style="text-align: center;"/>
-                        </div>
+                            <form action="/login" method="POST" id="loginForm">
+                                <!-- 나중에 까먹으니 추가 -->
+                                <input type="hidden" th:name="${}" th:value="${}" />
 
-                        <div>
-                            <label class="form-label m-2 fs-5" for="login_password">Password</label>
-                            <input type="password" class="form-control form-control-lg input" id="login_password"
-                            required placeholder="Password" style="text-align: center;"/>
-                        </div>
+                                <div>
+                                    <label class="form-label m-2 fs-5" for="login_id">Email</label>
+                                    <input type="email" class="form-control form-control-lg input" id="login_id" 
+                                    autocomplete="off" required placeholder="user@gmail.com" style="text-align: center;"/>
+                                </div>
+                            
+                                <div>
+                                    <label class="form-label m-2 fs-5" for="login_password">Password</label>
+                                    <input type="password" class="form-control form-control-lg input" id="login_password"
+                                    required placeholder="Password" style="text-align: center;"/>
+                                </div>
+                            
+                            </form>
+                        
+                            <button class="btn btn-lg m-3 text-white border-0" type="submit" id="loginBtn">Login</button>
 
-                    </form>
+                            <hr class="my-4">
+                        
+                            <!-- 각 SNS API로 전송되도록 -->
+                            <button class="btn btn-lg btn-block btn-primary mb-2 border-0" style="background-color: #fee500;"
+                            type="submit"><i class="fas fa-solid fa-comment mb-2" style="color: #1a1a1c;"> </i> Sign in with Kakao</button>
+                            <button class="btn btn-lg btn-block btn-primary mb-2 border-0" style="background-color: #03c75a;"
+                            type="submit"><i class="fas fa-solid fa-comment mb-2" style="color: #1a1a1c;"> </i> Sign in with Naver</button>
 
-                  <button class="btn btn-lg m-3 text-white border-0" type="submit" id="loginBtn">Login</button>
-      
-                  <hr class="my-4 text-white">
-
-                  <!-- 각 SNS API로 전송되도록 -->
-                  <button class="btn btn-lg btn-block btn-primary mb-2 border-0" style="background-color: #fee500;"
-                    type="submit"><i class="fas fa-solid fa-comment mb-2" style="color: #1a1a1c;"> </i> Sign in with Kakao</button>
-                  <button class="btn btn-lg btn-block btn-primary mb-2 border-0" style="background-color: #03c75a;"
-                    type="submit"><i class="fas fa-solid fa-comment mb-2" style="color: #1a1a1c;"> </i> Sign in with Naver</button>
-                
-                    <ul id="snsLoginBox">
-                        <!-- 각 사이트로 이동 -->
-                        <li class="m-1 ">아직 회원이 아니신가요? <a href="/signup">회원가입</a></li>
-                        <li class="m-1"><a href="/finduser">아이디 / 비밀번호 찾기</a></li>
-                    </ul>
-                    
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-
-      <footer class="bg-black">
-        <div class="container-fluid">
-            <div class="d-flex">
-                <div class="d-flex col-3 text-white align-items-center justify-content-center">
-                    <div class="align-items-center">
-                        <div class="fs-6 fw-semibold">콘서트 주체 회사명</div>
-                        <div class="d-flex">
-                            <div>주소:</div>
-                            <div class="ms-1">서울시 마포구 신촌로 176</div>
-                        </div>
-                        <div class="d-flex">
-                            <div>대표전화:</div>
-                            <div class="ms-1">010-0000-0000</div>
-                        </div>
-                        <div class="d-flex">
-                            <div>이메일:</div>
-                            <div class="ms-1">example@example.com</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="d-block col-6 text-center">
-                    <div class="d-flex justify-content-center">
-                        <ul class="nav fw-semibold">
-                            <li class="nav-item">
-                                <a href="" class="nav-link text-decoration-none text-white">ABOUT</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="" class="nav-link text-decoration-none text-white">TICKET</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="" class="nav-link text-decoration-none text-white">NOTICE</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="" class="nav-link text-decoration-none text-white">QNA</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="" class="nav-link text-decoration-none text-white">EVENT</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div>
-                        <img src="../../static/img/concert_logo_final2.png" alt="">
-                    </div>
-                </div>
-                <div class="d-flex col-3 text-white align-items-center justify-content-center">
-                    <div>
-                        <div class="fs-5 fw-semibold">고객센터</div>
-                        <div class="d-flex">
-                            <div>전화:</div>
-                            <div class="ms-1">000-0000-0000</div>
-                        </div>
-                        <div class="d-flex">
-                            <div>카톡ID:</div>
-                            <div class="ms-1">jaehoon</div>
-                        </div>
-                        <div class="d-flex">
-                            <div>이메일:</div>
-                            <div class="ms-1">example@example.com</div>
+                            <ul id="snsLoginBox">
+                                <!-- 각 사이트로 이동 -->
+                                <li class="m-1 ">아직 회원이 아니신가요? <a href="/signup">회원가입</a></li>
+                                <li class="m-1"><a href="/finduser">아이디 / 비밀번호 찾기</a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </footer>
+    </section>
+
+
+
 
     <!-- bootstrap js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>

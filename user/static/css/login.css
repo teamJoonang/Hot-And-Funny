@@ -25,6 +25,12 @@ input[id=login_password]::placeholder {
   text-align: center;
 }
 
+input[id=login_re_password]::placeholder {
+  color: #ccc;
+  font-size: 0.9375em;
+  text-align: center;
+}
+
 /* bootstrap .form-control의 focus 아래의 설정으로 재설정  */
 .form-control:focus , .form-control:hover{
   border-color: #ea10a0;
@@ -118,4 +124,10 @@ textarea:focus:-ms-input-placeholder { /* Internet Explorer 10+ */
 
 #findUserPassword {
   display: none;
+}
+
+#securityBody {
+  background-image: linear-gradient(135deg , #de29e6 ,#9816c8 , #461959 , black);
+  background-repeat: no-repeat;
+  background-size: auto;
 }

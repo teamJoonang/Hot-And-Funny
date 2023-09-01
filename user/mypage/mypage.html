@@ -14,7 +14,7 @@
     <!-- mypage.css -->
     <link rel="stylesheet" href="../static/css/mypage.css">
     
-    <title>내 정보</title>
+    <title>회원정보</title>
 </head>
 <body>
     <header class="mx-0 px-0 bg-black">
@@ -53,9 +53,9 @@
         </div>
     </header>
 
-    <section class="vh-100">
-        <div class="container px-5 h-100">
-            <div class="row d-flex py-5 h-100">
+    <section class="">
+        <div class="container px-5">
+            <div class="row d-flex py-5">
                 
                 <div class="col-xl-3">
                     <div class="card">
@@ -81,7 +81,7 @@
                         <div class="card-body">
 
                             <!-- 회원정보 -->
-                            <form action="">
+                            <form action="" method="">
                                 <!-- user email -->
                                 <div class="mb-3">
                                     <label class="small mb-1" for="user_login_id">이메일 ( Login ID )</label>
@@ -116,32 +116,35 @@
                                     value="010-0000-0000" placeholder="연락처를 입력해주세요.">
                                 </div>
                                 <!-- row -->
-                                <div class="row gx-3 mb-3">
-                                    <!-- name -->
+                                <div class="row gx-3 mb-4">
+                                    <!-- age -->
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="user_age">나이</label>
                                         <input class="form-control" id="user_age" type="text" value="17" readonly
                                         placeholder="나이를 입력해주세요.">
                                     </div>
-                                    <!-- nickname -->
+                                    <!-- gender -->
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="user_gender">성별</label><br>
                                         <input class="chk_input" type="radio" name="chk_gender" id="user_gender" value="M"> 남자
                                         <input class="chk_input" type="radio" name="chk_gender" id="user_gender" value="W" checked> 여자
                                     </div>
                                 </div>
-                                <hr>
                                 <!-- 광고 승인여부 -->
-                                <div class="my-3 text-center">
+                                <div class="my-3 text-center mb-4">
                                     <label for="chk_marketing">Hot and Funny의 다양한 이벤트 소식을 전해드립니다.</label><br>
                                     <input class="chk_input" type="radio" name="chk_marketing" value="y"> 수신
                                     <input class="chk_input" type="radio" name="chk_marketing" value="n" checked> 수신거부
                                 </div>
-
-                            
-                                <button class="btn btn-primary" type="button">수정</button>
+                                
+                                <hr>
+                                
+                                <div class="text-center">
+                                    <button class="btn btn-primary" type="button">수정</button>
+                                </div>
                             </form>
 
+                            
                         </div>
                     </div>
                 </div>
@@ -150,9 +153,9 @@
     </section>
 
     <footer class="bg-black">
-        <div class="container-fluid">
+        <div class="container-fluid row">
             <div class="d-flex">
-                <div class="d-flex col-3 text-white align-items-center justify-content-center">
+                <div class="d-flex col-4 align-items-center justify-content-start corp-content">
                     <div class="align-items-center">
                         <div class="fs-6 fw-semibold">콘서트 주체 회사명</div>
                         <div class="d-flex">
@@ -169,43 +172,43 @@
                         </div>
                     </div>
                 </div>
-                <div class="d-block col-6 text-center">
+                <div class="d-block col-4 text-center">
+                    <div>
+                        <img src="/static/img/concert_logo.png" class="footer-logo-img" alt="">
+                    </div>
                     <div class="d-flex justify-content-center">
-                        <ul class="nav fw-semibold">
+                        <ul class="nav fw-semibold justify-content-center">
                             <li class="nav-item">
-                                <a href="" class="nav-link text-decoration-none text-white">ABOUT</a>
+                                <a href="/about" class="nav-link custom-atag">ABOUT</a>
                             </li>
                             <li class="nav-item">
-                                <a href="" class="nav-link text-decoration-none text-white">TICKET</a>
+                                <a href="/ticket" class="nav-link custom-atag">TICKET</a>
                             </li>
                             <li class="nav-item">
-                                <a href="" class="nav-link text-decoration-none text-white">NOTICE</a>
+                                <a href="/notice" class="nav-link custom-atag">NOTICE</a>
                             </li>
                             <li class="nav-item">
-                                <a href="" class="nav-link text-decoration-none text-white">QNA</a>
+                                <a href="/qna" class="nav-link custom-atag">QNA</a>
                             </li>
                             <li class="nav-item">
-                                <a href="" class="nav-link text-decoration-none text-white">EVENT</a>
+                                <a href="/event" class="nav-link custom-atag">EVENT</a>
                             </li>
                         </ul>
                     </div>
-                    <div>
-                        <img src="../../static/img/concert_logo_final2.png" alt="">
-                    </div>
                 </div>
-                <div class="d-flex col-3 text-white align-items-center justify-content-center">
+                <div class="d-flex col-4 align-items-center justify-content-end corp-content">
                     <div>
-                        <div class="fs-5 fw-semibold">고객센터</div>
+                        <div class="fs-6 fw-semibold">고객센터</div>
                         <div class="d-flex">
-                            <div>전화:</div>
+                            <div>전화: </div>
                             <div class="ms-1">000-0000-0000</div>
                         </div>
                         <div class="d-flex">
-                            <div>카톡ID:</div>
+                            <div>카톡ID: </div>
                             <div class="ms-1">jaehoon</div>
                         </div>
                         <div class="d-flex">
-                            <div>이메일:</div>
+                            <div>이메일: </div>
                             <div class="ms-1">example@example.com</div>
                         </div>
                     </div>

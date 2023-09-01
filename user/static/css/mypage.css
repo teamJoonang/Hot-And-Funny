@@ -57,16 +57,27 @@ tbody > tr:hover {
 }
 
 
+/* 회원탈퇴 */
+
 /* 회원탈퇴 용어 목록 설정 */
 dl {
     border: 1px solid black;
     text-align: left;
 }
 
+/* 기타 양식 입력창 */
 #etcText {
+    /* border: 1px solid black; */
     border: none;
-    
+    height: 2.5rem;
+    width: 50%;
     color: black;
+    font-size: 1.5rem;
+}
+
+#selectUserOutReason {
+    border-radius: 0.5rem;
+    text-indent: 1rem;
 }
 
 
