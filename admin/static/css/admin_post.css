@@ -11,39 +11,33 @@ body {
 /*----- MAIN -----*/
 
 
-.main-box{
-    /* border: 5px solid red; */
-}
-
-.left-nav{
 
 
-
-    /* border: 3px solid red; */
-}
-
+/* 좌측 네비바    */
 .left-nav a {
     margin-top: 20%;
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 
 
 
-.container-content{
-    
-    /* width: 100%; */
-    /* border: 0px solid pink; */
-}
 
-.card{
-    border: 1px solid black;
-}
 
+/* 삭제, 수정버튼 간격 조절 */
 .btn{
     margin-left: 1%;
+}
 
 
 
+
+/* 전체 게시판 관리, 
+    QnA 게시판 관리 
+    스크롤바 생성 문제로 max-height 부여
+*/
+.card {
+
+    max-height: 20rem;
 }
 
 /*----- FOOTER -----*/

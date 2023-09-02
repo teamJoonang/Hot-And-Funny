@@ -2,6 +2,8 @@
 google.charts.load('current', {'packages':['corechart']});
 google.charts.setOnLoadCallback(drawCharts);
 
+window.addEventListener('resize', drawCharts);
+
 function drawCharts() {
   drawAreaChart();
   drawBarChart();
@@ -38,7 +40,7 @@ function drawBarChart() {
   ]);
 
   var options = {
-    title: '예매율',
+    title: '',
     bars: 'vertical',
     legend: { position: 'bottom' }
   };
@@ -59,7 +61,10 @@ function drawDonutChart() {
     title: '성비별',
     pieHole: 1,
     legend: 'none',
-    chartArea: { width: '100%', height: '80%' }
+    chartArea: { 
+      width: '80%',  // 차트 영역의 너비 조정
+      height: '80%'  // 차트 영역의 높이 조정
+    }
   };
 
   
@@ -74,7 +79,7 @@ function drawDonutChart() {
 function drawSecondDonutChart() {
     var data = google.visualization.arrayToDataTable([
       ['연령대별', 'Count'],
-      ['10대', 120],
+      ['10대', 110],
       ['20대', 250],
       ['30대', 80],
       ['40대 이상', 60]
@@ -84,10 +89,15 @@ function drawSecondDonutChart() {
       title: '연령대별',
       pieHole: 0.4,
       legend: 'none',
-      chartArea: { width: '100%', height: '80%' }
+      chartArea: { width: '80%', height: '80%'}
+      
     };
+
+    
   
     var chart = new google.visualization.PieChart(document.getElementById('secondDonutChart'));
   
     chart.draw(data, options);
+    
   }
+

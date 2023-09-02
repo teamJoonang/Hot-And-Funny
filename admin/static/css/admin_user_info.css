@@ -11,38 +11,25 @@ body {
 /*----- MAIN -----*/
 
 
+/* 좌측 네비바 */
 
-.panel-heading{
-    /* border: 0px solid red; */
 
-}
-
-.main-box{
-    /* border: 5px solid red; */
-}
-
-.left-nav{
+@media screen and (max-width: 1200px) {
+    .left-nav {
+      min-width: 80px; /* 작은 화면 크기에 대한 최소 너비 설정 */
+    }
+  }
 
 
 
-    /* border: 3px solid red; */
-}
 
 .left-nav a {
     margin-top: 20%;
-    border: 1px solid black;
-}
-
-
-
-.search-group{
-    /* border: 1px solid red; */
 
 }
 
 
-
-
+/* 서치바 */
 .form-control{
     width: 10%;
 }
@@ -52,8 +39,4 @@ body {
     margin-right: 1%;
 }
 
-.form input {
-    border: 0px solid red;
-
-}
 /*----- FOOTER -----*/
