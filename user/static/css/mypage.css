@@ -1,0 +1,133 @@
+ul , li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:visited {
+    color: black;
+}
+
+body , html {
+    height: 100%;
+}
+
+#wrap {
+    min-height: calc(100%);
+}
+
+
+
+/* 내 정보 사이드 메뉴바 설정 */
+#mypage_menu {
+    text-align: center;
+    /* justify-content: center; */
+    width: 100%;
+}
+
+#mypage_menu > li {
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    width: 100%;
+}
+
+#mypage_menu > li:hover {
+    border-color: #ea10a0;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(234, 16, 160, 0.476);
+    cursor: pointer;
+}
+
+/* 모든 radio 버튼 설정 */
+.chk_input {
+    margin-left: 0.5rem;
+}
+
+/* 테이블 설정 */
+table {
+    border-collapse: collapse;
+    font-weight: 0.5rem;
+    margin: auto;
+    padding: auto;
+}
+
+th , td {
+    /* border: 1px solid black; */
+    text-align: center;
+}
+
+tbody > tr:hover {
+    background-color: #CCC;
+    cursor: pointer;
+}
+
+
+/* 회원탈퇴 */
+
+/* 회원탈퇴 용어 목록 설정 */
+dl {
+    border: 1px solid black;
+    text-align: left;
+}
+
+/* 기타 양식 입력창 */
+#etcText {
+    /* border: 1px solid black; */
+    border: none;
+    height: 2.5rem;
+    width: 50%;
+    color: black;
+    font-size: 1.5rem;
+}
+
+#selectUserOutReason {
+    border-radius: 0.5rem;
+    text-indent: 1rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 1200px 이하라면 아래의 설정을 적용. */
+
+/* 내정보 사이드 메뉴바 설정 */
+@media screen and (max-width: 1200px) {
+ #mypage_menu {
+    padding: 0px !important;
+    margin: 0px !important;
+    display: flex;
+    
+ }
+
+ /* #mypageContentBox {
+    min-width: 570px;
+ } */
+
+ /* min-width: ; 작은 화면 크기 최소 너비 */
+ #mypage_menu > li {
+    margin-right: 0.5rem;
+    justify-content: center;
+ }
+
+ table {
+    word-break: break-all;
+    height: auto;
+ }
+
+ 
+
+}
