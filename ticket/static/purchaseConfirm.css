@@ -42,40 +42,113 @@ body {
 }
 /* <--------- confirm - left ---------> */
 .content-left {
-    width : 800px;
+    width : 799px;
     height : 690px;
     float : left;
     border-right : 1px dotted black;
-    padding-top: 20px; 
+    padding-top: 10px; 
 }
 .left-upper {
-    outline: 3px solid purple;
-    width: 800px;
-    height: 280px;
+    outline: 0px solid purple;
+    width: 780px;
+    height: 390px;
     position: relative;
-    display: flex;
+    padding-left: 10px;
+}
+.menu-title {
+    padding-left: 10px;
+    border: 1px solid #eeeeee;
+    height: 20px;
+    font-weight: bold;
 }
 
-.poster {
-    outline: 0px solid red;
-    width : 205px;
-    height : 280px;
+/* 표 공통 스타일 */
+.ticket-discount-table {
+    border-collapse: collapse;
+    width: 780px;
+    margin-top: 2px;
 }
-.poster img {
-    width : 100%;
+.ticket-discount-table th {
+    background-color: lightgray;
+}
+.ticket-discount-table th:first-child {
+    width: 50px;
+}
+.ticket-discount-table tr {
+    border-bottom: 1px solid black;
+}
+.ticket-discount-table td {
+    border-right: 1px solid #ccc;
+}
+.ticket-discount-table .left-align {
+    text-align: left;
+}
+.ticket-discount-table tbody .w80 {
+    width: 80px;
+    background-color: #eeeeee;
+    text-align: center;
+}
+.ticket-discount-table tbody .w450 {
+    width: 450px;
+    text-align: left;
+}
+.ticket-discount-table th, .ticket-discount-table td {
+    padding: 5px;
+    text-align: center;
+}
+.ticket-discount-table th {
+    width: 40px;
 }
 
-.left-upper .concert-info {
-    border: 2px solid red;
-    width: 265px;
-    height : 280px;
+/* left-down 환불정책 부분 */
+.content-left .left-down {
+    border: 0px solid green;
+    padding-top: 15px;
 }
-.about-concert {
-    font-size: 1.2rem;
+.bottom-line {
+    border-bottom : 2px solid black;
 }
-.concert-info p {
-    border: 1px solid green;
+.left-down .refund-policy, .left-down .refund-footer {
+    border: 1px dotted black;
+    width: 769px;
+    padding: 5px;
+    background-color: #eeeeee;
 }
+.left-down .refund-policy p, .left-down .refund-footer p {
+    font-size: 0.7rem;
+    margin-top: 2px;
+}
+
+.left-down .refund-policy {
+    height: 165px;
+}
+.left-down .refund-policy p > span {
+    border: 1px solid red;
+    border-radius: 100%;
+    background-color: red;
+    color: white;
+    text-align: center;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    vertical-align: middle; /* 수평 중앙 정렬 */
+    font-weight: bold;
+}
+.left-down .refund-policy ul li > span {
+    color: red;
+}
+.left-down .refund-policy li {
+    font-size: 0.7rem;
+    margin-top: 2px;
+}
+.left-down .refund-footer {
+    height: 60px;
+}
+.left-down .refund-footer > p {
+    margin-top: 10px;
+}
+
 
 /* <----------------------- right ---------------------> */
 .content-right {
@@ -83,4 +156,38 @@ body {
     height : 100%;
     float : right;  
     background-color: #ccc;
+}
+.content-right .concert-info {
+    border: 1px solid red;
+    width: 380px;
+    height: 140px;
+    padding: 10px;
+    display: flex;
+}
+.poster {
+    outline: 1px solid red;
+    width : 100px;
+}
+.poster img {
+    width : 100%;
+}
+.concert-info .concert-info-title {
+    border: 1px solid green;
+    padding: 10px;
+}
+.bold-text {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+.content-right .ticket-info {
+    border: 1px solid red;
+    width: 380px;
+    padding: 10px;
+}
+.my-ticket-table {
+    width: 380px;
+    text-indent: 5px;
+}
+.my-ticket-table td:first-child {
+    width: 120px;
 }

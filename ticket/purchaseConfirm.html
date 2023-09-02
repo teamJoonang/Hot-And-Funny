@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="./static/purchaseConfirm.css">
     <title>PurchaseConfirm</title>
 </head>
@@ -16,7 +16,181 @@
     <div class="content">
         <div class="content-left">
             <div class="left-upper">
-                <div class="poster">
+                <p class="menu-title">가격</p>
+                <table class="ticket-discount-table">  <!--타임리프 반복문 적용구간-->
+                    <thead>
+                        <th><span>VIP</span> 석</th>
+                        <th colspan="4" class="left-align">| 좌석 <span>2</span>매를 선택하셨습니다</th>
+
+                    </thead>
+                    <tbody>
+                        <tr height="30">
+                            <td colspan="2" class="w80">기본가</td>
+                            <td class="w450">일반</td>
+                            <td>100,000원</td>
+                            <td>
+                                <select>
+                                    <option value="option1">0 매</option>
+                                    <option value="option2">1 매</option>
+                                    <option value="option3">2 매</option>
+                                    <option value="option3">3 매</option>
+                                    <option value="option3">4 매</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" rowspan="2" class="w80">기본할인</td>
+                            <td class="w450">장애인 본인 및 동반자 1인 30%</td>
+                            <td>70,000원</td>
+                            <td>
+                                <select>
+                                    <option value="option1">0 매</option>
+                                    <option value="option2">1 매</option>
+                                    <option value="option3">2 매</option>
+                                    <option value="option3">3 매</option>
+                                    <option value="option3">4 매</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="w450">국가유공상이자 본인 30%</td>
+                            <td>70,000원</td>
+                            <td>
+                                <select>
+                                    <option value="option1">0 매</option>
+                                    <option value="option2">1 매</option>
+                                    <option value="option3">2 매</option>
+                                    <option value="option3">3 매</option>
+                                    <option value="option3">4 매</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="ticket-discount-table">  <!--타임리프 반복문 적용구간-->
+                    <thead>
+                        <th><span>R</span> 석</th>
+                        <th colspan="4" class="left-align">| 좌석 <span>2</span>매를 선택하셨습니다</th>
+
+                    </thead>
+                    <tbody>
+                        <tr height="30">
+                            <td colspan="2" class="w80">기본가</td>
+                            <td class="w450">일반</td>
+                            <td>80,000원</td>
+                            <td>
+                                <select>
+                                    <option value="option1">0 매</option>
+                                    <option value="option2">1 매</option>
+                                    <option value="option3">2 매</option>
+                                    <option value="option3">3 매</option>
+                                    <option value="option3">4 매</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" rowspan="2" class="w80">기본할인</td>
+                            <td class="w450">장애인 본인 및 동반자 1인 30%</td>
+                            <td>56,000원</td>
+                            <td>
+                                <select>
+                                    <option value="option1">0 매</option>
+                                    <option value="option2">1 매</option>
+                                    <option value="option3">2 매</option>
+                                    <option value="option3">3 매</option>
+                                    <option value="option3">4 매</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="w450">국가유공상이자 본인 30%</td>
+                            <td>56,000원</td>
+                            <td>
+                                <select>
+                                    <option value="option1">0 매</option>
+                                    <option value="option2">1 매</option>
+                                    <option value="option3">2 매</option>
+                                    <option value="option3">3 매</option>
+                                    <option value="option3">4 매</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="ticket-discount-table">  <!--타임리프 반복문 적용구간-->
+                    <thead>
+                        <th><span>S</span> 석</th>
+                        <th colspan="4" class="left-align">| 좌석 <span>2</span>매를 선택하셨습니다</th>
+
+                    </thead>
+                    <tbody>
+                        <tr height="30">
+                            <td colspan="2" class="w80">기본가</td>
+                            <td class="w450">일반</td>
+                            <td>60,000원</td>
+                            <td>
+                                <select>
+                                    <option value="option1">0 매</option>
+                                    <option value="option2">1 매</option>
+                                    <option value="option3">2 매</option>
+                                    <option value="option3">3 매</option>
+                                    <option value="option3">4 매</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" rowspan="2" class="w80">기본할인</td>
+                            <td class="w450">장애인 본인 및 동반자 1인 30%</td>
+                            <td>42,000원</td>
+                            <td>
+                                <select>
+                                    <option value="option1">0 매</option>
+                                    <option value="option2">1 매</option>
+                                    <option value="option3">2 매</option>
+                                    <option value="option3">3 매</option>
+                                    <option value="option3">4 매</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="w450">국가유공상이자 본인 30%</td>
+                            <td>42,000원</td>
+                            <td>
+                                <select>
+                                    <option value="option1">0 매</option>
+                                    <option value="option2">1 매</option>
+                                    <option value="option3">2 매</option>
+                                    <option value="option3">3 매</option>
+                                    <option value="option3">4 매</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="left-down">
+                    <p class="menu-title bottom-line">취소 수수료 안내</p>
+                    <div class="refund-policy">
+                        <p><span>01 </span> 예매 당일 밤 12시까지 취소시에는 취소수수료가 없습니다.</p>
+                        <p><span>02 </span> 예매후 7일까지 취소시에는 취소수수료가 없습니다. <br>
+                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 단, 관람일 9일 이내의 경우는 (4)번의 기준이 우선 적용됩니다.</p>
+                        <p><span>03 </span> 관람일 10일전까지 취소시에는 티켓당 고정금액으로 취소수수료가 부과됩니다. (단, 티켓금액의 10%를 초과하지 않습니다)</p>
+                        <p><span>04 </span> 관람일 9일 이내 취소시에는 다음과 같이 취소수수료가 부과됩니다.</p>
+                        <ul>
+                            <li>-관람일 7일전까지 : 티켓금액의 <span>10%</span></li>
+                            <li>-관람일 3일전까지 : 티켓금액의 <span>20%</span></li>
+                            <li>-관람일 1일전까지 : 티켓금액의 <span>30%</span></li>
+                        </ul>
+                    </div>
+                    <div class="refund-footer">
+                        <p>▶ 예매수수료는 예매일 이후 취소시에는 환불되지 않습니다.</p>
+                        <p>▶ 특정상품의 경우 취소 정책 및 취소수수료 정책이 달라질 수 있습니다. 상품별 취소 정책을 자세히 확인해주세요.
+                        </p>
+                    </div>
+
+                </div>
+                <!-- <div class="poster">
                     <img src="./static/img/concert_ticket2.png" alt="">
                 </div>
                 <div class="concert-info">
@@ -24,12 +198,61 @@
                     <p>2</p>
                     <p>3</p>
                     
-                </div>
+                </div> -->
             </div>
             
         </div>
         <div class="content-right">
-            
+            <div class="concert-info">
+                <div class="poster">
+                    <img src="./static/img/concert_ticket2.png" alt="">
+                </div>
+                <div class="concert-info-title">
+                    <p class="bold-text">Hot & Funny 페스티벌</p>
+                    <p>&nbsp</p>
+                    <p>2023.09.15</p>
+                    <p>중앙정보처리학원 601호</p>
+                    <p>만 15세 이상 </p>
+                    <p>관람시간 : 60분 </p>
+                </div>
+            </div>
+            <div class="ticket-info">
+                <p class="bottom-line bold-text">나의 예매 정보</p>
+                <table class="my-ticket-table" border="1">
+                    <tbody>
+                        <tr>
+                            <td>일시</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>선택좌석<br>&nbsp
+                                (<span>4</span>)석</td>
+                            <td>
+                                <p>1</p>
+                                <p>2</p>
+                                <p>3</p>
+                                <p>4</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>티켓금액</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>수수료</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>배송료</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>총 결재금액</td>
+                            <td>2</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </form>
 </body>
