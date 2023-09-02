@@ -17,7 +17,7 @@
 <body id="securityBody">
 
 
-    <section>
+    <section id="wrap">
         <div class="container px-5">
             <div class="row d-flex justify-content-center align-items-center">
                 
@@ -25,57 +25,10 @@
                     <div class="card shadow-lg" >
 
                         <div class="card-body p-4 shadow-lg" >
-                            <ul id="findBoxSelecter">
-                                <li class="bg-primary" id="findUserIdBtn">아이디 찾기</li>
-                                <li class="bg-primary" id="findUserPwBtn">비밀번호 찾기</li>
-                            </ul>
                             
-                            <form action="" method="POST" id="findUserId">
-                                
-                                <h4 class="mt-5" style="color: black;">로그인 아이디 찾기</h4>
-                                <p class="mt-1">가입하셨던 이메일을 입력해주세요.</p>
-                                
-                                <div>
-                                    <label class="form-label m-2 fs-5" for="user_id">Email</label>
-                                    <input type="email" class="form-control form-control-lg " id="user_id" 
-                                    autocomplete="off" placeholder="user@gmail.com"/>
-                                </div>
-                                
-                                <div class="findBtnBox">
-                                    <button class="btn btn-lg m-3 border-0" type="submit" id="finduserBtn">send</button>
-                                </div>
-                            </form>
+                            
+                            
 
-                            <form action="" method="POST" id="findUserPassword">
-                                
-                                <h4 class="mt-5" style="color: black;">로그인 비빌번호 찾기</h4>
-                                <p class="mt-1">
-                                    양식을 모두 입력해주세요. <br>
-                                    새로운 비밀번호로 재설정해드리겠습니다.
-                                </p>
-                                
-                                <div>
-                                    <label class="form-label m-2 fs-5" for="user_id">Email</label>
-                                    <input type="email" class="form-control form-control-lg " id="user_id" 
-                                    autocomplete="off" placeholder="user@gmail.com"/>
-                                </div>
-                                
-                                <div>
-                                    <label class="form-label m-2 fs-5" for="user_name">Name</label>
-                                    <input type="email" class="form-control form-control-lg " id="user_name" 
-                                    autocomplete="off" placeholder="Name"/>
-                                </div>
-
-                                <div>
-                                    <label class="form-label m-2 fs-5" for="login_id">Tel</label>
-                                    <input type="text" class="form-control form-control-lg " id="user_tel" 
-                                    autocomplete="off" placeholder="- 빼고 입력해주세요."/>
-                                </div>
-                                
-                                <div class="findBtnBox">
-                                    <button class="btn btn-lg m-3 border-0" type="submit" id="finduserBtn">send</button>
-                                </div>
-                            </form>
                         </div>
                     </div>
                 </div>

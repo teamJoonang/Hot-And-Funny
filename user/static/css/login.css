@@ -1,3 +1,7 @@
+html , body {
+  height: 100%;
+}
+
 ul , li {
     list-style: none;
 }
@@ -126,8 +130,10 @@ textarea:focus:-ms-input-placeholder { /* Internet Explorer 10+ */
   display: none;
 }
 
+
 #securityBody {
-  background-image: linear-gradient(135deg , #de29e6 ,#9816c8 , #461959 , black);
-  background-repeat: no-repeat;
-  background-size: auto;
+  background: rgb(2,0,36);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 7%, rgba(88,9,121,1) 59%, rgba(22,156,184,1) 100%);
+  /* background-repeat: no-repeat;
+  background-size: auto; */
 }

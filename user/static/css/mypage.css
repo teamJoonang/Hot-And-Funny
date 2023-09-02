@@ -11,6 +11,14 @@ a:visited {
     color: black;
 }
 
+body , html {
+    height: 100%;
+}
+
+#wrap {
+    min-height: calc(100%);
+}
+
 
 
 /* 내 정보 사이드 메뉴바 설정 */

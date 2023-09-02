@@ -15,21 +15,26 @@
     <title>사용자 아이디/비밀번호 찾기</title>
 </head>
 <body id="securityBody">
-
-
-    <section class="">
-        <div class="container px-5">
-            <div class="row d-flex justify-content-center align-items-center">
+    
+    <!-- content -->
+    <section class="h-100">
+        <div class="container px-5 h-100">
+            <div class="row h-100 d-flex justify-content-center align-items-center">
                 
                 <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                     <div class="card shadow-lg" >
 
-                        <div class="card-body p-4 shadow-lg" >
-                            <ul id="findBoxSelecter">
+                        <div class="card-body p-4 shadow-lg text-center">
+                            <ul id="findBoxSelecter" class="mb-5">
                                 <li class="bg-primary" id="findUserIdBtn">아이디 찾기</li>
                                 <li class="bg-primary" id="findUserPwBtn">비밀번호 찾기</li>
                             </ul>
+
+                            <a href="#">
+                                <img src="../static/img/concert_logo_final2_black1.png" alt="logo">
+                            </a>
                             
+                            <!-- 아이디 찾기 -->
                             <form action="" method="POST" id="findUserId">
                                 
                                 <h4 class="mt-5" style="color: black;">로그인 아이디 찾기</h4>
@@ -45,7 +50,8 @@
                                     <button class="btn btn-lg m-3 border-0" type="submit" id="finduserBtn">send</button>
                                 </div>
                             </form>
-
+                            
+                            <!-- 비밀번호 찾기 -->
                             <form action="" method="POST" id="findUserPassword">
                                 
                                 <h4 class="mt-5" style="color: black;">로그인 비빌번호 찾기</h4>
