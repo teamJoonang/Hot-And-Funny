@@ -24,7 +24,7 @@ body , html {
 /* 내 정보 사이드 메뉴바 설정 */
 #mypage_menu {
     text-align: center;
-    justify-content: center;
+    /* justify-content: center; */
     width: 100%;
 }
 

@@ -1,6 +1,6 @@
-html , body {
+/* html , body {
   height: 100%;
-}
+} */
 
 ul , li {
     list-style: none;
@@ -20,26 +20,26 @@ input::placeholder {
 input[id=login_id]::placeholder {
     color: #ccc;
     font-size: 0.9375em;
-    text-align: center;
+    /* text-align: center; */
 }
 
 input[id=login_password]::placeholder {
   color: #ccc;
   font-size: 0.9375em;
-  text-align: center;
+  /* text-align: center; */
 }
 
 input[id=login_re_password]::placeholder {
   color: #ccc;
   font-size: 0.9375em;
-  text-align: center;
+  /* text-align: center; */
 }
 
 /* bootstrap .form-control의 focus 아래의 설정으로 재설정  */
 .form-control:focus , .form-control:hover{
   border-color: #ea10a0;
   outline: 0;
-  box-shadow: 0 0 0 0.25rem rgba(234, 16, 160, 0.476);
+  box-shadow: 0 0 0 0.1rem rgba(234, 16, 160, 0.476);
 }
 
 
@@ -66,13 +66,13 @@ textarea:focus:-ms-input-placeholder { /* Internet Explorer 10+ */
 
 /* 로그인 페이지 버튼 개인 설정  */
 #loginBtn {
-    width: 50%;
+    width: 100%;
     background-image: linear-gradient(to right , #de29e6 , #9816c8);
 }
 
 #loginBtn:hover {
-    box-shadow: 0 0 0 0.25rem rgba(234, 16, 161, 0.476);
-    color: black !important;
+    box-shadow: 0 0 0 0.18rem rgba(234, 16, 161, 0.476);
+    /* color: black !important; */
 }
 
 /********************************
@@ -120,6 +120,7 @@ textarea:focus:-ms-input-placeholder { /* Internet Explorer 10+ */
 .findBtnBox > button:hover {
     box-shadow: 0 0 0 0.25rem rgba(234, 16, 161, 0.476);
     color: black !important;
+    
 }
 
 #findUserId {
@@ -136,4 +137,29 @@ textarea:focus:-ms-input-placeholder { /* Internet Explorer 10+ */
   background: linear-gradient(90deg, rgba(2,0,36,1) 7%, rgba(88,9,121,1) 59%, rgba(22,156,184,1) 100%);
   /* background-repeat: no-repeat;
   background-size: auto; */
+}
+
+/* ----- signup.html ----- */
+
+/* 통신사 선택 박스 */
+#mobile_carrier:hover {
+  cursor: pointer;
+}
+
+#mobile_carrier > div:hover {
+  border-color: #ea10a0;
+  box-shadow: 0 0 0 0.1rem rgba(234, 16, 161, 0.476);
+  /* color: black !important; */
+
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#mobile_carrier > div {
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
 }
