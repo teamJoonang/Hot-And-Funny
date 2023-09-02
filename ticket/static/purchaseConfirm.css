@@ -123,7 +123,7 @@ body {
     height: 165px;
 }
 .left-down .refund-policy p > span {
-    border: 1px solid red;
+    border: 0px solid red;
     border-radius: 100%;
     background-color: red;
     color: white;
@@ -158,21 +158,22 @@ body {
     background-color: #ccc;
 }
 .content-right .concert-info {
-    border: 1px solid red;
+    border: 0px solid red;
     width: 380px;
     height: 140px;
     padding: 10px;
     display: flex;
+    margin-top: 20px;
 }
 .poster {
-    outline: 1px solid red;
+    outline: 0px solid red;
     width : 100px;
 }
 .poster img {
     width : 100%;
 }
 .concert-info .concert-info-title {
-    border: 1px solid green;
+    border: 0px solid green;
     padding: 10px;
 }
 .bold-text {
@@ -180,7 +181,7 @@ body {
     font-size: 1.2rem;
 }
 .content-right .ticket-info {
-    border: 1px solid red;
+    border: 0px solid red;
     width: 380px;
     padding: 10px;
 }
@@ -188,6 +189,54 @@ body {
     width: 380px;
     text-indent: 5px;
 }
+.my-ticket-table td {
+    padding: 5px;
+}
 .my-ticket-table td:first-child {
     width: 120px;
+}
+.my-ticket-table td:last-child {
+    background-color: white;
+}
+
+
+.my-ticket-table tr:last-child {
+    background-color: #777;
+    height: 70px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+}
+.my-ticket-table tr:last-child td:last-child {
+    background-color: #bbb;
+    text-align: right;
+}
+.my-ticket-table tr:last-child td:last-child span {
+    font-size: 1.4rem;
+    color: rgb(255, 208, 0);
+}
+.button-box {
+    border: 0px solid red;
+    width: 380px;
+    height: 140px;
+    padding: 10px;
+    display: flex;
+}
+.button-box div {
+    border: 1px solid black;
+    border-radius: 8px;
+    width: 186px;
+    height: 60px;
+    text-align: center;
+    margin-top: 30px;
+    line-height: 60px;
+    font-size: 1.4rem;
+    color: white;
+}
+.button-box .pre-view-btn {
+    background-color: #777;
+}
+.button-box .next-view-btn {
+    background-color: red;
+    margin-left: 4px;
 }
