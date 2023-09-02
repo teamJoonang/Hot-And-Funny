@@ -9,6 +9,8 @@
     color: black !important;
 }
 
+
+/* input 타입 number를 숫자만 입력받는 용로도 사용하기 위해 증감버튼 삭제*/
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;

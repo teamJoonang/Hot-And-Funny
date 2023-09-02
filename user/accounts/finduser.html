@@ -25,11 +25,14 @@
                     <div class="card shadow-lg" >
 
                         <div class="card-body p-4 shadow-lg text-center">
+
+                            <!-- 아이디/비밀번호 찾기 선택 버튼 -->
                             <ul id="findBoxSelecter" class="mb-5">
                                 <li class="bg-primary" id="findUserIdBtn">아이디 찾기</li>
                                 <li class="bg-primary" id="findUserPwBtn">비밀번호 찾기</li>
                             </ul>
 
+                            <!-- 홈으로 돌아가기 로고 -->
                             <a href="#">
                                 <img src="../static/img/concert_logo_final2_black1.png" alt="logo">
                             </a>
@@ -40,7 +43,8 @@
                                 <h4 class="mt-5" style="color: black;">로그인 아이디 찾기</h4>
                                 <p class="mt-1">가입하셨던 이메일을 입력해주세요.</p>
                                 
-                                <div>
+                                <!-- 기존 사용자 이메일 -->
+                                <div class="text-start">
                                     <label class="form-label m-2 fs-5" for="user_id">Email</label>
                                     <input type="email" class="form-control form-control-lg " id="user_id" 
                                     autocomplete="off" placeholder="user@gmail.com"/>
@@ -57,27 +61,27 @@
                                 <h4 class="mt-5" style="color: black;">로그인 비빌번호 찾기</h4>
                                 <p class="mt-1">
                                     양식을 모두 입력해주세요. <br>
-                                    새로운 비밀번호로 재설정해드리겠습니다.
                                 </p>
                                 
-                                <div>
+                                <!-- 기존 사용자 이메일 -->
+                                <div class="text-start">
                                     <label class="form-label m-2 fs-5" for="user_id">Email</label>
                                     <input type="email" class="form-control form-control-lg " id="user_id" 
                                     autocomplete="off" placeholder="user@gmail.com"/>
                                 </div>
-                                
-                                <div>
+                                <!-- 기존 사용자 이름 -->
+                                <div class="text-start">
                                     <label class="form-label m-2 fs-5" for="user_name">Name</label>
                                     <input type="email" class="form-control form-control-lg " id="user_name" 
                                     autocomplete="off" placeholder="Name"/>
                                 </div>
-
-                                <div>
+                                <!-- 기존 사용자 전화번호 -->
+                                <div class="text-start">
                                     <label class="form-label m-2 fs-5" for="login_id">Tel</label>
                                     <input type="text" class="form-control form-control-lg " id="user_tel" 
-                                    autocomplete="off" placeholder="- 빼고 입력해주세요."/>
+                                    autocomplete="off" placeholder="Tel 010-0000-0000"/>
                                 </div>
-                                
+
                                 <div class="findBtnBox">
                                     <button class="btn btn-lg m-3 border-0" type="submit" id="finduserBtn">send</button>
                                 </div>

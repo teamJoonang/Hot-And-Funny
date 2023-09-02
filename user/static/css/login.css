@@ -12,27 +12,23 @@ input::placeholder {
     font-size: 0.9375em;
 }
 
-#login_form > div > input {
-    text-align: center;
-}
-
 /* placeholder 개별 설정 */
 input[id=login_id]::placeholder {
     color: #ccc;
     font-size: 0.9375em;
-    text-align: center;
+    /* text-align: center; */
 }
 
 input[id=login_password]::placeholder {
   color: #ccc;
   font-size: 0.9375em;
-  text-align: center;
+  /* text-align: center; */
 }
 
 input[id=login_re_password]::placeholder {
   color: #ccc;
   font-size: 0.9375em;
-  text-align: center;
+  /* text-align: center; */
 }
 
 /* bootstrap .form-control의 focus 아래의 설정으로 재설정  */
