@@ -53,96 +53,78 @@
         </div>
     </header>
     <!--헤더 끝-->
-
-    
-    <div class="main-box row bg-white">
-        <div class="left-nav col-1 flex-column mx-5 d-flex text-center fw-bold mt-5">
-            <a href="admin_dashboard.html">
-                <p class="text-dark">대시보드</p>
-            </a>
-            <a href="admin_statistics.html">
-                <p class="text-dark">통계자료</p>
-            </a>
-            <a href="admin_refund.html">
-                <p class="text-dark">환불관리</p>
-            </a>
-            <a href="admin_post.html">
-                <p class="text-dark">게시글 관리</p>
-            </a>
-            <a href="admin_user_info.html">
-                <p class="text-dark">회원정보 조회</p>
-            </a>
-        </div>
-
-
-
-        <div class="content-box h-100 col-9 d-flex flex-wrap mt-5">
-            <div class="w-50">
-
-                    <div class="card">
-                      <div class="card-header">
-                        매출
-                      </div>
-                      <div class="card-body">
-                        <div id="areaChart"></div>
-                      </div>
-                    </div>
-
+    <div class="container-fluid px-0">
+        <div class="row gx-0">
+            <div class="col-2 me-3 text-center fw-bold border rounded-1">
+                <div>
+                    <h3 class="mt-5">관리자 목록</h3>
+                    <nav class="mt-5">
+                        <div>
+                            <a href="admin_dashboard.html" class="nav-link">대시보드</a>
+                        </div>
+                        <div class="mt-3">
+                            <a href="admin_statistics.html" class="nav-link py-2">통계자료</a>
+                        </div>
+                        <div class="mt-3">
+                            <a href="admin_refund.html" class="nav-link py-2">환불관리</a>
+                        </div>
+                        <div class="mt-3">
+                            <a href="admin_post.html" class="nav-link py-2">게시글 관리</a> 
+                        </div>
+                        <div class="mt-3">
+                            <a href="admin_user_info.html" class="nav-link py-2">회원정보 조회</a>
+                        </div>
+                    </nav>
+                </div>
             </div>
-            <div class="w-50">
-
-                    <div class="card">
-                      <div class="card-header">
-                        예매율
-                      </div>
-                      <div class="card-body">
-                        <div id="barChart"></div>
-                      </div>
+            <div class="col-9 mx-3 mt-3">
+                <div class="row gy-3 mt-4">
+                    <div class="col-12 col-xl-6">
+                        <div class="card">
+                        <div class="card-header">
+                            매출
+                        </div>
+                        <div class="card-body">
+                            <div id="areaChart"></div>
+                        </div>
+                        </div>
                     </div>
-
-            </div>
-            <div class="w-50">
-
-                    <div class="card">
-                      <div class="card-header">
+                    <div class="col-12 col-xl-6">
+                        <div class="card">
+                        <div class="card-header">
+                            예매율
+                        </div>
+                        <div class="card-body">
+                            <div id="barChart"></div>
+                        </div>
+                        </div>
+                    </div>
+                </div>       
+                <div class="row gy-3 mt-2">
+                    <div class="col-12 col-xl-6">
+                        <div class="card">
+                        <div class="card-header">
                         고객 통계
-                      </div>
-                      <div class="card-body d-flex">
+                        </div>
+                        <div class="card-body d-flex">
                         <div id="donutChart"></div>
                         <div id="secondDonutChart"></div>
-                      </div>
-                        
+                        </div>
+                            
+                        </div>
                     </div>
-
+                    <div class="col-12 col-xl-6">
+                        <div class="card h-100">
+                            <div class="card-header">
+                                실시간 좌석 확인
+                            </div>
+                            <div class="card-body d-flex"></div>    
+                        </div>
+                    </div>
+                </div>
             </div>
-
-
-
-
-            <div class="w-50">
-
-                <div class="card h-100">
-                    <div class="card-header">
-                        실시간 좌석 확인
-                    </div>
-                    <div class="card-body d-flex">
-
-                    </div>
-                      
-                  </div>
-
-            </div>
-
         </div>
-
-
-
-
-
     </div>
-
-
-
     <!--푸터-->
     <footer class="bg-black mt-auto">
         <div class="container-fluid row">
