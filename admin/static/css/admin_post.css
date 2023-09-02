@@ -13,13 +13,11 @@ body {
 
 
 
-/* 좌측 네비바    */
-.left-nav a {
-    margin-top: 20%;
-    /* border: 1px solid black; */
+.left-nav div :hover{
+    font-size: 1.5rem;
+    background-color: grey;
+    color: white;
 }
-
-
 
 
 
