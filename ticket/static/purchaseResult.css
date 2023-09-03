@@ -54,13 +54,13 @@ body {
 .ticket-info-form{
     width : 500px;
     margin-left : 350px;
-    height : 250px;
-    border : 1px solid black;
+    height : 170px;
+    outline : 1px solid black;
     display : inline-block;
-    font-size : 1.5rem;
+    font-size : 1.2rem;
 }
 .ticket-list {
-    width: 240px;
+    width: 250px;
     float : left;
 }
 .ticket-list li{
@@ -68,7 +68,8 @@ body {
     text-align: center;
     display : inline-block;
     margin-left : 50px;
-    margin-top : 30px;
+    margin-top : 10px;
+
 }
 .ticket-info {
     width : 250px;
@@ -77,10 +78,26 @@ body {
 .ticket-info li{
     width : 150px;
     display: inline-block;
+    text-align: center;
     margin-right : 50px;
-    margin-top : 30px;
+    margin-top : 10px;
 }
-
+.price-form {
+    margin: auto;
+    width : 300px;
+    height: 100px;
+    line-height: 100px;
+    display: flex;
+    text-align: center;
+    font-size : 1.5rem;
+    font-weight: 500;
+}
+.total {
+    width : 100px;    
+}
+.total-price {
+    width : 200px;
+}
 
 /* <---------- btn ----------> */
 .btns {
@@ -93,7 +110,7 @@ body {
 .btns button{
     width: 100px;
     height: 50px;
-    margin-top : 50px;
+    margin-top : 20px;
     text-align: center;
     background-color: white;
 }

@@ -1,7 +1,7 @@
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css');
 body {
-
     font-family: 'Pretendard', 'sans-serif';
+    overflow-x: hidden;
 }
 
 .post-img {
@@ -121,6 +121,7 @@ body {
     content: '';
 }
 
+
 .concert {
     position: relative;
     color: #FFFFFF;
@@ -131,12 +132,17 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: -2;
-    width : 50px;
-    height : 50px;
+    width : 30px;
+    height : 30px;
     display : block;
     background : blue;
+    border-radius: 50%;
     content: "";
 }
+.concert:hover{
+    cursor : pointer;
+}
+
 
 /* <-------Calendar 끝 ------->*/
 
