@@ -9,6 +9,7 @@ function drawCharts() {
   drawBarChart();
   drawDonutChart();
   drawSecondDonutChart();
+  drawRemainingSeatsChart();
 }
 
 function drawAreaChart() {
@@ -101,3 +102,45 @@ function drawSecondDonutChart() {
     
   }
 
+
+
+
+
+
+document.write('<script src="/admin/static/js/seatchoice.js"></script>');
+document.write('<script src="/ticket/seatchoice.html"></script>');
+
+
+/////////////////////////////////////////////////////
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(updateCharts);
+
+// 창 크기 변경 시 그래프 다시 그리기
+window.addEventListener('resize', updateCharts);
+
+// seatchoice.js 파일에서 가져온 남은 좌석 수로 그래프를 업데이트하는 함수
+function updateCharts(vipCount, rCount, sCount) {
+  // 그래프 데이터 업데이트
+  const data = google.visualization.arrayToDataTable([
+    ['좌석 유형', '남은 좌석 수'],
+    ['VIP', vipCount],
+    ['R', rCount],
+    ['S', sCount]
+  ]);
+
+  // 그래프 그리기
+  drawRemainingSeatsChart(data);
+}
+
+// 그래프 그리는 함수
+function drawRemainingSeatsChart(data) {
+  const options = {
+    title: '남은 좌석 수',
+    pieHole: 0.4,
+    legend: 'none',
+    chartArea: { width: '80%', height: '80%'}
+  };
+
+  const chart = new google.visualization.PieChart(document.getElementById('remainingSeatsChart'));
+  chart.draw(data, options);
+}
