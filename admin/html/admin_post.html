@@ -61,23 +61,23 @@
 
     
     <div class="row gx-0">
-        <div class="col-2 me-3 text-center fw-bold border rounded-1" style="background-color: #ccc;">
+        <div class="col-2 me-3 text-center fw-bold border rounded-1">
             <div class="left-nav">
                 <h3 class="mt-5">관리자 목록</h3>
                 <nav class="mt-5">
-                    <div>
+                    <div class="mx-auto">
                         <a href="admin_dashboard.html" class="nav-link py-2">대시보드</a>
                     </div>
-                    <div class="mt-3">
+                    <div class="mt-3 mx-auto">
                         <a href="admin_statistics.html" class="nav-link py-2">통계자료</a>
                     </div>
-                    <div class="mt-3">
+                    <div class="mt-3 mx-auto">
                         <a href="admin_refund.html" class="nav-link py-2">환불관리</a>
                     </div>
-                    <div class="mt-3">
-                        <a href="admin_post.html" class="nav-link py-2 fs-4">게시글 관리</a> 
+                    <div class="mt-3 mx-auto">
+                        <a href="admin_post.html" class="nav-link py-2 fs-5">게시글 관리</a> 
                     </div>
-                    <div class="mt-3">
+                    <div class="mt-3 mx-auto">
                         <a href="admin_user_info.html" class="nav-link py-2">회원정보 조회</a>
                     </div>
                 </nav>
@@ -88,24 +88,35 @@
 	<div class="col-9 mt-5">
 		<h1 class="mt-4 text-center">전체 게시판 관리</h1>
  
-		<div class="card mb-4 overflow-y-scroll border-black w-75 mx-auto">
+		<div class="card mb-4 overflow-y-scroll w-75 mx-auto" style="border: 1px solid #ccc">
 
 			<div class="card-body">
                 <form action="" method="post">
                     <table class="table">
-
+                        
+                        
+                        <colgroup>
+                            <col width="10%"/> <!--번호-->
+                            <col width="40%"/> <!--제목-->
+                            <col width="20%"/> <!--작성자-->
+                            <col width="15%"/> <!--글 카테고리-->
+                            <col width="10%"/> <!--작성일-->
+                            <col width="5%"/> <!--체크박스-->
+                        </colgroup>
                         <thead>
                             <tr>
-                                <th>글번호</th>
-                                <th>제목</th>
-                                <th>작성자</th>
-                                <th>게시판</th>
-                                <th>작성일</th>
-                                    <input type = button class="btn btn-primary text-black bg-white float-end" value="수정"></input>
+                                <th scope="col">글 번호</th>
+                                <th scope="col">제목</th>
+                                <th scope="col">작성자</th>
+                                <th scope="col">카테고리</th>
+                                <th scope="col">작성일</th>
 
-                                    <input type = button class="btn btn-primary text-black bg-white float-end" value="삭제"></input>
-                            </tr>        
+                                <input type = button class="btn btn-primary text-black bg-white float-end" value="수정" style="border: 1px solid #444444d8;"></input>
+
+                                <input type = button class="btn btn-primary text-black bg-white float-end" value="삭제" style="border: 1px solid #444444d8;"></input>
+                            </tr>
                         </thead>
+
                         <tbody>
                             <tr>
                                 <td>1</td>
@@ -235,7 +246,7 @@
 		</div>
 
 
-        <h2 class="mt-4 text-center">Q&A 게시판 관리</h2>
+        <h2 class="mt-5 text-center">Q&A 게시판 관리</h2>
  
 		<div class="card mb-4 overflow-y-scroll border-black w-75 mx-auto">
 
@@ -243,15 +254,23 @@
                 <form action="" method="post">
                     <table class="table">
 
+                        <colgroup>
+                            <col width="10%"/> <!--번호-->
+                            <col width="45%"/> <!--제목-->
+                            <col width="25%"/> <!--작성자-->
+                            <col width="15%"/> <!--작성일-->
+                            <col width="5%"/> <!--체크박스-->
+                        </colgroup>
                         <thead>
                             <tr>
-                                <th>글번호</th>
-                                <th>제목</th>
-                                <th>작성자</th>
-                                <th>작성일</th>
-                                    <input type = button class="btn btn-primary text-black bg-white float-end" value="수정"></input>
+                                <th scope="col">글 번호</th>
+                                <th scope="col">제목</th>
+                                <th scope="col">작성자</th>
+                                <th scope="col">작성일</th>
 
-                                    <input type = button class="btn btn-primary text-black bg-white float-end" value="삭제"></input>
+                                <input type = button class="btn btn-primary text-black bg-white float-end" value="수정" style="border: 1px solid #444444d8;"></input>
+
+                                <input type = button class="btn btn-primary text-black bg-white float-end" value="삭제" style="border: 1px solid #444444d8;"></input>
                             </tr>
                         </thead>
                         <tbody>

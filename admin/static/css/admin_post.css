@@ -10,15 +10,29 @@ body {
 
 /*----- MAIN -----*/
 
-
-
-
-.left-nav div :hover{
-    font-size: 1.5rem;
-    background-color: grey;
-    color: white;
+.left-nav{
+    color: #444444d8;
 }
 
+.left-nav div{
+    width: 40%;
+    border: 1px solid #444444d8;
+
+    border-radius: 25px;
+}
+.left-nav div a{
+    width: 100%;
+
+}
+
+.left-nav div a:hover{
+    font-size: 1.25rem;
+    border-radius: 25px;
+}
+
+.table input{
+    border: 1px solid red;
+}
 
 
 /* 삭제, 수정버튼 간격 조절 */
