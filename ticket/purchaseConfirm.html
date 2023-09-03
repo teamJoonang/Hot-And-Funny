@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./static/purchaseConfirm.css">
+    <title>PurchaseConfirm</title>
+</head>
+<body>
+    <div class="sub-header">
+        <div class="sub-menu inline-div">좌석 선택</div>
+        <div class="sub-menu inline-div"  style="background-color: red;">예매 내역 확인</div>
+        <div class="sub-menu inline-div">결제</div>
+    </div>
+    <div class="content">
+        <div class="confirm-left">
+            <div class="concert-info">
+                <div class="post">
+                    <img src="./static/img/concert_ticket2.png" alt="">
+                </div>
+                <div class="concert-content">
+                    <div class="concert-name">콘서트 about</div>
+                    <div class="concert-about">
+                        <div class="concert-about-content">
+                            <ul>
+                                <li>음악</li>
+                                <li>무대,의상</li>
+                                <li>조명</li>
+                                <li>지휘</li>
+                                <li>연주</li>
+                            </ul>
+                        </div>
+                        <div class="concert-about-member">
+                            <ul>
+                                <li>루트비히 밍쿠스</li>
+                                <li>김인규</li>
+                                <li>고희선</li>
+                                <li>이병욱</li>
+                                <li>심포니오케스트라</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <form class="reservation-info-layout" method="get" action ="#">
+                    <div class = "reservation-sub">
+                        예매 정보
+                    </div>
+                    <table class = "reservation-form">
+                        <thead class="reservation-thead">
+                            <tr>
+                                <td>좌석 등급</td>
+                                <td>좌석 번호</td>
+                            </tr>
+                        </thead>
+                        <tbody class="reservation-info">
+                            <tr>
+                                <td>VIP Class</td>
+                                <td>A - 13</td>
+                            </tr>
+                            <tr>
+                                <td>VIP Class</td>
+                                <td>A - 14</td>
+                            </tr>
+                            <tr>
+                                <td>VIP Class</td>
+                                <td>A - 15</td>
+                            </tr>
+                            <tr>
+                                <td>VIP Class</td>
+                                <td>A - 16</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+            <form class="member-info-form" method="get" action="#">
+                <div class="member-info-form-header">
+                    주문자 정보
+                </div>
+                <div class="member-form">
+                    <ul class="member-info">
+                        <li>이름<span class="member-name">고일봉</span></li>
+                        <li>휴대폰 번호<span class="member-phone">010-6399-4461</span></li>
+                        <li>이메일<span class="member-email">bbonga0609@gmailc.om</span></li>
+                    </ul>
+                    <div class = "refund-info">
+                        <div class="refund-sub">환불 안내</div>
+                        </br>
+                        <ul class="refund-content">
+                            <li>공연일로부터 30일 이전 100% 환불 (주말 포함)</li>
+                            <li>공연일로부터 15일 이전 50% 환불 (주말 포함)</li>
+                            <li>공연일로부터 7일 이전 환불 불가 (주말 포함)</li>
+                        </ul>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="confirm-right">
+            <div>
+                <form class="price-form">             
+                    <div class="date-info"  method="post" action="#">
+                       <span>공연 날짜 : </span>
+                       <span>2023-01-01</span>
+                    </div>
+                    <table class="total-info">
+                        <thead>
+                            <tr class="total-price-thead">
+                                <td>좌석 등급</td>
+                                <td>티켓 수</td>
+                                <td>가격</td>
+                            </tr>
+                        </thead>
+                        <tbody class="total-price-info">
+                            <tr>
+                                <td>VIP Class</td>
+                                <td>1</td>
+                                <td>KRW 100000</td>
+                            </tr>
+                            <tr>
+                                <td>R Class</td>
+                                <td>2</td>
+                                <td>KRW 100000</td>
+                            </tr>
+                            <tr>
+                                <td>S Class</td>
+                                <td>1</td>
+                                <td>KRW 30000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="total-price">
+                        <span>총 결제 : </span>
+                        <span class="price-sum">KRW 230000</span>
+                    </div>
+                </form>
+                <div class="btns">
+                    <button class="btn" id="prev">이전단계</button>
+                    <button class="btn" id="payment">결제하기</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
