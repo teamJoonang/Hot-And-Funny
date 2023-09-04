@@ -36,8 +36,8 @@ body {
 }
 
 @media screen and (max-width: 1200px) {
-    .left-nav {
-      min-width: 80px; /* 작은 화면 크기에 대한 최소 너비 설정 */
+    .table {
+      min-width: 920px; /* 작은 화면 크기에 대한 최소 너비 설정 */
     }
   }
 
