@@ -122,25 +122,29 @@ body {
 }
 
 
-.concert {
+.selected {
     position: relative;
     color: #FFFFFF;
 }
-.concert::before {
+.selected::before {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: -2;
-    width : 30px;
-    height : 30px;
+    width : 50%;
+    height : 50%;
     display : block;
-    background : blue;
-    border-radius: 50%;
+    background-color : rgb(213, 213, 245);
+    opacity : 0.5;
     content: "";
 }
-.concert:hover{
+.selected:hover{
     cursor : pointer;
+}
+
+.concert {
+    color : black;
 }
 
 

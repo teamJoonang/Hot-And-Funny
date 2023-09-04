@@ -4,7 +4,7 @@ const concertTime = document.getElementById('concert-time');
 const concertDate = document.getElementById('concert-date');
 const concertGrade = document.getElementById('concert-grade');
 let selectedDate = null;
-const concertDates = [1, 2, 3, 5, 6, 7, 8, 9, 10];
+const concertDates = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const clickableDates = generateClickableDates(concertDates);
 
 function generateClickableDates(concertDates) {
@@ -91,16 +91,19 @@ const renderCalendar = () =>{
         if (viewMonth === concertMonth.getMonth() && viewYear === concertMonth.getFullYear()){
             const concertElements = document.querySelectorAll(`.this`);
             const concertArray = Array.from(concertElements);
+            
             for (let i=0; i<concertDates.length; i++){
                 let concertDate = concertDates[i];
                 let dates = concertArray[concertDate - 1];
                     if(dates){
-                        dates.classList.add(`concert`);
+                        dates.classList.add(`concert`);            
+                        dates.closest('.date').classList.add(`selected`);
                     }
             }
-        
+            
         }
     }
+
     //  날짜 클릭 시 출력
     document.querySelector('.dates').addEventListener('click', (event) => {
         const clickedDate = event.target.innerText;
@@ -111,6 +114,9 @@ const renderCalendar = () =>{
             concertDate.innerHTML = `• ${viewYear}-${String(viewMonth + 1).padStart(2, '0')}-${formattedDay}`;
         }
     });
+
+
+
 };
     
 renderCalendar();

@@ -1,13 +1,6 @@
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css');
 * {
     margin: 0;
-<<<<<<< HEAD
-    padding: 0;
-    box-sizing: border-box;
-    list-style: none;
-    font-family: 'Pretendard', 'sans-serif';
-}
-=======
     margin-top: 0;
     list-style: none;
     font-family: 'Pretendard', 'sans-serif';
@@ -16,7 +9,6 @@ body {
     margin-top: 8px;
     margin-left: 9px;
 }
->>>>>>> mixpuppy
 /* <--------- header ---------> */
 .inline-div {
     display: inline-block;
@@ -26,10 +18,7 @@ body {
     outline: 0px solid red;
     width: 1200px;
     font-size: 0;
-<<<<<<< HEAD
-=======
     display: flex;
->>>>>>> mixpuppy
 }
 .sub-header :nth-child(2) {
     color: white;
@@ -52,249 +41,6 @@ body {
     outline: 1px solid black;
 }
 /* <--------- confirm - left ---------> */
-<<<<<<< HEAD
-.confirm-left {
-    width : 800px;
-    height : 100%;
-    float : left;
-    border-right : 1px dotted black;
-}
-
-/* <--------- conert - information ---------> */
-.concert-info {
-    width : 100%;
-    height : 300px;
-    display : inline-block;
-}
-.post {
-    width : 160px;
-    height : 270px;
-    margin-left : 20px;
-    margin-top : 20px;
-    float : left;    
-}
-.post img {
-    width : 100%;
-    margin-top: 50px;
-}
-.concert-content {
-    width : 240px;
-    height : 270px;
-    margin-left : 20px;
-    margin-top : 20px;
-    float : left;
-}
-.concert-name {
-    text-align: center;
-    font-size: 1.2rem;
-    font-weight: 700;
-    height : 50px;
-    line-height: 50px;
-}
-.concert-about {
-    width : 240px;
-    height : 220px;
-    display : inline-block;
-    border : 1px solid black;
-}
-.concert-about-content {
-    width : 100px;
-    margin-left : -20px;
-    float : left;
-}
-.concert-about-content li {
-    margin-top : 10px;
-}
-.concert-about-member {
-    width : 160px;
-    margin-left : -20px;
-    float : right;
-}
-.concert-about-member li {
-    margin-top : 10px;
-}
-.reservation-info-layout {
-    width : 320px;
-    height : 270px;
-    margin-right : 20px;
-    margin-top : 20px;
-    float : right;
-}
-.reservation-sub {
-    width : 320px;
-    height : 50px;
-    line-height : 50px;
-    font-size : 1.2rem;
-    font-weight: 700;
-    text-align: center;
-}
-.reservation-form {
-    height : 220px;
-    border : 1px solid black;
-}
-.reservation-thead {
-    text-align: center;
-}
-.reservation-thead td:first-child{
-    width : 160px;
-}
-.reservation-thead td:nth-child(2){
-    width : 160px;
-}
-.reservation-info {
-    height : 30px;
-    text-align: center;
-    width : 100%;
-}
-.reservation-info td {
-    font-size : 1rem;
-    font-weight: 500;
-}
-
-/* <--------- member - information ---------> */
-.member-info-form {
-    width : 800px;
-}
-.member-info-form-header {
-    width : 100%;
-    font-size : 2rem;
-    text-align: center;
-
-}
-.member-form{
-    width : 750px;
-    height : 300px;
-    margin-left : 25px;
-    margin-top : 10px;
-    border : 1px solid black;
-}
-.member-info {
-    width : 100%;
-    display: inline-block;
-}
-.member-info li {
-    height : 50px;
-    line-height: 50px;
-    font-size: 1rem;
-    font-weight: 500;
-}
-.member-info span {
-    font-size: 1rem;
-    font-weight: 500;
-}
-.member-info li:first-child{
-    width : 300px;
-}
-.member-name {
-    margin-left : 100px;
-}
-.member-info li:nth-child(2) {
-    width : 300px;
-    float : left;
-}
-.member-phone {
-    margin-left : 50px;
-}
-.member-info li:nth-child(3) {
-    width : 350px;
-    float : right;
-    margin-right : 50px;
-}
-.member-email {
-    margin-left : 50px;
-}
-/* <---------- refund ---------> */
-.refund-info {
-    border-top: 1px dotted black;
-}
-.refund-sub {
-    width: 100%;
-    font-size : 2rem;
-    font-weight: 500;
-    text-align: center;
-}
-.refund-content {
-    width : 400px;
-    margin-left : 120px;
-    font-size : 1rem;
-    font-weight: 500;
-}
-
-/* <----------------------- right ---------------------> */
-.confirm-right {
-    width : 380px;
-    height : 100%;
-    float : right;  
-}
-.price-form {
-    width : 300px;
-    height : 400px;
-    margin-left : 30px;
-    margin-top : 50px;
-}
-.date-info {
-    height : 50px;
-    line-height: 50px;
-    text-align: center;
-}
-.total-info {
-    width : 100%;
-    height : 250px;
-    text-align: center;
-}
-.total-price-thead {
-    height : 50px;
-    font-weight: 700;
-    text-align: center;
-    border : 1px solid black;
-}
-.total-price-info {
-    height : 200px;
-    font-weight: 700;
-    text-align: center;
-    border : 1px solid black;
-}
-.total-price {
-    white-space: nowrap;
-    width : 100%;
-    height : 80px;
-    line-height: 80px;
-    font-size : 1.2rem;
-    font-weight: 500;
-    border : 1px solid black;
-}
-.total-price::before {
-    content: "\00a0";
-}
-.price-sum {
-    float: right;
-    margin-right : 20px;
-}
-
-/* <-------- btn -------> */
-.btns {
-    width : 300px;
-    height : 50px;
-    margin-top : 100px;
-    margin-left : 30px;
-    display : flex;
-    align-items: center;
-    justify-content: space-around;
-}
-.btn {
-    width: 100px;
-    height: 50px;
-    font-size : 1rem;
-    font-weight: 700;
-    text-align: center;
-    border : 1px solid black;
-    background-color: white;
-}
-.btn:hover {
-    cursor : pointer;
-    background-color: black;
-    color : white;
-=======
 .content-left {
     width : 799px;
     height : 690px;
@@ -493,5 +239,4 @@ body {
 .button-box .next-view-btn {
     background-color: red;
     margin-left: 4px;
->>>>>>> mixpuppy
 }
