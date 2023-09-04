@@ -12,7 +12,6 @@
             integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
             crossorigin="anonymous">
             <link rel="stylesheet" href="/board/static/common.css">
-            <link rel="stylesheet" href="/board/static/style.css">
         <title>Document</title>
 
     </head>
@@ -21,7 +20,7 @@
             <div class="container-fluid d-flex justify-content-between navbar">
                 <div class="col-3">
                     <a href="" class="d-flex">
-                        <img src="/static/img/concert_logo.png" class="img-fluid" alt="콘서트_이미지_로고">
+                        <img src="/board/static/img/concert_logo.png" class="img-fluid" alt="콘서트_이미지_로고">
                     </a>
                 </div>
                 <nav class="col-6 d-flex justify-content-center">
@@ -61,46 +60,143 @@
         </header>
 
         <main>
-           <div class="container w-75 my-2 py-4">
-                <form action="" method="post" class="edit-form">
-                    <div class="border-bottom-3 mb-3 text-black">
-                        <h4 class="fw-bold">글쓰기</h4>
+
+            <div class="container pt-5 mt-5 ">
+                <table class="table text-center custom-table">
+                    <thead>
+                        <tr class="align-items-center">
+                            <th class="custom-hover border-black bg-black">
+                                <a href="#" class="text-decoration-none text-white">전체</a>
+                            </th>
+                            <th class="custom-hover border-black bg-black">
+                                <a href="#" class="text-decoration-none text-white">예매/취소</a>
+                            </th>
+                            <th class="custom-hover border-black bg-black">
+                                <a href="#" class="text-decoration-none text-white">결제</a>
+                            </th>
+                            <th colspan="2" class="custom-hover border-black bg-black">
+                                <a href="#" class="text-decoration-none text-white">기타</a>
+                            </th>
+                            <!-- <th class="bg-black"></th> -->
+                        </tr>
+                    </thead>
+                </table>
+
+                <table class="table">
+                    <tbody>
+                        <tr class="border">
+                            <td class="fw-bold">카테고리</th>
+                            <td class="fw-bold">제목</th>
+                            <td class="fw-bold">날짜</th>
+                            <td class="fw-bold">아이디</th>
+                            <td class="fw-bold">조회수</th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody class="pt-5 mt-5">
+                        <tr>
+                            <td>예매 취소</td>
+                            <td>예매취소 부탁드립니다</td>
+                            <td>9999.99.99</td>
+                            <td>user1</td>
+                            <td>16857</td>
+                        </tr>
+                        <tr>
+                            <td>환불</td>
+                            <td>환불 부탁드립니다</td>
+                            <td>2023.08.30</td>
+                            <td>user2</td>
+                            <td>18216</td>
+                        </tr>
+                        <tr>
+                            <td>결제</td>
+                            <td>결제 관련 문의</td>
+                            <td>2023.08.31</td>
+                            <td>user3</td>
+                            <td>821</td>
+                        </tr>
+                        <tr>
+                            <td>결제</td>
+                            <td>결제 관련 문의</td>
+                            <td>2023.09.01</td>
+                            <td>user4</td>
+                            <td>398</td>
+                        </tr>
+                        <tr>
+                            <td>환불</td>
+                            <td>환불 부탁드립니다</td>
+                            <td>2023.09.02</td>
+                            <td>user5</td>
+                            <td>1231</td>
+                        </tr>
+                        <tr>
+                            <td>예매취소</td>
+                            <td>예매취소 부탁드립니다.</td>
+                            <td>2023.09.03</td>
+                            <td>user6</td>
+                            <td>573</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+                <hr>
+
+                <div class="text-center mt-5">
+                    <ul class="pagination pagination-sm justify-content-center">
+                        <li class="page-item">
+                            <a class="page-link text-black" href="#">Previous</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link text-black" href="#">1</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link text-black" href="#">2</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link text-black" href="#">3</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link text-black" href="#">4</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link text-black" href="#">5</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link text-black" href="#">Next</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <a class="btn btn-outline-success float-end btn-dark text-white">글쓰기</a>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-15 mt-5 mb-5">
+                            <div class="box-body ml-4">
+                                <form class="d-flex justify-content-center">
+                                    <select id='search_type' class="form-select me-1 w-auto border">
+                                        <option value="title">제목</option>
+                                        <option value="content">내용</option>
+                                    </select>
+                                    <input
+                                        class="form-control me-1 search-bar w-auto border"
+                                        type="search"
+                                        placeholder="Search"
+                                        aria-label="Search">
+                                    <button
+                                        class="btn btn-outline-success custom-button btn-outline-dark border"
+                                        type="submit">Search
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                    <div class="write">
-                        <div class="d-flex border border-bottom-0">
-                            <div class="col-2 border-end text-center fw-bold">작성자</div>
-                            <input type="text" name="writer" id="writer_id" style="outline: none;" class="flex-fill border-0" placeholder="이름을 입력해 주세요." value="" />
-                        </div>
-                        <div class="d-flex border mb-1">
-                            <div class="col-2 border-end text-center fw-bold">제목</div>
-                            <input type="text" name="title" id="title" style="outline: none;" class="flex-fill border-0" placeholder="제목을 입력해 주세요." value="" />
-                        </div>
-                        <div>
-                            <div>
-                                <h5 class="fw-bold">내용</h5>
-                            </div>
-                            <div>
-                                <textarea style="width: 100%; height: 20rem; resize: none; outline: none;" class="border" name="edit-body" id="edit-body"></textarea>
-                            </div>
-                            <div class="d-flex justify-content-end">
-                                <input type="button" class="btn btn-success me-2" value="수정"/>
-                                <input type="button" class="btn btn-dark me-2" value="글쓰기"/>
-                                <input type="button" class="btn btn-danger" value="삭제"/>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-           </div>
-​
-            
-​
-            
-            
-​
-        
-​
+                </div>
+            </div>
         </main>
-​
+
         <footer class="bg-black mb-0">
             <div class="container-fluid row">
                 <div class="d-flex">
@@ -123,7 +219,7 @@
                     </div>
                     <div class="d-block col-4 text-center">
                         <div>
-                            <img src="/static/img/concert_logo.png" class="footer-logo-img" alt="">
+                            <img src="/board/static/img/concert_logo.png" class="footer-logo-img" alt="">
                         </div>
                         <div class="d-flex justify-content-center">
                             <ul class="nav fw-semibold justify-content-center">
@@ -169,6 +265,7 @@
             </div>
         </footer>
 
+        
         <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
