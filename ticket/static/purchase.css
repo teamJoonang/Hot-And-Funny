@@ -6,7 +6,7 @@ body {
 
 .post-img {
     width : 100%;
-    /* height : 100%; */
+    height : 944px;
     display: block;
 }
 .concert-list {
@@ -27,12 +27,13 @@ body {
     /* display: flex; */
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    /* min-height: 100vh; */
 }
 .calendar-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    /* border: 1px solid black; */
 }
 .year-month {
     font-size: 30px;
@@ -43,29 +44,29 @@ body {
 }
 @media (max-width: 1150px){
     .year-month{
-        font-size : 1.2rem;
+        font-size : 1.5rem;
     }
 }
 .c-nav {
     display: flex;
-    border: 1px solid #333333;
+    height : 45px;
+    outline: 1px solid #333333;
     border-radius: 5px;
-    margin-right : 20px;
+    margin-right : 10px;
+    background-color: #3333;
 }
 
 .c-nav-btn {
-    /* width : 28px; */
-    width : 100%;
-    height : 30px;
+    width : 28px;
+    height : 45px;
+    color: white;
     border: none;
     font-size: 100%;
-    line-height: 200%;
     background-color: transparent;
     cursor: pointer;
 }
 .go-today {
-    /* width: 75px; */
-    width: 75%;
+    width: 75px;
     border-left: 1px solid #333333;
     border-right: 1px solid #333333;
 }
