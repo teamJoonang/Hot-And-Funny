@@ -12,13 +12,14 @@ body {
 
 .left-nav{
     color: #444444d8;
+    color: rgba(37, 37, 37, 0.699);
+    margin-top: 40%;
 }
 
-.left-nav div{
-    width: 40%;
-    border: 1px solid #444444d8;
 
-    border-radius: 25px;
+.left-nav div{
+    width: 100%;
+
 }
 .left-nav div a{
     width: 100%;
@@ -26,8 +27,10 @@ body {
 }
 
 .left-nav div a:hover{
-    font-size: 1.25rem;
-    border-radius: 25px;
+    background-color: rgb(190, 190, 190);
+
+
+
 }
 
 
@@ -47,8 +50,6 @@ body {
 .content .left tr{
     border: 1px solid black;
 }
-
-
 
 
 
