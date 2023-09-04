@@ -6,7 +6,7 @@ const allClear = document.querySelector('.all-clear');
 const seatChoiceTable = document.querySelector('.seat-choice-table');
 const nextPage = document.getElementById('next-page');
 
-
+console.log(count);
 //로그번호
 let logIndex = 0;
 
@@ -16,13 +16,14 @@ function updateSelectedCount() {
   
     const selectedSeatsIndex = [...selectedSeats].map((seat) => [...seats].indexOf(seat));
   
-    localStorage.setItem('selectedSeats', JSON.stringify(selectedSeatsIndex));
+    // localStorage.setItem('selectedSeats', JSON.stringify(selectedSeatsIndex));
   
     if(selectedSeatCount > 4) {
         alert("예매는 최대 4장까지만 가능합니다.")
         return;
     }
     count.textContent = selectedSeatCount;
+    btnAnimation();
 }
 
 //log 내용 create 메소드
@@ -97,6 +98,7 @@ function deleteLog(seatIndex) {
         //-----------------------------------------------------
     }
     logIndex--;
+    btnAnimation();
 }
 //<tbody> 를 안만들었는데 개발자도구 확인결과 다른곳에 생성됨 확인으로 바디 추가 및 클래스 추가함
 //seat-choice-table 빈 tr 생성 메소드
@@ -133,7 +135,7 @@ container.addEventListener('click', (event) => {
         event.target.classList.toggle('selected');
         createLog(clickedSeatIndex, clickedSeatGrade);
         updateSelectedCount();
-        
+        btnAnimation();
     }
 });
 
@@ -166,7 +168,7 @@ allClear.addEventListener('click', (event) => {
     // if (seats.classList.contains('selected') && !seats.classList.contains('occupied')) {
     //     seats.classList.toggle('seat');
     // }
-    
+    btnAnimation();
 });
 //티켓 취소 버튼 (부모에 리스너 주기방식)
 seatChoiceTable.addEventListener('click', (event) => {
@@ -190,6 +192,7 @@ seatChoiceTable.addEventListener('click', (event) => {
         clickedSeatElement.classList.toggle('selected');
         logIndex--;
         count.textContent = logIndex;
+        btnAnimation();
     }
 });
 //남은 좌석수 계산 메소드
@@ -230,9 +233,26 @@ nextPage.addEventListener("click", () => {
         ticketArray.push(ticket);
     }
 
-    // ticketArray를 로컬 저장소에 저장
-    localStorage.setItem("ticketArray", JSON.stringify(ticketArray));
-    console.log(localStorage.ticketArray);
+    // ticketArray를 세션에 저장
+    sessionStorage.setItem("ticketArray", JSON.stringify(ticketArray));
+
+
     // 다음 페이지로 이동
-    // window.location.href = "nextpage.html";
+    if(!ticketArray.length) {
+        alert("좌석을 선택해 주세요.");
+    } else {
+        window.location.href = "purchaseConfirm.html";
+    }
+
 });
+
+//조건부 애니메이션 적용
+function btnAnimation() {
+    const button = document.getElementById('next-page');
+    const checkTicket = count.textContent;
+    if(parseInt(checkTicket) == '0') {
+        button.classList.remove('blinking-button'); 
+    } else {
+        button.classList.add('blinking-button');
+    }
+}

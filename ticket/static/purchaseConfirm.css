@@ -42,10 +42,10 @@ body {
 }
 /* <--------- confirm - left ---------> */
 .content-left {
-    width : 799px;
+    width : 798px;
     height : 690px;
     float : left;
-    border-right : 1px dotted black;
+    border-right : 0px dotted black;
     padding-top: 10px; 
 }
 .left-upper {
@@ -57,7 +57,7 @@ body {
 }
 .menu-title {
     padding-left: 10px;
-    border: 1px solid #eeeeee;
+    border: 0px solid #eeeeee;
     height: 20px;
     font-weight: bold;
 }
@@ -103,10 +103,11 @@ body {
 /* left-down 환불정책 부분 */
 .content-left .left-down {
     border: 0px solid green;
-    padding-top: 15px;
+    padding-top: 8px;
+    padding-left: 10px;
 }
 .bottom-line {
-    border-bottom : 2px solid black;
+    border-bottom : 3px solid black;
 }
 .left-down .refund-policy, .left-down .refund-footer {
     border: 1px dotted black;
@@ -156,6 +157,7 @@ body {
     height : 100%;
     float : right;  
     background-color: #ccc;
+    border-left: 1px dotted black;
 }
 .content-right .concert-info {
     border: 0px solid red;
@@ -191,9 +193,11 @@ body {
 }
 .my-ticket-table td {
     padding: 5px;
+    border-bottom: 1px solid black;
 }
 .my-ticket-table td:first-child {
     width: 120px;
+    border-right: 1px solid black;
 }
 .my-ticket-table td:last-child {
     background-color: white;
@@ -232,6 +236,7 @@ body {
     line-height: 60px;
     font-size: 1.4rem;
     color: white;
+    cursor: pointer;
 }
 .button-box .pre-view-btn {
     background-color: #777;
