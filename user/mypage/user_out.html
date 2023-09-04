@@ -3,8 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- font awesome cdn -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
     <!-- bootstrap cdn -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- bootstrap icon cdn -->
@@ -104,7 +102,7 @@
                                     <!-- 탈퇴사유 선택 -->
                                     <div class="selectbox">
                                         <select id="selectUserOutReason" name="reason">
-                                            <option value="" selected>탈퇴사유는 무엇인가요?</option>
+                                            <option value="0" selected>탈퇴사유는 무엇인가요?</option>
                                             <option value="1">재 가입을 위해</option>
                                             <option value="2">콘텐츠 품질과 서비스 정보 부족</option>
                                             <option value="3">고객 서비스의 불만</option>
@@ -146,9 +144,9 @@
                                     </dl>
                                     <!-- 탈퇴 유의사항 사용자 확인 -->
                                     <p>
-                                        <label class="wz checkbox">
+                                        <label class="haf checkbox">
                                             <input type="checkbox" name="agree" value="Y" id="dropConfirm">
-                                            <span>상기 와디즈 탈퇴 시 유의 사항을 확인하였습니다.</span>
+                                            <span>상기 Hot nad Funny 탈퇴 시 유의 사항을 확인하였습니다.</span>
                                         </label>
                                     </p>
                                     <!-- 탈퇴 버튼 -->
@@ -234,7 +232,9 @@
 
         <!-- bootstrap js -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- sweetalert2 -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>        
         <!-- mypage js -->
-        <script src="../static/js/mypage.js"></script>
+        <script src="../static/js/user_out.js"></script>
 </body>
 </html>

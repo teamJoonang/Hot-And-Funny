@@ -12,8 +12,12 @@ ul , li {
 
 /* accounts의 모든 페이지 배경설정 */
 #securityBody {
-  background: rgb(2,0,36);
-  background: linear-gradient(90deg, rgba(2,0,36,1) 7%, rgba(88,9,121,1) 59%, rgba(22,156,184,1) 100%);
+  background-image: url(../img/concert_sample.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+  /* background: rgb(2,0,36);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 7%, rgba(88,9,121,1) 59%, rgba(22,156,184,1) 100%); */
 }
 
 /***** input 설정들 *****/
