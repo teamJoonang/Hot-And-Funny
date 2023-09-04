@@ -14,5 +14,10 @@ body {
 
 .calc-icon {
 
-    
+    border-radius: 50%;
+    background-color: #adb5bd;
+    color: white;
+    position: relative;
+    top: 5px;
+    left: 29px;    
 }
