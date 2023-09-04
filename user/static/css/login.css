@@ -13,8 +13,10 @@ ul , li {
 /* accounts의 모든 페이지 배경설정 */
 #securityBody {
   background-image: url(../img/concert_sample.jpg);
-  background-repeat: no-repeat;
+  /* background-repeat: no-repeat; */
   background-size: cover;
+
+
   
   /* background: rgb(2,0,36);
   background: linear-gradient(90deg, rgba(2,0,36,1) 7%, rgba(88,9,121,1) 59%, rgba(22,156,184,1) 100%); */
@@ -146,6 +148,26 @@ textarea:focus:-ms-input-placeholder { /* Internet Explorer 10+ */
 /********************************
         signup page
 *********************************/
+
+/* 회원가입 검증에러 출력 */
+
+#email_err , #pw_err , #repw_err ,  #addr_err , 
+#age_err , #name_err , #tel_err , #carrier_err 
+{
+  display: none;
+}
+
+
+/* 스크롤 바 관련 */
+#signup_card {
+  max-height: 45rem;
+}
+.card-body {
+  -ms-overflow-style: none;
+}
+.card-body::-webkit-scrollbar{
+  display:none;
+}
 
 /* 통신사 선택 박스 */
 #mobile_carrier:hover {
