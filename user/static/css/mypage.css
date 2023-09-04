@@ -49,10 +49,12 @@ td {
     border: 1px dashed black;
 }  */
 
-/* bold로 인해 움찔거리는 문제 존재, 빼던가 고민.. */
-table >tbody > tr:hover {
+
+table >tbody > tr:hover{
     cursor: pointer;
     /* font-weight: bold; */
+    /* line-height: 19.5px;
+    font-size: 12px; */
 }
 
 
