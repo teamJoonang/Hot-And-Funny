@@ -86,15 +86,32 @@ body {
 
 }
 
-.offcanvas-body ul .nav-item ul {
+.offcanvas-body ul .nav-item .sub-menu {
+
+    /* opacity: 1; */
+    visibility: hidden;
+    text-align: center;
+    /* transform: translate(0px, 0px); */
+    /* z-index: 50; */
+}
+
+.offcanvas-body ul .nav-item:hover .sub-menu {
 
     opacity: 1;
     visibility: visible;
+    text-align: center;
     transform: translate(0px, 0px);
     z-index: 50;
 }
 
+.offcanvas-body ul li {
+
+    position: relative;
+}
+
+
 .sub-menu {
+    min-width: 100px;
     background-color: #050505;
     min-width: 100px;
     position: absolute;
@@ -113,16 +130,18 @@ body {
     box-shadow: 0px 0px 30px 0px rgba(24, 24, 24, 0.1);
 }
 
-.sub-menu:hover {
-    opacity: 1;
-    visibility: visible;
-    transform: translate(0, 0);
-    z-index: 50;
+.sub-menu > li a:hover {
+    background-color: #000;
+    color: #6C03FB;
 }
 
-.sub-children {
-    position: relative;
+.sub-menu >li a {
+
+    text-decoration: none;
+    color: #f8f8f8;
 }
+
+
 
 /* ----- custom <a> tag [end] ----- */
 
@@ -149,7 +168,7 @@ body {
 /*----- FOOTER -----*/
 
 .footer-logo-img {
-    width: 30%;
+    /* width: 30%; */
 }
 
 .notion {
