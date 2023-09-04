@@ -4,18 +4,8 @@ const concertTime = document.getElementById('concert-time');
 const concertDate = document.getElementById('concert-date');
 const concertGrade = document.getElementById('concert-grade');
 let selectedDate = null;
-const concertDates = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-const clickableDates = generateClickableDates(concertDates);
+const concertDates = ["2023-09-01", "2023-09-02", "2023-09-03", "2023-09-04"];
 
-function generateClickableDates(concertDates) {
-    const clickableDates = {};
-
-    for (const date of concertDates) {
-        clickableDates[date] = true;
-    }
-
-    return clickableDates;
-}
 
 
 const renderCalendar = () =>{
@@ -87,8 +77,8 @@ const renderCalendar = () =>{
 
     // 날짜에 이벤트 표시하기
     function concertCheck(){
-        const concertMonth = new Date();
-        if (viewMonth === concertMonth.getMonth() && viewYear === concertMonth.getFullYear()){
+        const concertCalendar = new Date();
+        if (viewMonth === concertCalendar.getMonth() && viewYear === concertCalendar.getFullYear()){
             const concertElements = document.querySelectorAll(`.this`);
             const concertArray = Array.from(concertElements);
             
@@ -97,26 +87,55 @@ const renderCalendar = () =>{
                 let dates = concertArray[concertDate - 1];
                     if(dates){
                         dates.classList.add(`concert`);            
-                        dates.closest('.date').classList.add(`selected`);
+                        dates.closest('.date').classList.add('selected');
                     }
             }
             
         }
     }
 
-    //  날짜 클릭 시 출력
+    //  날짜 클릭 데이터 배열 저장
+    const clickableDates = generateClickableDates(concertDates);
+    function generateClickableDates(concertDates) {
+        const clickableDates = {};
+        for (const date of concertDates) {
+            clickableDates[date] = true;
+        }
+        return clickableDates;
+    
+    }
+
+    //  날짜 클릭시 타이틀 화면에 표시
     document.querySelector('.dates').addEventListener('click', (event) => {
         const clickedDate = event.target.innerText;
         const [clickedDay] = clickedDate.split('\n');
-    
+
         if (clickedDay && clickableDates[Number(clickedDay)]) {
             const formattedDay = String(clickedDay).padStart(2, '0'); // 두 자리로 포맷팅
+            concertSite.innerText = `• 서울시 강서구 양천로 125 서울문화예관 B1F`;
             concertDate.innerHTML = `• ${viewYear}-${String(viewMonth + 1).padStart(2, '0')}-${formattedDay}`;
+            concertTime.innerText = `• 180분`;
+            concertGrade.innerText = `• 18등급`;
         }
     });
 
-
-
+    //  날짜 클릭 시 색상 고정
+    const choiceDates = document.querySelectorAll('.selected');
+    choiceDates.forEach(choiceDate => {
+        choiceDate.addEventListener('click', (event) => {
+            choiceDates.forEach(element => element.classList.remove('choice'));
+            let existngChoice = document.querySelector('.choice');
+    
+            if(existngChoice) {
+                existngChoice.classList.remove('choice');
+            }
+            event.target.classList.add('choice');
+            const subSpan = event.target.closest('.selected');
+            if (subSpan) {
+                subSpan.classList.add('choice');
+            }
+        });
+    });
 };
     
 renderCalendar();

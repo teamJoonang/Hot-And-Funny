@@ -6,12 +6,17 @@ body {
 
 .post-img {
     width : 100%;
-    height : 100%;
+    /* height : 100%; */
     display: block;
 }
 .concert-list {
     font-size : 1rem;
     font-weight : 500;
+}
+.concert-list p{
+    min-height: 26px;
+    /* border: 1px solid black; */
+
 }
 
 /* <------- Calendar 시작 -------> */
@@ -22,7 +27,7 @@ body {
     /* display: flex; */
     justify-content: center;
     align-items: center;
-    /* min-height: 100vh; */
+    min-height: 100vh;
 }
 .calendar-header {
     display: flex;
@@ -30,9 +35,11 @@ body {
     align-items: center;
 }
 .year-month {
-    font-size: 25px;
+    font-size: 30px;
     font-weight: 500;
     margin-left : 10px;
+ 
+
 }
 @media (max-width: 1150px){
     .year-month{
@@ -77,16 +84,16 @@ body {
     display: flex;
     flex-flow: row wrap;
     height: 100%;
-    border-top: 1px solid #333333;
-    border-right: 1px solid #333333;
+    border-top: 1px dotted #333333;
+    border-right: 1px dotted #333333;
 }
 
 .date{
     width: calc(100%/7);
     padding: 5%;
     text-align: center;
-    border-bottom: 1px solid #333333;
-    border-left: 1px solid #333333;
+    border-bottom: 1px dotted #333333;
+    border-left: 1px dotted #333333;
 }
 
 .day:nth-child(7n + 1),
@@ -121,10 +128,9 @@ body {
     content: '';
 }
 
-
+/* 이벤트 날짜 표시 */
 .selected {
     position: relative;
-    color: #FFFFFF;
 }
 .selected::before {
     position: absolute;
@@ -132,19 +138,26 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: -2;
-    width : 50%;
-    height : 50%;
+    width : 100%;
+    height : 100%;
     display : block;
-    background-color : rgb(213, 213, 245);
+    background-color : #3E53EA;
     opacity : 0.5;
     content: "";
 }
 .selected:hover{
     cursor : pointer;
+    background-color: #405bb5;
+    color: white;
 }
-
-.concert {
-    color : black;
+.choice {
+    position: relative;
+    color: white;
+}
+.choice::before {
+    position: absolute;
+    background: #405bb5;
+    z-index: -3;
 }
 
 
