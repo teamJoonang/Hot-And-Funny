@@ -27,31 +27,7 @@ if(sNum != 0) {
 discountPriceSet();
 
 //드롭박스 선택에 따른 동작 로직
-const dropDownBox = document.querySelectorAll('.input-opt');
-dropDownBox.forEach((dropBox, index) => {
-    dropBox.addEventListener('change', function () {
-        const selectedOptionValue = dropBox.value;
-        let totalSelectedNum = 0;
-
-        // index를 기반으로 조건을 체크.
-        if (index === 0 || index === 3 || index === 6) {
-            totalSelectedNum += parseInt(selectedOptionValue);
-            console.log(totalSelectedNum);
-        } else {
-            totalSelectedNum += parseInt(selectedOptionValue);
-            console.log(totalSelectedNum);
-        }
-
-        const limitCond = dropBox.closest('table').querySelector('.grade-su').textContent;
-        if(parseInt(limitCond) < totalSelectedNum) {
-            console.log(parseInt(limitCond));
-            console.log(totalSelectedNum);
-            alert(`해당 등급의 티켓을 ${limitCond}장 선택하셨습니다. 현재 선택된 티켓은 ${totalSelectedNum}장 입니다 확인 바랍니다.`);
-            dropBox.value = 0;
-            return;
-        }
-    });
-});
+dropBoxChoice();
 
 //선택된 티켓 정보 업데이트 메소드
 function ticketView() {
@@ -186,6 +162,50 @@ function setPrice(grade) {
 // 정규표현식 숫자 포멧팅
 function formatNumberWithCommas(number) {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+//드롭박스 선택에 따른 동작 메소드
+function dropBoxChoice() {
+    const dropDownBox = document.querySelectorAll('.input-opt');
+    let totalSelectedNum = 0;
+
+    dropDownBox.forEach((dropBox, index) => {
+        dropBox.addEventListener('change', function () {
+            const selectedOptionValue = parseInt(dropBox.value);
+            
+            // index를 기반으로 조건을 체크.
+            if (index === 0 || index === 3 || index === 6) {
+                if (totalSelectedNum + selectedOptionValue <= maxCond(dropBox)) {
+                    totalSelectedNum += selectedOptionValue;
+                    console.log(totalSelectedNum);
+                } else {
+                    alert(`해당 등급의 티켓을 ${maxCond(dropBox)}장 이상 선택할 수 없습니다.`);
+                    dropBox.value = 0;
+                }
+            } else {
+                if (totalSelectedNum + selectedOptionValue <= maxCond(dropBox)) {
+                    totalSelectedNum += selectedOptionValue;
+                    console.log(totalSelectedNum);
+                } else {
+                    alert(`해당 등급의 티켓을 ${maxCond(dropBox)}장 이상 선택할 수 없습니다.`);
+                    dropBox.value = 0;
+                }
+            }
+            colorApply(dropBox);
+        });
+    });
+}
+
+// 티켓 선택 최대값 산출 메소드
+function maxCond(dropBox) {
+    const limitCond = parseInt(dropBox.closest('table').querySelector('.grade-su').textContent);
+    return limitCond;
+}
+// 드롭박스 조건부 색상변경
+function colorApply(dropBox) {
+    if(dropBox.value != 0) {
+        dropBox.closest('tr').style.backgroundColor = 'lightblue';
+    }
 }
 
 //이전페이지로 전환 이벤트
