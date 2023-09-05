@@ -1,16 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <link rel="stylesheet" href="/static/css/common.css">
+    <!-- bootstrap cdn -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap icon cdn -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+    <!-- common.css -->
+    <link rel="stylesheet" href="../../static/css/common.css">
+    <!-- login.css -->
+    <link rel="stylesheet" href="../static/css/login.css">
+    <!-- mypage.css -->
+    <link rel="stylesheet" href="../static/css/mypage.css">
     
-    <title>Hot & Funny</title>
-    
+    <title>구매내역</title>
 </head>
-<body class="min-vh-100">
+<body class="d-flex flex-column min-vh-100">
+    
+    <!-- header -->
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-black" aria-label="Offcanvas navbar large">
             <div class="container-fluid">
@@ -94,14 +102,110 @@
             </div>
           </nav>
     </header>
-    <main>
-        <div class="main-concert-bg"></div>
-    </main>
-    <footer class="bg-black mt-auto py-3 text-light-emphasis">
+
+    <!-- 컨텐츠 -->
+    <section id="wrap">
+        <div class="container px-5">
+            <div class="row d-flex py-5">
+                
+                <div class="col-xl-3">
+                    <div class="card"> 
+                        <!-- 사이드 메뉴 -->
+                        <div class="card-header bg-black text-white">메뉴</div>
+                        <div class="card-body" id="mypage_menu">
+                            <a class="my-3" href="mypage.html">회원정보</a>
+                            <a class="my-3" href="myticket_list.html">구매내역</a>
+                            <a class="my-3" href="ask_admin_list.html">문의내역</a>
+                            <a class="my-3" href="user_out.html">회원탈퇴</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 메인 -->
+                <div class="col-xl-9">
+                    <div class="card mb-4">
+                        <div class="card-header bg-black text-white" id="mypage_header">구매 내역</div>
+                        <div class="card-body">
+                            
+                            <!-- 구매내역(티켓) -->
+                            <div class="row table-responsive">
+                                <table class="table text-center table-striped" id="ticket_list">
+                                    
+                                    <caption style="display: none;">구매내역</caption>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" class="px-2">고유번호</th>
+                                            <th scope="col" class="px-2">티켓명</th>
+                                            <th scope="col" class="px-2">좌석번호</th>
+                                            <th scope="col" class="px-2">날짜</th>
+                                            <th scope="col" class="px-2">시간</th>
+                                            <th scope="col" class="px-2">장소</th>
+                                            <th scope="col" class="px-2">구매일</th>
+                                            <th scope="col" class="px-2">담당자</th>
+                                            <th scope="col" class="px-2">상태</th>
+                                            <th scope="col" class="px-2">취소요청</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>dkalfk836</td>
+                                            <td>Tintop 콘서트 1일차</td>
+                                            <td>D-A53</td>
+                                            <td>2023.09.09</td>
+                                            <td>18:30</td>
+                                            <td>LG아트센터</td>
+                                            <td>2023.08.31 21시:32분:12초</td>
+                                            <td>이현승</td>
+                                            <td>유효</td>
+                                            <td>취소</td>
+                                            <!-- <td><input type="checkbox" name="ticket_refund" value="Y" class="ticketCkBox"></td> -->
+                                        </tr>
+                                        <tr>
+                                            <td>wd1LmD!e86</td>
+                                            <td>Tintop 콘서트 1일차</td>
+                                            <td>D-A53</td>
+                                            <td>2023.09.09</td>
+                                            <td>18:30</td>
+                                            <td>LG아트센터</td>
+                                            <td>2023.08.31 21시:32분:12초</td>
+                                            <td>박거성</td>
+                                            <td>유효</td>
+                                            <td>취소</td>
+                                        </tr>
+                                        <tr>
+                                            <td>wwrmal!e86</td>
+                                            <td>Tintop 콘서트 2일차</td>
+                                            <td>D-A52</td>
+                                            <td>2023.09.10</td>
+                                            <td>18:30</td>
+                                            <td>LG아트센터</td>
+                                            <td>2023.08.31 21시:32분:12초</td>
+                                            <td>이현승</td>
+                                            <td>유효</td>
+                                            <td>취소</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                
+                                <!-- <hr class="mt-2">
+                                <div class="text-end">
+                                    <input type="button" class="btn btn-primary" id="ticketBtn" value="제출">
+                                </div> -->
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- footer -->
+    <footer class="bg-white mt-auto py-3 text-light-emphasis border-top">
         <div class="container-fluid row">
             <div class="d-flex">
                 <div class="d-flex col-2 align-items-center justify-content-center">
-                    <img src="/static/img/concert_logo.png" class="img-fluid footer-logo-img" alt="">
+                    <img src="/static/img/concert_logo_black.png" class="img-fluid footer-logo-img" alt="">
                 </div>
                 <div class="d-flex col-3 align-items-center justify-content-center footer-content small">
                     <div class="align-items-center">
@@ -167,7 +271,14 @@
                 </div>
             </div>
         </div>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    </footer>   
+
+
+        <!-- bootstrap js -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- sweetalert2 -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!-- myticket_list js -->
+        <script src="../static/js/myticket_list.js"></script>
 </body>
 </html>
