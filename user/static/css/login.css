@@ -12,8 +12,14 @@ ul , li {
 
 /* accounts의 모든 페이지 배경설정 */
 #securityBody {
-  background: rgb(2,0,36);
-  background: linear-gradient(90deg, rgba(2,0,36,1) 7%, rgba(88,9,121,1) 59%, rgba(22,156,184,1) 100%);
+  background-image: url(../img/concert_sample.jpg);
+  /* background-repeat: no-repeat; */
+  background-size: cover;
+
+
+  
+  /* background: rgb(2,0,36);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 7%, rgba(88,9,121,1) 59%, rgba(22,156,184,1) 100%); */
 }
 
 /***** input 설정들 *****/
@@ -28,7 +34,7 @@ input[type="number"]::-webkit-inner-spin-button {
 /* input 안 placeholder 설정 */
 input::placeholder {
     color: #ccc;
-    font-size: 0.9375em;
+    font-size: 0.8rem;
 }
 
 /* input의 focus 적용시 placehoder 사라지도록, 투명하게. */
@@ -142,6 +148,28 @@ textarea:focus:-ms-input-placeholder { /* Internet Explorer 10+ */
 /********************************
         signup page
 *********************************/
+
+/* 회원가입 검증에러 출력 */
+
+#email_err , #pw_err , #repw_err ,  #addr_err , 
+#age_err , #name_err , #tel_err , #carrier_err ,
+#nickname_err
+{
+  display: none;
+  /* color: #de29e6; */
+}
+
+
+/* 스크롤 바 관련 */
+#signup_card {
+  max-height: 45rem;
+}
+.card-body {
+  -ms-overflow-style: none;
+}
+.card-body::-webkit-scrollbar{
+  display:none;
+}
 
 /* 통신사 선택 박스 */
 #mobile_carrier:hover {

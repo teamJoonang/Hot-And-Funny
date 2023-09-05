@@ -3,12 +3,12 @@ ul , li {
 }
 
 a {
-    text-decoration: none;
-    color: black;
+    /* text-decoration: none; */
+    /* color: black; */
 }
 
 a:visited {
-    color: black;
+    /* color: black; */
 }
 
 /* body , footer 처방으로 일단 임시방편 해제 */
@@ -49,10 +49,12 @@ td {
     border: 1px dashed black;
 }  */
 
-/* bold로 인해 움찔거리는 문제 존재, 빼던가 고민.. */
-table >tbody > tr:hover {
+
+table >tbody > tr:hover{
     cursor: pointer;
-    font-weight: bold;
+    /* font-weight: bold; */
+    /* line-height: 19.5px;
+    font-size: 12px; */
 }
 
 
@@ -95,6 +97,15 @@ table >tbody > tr:hover {
 
 #mypage_menu > a:hover:after {
     transform: scaleX(1) !important;
+}
+
+/* 등록버튼은 처음에 안보이도록 */
+
+#saveBox , #modifyBox {
+    text-align: center;
+}
+#saveBox {
+    display: none;
 }
 
 /* 1200px 이하라면 아래의 설정을 적용. */
