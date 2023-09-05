@@ -4,8 +4,7 @@ const concertTime = document.getElementById('concert-time');
 const concertDate = document.getElementById('concert-date');
 const concertGrade = document.getElementById('concert-grade');
 let selectedDate = null;
-
-
+let count = 0;
 
 
 const renderCalendar = () =>{
@@ -79,24 +78,20 @@ const renderCalendar = () =>{
         {date: 1, month: 9 , year: 2023},
         {date: 2, month: 9 , year: 2023},
         {date: 3, month: 9 , year: 2023},
-        {date: 4, month: 9 , year: 2023},
-        {date: 5, month: 9 , year: 2023},
-        {date: 6, month: 9 , year: 2023},
-        {date: 7, month: 9 , year: 2023},
-        {date: 25, month: 10 , year: 2023},
-        {date: 23, month: 11, year: 2023}    
+        {date: 8, month: 9 , year: 2023},
+        {date: 9, month: 9 , year: 2023},
+        {date: 6, month: 10, year: 2023},
+        {date: 7, month: 10, year: 2023}
     ];
- 
+    
+    //  날짜 이벤트 표시하기 
     function concertCheck() {
-        const concertCalendar = new Date();
-        const currentMonth = concertCalendar.getMonth() + 1; // 월은 0부터 시작하므로 1을 더해줍니다.
-        const currentYear = concertCalendar.getFullYear();
         for (const concertDate of concertDates) {
-            if (concertDate.month === viewMonth + 1 && viewYear === currentYear) {
+            if (concertDate.month === viewMonth + 1 && concertDate.year === viewYear) {
                 const concertElements = document.querySelectorAll(`.this`);
                 const concertArray = Array.from(concertElements);
        
-                
+        
                 const dateIndex = concertDate.date - 1;
                 const dateElement = concertArray[dateIndex];
   
@@ -110,36 +105,46 @@ const renderCalendar = () =>{
 
     todayCheck();
     concertCheck();
-
- 
+    
+    
+  
     //  날짜 클릭 데이터 배열 저장
     function generateClickableDates(concertDates) {
         const clickableDates = {};
         for (const concertDate of concertDates) {
-            if(concertDate.month === viewMonth + 1 && concertDate.year === viewYear){
+            if(concertDate.month === viewMonth+1 && concertDate.year === viewYear){
                 clickableDates[concertDate.date] = true;
+                console.log(viewMonth+1);
             }
         }
-        console.log(clickableDates);
  
         return clickableDates;
     
     }
 
-
     //  날짜 클릭시 타이틀 화면에 표시
     const clickableDates = generateClickableDates(concertDates);
+ 
     document.querySelector('.dates').addEventListener('click', (event) => {
         const clickedDate = event.target.innerText;
         const [clickedDay] = clickedDate.split('\n');
-        console.log(viewMonth + 1);
+        
+        // console.log(viewMonth+1);
+        // console.log(clickedDate);
+        // if(targetDate.getDate()+1 === viewMonth+1){
+
+        // }
+        // for (const concertDate of concertDates) {
+        //     if (concertDate.month === targetDate.getMonth() + 1 && concertDate.date == clickedDay){
+        //         // console.log(concertDate.month);
+        //     }
+        // }
         if (clickedDay && clickableDates[Number(clickedDay)]) {
             const formattedDay = String(clickedDay).padStart(2, '0'); // 두 자리로 포맷팅
             concertSite.innerText = `• 서울시 강서구 양천로 125 서울문화예관 B1F`;
             concertDate.innerHTML = `• ${viewYear}-${String(viewMonth + 1).padStart(2, '0')}-${formattedDay}`;
             concertTime.innerText = `• 180분`;
             concertGrade.innerText = `• 18등급`;
-    
         }
     }); 
 
@@ -164,17 +169,17 @@ const renderCalendar = () =>{
     
 renderCalendar();
 
-const prevMonth = () => {
-    date.setDate(1);
-    date.setMonth(date.getMonth() - 1);
-    renderCalendar();
-};
+// const prevMonth = () => {
+//     date.setDate(1);
+//     date.setMonth(date.getMonth() - 1);
+//     renderCalendar();
+// };
 
-const nextMonth = () => { 
-    date.setDate(1);
-    date.setMonth(date.getMonth() + 1);
-    renderCalendar();
-};
+// const nextMonth = () => { 
+//     date.setDate(1);
+//     date.setMonth(date.getMonth() + 1);
+//     renderCalendar();
+// };
 
 const goToday = () => {
     date = new Date();

@@ -6,7 +6,7 @@ body {
 
 .post-img {
     width : 100%;
-    height : 944px;
+    height : 900px;
     display: block;
 }
 .concert-list {
@@ -47,7 +47,8 @@ body {
         font-size : 1.5rem;
     }
 }
-.c-nav {
+/* ///////////////버튼 삭제//////////////// */
+/* .c-nav {
     display: flex;
     height : 45px;
     outline: 1px solid #333333;
@@ -69,7 +70,8 @@ body {
     width: 75px;
     border-left: 1px solid #333333;
     border-right: 1px solid #333333;
-}
+} */
+/* /////////////버튼삭제 끝/////////// */
 .days {
     display: flex;
     /* margin: 25px 0 10px; */
@@ -120,11 +122,11 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: -1;
+    z-index: -2;
     width: 25px;
     height: 25px;
     display: block;
-    background-color: #FF0000;
+    background-color: #790fdd;
     border-radius: 50%;
     content: '';
 }
@@ -138,11 +140,11 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: -2;
+    z-index: -3;
     width : 100%;
     height : 100%;
     display : block;
-    background-color : #3E53EA;
+    background-color : #0D6EFD;
     opacity : 0.5;
     content: "";
 }
@@ -157,8 +159,11 @@ body {
 }
 .choice::before {
     position: absolute;
-    background: #405bb5;
-    z-index: -3;
+    background: black;
+    z-index: -1;
+}
+.choice span {
+    color : white;
 }
 
 
