@@ -1,22 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <link rel="stylesheet" href="/static/css/common.css">
+    <!-- bootstrap cdn -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap icon cdn -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+    <!-- common.css -->
+    <link rel="stylesheet" href="../../static/css/common.css">
+    <!-- login.css -->
+    <link rel="stylesheet" href="../../static/css/login.css">
+    <!-- mypage.css -->
+    <link rel="stylesheet" href="../../static/css/mypage.css">
     
-    <title>Hot & Funny</title>
-    
+    <title>회원정보</title>
 </head>
-<body class="min-vh-100">
+<body class="d-flex flex-column min-vh-100">
+    <!-- header -->
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-black" aria-label="Offcanvas navbar large">
             <div class="container-fluid">
                 <div class="col-3">
                     <a href="" class="d-flex">
-                        <img src="/static/img/concert_logo.png" class="img-fluid header-img-logo" alt="콘서트_이미지_로고">
+                        <img src="../../static/img/concert_logo.png" class="img-fluid header-img-logo" alt="콘서트_이미지_로고">
                     </a>
                 </div>
                 <button class="navbar-toggler bg-black" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
@@ -94,14 +101,123 @@
             </div>
           </nav>
     </header>
-    <main>
-        <div class="main-concert-bg"></div>
-    </main>
-    <footer class="bg-black mt-auto py-3 text-light-emphasis">
+
+    <!-- content -->
+    <section id="wrap">
+        <div class="container px-5">
+            <div class="row d-flex py-5">
+                
+                <div class="col-xl-3">
+                    <div class="card"> 
+                        <!-- 사이드 메뉴 -->
+                        <div class="card-header bg-black text-white">메뉴</div>
+                        <div class="card-body" id="mypage_menu">
+                            <a class="my-3 sidebar_link" href="myinfo.html">회원정보</a>
+                            <a class="my-3 sidebar_link" href="myticket.html">구매내역</a>
+                            <a class="my-3 sidebar_link" href="myquestion.html">문의내역</a>
+                            <a class="my-3 sidebar_link" href="user_out.html">회원탈퇴</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 메인 -->
+
+                <div class="col-xl-9">
+
+                    <div class="card mb-4">
+                        <div class="card-header bg-black text-white" id="mypage_header">회원 정보</div>
+                        <div class="card-body">
+
+                            <!-- 회원정보 -->
+                            <form action="" method="">
+                                <div class="row gx-3 mb-3">
+                                    <!-- user email -->
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="user_login_id">이메일 ( Login ID )</label>
+                                        <input class="form-control" id="user_login_id" type="text" readonly="readonly" 
+                                        placeholder="이메일을 입력해주세요" value="test@gmail.com">
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <a href="../accounts/pw_reset.html" class="btn btn-primary text-white mt-4">비밀번호 재설정</a>
+                                    </div>
+                                </div>
+                                <!-- Form Row-->
+                                <div class="row gx-3 mb-3">
+                                    <!-- name -->
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="user_name">이름</label>
+                                        <input class="form-control" id="user_name" type="text" value="홍길동" readonly
+                                        placeholder="이름을 입력해주세요.">
+                                    </div>
+                                    <!-- nickname -->
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="user_nickname">별명</label>
+                                        <input class="form-control" id="user_nickname" type="text" value="Denma5319" readonly
+                                        placeholder="별명은 다른 사용자와 소통하는 이름입니다.">
+                                    </div>
+                                </div>
+                                <!-- 주소 -->
+                                <div class="mb-3">
+                                    <label class="small mb-1" for="user_addr">주소</label>
+                                    <input class="form-control" id="user_addr" type="text" readonly
+                                    value="서울특별시 마포구 만리재로 99길 4-5" placeholder="주소를 입력해주세요.">
+                                </div>
+                                <!-- 연락처 -->
+                                <div class="mb-3">
+                                    <label class="small mb-1" for="user_tel">연락처</label>
+                                    <input class="form-control" id="user_tel" type="text" readonly
+                                    value="010-5039-6660" placeholder="연락처를 입력해주세요.">
+                                </div>
+                                <!-- row -->
+                                <div class="row gx-3 mb-4">
+                                    <!-- age -->
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="user_age">나이</label>
+                                        <input class="form-control" id="user_age" type="number" value="17" readonly
+                                        placeholder="나이를 입력해주세요.">
+                                    </div>
+                                    <!-- gender -->
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="user_gender">성별</label><br>
+                                        <input class="chk_input" type="radio" name="chk_gender" id="user_gender" value="M"> 남자
+                                        <input class="chk_input" type="radio" name="chk_gender" id="user_gender" value="W" checked> 여자
+                                    </div>
+                                </div>
+                                <!-- 광고 승인여부 -->
+                                <div class="my-3 text-center mb-4">
+                                    <label for="chk_marketing">Hot and Funny의 다양한 이벤트 소식을 전해드립니다.</label><br>
+                                    <input class="chk_input" type="radio" name="chk_marketing" value="y"> 수신
+                                    <input class="chk_input" type="radio" name="chk_marketing" value="n" checked> 수신거부
+                                </div>
+                                
+                                <hr>
+                                
+                                <div id="modifyBox">
+                                    <button class="btn btn-primary" type="button" id="modifyBtn">수정</button>
+                                </div>
+                                <div id="saveBox">
+                                    <button class="btn btn-primary" type="button" id="saveBtn">등록</button>
+                                </div>
+
+                            </form>
+
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+    </section>
+
+    <!-- footer -->
+    <footer class="bg-white mt-auto py-3 text-light-emphasis border-top">
         <div class="container-fluid row">
             <div class="d-flex">
                 <div class="d-flex col-2 align-items-center justify-content-center">
-                    <img src="/static/img/concert_logo.png" class="img-fluid footer-logo-img" alt="">
+                    <img src="/static/img/concert_logo_black.png" class="img-fluid footer-logo-img" alt="">
                 </div>
                 <div class="d-flex col-3 align-items-center justify-content-center footer-content small">
                     <div class="align-items-center">
@@ -167,7 +283,14 @@
                 </div>
             </div>
         </div>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    </footer>   
+
+
+        <!-- bootstrap js -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- sweetalert2 -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!-- mypage js -->
+        <script src="../../static/js/myinfo.js"></script>
 </body>
 </html>
