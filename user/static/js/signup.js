@@ -33,7 +33,11 @@ const nameRegex = /^[A-Za-z가-힝]{1,10}[^\d$!%*#?&]$/g;
 // 별명 - 언더바'_' 제외 특수문자 사용불가.
 const nicknameRegex =  /^[가-힣ㄱ-ㅎa-zA-z0-9]{2,10}[^$!%*#?&]$/g;
 // 연락처 - 숫자 11글자. 
-const telRegex = /\d{11}/g; 
+const telRegex = /\d{11}/g;
+// // 주소 - 한글 , 영어(대소문자) 가능 , 특수문자 사용불가. -는 가능.
+// const addrRegex = 
+// 나이 - 숫자만 가능 , 최소1글자 ~ 3글자.
+const ageRegex = /\d{1,3}/g;
 
 // 회원가입 검증
 function valid_signup(){
@@ -59,11 +63,10 @@ function valid_signup(){
         tel_err.style.display = 'block';
     }
 
-    if(!)
-
-
-
-    
+    if(!ageRegex.test(age_value)){
+        age_err.style.display = 'block';
+        return false;
+    }
 }
 
 
