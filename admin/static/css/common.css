@@ -1,0 +1,82 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css');
+
+/* ----- common ----- */
+/*가로 992px 이하일때 custom 설정*/
+@media(max-width: 991.98px) {
+
+    .corp-content {
+        font-size: 0.4rem !important;
+    }
+
+    footer ul, .footer-logo-img {
+        display: none !important;
+    }
+
+    .footer-logo-img {
+        width: 100%;
+    }    
+}
+
+body {
+    font-family: 'Pretendard', 'sans-serif';
+}
+
+
+/* ----- custom <a> tag ----- */
+.custom-atag {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.custom-atag::after {
+    display: block !important;
+    content: '' !important;
+    border-bottom: solid 2px #f517fe !important;  
+    transform: scaleX(0) !important;  
+    transition: 0.35s ease-in-out !important;
+    transform-origin: 0% 50% !important;
+
+}
+
+.custom-atag:hover {
+    color: #f517fe !important;
+}
+
+.custom-atag:hover:after {
+    transform: scaleX(1) !important;
+}
+
+
+/* ----- custom <a> tag [end] ----- */
+
+.navbar-toggler {
+    background-color: #ffffff;
+}
+
+
+
+/* ----- HEADER ----- */
+
+
+
+/*----- MAIN -----*/
+.main-concert-bg {
+    background-image: url(/static/img/concert_sample.jpg);
+    background-position: center center;
+    background-size: cover;
+    min-height: 100vh;
+}
+
+
+
+/*----- FOOTER -----*/
+
+.footer-logo-img {
+    width: 30%;
+}
+
+.corp-content {
+    font-size: 0.85rem;
+    color: #777777;
+}
+

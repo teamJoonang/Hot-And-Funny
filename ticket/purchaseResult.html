@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./static/purchaseResult.css">
+    <title>PurchaseResult</title>
+</head>
+<body>
+    <div class="sub-header">
+        <div class="sub-menu inline-div">좌석 선택</div>
+        <div class="sub-menu inline-div">예매 내역 확인</div>
+        <div class="sub-menu inline-div" style="background-color: red;">결제</div>
+    </div>
+    <div class="result">
+        <div class="text-content">
+            <span>결제가 완료되었습니다.</span><br>
+            <span><h2>감사합니다.</h2></span>
+        </div>
+        <form class="ticket-info-form">
+            <ul class="ticket-list">
+                <li>날 짜</li>
+                <li>좌 석</li>
+                <li>좌 석</li>
+                <li>좌 석</li>
+            </ul>
+            <ul class="ticket-info">
+                <li><span class="concert-date">2023-01-01</span></li> 
+                <li><span lass="concert-seat">A-13</span></li>
+                <li><span lass="concert-seat">A-14</span></li>
+                <li><span lass="concert-seat">A-15</span></li>
+            </ul>
+
+        </form>
+        <div class="price-form">
+            <div class="total">
+                Total
+            </div>
+            <div class="total-price"><span>KRW 430,000</span>
+                
+            </div>
+        </div>
+        <form class="btns">
+            <button class="btn-confirm">티켓 확인</button>
+            <button class="btn-home">홈</button>
+        </form>
+    </div>    
+    <!-- <fotter class="logo"> -->
+        <!-- <img src="./static/img/concert_logo_final2.png" alt=""> -->
+    <!-- </fotter> -->
+</body>
+</html>
