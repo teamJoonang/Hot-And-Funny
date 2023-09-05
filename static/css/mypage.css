@@ -2,13 +2,13 @@ ul , li {
     list-style: none;
 }
 
-a {
-    /* text-decoration: none; */
-    /* color: black; */
+.sidebar_link {
+    text-decoration: none;
+    color: black;
 }
 
-a:visited {
-    /* color: black; */
+.sidebar_link:visited {
+    color: black;
 }
 
 /* body , footer 처방으로 일단 임시방편 해제 */

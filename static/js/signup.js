@@ -1,4 +1,27 @@
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+
+=======
+<<<<<<< HEAD
+
+=======
+<<<<<<< HEAD:user/static/js/signup.js
+// input 
+let new_email = document.getElementById('new_email');
+let new_password = document.getElementById('new_password');
+let new_re_password = document.getElementById('new_re_password');
+let new_name = document.getElementById('new_name');
+let new_nickname = document.getElementById('new_nickname');
+let new_tel = document.getElementById('new_tel');
+let new_age = document.getElementById('new_age');
+=======
+
+>>>>>>> jy:static/js/signup.js
+>>>>>>> develop
+>>>>>>> develop
+>>>>>>> develop
 // err 에러메시지
 let email_err = document.getElementById('email_err');
 let pw_err = document.getElementById('pw_err');
@@ -9,7 +32,26 @@ let tel_err = document.getElementById('tel_err');
 let addr_err = document.getElementById('addr_err');
 let age_err = document.getElementById('age_err');
 
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+
+=======
+<<<<<<< HEAD
+
+=======
+<<<<<<< HEAD:user/static/js/signup.js
+// 혹시 모르니 -(대쉬)제거한 tel 값
+let tel_value = new_tel.value.replace(dashRegex, '');
+// 혹시 모르니 -(대쉬)제거한 tel 값
+let age_value = new_age.value.replace(dashRegex , '');
+=======
+
+>>>>>>> jy:static/js/signup.js
+>>>>>>> develop
+>>>>>>> develop
+>>>>>>> develop
 
 // 대쉬 제거 검증식 
 const dashRegex = /\-/g;
@@ -29,6 +71,55 @@ const telRegex = /\d{11}/g;
 // 나이 - 숫자만 가능 , 최소1글자 ~ 3글자.
 const ageRegex = /\d{1,3}/g;
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+=======
+<<<<<<< HEAD:user/static/js/signup.js
+>>>>>>> develop
+// 회원가입 검증
+function valid_signup(){
+    
+    // input 
+    let new_email = document.getElementById('new_email');
+    let new_password = document.getElementById('new_password');
+    let new_re_password = document.getElementById('new_re_password');
+    let new_name = document.getElementById('new_name');
+    let new_nickname = document.getElementById('new_nickname');
+    let new_tel = document.getElementById('new_tel');
+    let new_age = document.getElementById('new_age');
+    
+    // 혹시 모르니 -(대쉬)제거한 tel 값
+    let tel_value = new_tel.value.replace(dashRegex, '');
+    // 혹시 모르니 -(대쉬)제거한 tel 값
+    let age_value = new_age.value.replace(dashRegex , '');
+
+    // 에러 메시지를 숨김으로 초기화
+    email_err.style.display = 'none';
+    pw_err.style.display = 'none';
+    repw_err.style.display = 'none';
+    name_err.style.display = 'none';
+    nickname_err.style.display = 'none';
+    tel_err.style.display = 'none';
+    age_err.style.display = 'none';
+
+
+    if(emailRegex.test(new_email.value)){
+        email_err.style.display = 'block';
+        return false;
+    }
+
+    if(pwRegex.test(new_password.value)){
+        pw_err.style.display = 'block';
+<<<<<<< HEAD
+        return false;
+=======
+=======
+>>>>>>> develop
+>>>>>>> develop
 
 // 회원가입 검증
 function valid_signup(){
@@ -65,10 +156,51 @@ function valid_signup(){
     if(pwRegex.test(new_password.value)){
         pw_err.style.display = 'block';
         return false;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> jy:static/js/signup.js
+>>>>>>> develop
+>>>>>>> develop
+>>>>>>> develop
     }
 
     if(new_password.value !== new_re_password.value){
         repw_err.style.display = 'block';
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        return false;
+=======
+<<<<<<< HEAD:user/static/js/signup.js
+>>>>>>> develop
+    }
+
+    if(nameRegex.test(new_name.value)){
+        name_err.style.display = 'block';
+        return false;
+    }
+
+    if(nicknameRegex.test(new_nickname.value)){
+        nickname_err.style.display = 'block';
+        return false;
+    }
+
+    if(telRegex.test(tel_value)){
+        tel_err.style.display = 'block';
+        return false;
+    }
+
+<<<<<<< HEAD
+    if(ageRegex.test(age_value)){
+=======
+    if(!ageRegex.test(age_value)){
+=======
+>>>>>>> develop
+>>>>>>> develop
         return false;
     }
 
@@ -88,6 +220,14 @@ function valid_signup(){
     }
 
     if(ageRegex.test(age_value)){
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> jy:static/js/signup.js
+>>>>>>> develop
+>>>>>>> develop
+>>>>>>> develop
         age_err.style.display = 'block';
         return false;
     }
