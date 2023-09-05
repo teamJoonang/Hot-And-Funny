@@ -8,11 +8,11 @@
     <!-- bootstrap icon cdn -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
     <!-- common.css -->
-    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="../../static/css/common.css">
     <!-- login.css -->
-    <link rel="stylesheet" href="../static/css/login.css">
+    <link rel="stylesheet" href="../../static/css/login.css">
     <!-- mypage.css -->
-    <link rel="stylesheet" href="../static/css/mypage.css">
+    <link rel="stylesheet" href="../../static/css/mypage.css">
     
     <title>회원정보</title>
 </head>
@@ -23,7 +23,7 @@
             <div class="container-fluid">
                 <div class="col-3">
                     <a href="" class="d-flex">
-                        <img src="/static/img/concert_logo.png" class="img-fluid header-img-logo" alt="콘서트_이미지_로고">
+                        <img src="../../static/img/concert_logo.png" class="img-fluid header-img-logo" alt="콘서트_이미지_로고">
                     </a>
                 </div>
                 <button class="navbar-toggler bg-black" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
@@ -112,10 +112,10 @@
                         <!-- 사이드 메뉴 -->
                         <div class="card-header bg-black text-white">메뉴</div>
                         <div class="card-body" id="mypage_menu">
-                            <a class="my-3" href="mypage.html">회원정보</a>
-                            <a class="my-3" href="myticket_list.html">구매내역</a>
-                            <a class="my-3" href="ask_admin_list.html">문의내역</a>
-                            <a class="my-3" href="user_out.html">회원탈퇴</a>
+                            <a class="my-3 sidebar_link" href="myinfo.html">회원정보</a>
+                            <a class="my-3 sidebar_link" href="myticket.html">구매내역</a>
+                            <a class="my-3 sidebar_link" href="myquestion.html">문의내역</a>
+                            <a class="my-3 sidebar_link" href="user_out.html">회원탈퇴</a>
                         </div>
                     </div>
                 </div>
@@ -139,7 +139,7 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        <a href="../accounts/finuser_response.html" class="btn btn-primary text-white mt-4">비밀번호 재설정</a>
+                                        <a href="../accounts/pw_reset.html" class="btn btn-primary text-white mt-4">비밀번호 재설정</a>
                                     </div>
                                 </div>
                                 <!-- Form Row-->
@@ -291,6 +291,6 @@
         <!-- sweetalert2 -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <!-- mypage js -->
-        <script src="../static/js/mypage.js"></script>
+        <script src="../../static/js/myinfo.js"></script>
 </body>
 </html>
