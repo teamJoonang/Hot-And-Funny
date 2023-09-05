@@ -9,7 +9,7 @@ function drawCharts() {
   drawBarChart();
   drawDonutChart();
   drawSecondDonutChart();
-  drawRemainingSeatsChart();
+  drawBar2Chart();
 }
 
 function drawAreaChart() {
@@ -34,16 +34,16 @@ function drawAreaChart() {
 
 function drawBarChart() {
   var data = google.visualization.arrayToDataTable([
-    ['일자별 콘서트', '예매율'],
-    ['1일차', 10],
-    ['2일차', 11],
-    ['3일차', 66]
+    ['일자별 콘서트', '예매율', {role: 'style'}],
+    ['1일차', 10, 'color: #3366cc'],
+    ['2일차', 11, 'color: #dc3912'],
+    ['3일차', 66, 'color: #ff9900']
   ]);
 
   var options = {
     title: '',
     bars: 'vertical',
-    legend: { position: 'bottom' }
+    legend: { position: 'none' }
   };
 
   var chart = new google.visualization.BarChart(document.getElementById('barChart'));
@@ -61,7 +61,7 @@ function drawDonutChart() {
   var options = {
     title: '성비별',
     pieHole: 1,
-    legend: 'none',
+    legend: { position: 'bottom' },
     chartArea: { 
       width: '80%',  // 차트 영역의 너비 조정
       height: '80%'  // 차트 영역의 높이 조정
@@ -89,7 +89,7 @@ function drawSecondDonutChart() {
     var options = {
       title: '연령대별',
       pieHole: 0.4,
-      legend: 'none',
+      legend: { position: 'bottom' },
       chartArea: { width: '80%', height: '80%'}
       
     };
@@ -104,43 +104,23 @@ function drawSecondDonutChart() {
 
 
 
+  function drawBar2Chart() {
+    var data = google.visualization.arrayToDataTable([
+      ['일자별 콘서트', 'S석 남은 좌석 수', 'R석 남은 좌석 수', 'VIP석 남은 좌석 수'],
+      ['1일차', 100, 50, 30],
+      ['2일차', 90, 45, 25],
+      ['3일차', 80, 40, 20]
+    ]);
+  
+    var options = {
+      title: '일자별 남은 좌석 수',
+      bars: 'vertical',
+      legend: { position: 'bottom' }
+    };
+  
+    var chart = new google.visualization.BarChart(document.getElementById('bar2Chart'));
+  
+    chart.draw(data, options);
+  }
 
 
-
-document.write('<script src="/admin/static/js/seatchoice.js"></script>');
-document.write('<script src="/ticket/seatchoice.html"></script>');
-
-
-/////////////////////////////////////////////////////
-google.charts.load('current', {'packages':['corechart']});
-google.charts.setOnLoadCallback(updateCharts);
-
-// 창 크기 변경 시 그래프 다시 그리기
-window.addEventListener('resize', updateCharts);
-
-// seatchoice.js 파일에서 가져온 남은 좌석 수로 그래프를 업데이트하는 함수
-function updateCharts(vipCount, rCount, sCount) {
-  // 그래프 데이터 업데이트
-  const data = google.visualization.arrayToDataTable([
-    ['좌석 유형', '남은 좌석 수'],
-    ['VIP', vipCount],
-    ['R', rCount],
-    ['S', sCount]
-  ]);
-
-  // 그래프 그리기
-  drawRemainingSeatsChart(data);
-}
-
-// 그래프 그리는 함수
-function drawRemainingSeatsChart(data) {
-  const options = {
-    title: '남은 좌석 수',
-    pieHole: 0.4,
-    legend: 'none',
-    chartArea: { width: '80%', height: '80%'}
-  };
-
-  const chart = new google.visualization.PieChart(document.getElementById('remainingSeatsChart'));
-  chart.draw(data, options);
-}
