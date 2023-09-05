@@ -4,7 +4,6 @@ const concertTime = document.getElementById('concert-time');
 const concertDate = document.getElementById('concert-date');
 const concertGrade = document.getElementById('concert-grade');
 let selectedDate = null;
-let count = 0;
 
 const concertDates = [
     {date: 1, month: 9 , year: 2023},
