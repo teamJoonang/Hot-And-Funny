@@ -4,18 +4,7 @@ const concertTime = document.getElementById('concert-time');
 const concertDate = document.getElementById('concert-date');
 const concertGrade = document.getElementById('concert-grade');
 let selectedDate = null;
-const concertDates = [1, 2, 3, 5, 6, 7, 8, 9, 10];
-const clickableDates = generateClickableDates(concertDates);
-
-function generateClickableDates(concertDates) {
-    const clickableDates = {};
-
-    for (const date of concertDates) {
-        clickableDates[date] = true;
-    }
-
-    return clickableDates;
-}
+let count = 0;
 
 
 const renderCalendar = () =>{
@@ -68,8 +57,9 @@ const renderCalendar = () =>{
 
     document.querySelector('.dates').innerHTML = dates.join('');
  
-    todayCheck();
-    concertCheck();
+
+
+
 
     //  오늘 날짜 그리기
     function todayCheck(){
@@ -84,48 +74,112 @@ const renderCalendar = () =>{
         }
     }
 
-
-    // 날짜에 이벤트 표시하기
-    function concertCheck(){
-        const concertMonth = new Date();
-        if (viewMonth === concertMonth.getMonth() && viewYear === concertMonth.getFullYear()){
-            const concertElements = document.querySelectorAll(`.this`);
-            const concertArray = Array.from(concertElements);
-            for (let i=0; i<concertDates.length; i++){
-                let concertDate = concertDates[i];
-                let dates = concertArray[concertDate - 1];
-                    if(dates){
-                        dates.classList.add(`concert`);
-                    }
-            }
+    const concertDates = [
+        {date: 1, month: 9 , year: 2023},
+        {date: 2, month: 9 , year: 2023},
+        {date: 3, month: 9 , year: 2023},
+        {date: 8, month: 9 , year: 2023},
+        {date: 9, month: 9 , year: 2023},
+        {date: 6, month: 10, year: 2023},
+        {date: 7, month: 10, year: 2023}
+    ];
+    
+    //  날짜 이벤트 표시하기 
+    function concertCheck() {
+        for (const concertDate of concertDates) {
+            if (concertDate.month === viewMonth + 1 && concertDate.year === viewYear) {
+                const concertElements = document.querySelectorAll(`.this`);
+                const concertArray = Array.from(concertElements);
+       
         
+                const dateIndex = concertDate.date - 1;
+                const dateElement = concertArray[dateIndex];
+  
+                if (dateElement) {
+                    dateElement.classList.add(`concert`);
+                    dateElement.closest('.date').classList.add('selected');
+                }
+            }
         }
     }
-    //  날짜 클릭 시 출력
+
+    todayCheck();
+    concertCheck();
+    
+    
+  
+    //  날짜 클릭 데이터 배열 저장
+    function generateClickableDates(concertDates) {
+        const clickableDates = {};
+        for (const concertDate of concertDates) {
+            if(concertDate.month === viewMonth+1 && concertDate.year === viewYear){
+                clickableDates[concertDate.date] = true;
+                console.log(viewMonth+1);
+            }
+        }
+ 
+        return clickableDates;
+    
+    }
+
+    //  날짜 클릭시 타이틀 화면에 표시
+    const clickableDates = generateClickableDates(concertDates);
+ 
     document.querySelector('.dates').addEventListener('click', (event) => {
         const clickedDate = event.target.innerText;
         const [clickedDay] = clickedDate.split('\n');
-    
+        
+        // console.log(viewMonth+1);
+        // console.log(clickedDate);
+        // if(targetDate.getDate()+1 === viewMonth+1){
+
+        // }
+        // for (const concertDate of concertDates) {
+        //     if (concertDate.month === targetDate.getMonth() + 1 && concertDate.date == clickedDay){
+        //         // console.log(concertDate.month);
+        //     }
+        // }
         if (clickedDay && clickableDates[Number(clickedDay)]) {
             const formattedDay = String(clickedDay).padStart(2, '0'); // 두 자리로 포맷팅
+            concertSite.innerText = `• 서울시 강서구 양천로 125 서울문화예관 B1F`;
             concertDate.innerHTML = `• ${viewYear}-${String(viewMonth + 1).padStart(2, '0')}-${formattedDay}`;
+            concertTime.innerText = `• 180분`;
+            concertGrade.innerText = `• 18등급`;
         }
+    }); 
+
+    //  날짜 클릭 시 색상 고정
+    const choiceDates = document.querySelectorAll('.selected');
+    choiceDates.forEach(choiceDate => {
+        choiceDate.addEventListener('click', (event) => {
+            choiceDates.forEach(element => element.classList.remove('choice'));
+            let existngChoice = document.querySelector('.choice');
+    
+            if(existngChoice) {
+                existngChoice.classList.remove('choice');
+            }
+            event.target.classList.add('choice');
+            const subSpan = event.target.closest('.selected');
+            if (subSpan) {
+                subSpan.classList.add('choice');
+            }
+        });
     });
 };
     
 renderCalendar();
 
-const prevMonth = () => {
-    date.setDate(1);
-    date.setMonth(date.getMonth() - 1);
-    renderCalendar();
-};
+// const prevMonth = () => {
+//     date.setDate(1);
+//     date.setMonth(date.getMonth() - 1);
+//     renderCalendar();
+// };
 
-const nextMonth = () => { 
-    date.setDate(1);
-    date.setMonth(date.getMonth() + 1);
-    renderCalendar();
-};
+// const nextMonth = () => { 
+//     date.setDate(1);
+//     date.setMonth(date.getMonth() + 1);
+//     renderCalendar();
+// };
 
 const goToday = () => {
     date = new Date();
