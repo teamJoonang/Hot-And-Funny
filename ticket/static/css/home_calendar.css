@@ -144,8 +144,7 @@ body {
     width : 100%;
     height : 100%;
     display : block;
-    background-color : #0D6EFD;
-    opacity : 0.5;
+    background-color : #ece6ec;
     content: "";
 }
 .selected:hover{
@@ -159,13 +158,13 @@ body {
 }
 .choice::before {
     position: absolute;
-    background: black;
+    background: #4f30da !important;
     z-index: -1;
 }
 .choice span {
-    color : white;
+    color : #f517fe !important; 
+    font-weight: 900;
 }
-
 
 /* <-------Calendar 끝 ------->*/
 

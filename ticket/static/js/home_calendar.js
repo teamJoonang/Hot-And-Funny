@@ -6,6 +6,15 @@ const concertGrade = document.getElementById('concert-grade');
 let selectedDate = null;
 let count = 0;
 
+const concertDates = [
+    {date: 1, month: 9 , year: 2023},
+    {date: 2, month: 9 , year: 2023},
+    {date: 3, month: 9 , year: 2023},
+    {date: 8, month: 9 , year: 2023},
+    {date: 9, month: 9 , year: 2023},
+    {date: 6, month: 10, year: 2023},
+    {date: 7, month: 10, year: 2023}
+];
 
 const renderCalendar = () =>{
     const viewYear = date.getFullYear();
@@ -74,15 +83,7 @@ const renderCalendar = () =>{
         }
     }
 
-    const concertDates = [
-        {date: 1, month: 9 , year: 2023},
-        {date: 2, month: 9 , year: 2023},
-        {date: 3, month: 9 , year: 2023},
-        {date: 8, month: 9 , year: 2023},
-        {date: 9, month: 9 , year: 2023},
-        {date: 6, month: 10, year: 2023},
-        {date: 7, month: 10, year: 2023}
-    ];
+
     
     //  날짜 이벤트 표시하기 
     function concertCheck() {
