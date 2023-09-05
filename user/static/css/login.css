@@ -34,7 +34,7 @@ input[type="number"]::-webkit-inner-spin-button {
 /* input 안 placeholder 설정 */
 input::placeholder {
     color: #ccc;
-    font-size: 0.9375em;
+    font-size: 0.8rem;
 }
 
 /* input의 focus 적용시 placehoder 사라지도록, 투명하게. */
@@ -152,9 +152,11 @@ textarea:focus:-ms-input-placeholder { /* Internet Explorer 10+ */
 /* 회원가입 검증에러 출력 */
 
 #email_err , #pw_err , #repw_err ,  #addr_err , 
-#age_err , #name_err , #tel_err , #carrier_err 
+#age_err , #name_err , #tel_err , #carrier_err ,
+#nickname_err
 {
   display: none;
+  /* color: #de29e6; */
 }
 
 
