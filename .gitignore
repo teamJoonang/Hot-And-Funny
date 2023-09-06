@@ -36,5 +36,36 @@ out/
 ### VS Code ###
 .vscode/
 
-### properties ###
-application-db.properties
+##############
+##############
+# 승범
+/src/main/resources/templates/admin
+/src/main/resources/templates/board
+/src/main/resources/templates/ticket
+/src/main/resources/static/img
+/src/main/resources/templates/footer.html
+/src/main/resources/templates/index.html
+readme.md
+
+# accounts, mypage.css
+/src/main/resources/static/css/*
+
+!/src/main/resources/static/css/login.css
+!/src/main/resources/static/css/mypage.css
+!/src/main/resources/static/css/signup.css
+
+
+# acconuts, mypage.js
+
+/src/main/resources/static/js/*
+
+!/src/main/resources/static/js/finduser.js
+!/src/main/resources/static/js/myinfo.js
+!/src/main/resources/static/js/myticket.js
+!/src/main/resources/static/js/signup.js
+!/src/main/resources/static/js/user_out.js
+
+# bootstrap css
+/src/main/resources/static/css/bootstrap.css
+
+.gitignore

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,11 +8,11 @@
     <!-- bootstrap icon cdn -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
     <!-- common.css -->
-    <link rel="stylesheet" href="../../static/css/common.css">
+    <link rel="stylesheet" href="../../static/css/common.css" th:href="@{/css/common.css}">
     <!-- login.css -->
-    <link rel="stylesheet" href="../../static/css/login.css">
-    <!-- mypage.css -->
-    <link rel="stylesheet" href="../../static/css/mypage.css">
+    <link rel="stylesheet" href="../../static/css/login.css" th:href="@{/css/login.css}">
+    <!-- myinfo.css -->
+    <link rel="stylesheet" href="../../static/css/myinfo.css" th:href="@{/css/myinfo.css}">
     
     
     <title>회원탈퇴</title>
@@ -114,10 +114,10 @@
                         <!-- 사이드 메뉴 -->
                         <div class="card-header bg-black text-white">메뉴</div>
                         <div class="card-body" id="mypage_menu">
-                            <a class="my-3 sidebar_link" href="myinfo.html">회원정보</a>
-                            <a class="my-3 sidebar_link" href="myticket.html">구매내역</a>
-                            <a class="my-3 sidebar_link" href="myquestion.html">문의내역</a>
-                            <a class="my-3 sidebar_link" href="user_out.html">회원탈퇴</a>
+                            <a class="my-3 sidebar_link" href="myinfo.html" th:href="@{/user/myinfo}">회원정보</a>
+                            <a class="my-3 sidebar_link" href="myticket.html" th:href="@{/user/myticket}">구매내역</a>
+                            <a class="my-3 sidebar_link" href="myquestion.html" th:href="@{/user/myqna}">문의내역</a>
+                            <a class="my-3 sidebar_link" href="user_out.html" th:href="@{/user/out}">회원탈퇴</a>
                         </div>
                     </div>
                 </div>
@@ -134,7 +134,7 @@
                                     <h3 class="my-5 text-lg">Hot and Funny를 탈퇴하시기전에 확인해주세요.</h3>
                                     <hr>
                                     
-                                    <p><span th:text="${user.name}">홍길동</span>님, Hot and Funny를 이용해주셔서 감사합니다.</p>
+                                    <p><span>홍길동</span>님, Hot and Funny를 이용해주셔서 감사합니다.</p>
 
                                     <h4 class="my-4 text-lg-center">Hot and Funny에서 어떤 점이 불편하셨나요?</h4>
                                     <p>
@@ -287,6 +287,6 @@
         <!-- sweetalert2 -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>        
         <!-- mypage js -->
-        <script src="../../static/js/user_out.js"></script>
+        <script src="../../static/js/user_out.js" th:src="@{/js/user_out.js}"></script>
 </body>
 </html>

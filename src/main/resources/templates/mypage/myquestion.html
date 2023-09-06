@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,11 +8,11 @@
     <!-- bootstrap icon cdn -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
     <!-- common.css -->
-    <link rel="stylesheet" href="../../static/css/common.css">
+    <link rel="stylesheet" href="../../static/css/common.css" th:href="@{/css/common.css}">
     <!-- login.css -->
-    <link rel="stylesheet" href="../../static/css/login.css">
-    <!-- mypage.css -->
-    <link rel="stylesheet" href="../../static/css/mypage.css">
+    <link rel="stylesheet" href="../../static/css/login.css" th:href="@{/css/login.css}">
+    <!-- myinfo.css -->
+    <link rel="stylesheet" href="../../static/css/myinfo.css" th:href="@{/css/myinfo.css}">
     
     <title>문의내역</title>
 </head>
@@ -112,10 +112,10 @@
                         <!-- 사이드 메뉴 -->
                         <div class="card-header justify-content-center text-white bg-black">메뉴</div>
                         <div class="card-body" id="mypage_menu">
-                            <a class="my-3 sidebar_link" href="myinfo.html">회원정보</a>
-                            <a class="my-3 sidebar_link" href="myticket.html">구매내역</a>
-                            <a class="my-3 sidebar_link" href="myquestion.html">문의내역</a>
-                            <a class="my-3 sidebar_link" href="user_out.html">회원탈퇴</a>
+                            <a class="my-3 sidebar_link" href="myinfo.html" th:href="@{/user/myinfo}">회원정보</a>
+                            <a class="my-3 sidebar_link" href="myticket.html" th:href="@{/user/myticket}">구매내역</a>
+                            <a class="my-3 sidebar_link" href="myquestion.html" th:href="@{/user/myqna}">문의내역</a>
+                            <a class="my-3 sidebar_link" href="user_out.html" th:href="@{/user/out}">회원탈퇴</a>
                         </div>
                     </div>
                 </div>

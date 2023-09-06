@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,11 +8,11 @@
     <!-- bootstrap icon cdn -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
     <!-- common.css -->
-    <link rel="stylesheet" href="../../static/css/common.css">
+    <link rel="stylesheet" href="../../static/css/common.css" th:href="@{/css/common.css}">
     <!-- login.css -->
-    <link rel="stylesheet" href="../../static/css/login.css">
-    <!-- mypage.css -->
-    <link rel="stylesheet" href="../../static/css/mypage.css">
+    <link rel="stylesheet" href="../../static/css/login.css" th:href="@{/css/login.css}">
+    <!-- myinfo.css -->
+    <link rel="stylesheet" href="../../static/css/myinfo.css" th:href="@{/css/myinfo.css}">
     
     <title>회원정보</title>
 </head>
@@ -103,7 +103,7 @@
     </header>
 
     <!-- content -->
-    <section id="wrap">
+    <section id="wrap">111
         <div class="container px-5">
             <div class="row d-flex py-5">
                 
@@ -112,10 +112,10 @@
                         <!-- 사이드 메뉴 -->
                         <div class="card-header bg-black text-white">메뉴</div>
                         <div class="card-body" id="mypage_menu">
-                            <a class="my-3 sidebar_link" href="myinfo.html">회원정보</a>
-                            <a class="my-3 sidebar_link" href="myticket.html">구매내역</a>
-                            <a class="my-3 sidebar_link" href="myquestion.html">문의내역</a>
-                            <a class="my-3 sidebar_link" href="user_out.html">회원탈퇴</a>
+                            <a class="my-3 sidebar_link" href="myinfo.html" th:href="@{/user/myinfo}">회원정보</a>
+                            <a class="my-3 sidebar_link" href="myticket.html" th:href="@{/user/myticket}">구매내역</a>
+                            <a class="my-3 sidebar_link" href="myquestion.html" th:href="@{/user/myqna}">문의내역</a>
+                            <a class="my-3 sidebar_link" href="user_out.html" th:href="@{/user/out}">회원탈퇴</a>
                         </div>
                     </div>
                 </div>
@@ -139,7 +139,9 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        <a href="../accounts/pw_reset.html" class="btn btn-primary text-white mt-4">비밀번호 재설정</a>
+                                        <a href="../accounts/pw_reset.html" class="btn btn-primary text-white mt-4" th:href="@{/user/reset}">
+                                            비밀번호 재설정
+                                        </a>
                                     </div>
                                 </div>
                                 <!-- Form Row-->
@@ -179,16 +181,16 @@
                                     </div>
                                     <!-- gender -->
                                     <div class="col-md-6">
-                                        <label class="small mb-1" for="user_gender">성별</label><br>
-                                        <input class="chk_input" type="radio" name="chk_gender" id="user_gender" value="M"> 남자
-                                        <input class="chk_input" type="radio" name="chk_gender" id="user_gender" value="W" checked> 여자
+                                        <label class="small mb-1 mt-4" for="new_gender">성별</label>
+                                        <input class="chk_input" type="radio" name="chk_gender" id="new_gender" value="M"> 남자
+                                        <input class="chk_input" type="radio" name="chk_gender" id="new_gender" value="W" checked> 여자
                                     </div>
                                 </div>
                                 <!-- 광고 승인여부 -->
                                 <div class="my-3 text-center mb-4">
-                                    <label for="chk_marketing">Hot and Funny의 다양한 이벤트 소식을 전해드립니다.</label><br>
-                                    <input class="chk_input" type="radio" name="chk_marketing" value="y"> 수신
-                                    <input class="chk_input" type="radio" name="chk_marketing" value="n" checked> 수신거부
+                                    <label>Hot and Funny의 다양한 이벤트 소식을 전해드립니다.</label>
+                                        <input class="chk_input" type="radio" name="ch_marketing" value="y"> 수신
+                                        <input class="chk_input" type="radio" name="ch_marketing" value="n" checked> 수신거부
                                 </div>
                                 
                                 <hr>
@@ -291,6 +293,6 @@
         <!-- sweetalert2 -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <!-- mypage js -->
-        <script src="../../static/js/myinfo.js"></script>
+        <script src="../../static/js/myinfo.js" th:src="@{/js/myinfo.js}"></script>
 </body>
 </html>
