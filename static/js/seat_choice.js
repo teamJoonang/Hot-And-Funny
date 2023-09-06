@@ -241,11 +241,7 @@ nextPage.addEventListener("click", () => {
     if(!ticketArray.length) {
         alert("좌석을 선택해 주세요.");
     } else {
-<<<<<<<< HEAD:static/js/seat_choice.js
         window.location.href = "payment_check.html";
-========
-        window.location.href = "purchaseConfirm.html";
->>>>>>>> develop:static/js/seatchoice_script.js
     }
 
 });
