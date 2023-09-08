@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class TicketController2 {
 
-	@GetMapping ("/ticket/home/calendar")
-	public String homeCalendar () {
-		return "ticket/home_calendar";
-	}
+//	@GetMapping ("/ticket/home/calendar")
+//	public String homeCalendar () {
+//		return "ticket/home_calendar";
+//	}
 	
 	@GetMapping ("/ticket/approval")
 	public String approval () {

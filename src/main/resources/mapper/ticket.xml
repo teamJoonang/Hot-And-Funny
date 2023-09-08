@@ -1,0 +1,14 @@
+<<?xml version="1.0" encoding="UTF-8" ?>
+<!-- mapper DTD 선언 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.choongang.concert.domain.ticket">
+
+<!-- 날짜 선택시 HOME_CALENDAR TITLE과 잔여석 표시 -->
+<select id="selectedDate" parameterType="DateChoiceDTO" resultType="RequestData">
+	SELECT s.seat_type, s.seat_number, c.concert_date
+	FROM concert c
+	JOIN seat s ON c.id  = 1 AND s.seat_type IN ("VIP", "R", "S")
+	LEFT JOIN ticket t ON s.seat_number = t.seat_number AND c.id = t.concert_id
+	WHERE t.seat_number IS NULL AND t.concert_id IS null;
+</select>

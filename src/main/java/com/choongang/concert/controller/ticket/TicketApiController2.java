@@ -1,42 +1,29 @@
 package com.choongang.concert.controller.ticket;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.choongang.concert.domain.ticket.RequestData;
+import com.choongang.concert.dto.ticket.ChoiceDateData;
 import com.choongang.concert.service.ticket.TicketService;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
 @RestController
-@RequestMapping("/ticket/home/calendar")
+@RequiredArgsConstructor
 @Log4j2
 public class TicketApiController2 {
+	 
+	private final TicketService ticketService;
 	
-	@Autowired
-	private TicketService ticketService;
-	
-	
-	@PostMapping
-	public ResponseEntity<?> handleRequest(Model model, @RequestBody RequestData requestData) {
-		
-        Map<String, Object> response = new HashMap<>();
-        response.put("message", "요청이 성공적으로 처리되었습니다." + requestData);
-        return ResponseEntity.ok(response);
-		
-    }
+	@GetMapping("/ticket/home/calendar")
+	public List<ChoiceDateData> seat(@RequestParam int concertId){
+		List <ChoiceDateData> cdd = ticketService.selectedDate(concertId);
+		return cdd;
+	}
 
 
 }
