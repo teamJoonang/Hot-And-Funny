@@ -1,18 +1,15 @@
 let date = new Date();
 const concertSite = document.getElementById('concert-site');
-const concertTime = document.getElementById('concert-time');
+const concertRuntime = document.getElementById('concert-runtime');
 const concertDate = document.getElementById('concert-date');
 const concertGrade = document.getElementById('concert-grade');
+const sendeDate = document.querySelectorAll('.selected');
 let selectedDate = null;
 
 const concertDates = [
-    {date: 1, month: 9 , year: 2023},
-    {date: 2, month: 9 , year: 2023},
-    {date: 3, month: 9 , year: 2023},
-    {date: 8, month: 9 , year: 2023},
-    {date: 9, month: 9 , year: 2023},
-    {date: 6, month: 10, year: 2023},
-    {date: 7, month: 10, year: 2023}
+    {id:1, date: 9, month: 9 , year: 2023, time : "20:30:00"},
+    {id:2, date: 10, month: 9 , year: 2023, time : "18:30:00"},
+    {id:3, date: 11, month: 9 , year: 2023, time : "21:30:00"}
 ];
 
 const viewYear = date.getFullYear();
@@ -81,16 +78,54 @@ renderCalendar();
 
 //  날짜 클릭시 타이틀 화면에 표시
 document.querySelector('.dates').addEventListener('click', (event) => {
+     const clickedDate = event.target.innerText;
+     const [clickedDay] = clickedDate.split('\n');
+     const selectedDate = concertDates.find(date => date.date === Number(clickedDay));
+     console.log(selectedDate.id);
+     console.log(typeof(selectedDate.id));
+     if (selectedDate) {
+         const formattedDay = String(clickedDay).padStart(2, '0'); // 두 자리로 포맷팅
+         concertSite.innerText = `• 서울시 강서구 양천로 125 서울문화예관 B1F`;
+         concertDate.innerHTML = `• ${selectedDate.year}-${String(selectedDate.month).padStart(2, '0')}-${formattedDay} P.M ${selectedDate.time}`;
+         concertGrade.innerText = `• 18등급`;
+ 		 concertRuntime.innerText = `• 180분`;
+     }
+     var concertId = selectedDate.id;
+     var remainingVipSeat = $("#remaining-VIP").val();
+     var remainingRSeat = $("#remaining-R").val();
+     var remainingSSeat = $("#remaining-S").val();
+     if(concertId.trim()==''|| remainingVipSeat.trim() =='' || remainingRSeat.trim()=='' || remainingSSeat.trim()==''){
+         return;}
+     //서버로 보낼 데이터 준비 : 파라미터로 만들기 . json 으로 만들기
+     var sendData = {"concertId": concertId, "remaining-VIP":remainingVipSeat, "remainingR":remainingRSeat, "remainingS":remainingSSeat};
+     $.ajax({
+         url:'ticket/home/calendar?id='
+         , method : 'GET'
+         , data: JSON.stringify(sendData)
+         ,contentType : 'application/json; charset=UTF-8'
+         ,dataType : 'json'
+         , success :function(resp){
+             alert( JSON.stringify(sendData))
+         }
+     })
+
+
+});
+
+document.querySelector('.dates').addEventListener('click', (event) => {
     const clickedDate = event.target.innerText;
     const [clickedDay] = clickedDate.split('\n');
-    if (clickedDay && clickableDates[Number(clickedDay)]) {
+    const selectedDate = concertDates.find(date => date.date === Number(clickedDay));
+    if (selectedDate) {
         const formattedDay = String(clickedDay).padStart(2, '0'); // 두 자리로 포맷팅
-        concertSite.innerText = `• 서울시 강서구 양천로 125 서울문화예관 B1F`;
-        concertDate.innerHTML = `• ${viewYear}-${String(viewMonth + 1).padStart(2, '0')}-${formattedDay}`;
-        concertTime.innerText = `• 180분`;
-        concertGrade.innerText = `• 18등급`;
+
+       
+
     }
-}); 
+});
+
+
+
 
 ////////////다음날, 이전날, 오늘날 구현 삭제///////////
 ////////////////////////////////////////////////////
@@ -150,10 +185,8 @@ function concertCheck() {
     for (const concertDate of concertDates) {
         if(concertDate.month === viewMonth+1 && concertDate.year === viewYear){
             clickableDates[concertDate.date] = true;
-            console.log(viewMonth+1);
         }
     }
-
     return clickableDates;
 
 }

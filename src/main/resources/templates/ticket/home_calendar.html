@@ -16,7 +16,7 @@
             <div class="container-fluid">
                 <div class="col-3">
                     <a href="" class="d-flex">
-                        <img src="/static/img/concert_logo.png" th:src="@{/img/concert_logo.png}" class="img-fluid header-img-logo" alt="콘서트_이미지_로고">
+                        <img src="../../static/img/concert_logo.png" th:src="@{/img/concert_logo.png}" class="img-fluid header-img-logo" alt="콘서트_이미지_로고">
                     </a>
                 </div>
                 <button class="navbar-toggler bg-black" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
@@ -27,10 +27,10 @@
                         <h6 class="offcanvas-title text-white" id="offcanvasNavbarLabel">로그인이 필요합니다.</h6>
                         <div class="col-3 navbar justify-content-center user-nav">
                             <div class="d-flex">
-                                <a href="/ticket" class="nav-link text-decoration-none text-white fw-semibold">
+                                <a href="../ticket" class="nav-link text-decoration-none text-white fw-semibold">
                                     <i class="bi bi-ticket-detailed custom-atag fs-4"></i>
                                 </a>
-                                <a href="/accounts/login.html" class="nav-link text-decoration-none text-white fw-semibold mx-2">
+                                <a href="../accounts/login.html" class="nav-link text-decoration-none text-white fw-semibold mx-2">
                                     <i class="bi bi-person custom-atag fs-4"></i>
                                 </a>
                                 <!-- <a href="#" class="nav-link text-decoration-none text-white fw-semibold custom-atag">회원가입</a> -->
@@ -41,13 +41,13 @@
                     <div class="offcanvas-body">
                         <ul class="navbar-nav justify-content-center flex-grow-1 pe-3 fs-5">
                             <li class="nav-item">
-                                <a href="/admin" class="nav-link text-warning px-3" hidden>ADMIN</a>
+                                <a href="../admin" class="nav-link text-warning px-3" hidden>ADMIN</a>
                             </li>
                             <li class="nav-item">
-                                <a href="/about.html" class="nav-link custom-atag px-3">ABOUT</a>
+                                <a href="../about.html" class="nav-link custom-atag px-3">ABOUT</a>
                             </li>
                             <li class="nav-item">
-                                <a href="/ticket" class="nav-link custom-atag px-3">TICKET</a>
+                                <a href="../ticket" class="nav-link custom-atag px-3">TICKET</a>
                                 <ul class="sub-menu">
                                     <li><a href="">구매내역</a></li>
                                     <li><a href="">예매정보</a></li>
@@ -55,7 +55,7 @@
                                 </ul>
                             </li>
                             <li class="nav-item">
-                                <a href="/notice" class="nav-link custom-atag px-3">NOTICE</a>
+                                <a href="../notice" class="nav-link custom-atag px-3">NOTICE</a>
                                 <ul class="sub-menu">
                                     <li><a href="">티켓소식</a></li>
                                     <li><a href="">시스템관련</a></li>
@@ -64,7 +64,7 @@
                                 </ul>
                             </li>
                             <li class="nav-item">
-                                <a href="/qna" class="nav-link custom-atag px-3">Q N A</a>
+                                <a href="../qna" class="nav-link custom-atag px-3">Q N A</a>
                                 <ul class="sub-menu pe-2">
                                     <li><a href="">예매/취소</a></li>
                                     <li><a href="">결제</a></li>
@@ -87,7 +87,7 @@
                         </div>
                         <div class="col-1 d-flex align-items-center justify-content-end fs-2 pe-4 footer-icon user-nav">
                             <a href="https://github.com/teamJoongang/Hot-And-Funny" class="text-secondary pe-3"><i class="bi bi-github"></i></a>
-                            <a href="https://hyunsense.notion.site/hyunsense/fd8584dc0730455aa340d328dba8beb6" class=""><img class="notion" src="/static/img/notion_icon2.png" alt=""></a>
+                            <a href="https://hyunsense.notion.site/hyunsense/fd8584dc0730455aa340d328dba8beb6" class=""><img class="notion" src="../../static/img/notion_icon2.png" th:src="@{/img/notion_icon2.png}" alt=""></a>
                         </div>
                     </div>
               </div>
@@ -104,7 +104,7 @@
             <div>
                 <ul class="list-unstyled row offset-xs-1 concert-list">
                     <li class="col-lg-6"><h4>&lt;콘서트 장소&gt;</h4><p class="concert-site offset-lg-1" id="concert-site"></p></li>
-                    <li class="col-lg-4"><h4>&lt;관람 시간&gt;</h4><p class="concert-time offset-lg-2" id="concert-time"></p></li>
+                    <li class="col-lg-4"><h4>&lt;관람 시간&gt;</h4><p class="concert-runtime offset-lg-2" id="concert-runtime"></p></li>
                     <li class="col-lg-6 mt-lg-5 "><h4>&lt;콘서트 날짜&gt;</h4><p class="concert-date offset-lg-1" id="concert-date"></p></li>
                     <li class="col-lg-4 mt-lg-5"><h4>&lt;관람 등급&gt;</h4><p class="concert-grade offset-lg-2" id="concert-grade"></p></li>
                 </ul>
@@ -148,15 +148,15 @@
                         <tbody>
                             <tr>
                                 <td class="col-lg-5">VIP-CLASS</td>
-                                <td class="col-lg-5">0석</td>
+                                <td class="col-lg-5"><span ID="remaining-VIP"></span></td>
                             </tr>
                             <tr>
                                 <td class="col-lg-5"><span>R-CLASS</span></td>
-                                <td class="col-lg-5"><span>100석</span></td>
+                                <td class="col-lg-5"><span ID="remaining-R"></span></td>
                             </tr>
                             <tr>
                                 <td class="col-lg-5"><span>S-CLASS</span></td>
-                                <td class="col-lg-5"><span>15석</span></td>
+                                <td class="col-lg-5"><span ID="remaining-S"></span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -186,6 +186,7 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="../../static/js/home_calendar.js" th:src="@{/js/home_calendar.js}"></script>
     </body>
     </html>
