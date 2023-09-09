@@ -1,4 +1,4 @@
-package com.choongang.concert.domain.ticket;
+package com.choongang.concert.dto.ticket;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,9 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ChoiceDateData {
 
-	private String concertId;
-	private int remainingSeatVip; 	// VIP 좌석 남은수
-	private int remainingSeatR;		// R 좌석 남은수
-	private int remainingSeatS;		// S 좌석 남은수
-
+	private String remainingSeat; 		// 남은 좌석 종류
+	private int remainingSeatCount;  // 좌석 남은 수 
+	
 }

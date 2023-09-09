@@ -1,3 +1,4 @@
+
 let date = new Date();
 const concertSite = document.getElementById('concert-site');
 const concertRuntime = document.getElementById('concert-runtime');
@@ -6,10 +7,12 @@ const concertGrade = document.getElementById('concert-grade');
 const sendeDate = document.querySelectorAll('.selected');
 let selectedDate = null;
 
+
+
 const concertDates = [
-    {id:1, date: 9, month: 9 , year: 2023, time : "20:30:00"},
-    {id:2, date: 10, month: 9 , year: 2023, time : "18:30:00"},
-    {id:3, date: 11, month: 9 , year: 2023, time : "21:30:00"}
+    {number:1, date: 9, month: 9 , year: 2023, time : "20:30:00"},
+    {number:2, date: 10, month: 9 , year: 2023, time : "18:30:00"},
+    {number:3, date: 11, month: 9 , year: 2023, time : "21:30:00"}
 ];
 
 const viewYear = date.getFullYear();
@@ -81,8 +84,7 @@ document.querySelector('.dates').addEventListener('click', (event) => {
      const clickedDate = event.target.innerText;
      const [clickedDay] = clickedDate.split('\n');
      const selectedDate = concertDates.find(date => date.date === Number(clickedDay));
-     console.log(selectedDate.id);
-     console.log(typeof(selectedDate.id));
+     
      if (selectedDate) {
          const formattedDay = String(clickedDay).padStart(2, '0'); // 두 자리로 포맷팅
          concertSite.innerText = `• 서울시 강서구 양천로 125 서울문화예관 B1F`;
@@ -90,42 +92,56 @@ document.querySelector('.dates').addEventListener('click', (event) => {
          concertGrade.innerText = `• 18등급`;
  		 concertRuntime.innerText = `• 180분`;
      }
-     var concertId = selectedDate.id;
-     var remainingVipSeat = $("#remaining-VIP").val();
-     var remainingRSeat = $("#remaining-R").val();
-     var remainingSSeat = $("#remaining-S").val();
-     if(concertId.trim()==''|| remainingVipSeat.trim() =='' || remainingRSeat.trim()=='' || remainingSSeat.trim()==''){
-         return;}
+     const concertId = selectedDate.number;
+     console.log("concertId: " + concertId);
      //서버로 보낼 데이터 준비 : 파라미터로 만들기 . json 으로 만들기
-     var sendData = {"concertId": concertId, "remaining-VIP":remainingVipSeat, "remainingR":remainingRSeat, "remainingS":remainingSSeat};
+
      $.ajax({
-         url:'ticket/home/calendar?id='
+         url: 'calendar/' + concertId
          , method : 'GET'
-         , data: JSON.stringify(sendData)
-         ,contentType : 'application/json; charset=UTF-8'
-         ,dataType : 'json'
-         , success :function(resp){
-             alert( JSON.stringify(sendData))
-         }
-     })
-
-
+         , dataType : 'json'
+         , success: function(data){
+            showSeatCount(data);
+            console.log(data);
+         },
+         error: function(jqXHR, textStatus, errorThrown) {
+			console.log(errorThrown);
+			console.log(jqXHR);
+			console.log(textStatus);
+			alert("실패");
+		 }
+	});
+  
 });
 
-document.querySelector('.dates').addEventListener('click', (event) => {
-    const clickedDate = event.target.innerText;
-    const [clickedDay] = clickedDate.split('\n');
-    const selectedDate = concertDates.find(date => date.date === Number(clickedDay));
-    if (selectedDate) {
-        const formattedDay = String(clickedDay).padStart(2, '0'); // 두 자리로 포맷팅
+// AJAX 내 남은 seat 수를 표현해주는 <tag>
+function showSeatCount(data) {
+	const tr = $("<tr></tr>");
+    $.each(data, function(index, sd){
+        const td1 = $("<td class='col-lg-5'></td>").text(sd.remainingSeat);
+        const td2 = $("<td class='col-lg-5'></td>").text(sd.remainingSeatCount);
+        //const span1 = $("<span></span>").text(sd.remainingSeat); 
+        //const span2 = $("<span></span>").text(sd.remainingSeatCount); 
+    
+        //td1.append(span1);
+        //td2.append(span2);
+        tr.append(td1, td2)
+    })
+    $("#remainSeat").empty();
+    $("#remainSeat").append(tr);
+}
 
-       
-
-    }
-});
-
-
-
+/*
+fetch('/ticket/home/caledar')
+    		.then(response => response.json())
+    		.then(data => {
+			// JSON 데이터를 사용하여 원하는 작업 수행
+			console.log(data);
+		})
+		.catch(error => {
+			console.log("데이터 가져오기 실패", error);
+		}
+*/
 
 ////////////다음날, 이전날, 오늘날 구현 삭제///////////
 ////////////////////////////////////////////////////
@@ -145,8 +161,8 @@ document.querySelector('.dates').addEventListener('click', (event) => {
 // };
 /////////////////////////////////////////////////////
 
- //  오늘 날짜 표시하기
- function todayCheck(){
+//  오늘 날짜 표시하기
+function todayCheck(){
     const today = new Date();
     if (viewMonth === today.getMonth() && viewYear === today.getFullYear()){
         for (let date of document.querySelectorAll('.this')) {
@@ -209,3 +225,5 @@ function concertDateColor(){
         });
     });
 }
+
+

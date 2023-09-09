@@ -145,19 +145,19 @@
                                 <th>잔여석</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td class="col-lg-5">VIP-CLASS</td>
-                                <td class="col-lg-5"><span ID="remaining-VIP"></span></td>
+                        <tbody id = "remainSeat">
+                            <tr th:each="sd : ${sd}">
+                            	<td class="col-lg-5" th:text="${sd.remainingSeat}"></td>
+                                <td class="col-lg-5" th:text="${sd.remainingSeatCount}"></td>                                      
+                            </tr>
+                            <!-- <tr>
+                                <td class="col-lg-5"><span></span></td>
+                                <td class="col-lg-5"><span></span></td>
                             </tr>
                             <tr>
-                                <td class="col-lg-5"><span>R-CLASS</span></td>
-                                <td class="col-lg-5"><span ID="remaining-R"></span></td>
-                            </tr>
-                            <tr>
-                                <td class="col-lg-5"><span>S-CLASS</span></td>
-                                <td class="col-lg-5"><span ID="remaining-S"></span></td>
-                            </tr>
+                                <td class="col-lg-5"><span></span></td>
+                                <td class="col-lg-5"><span></span></td>
+                            </tr> -->
                         </tbody>
                     </table>
                     <table class="table" >
