@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"> -->
-    <link rel="stylesheet" href="../../static/css/payment_check.css">
+    <link rel="stylesheet" href="../../static/css/payment_check.css" th:href="@{/css/payment_check.css}">
     <script src="https://kit.fontawesome.com/9547cb8259.js" crossorigin="anonymous"></script>
     <title>PurchaseConfirm</title>
 </head>
@@ -48,7 +48,7 @@
         <div class="content-right">
             <div class="concert-info">
                 <div class="poster">
-                    <img src="../../static/img/concert_ticket2.png" alt="">
+                    <img src="../../static/img/concert_ticket2.png" alt="" th:src="@{/img/concert_ticket2.png}">
                 </div>
                 <div class="concert-info-title">
                     <p class="bold-text">Hot & Funny 페스티벌</p>
@@ -104,6 +104,6 @@
         </div>
     </div>
     </form>
-    <script src="../../static/js/payment_check.js"></script>
+    <script src="../../static/js/payment_check.js" th:src="@{/js/payment_check.js}"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +7,7 @@
     
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
-    <link rel="stylesheet" href="../../static/css/seat_choice.css">
+    <link rel="stylesheet" href="../../static/css/seat_choice.css" th:href="@{/css/seat_choice.css}">
     <script src="https://kit.fontawesome.com/9547cb8259.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -16,14 +16,15 @@
         <div class="sub-menu inline-div">예매 내역 확인</div>
         <div class="sub-menu inline-div">결제</div>
     </div>
-
+    <!--  숨겨있는 요소 / 서버 데이터 js 전달용  -->
+    <div id="server-data" th:attr="data-seat-list=${remainSeat}"></div>
     <div class="content">
         <div class="seat-map inline-div">
             <div id="back-pic">
                 <div class="container">
                     <div class="left-seat total-seat">
                         <div class="row"> <!-- 16 -->
-                            <div class="seat seat-r occupied"></div>
+                            <div class="seat seat-r"></div>
                             <div class="seat seat-r"></div>
                             <div class="seat seat-r"></div>
                             <div class="seat seat-r"></div>
@@ -45,9 +46,9 @@
                             <div class="seat seat-r"></div>
                             <div class="seat seat-r"></div>
                             <div class="seat seat-r"></div>
-                            <div class="seat seat-r occupied"></div>
-                            <div class="seat seat-r occupied"></div>
-                            <div class="seat seat-r occupied"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
                             <div class="seat seat-r"></div>
                             <div class="seat seat-s turn-l"></div>
                             <div class="seat seat-s turn-l"></div>
@@ -115,26 +116,9 @@
                     </div>
                     <div class="center-seat total-seat">
                         <div class="row"> <!-- 15 -->
-                            <div class="seat seat-vip occupied"></div>
-                            <div class="seat seat-vip occupied"></div>
-                            <div class="seat seat-vip occupied"></div>
                             <div class="seat seat-vip"></div>
                             <div class="seat seat-vip"></div>
                             <div class="seat seat-vip"></div>
-                            <div class="seat seat-vip"></div>
-                            <div class="seat seat-vip"></div>
-                            <div class="seat seat-vip"></div>
-                            <div class="seat seat-vip"></div>
-                            <div class="seat seat-vip"></div>
-                            <div class="seat seat-vip"></div>
-                            <div class="seat seat-vip"></div>
-                            <div class="seat seat-vip"></div>
-                            <div class="seat seat-vip"></div>
-                        </div>
-                        <div class="row"> <!-- 15 -->
-                            <div class="seat seat-vip occupied"></div>
-                            <div class="seat seat-vip occupied"></div>
-                            <div class="seat seat-vip occupied"></div>
                             <div class="seat seat-vip"></div>
                             <div class="seat seat-vip"></div>
                             <div class="seat seat-vip"></div>
@@ -217,9 +201,26 @@
                             <div class="seat seat-vip"></div>
                         </div>
                         <div class="row"> <!-- 15 -->
-                            <div class="seat seat-r occupied"></div>
-                            <div class="seat seat-r occupied"></div>
-                            <div class="seat seat-r occupied"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                        </div>
+                        <div class="row"> <!-- 15 -->
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
                             <div class="seat seat-r"></div>
                             <div class="seat seat-r"></div>
                             <div class="seat seat-r"></div>
@@ -416,8 +417,10 @@
         </div>
         <div class="seat-info inline-div">
             <div class="concert-info">
-                <p style="font-weight: bold;">콘서트명 자리</p>
-                <p>콘서트 장소 | 2023.09.15(금) 14:00</p>
+                <p style="font-weight: bold;" th:object="${concertInfo}"><span th:text="${concertInfo.concertName}">콘서트명 자리</span></p>
+                <p th:object="${concertInfo}"><span th:text="${concertInfo.concertPlace}">콘서트 장소</span>
+                    | <span th:text="${concertDate} + ' '">${concertDate} + ' '</span>
+                    <span th:text="${concertInfo.formattedTime}"></span></p>
             </div>
             <div class="seat-remain">
                 <p>좌석등급/잔여좌석</p>
@@ -454,11 +457,6 @@
                                 <td> </td>
                                 <td> </td>
                                 <td> </td>
-                            </tr>
-                            <tr>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
                                 <td> </td>
                             </tr>
                             <tr>
@@ -466,8 +464,17 @@
                                 <td> </td>
                                 <td> </td>
                                 <td> </td>
+                                <td> </td>
                             </tr>
                             <tr>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                            </tr>
+                            <tr>
+                                <td> </td>
                                 <td> </td>
                                 <td> </td>
                                 <td> </td>
@@ -491,6 +498,12 @@
             </div>
         </div>
     </div>
-    <script src="../../static/js/seat_choice.js"></script>
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script th:inline="javascript">
+        // js 에서 사용하기 위해 타임리프 방식으로 뷰컨트롤러에서 보낸 데이터 전달
+        let concertDate =  [[${concertDate}]];
+    </script>
+    <script src="../../static/js/seat_choice.js" th:src="@{/js/seat_choice.js}"></script>
 </body>
 </html>

@@ -230,6 +230,9 @@ table tr td p {
     height: 50px;
     width: 100px;
 }
+.seat-choice-table tr td:nth-child(4){
+    display: none;
+}
 .seat-choice-table tr td:last-child {
     color: red;
     text-decoration: underline;

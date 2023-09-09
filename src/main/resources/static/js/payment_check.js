@@ -34,7 +34,7 @@ function ticketView() {
     //권장되지 않는 동적 변수 선언
     const tGrades = [document.getElementById('t1-grade'), document.getElementById('t2-grade'), document.getElementById('t3-grade'), document.getElementById('t4-grade')];
     const tNums = [document.getElementById('t1-num'), document.getElementById('t2-num'), document.getElementById('t3-num'), document.getElementById('t4-num')];
-    
+
     for(let i = 0; i < ticketArray.length; i++) {
         if (ticketArray && ticketArray.length > i) {
             const ticket = ticketArray[i];
@@ -103,7 +103,7 @@ function tableCreate (grade, gradeNum) {
     table.appendChild(tbody);
     tablePosition.appendChild(table);
     // 동적내용 적용코드
-        // document. 으로 할때 못찾아서 table 로 바꿈
+    // document. 으로 할때 못찾아서 table 로 바꿈
     let gradeInput = table.querySelector('.grade-input');
     const gradeSu = table.querySelector('.grade-su');
 
@@ -165,61 +165,80 @@ function formatNumberWithCommas(number) {
 }
 
 //드롭박스 선택에 따른 동작 메소드
-// function dropBoxChoice2() {
-//     const discountTables = document.querySelectorAll('.ticket-discount-table');
-//     discountTables.forEach(table => {
-//         const 
-//     });
-// }
-
 function dropBoxChoice() {
     const dropDownBox = document.querySelectorAll('.input-opt');
-    let totalSelectedNum = 0;
     dropDownBox.forEach((dropBox, index) => {
+        let previousOptionValue = parseInt(dropBox.value); // 이전 선택값을 저장할 변수
         dropBox.addEventListener('change', function () {
             const selectedOptionValue = parseInt(dropBox.value);
-            
-            // index를 기반으로 조건을 체크.
-            if (index === 0 || index === 1 || index === 2) {
-                if (totalSelectedNum + selectedOptionValue <= maxCond(dropBox)) {
-                    totalSelectedNum += selectedOptionValue;
-                    console.log(totalSelectedNum);
-                } else {
-                    alert(`해당 등급의 티켓을 ${maxCond(dropBox)}장 이상 선택할 수 없습니다.`);
-                    dropBox.selectedIndex = 0;
-                }
-            } else if (index === 3 || index === 4 || index === 5) {
-                if (totalSelectedNum + selectedOptionValue <= maxCond(dropBox)) {
-                    totalSelectedNum += selectedOptionValue;
-                    console.log(totalSelectedNum);
-                } else {
-                    alert(`해당 등급의 티켓을 ${maxCond(dropBox)}장 이상 선택할 수 없습니다.`);
-                    dropBox.selectedIndex = 0;
-                }
-            } else if (index === 6 || index === 7 || index === 8) {
-                if (totalSelectedNum + selectedOptionValue <= maxCond(dropBox)) {
-                    totalSelectedNum += selectedOptionValue;
-                    console.log(totalSelectedNum);
-                } else {
-                    alert(`해당 등급의 티켓을 ${maxCond(dropBox)}장 이상 선택할 수 없습니다.`);
-                    dropBox.selectedIndex = 0;
-                }
+            const table = dropBox.closest('table');
+            const limitCond = parseInt(table.querySelector('.grade-su').textContent);
+
+            // 현재 선택 수를 가져오기
+            const currentSelectedValue = Array.from(table.querySelectorAll('.input-opt'))
+                .map(opt => parseInt(opt.value))
+                .reduce((acc, val) => acc + val, 0);
+
+            if (currentSelectedValue <= limitCond) {
+                // 허용 범위 내에서 변경될 때만 이전 선택값 업데이트
+                previousOptionValue = selectedOptionValue;
+                colorApply(dropBox);
             } else {
-                alert("드롭박스가 뭔가가 잘못되었어요");
+                alert(`해당 등급의 티켓을 ${limitCond}장 이상 선택할 수 없습니다.`);
+                // 이전 선택값으로 돌아가도록 드롭박스 값을 변경
+                dropBox.value = previousOptionValue;
             }
-            colorApply(dropBox);
         });
     });
 }
-// 티켓 선택 최대값 산출 메소드
-function maxCond(dropBox) {
-    const limitCond = parseInt(dropBox.closest('table').querySelector('.grade-su').textContent);
-    return limitCond;
-}
+
+
+// function dropBoxChoice() {
+//     const dropDownBox = document.querySelectorAll('.input-opt');
+//     const totalSelectedNums = [0, 0, 0]; // 표 별 최대 선택수 관리
+
+//     dropDownBox.forEach((dropBox, index) => {
+//         // 이전 선택 값을 data-selected 속성에 저장
+//         dropBox.setAttribute('data-selected', 0);
+
+//         dropBox.addEventListener('change', function () {
+//             const selectedOptionValue = parseInt(dropBox.value);
+//             const tableIndex = Math.floor(index / 3); // 표의 인덱스 계산
+
+//             // 이전 선택 값과 현재 선택 값 차이 계산
+//             const prevSelectedValue = parseInt(dropBox.getAttribute('data-selected'));
+//             let diff = selectedOptionValue - prevSelectedValue;
+//             console.log("이전숫자 : " + prevSelectedValue);
+//             console.log("현재숫자 : " + selectedOptionValue);
+//             console.log("차이 : " + diff);
+//             console.log("실제 적용되는 티켓수 : " + (totalSelectedNums[tableIndex] + diff));
+//             console.log("else 시 : " + (totalSelectedNums[tableIndex]));
+
+//             if (totalSelectedNums[tableIndex] + diff <= maxCond(dropBox)) {
+//                 totalSelectedNums[tableIndex] += diff;
+//             } else {
+//                 alert(`해당 등급의 티켓을 ${maxCond(dropBox)}장 이상 선택할 수 없습니다.`);
+//                 dropBox.selectedIndex = 0;
+//             }
+
+//             // 현재 선택 값을 data-selected 속성에 업데이트
+//             dropBox.setAttribute('data-selected', selectedOptionValue);
+
+//             colorApply(dropBox);
+//         });
+//     });
+// }
+// 티켓 선택 최대값 산출 메소드 (드롭박스초이스 메소드 내부로 녹임)
+// function maxCond(dropBox) {
+//     const limitCond = parseInt(dropBox.closest('table').querySelector('.grade-su').textContent);
+//     return limitCond;
+// }
 // 드롭박스 조건부 색상변경
 function colorApply(dropBox) {
     if(dropBox.value != 0) {
         dropBox.closest('tr').style.backgroundColor = 'lightblue';
+    } else if (dropBox.value == 0) {
+        dropBox.closest('tr').style.backgroundColor = 'white';
     }
 }
 
