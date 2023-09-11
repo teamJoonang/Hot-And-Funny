@@ -22,9 +22,13 @@ public interface ITicketService {
      * 날짜 기반 좌석 등급별 가격및 잔여좌석수
      * js 구현으로 기능 보류 (정보의 정확성 및 일관성 관련 db 로 구현할지 고민)
      */
-//    List<RemainNumDto> remainNum(String concertDate);
+    List<RemainNumDto> remainNum(String concertDate);
     /**
      * html 좌석구조 및 실제 좌석번호 매핑용 데이터
      */
     String originSeatMapping(int seatIndex);
+    /**
+     * 금액 누적 ajax 용 서비스
+     */
+    int accumulatePrice(String grade, int diff, boolean discountYN);
 }

@@ -6,12 +6,21 @@ const tablePosition = document.querySelector('.left-upper');
 const vipNum = countingTicket("VIP");
 const rNum = countingTicket("R");
 const sNum = countingTicket("S");
+
+//이전 클라이언트 세션 데이터
+const concertInfo = JSON.parse(sessionStorage.getItem("concertInfo"));
+const priceInfo = JSON.parse(sessionStorage.getItem("priceInfo"));
+
 //티켓 가격정보
-let VIPPrice = 100000;
-let RPrice = 80000;
-let SPrice = 60000;
-let discountPercent = 0.7;
+const VIPPrice = parseInt(deleteCommas(priceInfo["VIP"].price));
+const RPrice = parseInt(deleteCommas(priceInfo["R"].price));
+const SPrice = parseInt(deleteCommas(priceInfo["S"].price));
+const discountPercent = 0.7;
 let charge = 2000;
+
+//드롭박스용 ajax 전용 전역변수
+let totalPrice = 0;
+let totalcharge = 0;
 
 ticketView();
 
@@ -25,9 +34,9 @@ if(sNum != 0) {
     tableCreate("S" , sNum);
 }
 discountPriceSet();
-
 //드롭박스 선택에 따른 동작 로직
 dropBoxChoice();
+concertInfoUpdate();
 
 //선택된 티켓 정보 업데이트 메소드
 function ticketView() {
@@ -163,7 +172,10 @@ function setPrice(grade) {
 function formatNumberWithCommas(number) {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
-
+// 콤마 제거 정규식
+function deleteCommas(numberString) {
+    return parseInt(numberString.replace(/,/g, ''), 10);
+}
 //드롭박스 선택에 따른 동작 메소드
 function dropBoxChoice() {
     const dropDownBox = document.querySelectorAll('.input-opt');
@@ -173,21 +185,67 @@ function dropBoxChoice() {
             const selectedOptionValue = parseInt(dropBox.value);
             const table = dropBox.closest('table');
             const limitCond = parseInt(table.querySelector('.grade-su').textContent);
+            //ajax 용 변수추가
+            const seatGrade = table.querySelector('.grade-input').textContent;
 
             // 현재 선택 수를 가져오기
             const currentSelectedValue = Array.from(table.querySelectorAll('.input-opt'))
                 .map(opt => parseInt(opt.value))
                 .reduce((acc, val) => acc + val, 0);
-
+            //허용 범위 내에서 변경될 때만 이전 선택값 업데이트
             if (currentSelectedValue <= limitCond) {
-                // 허용 범위 내에서 변경될 때만 이전 선택값 업데이트
+                let diff = selectedOptionValue- previousOptionValue;
+                let sendServer = {};
+                table.querySelectorAll('.input-opt').forEach((innerDropBox , index) => {
+
+                    if(index == 0) {
+                        sendServer = {
+                            "grade": seatGrade,
+                            "diff": diff,
+                            "disCountYN": false
+                        }
+                        console.log(index);
+                    } else {
+                        sendServer = {
+                            "grade": seatGrade,
+                            "diff": diff,
+                            "disCountYN": true
+                        }
+                    }
+                });
+                $.ajax({
+                    url: '/ticket/payment/check',
+                    method: 'POST',
+                    contentType: 'application/json', // 헤더 설정
+                    data: JSON.stringify(sendServer), // 전송
+                    dataType: 'json',
+                    cache: false, // 캐싱 비활성
+                    success: function(data) {
+                        totalPrice += data;
+                        totalcharge += charge * getSign(data);
+
+                        console.log("총금액 : " + totalPrice);
+                        console.log("총차지 : " + totalcharge);
+                    },
+                    error: function(error) {
+                        console.error('에러:', error);
+                    }
+                });
                 previousOptionValue = selectedOptionValue;
+
                 colorApply(dropBox);
+
+
             } else {
                 alert(`해당 등급의 티켓을 ${limitCond}장 이상 선택할 수 없습니다.`);
                 // 이전 선택값으로 돌아가도록 드롭박스 값을 변경
                 dropBox.value = previousOptionValue;
             }
+            // console.log("limit: " + limitCond);
+            // console.log("pre: " + previousOptionValue);
+            // console.log("current : " + currentSelectedValue);
+            // console.log("선택 옵션 벨류: " + selectedOptionValue);
+            // console.log("---------------------------------");
         });
     });
 }
@@ -241,8 +299,25 @@ function colorApply(dropBox) {
         dropBox.closest('tr').style.backgroundColor = 'white';
     }
 }
+// 콘서트 정보 뷰 업데이트
+function concertInfoUpdate() {
+    const concertInfoTitle = document.querySelectorAll(".concert-info-title p");
+    concertInfoTitle.forEach((pTag, index) => {
+        if(index == 0) {
+            pTag.textContent = concertInfo.concertName;
+        } else if (index == 2) {
+            pTag.textContent = concertInfo.concertDate + concertInfo.concertTime;
+        } else if (index == 3) {
+            pTag.textContent = concertInfo.concertPlace;
+        }
+    });
+}
+// 정수 부호 반환 메소드
+function getSign(number) {
+    return number > 0 ? 1 : number < 0 ? -1 : 0;
+}
 
 //이전페이지로 전환 이벤트
 prePage.addEventListener("click", () => {
-    window.location.href = "seat_choice.html";
+    window.location.href = "/ticket/seat/choice/" + concertInfo.concertDate;
 });

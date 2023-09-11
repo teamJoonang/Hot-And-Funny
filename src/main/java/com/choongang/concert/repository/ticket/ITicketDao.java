@@ -18,8 +18,11 @@ public interface ITicketDao {
     ConcertInfoDto findConcertInfo (@Param("concertDate") String concertDate);
 
     // 날짜 기반 잔여 좌석 수 (자바스크립트로 구현 했었는데 괜히만듬 시간낭비)
-//    List<RemainNumDto> findRemainNum(@Param("concertDate") String concertDate);
+    List<RemainNumDto> findRemainNum(@Param("concertDate") String concertDate);
 
     // html 좌석구조 및 실제 좌석번호 매핑용 데이터
     String originSeatMapping(int seatIndex);
+
+    // 금액 누적 ajax 용 서비스
+    int gradePrice(@Param("grade") String grade);
 }

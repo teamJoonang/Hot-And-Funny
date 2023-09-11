@@ -1,5 +1,6 @@
 package com.choongang.concert.controller.ticket;
 
+import com.choongang.concert.dto.ticket.AccumulatePriceDto;
 import com.choongang.concert.dto.ticket.OriginSeatNumberDto;
 import com.choongang.concert.dto.ticket.SeatListDto;
 import com.choongang.concert.service.ticket.TicketService;
@@ -31,6 +32,16 @@ public class TicketRestController {
     public String OriginSeatAPI(@PathVariable String concertDate, @PathVariable int seatIndex) {
         String originSeatNumber = ticketService.originSeatMapping(seatIndex);
         return originSeatNumber;
+    }
+
+    @PostMapping("/payment/check")
+    public int accumulatePriceAPI(@RequestBody AccumulatePriceDto accumulatePriceDto) {
+        String grade = accumulatePriceDto.getGrade();
+        int diff = accumulatePriceDto.getDiff();
+        boolean disCountYN = accumulatePriceDto.isDisCountYN();
+        System.out.println("CONTROLLER : "+ disCountYN);
+        int accumulateResult = ticketService.accumulatePrice(grade, diff, disCountYN);
+        return accumulateResult;
     }
 
 

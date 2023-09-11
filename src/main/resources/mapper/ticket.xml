@@ -15,8 +15,8 @@
         select concert_name, concert_place, DATE_FORMAT(concert_date, '%H:%i') AS formatted_time
         from concert where date(concert_date) = #{concertDate}
     </select>
-    <!--
-    날짜기반 잔여좌석 수 및 가격
+
+    <!-- 날짜기반 잔여좌석 수 및 가격  -->
     <select id="findRemainNum" parameterType="String" resultType="RemainNumDto">
         SELECT
             'vip' AS seat_type,
@@ -45,9 +45,13 @@
         INNER JOIN concert ON ticket.concert_id = concert.id
     WHERE seat.seat_type = 's' AND date(concert.concert_date) = #{concertDate}) AS remaining_seats;
     </select>
-    -->
+
     <!-- html 좌석구조 및 실제 좌석번호 매핑용 데이터  -->
     <select id="originSeatMapping"  parameterType="int" resultType="String">
         select seat_number from seat where seat_index = #{seatIndex};
+    </select>
+    <!-- 금액 누적 ajax 용 서비스 -->
+    <select id="gradePrice"  parameterType="String" resultType="int">
+        select price from seat where seat_type = #{grade} limit 1;
     </select>
 </mapper>

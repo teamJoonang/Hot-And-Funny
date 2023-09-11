@@ -27,13 +27,26 @@ public class TicketService implements ITicketService {
         return ticketDao.findConcertInfo(concertDate);
     }
     // 날짜 기반 잔여 좌석 수 업데이트 (자바스크립트로 구현 했었는데 괜히만듬 시간낭비)
-//    public List<RemainNumDto> remainNum(String concertDate) {
-//        return ticketDao.findRemainNum(concertDate);
-//    }
+    public List<RemainNumDto> remainNum(String concertDate) {
+        return ticketDao.findRemainNum(concertDate);
+    }
     // html 좌석구조 및 실제 좌석번호 매핑용 데이터
     public String originSeatMapping(int seatIndex) {
         return ticketDao.originSeatMapping(seatIndex);
-
     };
+    // 금액 누적 ajax 용 서비스
+    public int accumulatePrice(String grade, int diff, boolean discountYN) {
+        int basicPrice = ticketDao.gradePrice(grade);
+        int diffPrice;
+        System.out.println(discountYN);
+        if(discountYN == false) {
+            diffPrice = basicPrice * diff;
+        } else {
+            // 100 이하단위 버림 처리
+            int datasort = (int) (basicPrice * 0.7) * diff;
+            diffPrice = (datasort / 100) * 100;
+        }
+        return diffPrice;
+    }
 
 }

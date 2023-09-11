@@ -96,7 +96,7 @@ function gradeCheck(event) {
 function deleteLog(seatIndex) {
     let repeatConuter = 0;
     for(let i = 1; i <= logIndex; i++) {
-        let choicedLogIndex = document.querySelector(`.seat-choice-table tr:nth-child(${i}) td:nth-child(3)`);
+        let choicedLogIndex = document.querySelector(`.seat-choice-table tr:nth-child(${i}) td:nth-child(4)`);
 
         let choicedLogIndexNum = Number(choicedLogIndex.textContent);
         repeatConuter++;
@@ -272,7 +272,22 @@ nextPage.addEventListener("click", () => {
         ticketArray.push(ticket);
     }
 
+    const name = document.getElementById('concert-name').textContent;
+    const place = document.getElementById('concert-place').textContent;
+    const date = document.getElementById('concert-date').textContent;
+    const time = document.getElementById('concert-time').textContent;
+    let concert = {
+        "concertName": name,
+        "concertPlace": place,
+        "concertDate": date,
+        "concertTime": time
+    };
+    let priceInfo = priceInfoCheck();
+
+
     // ticketArray를 세션에 저장
+    sessionStorage.setItem("concertInfo", JSON.stringify(concert));
+    sessionStorage.setItem("priceInfo", JSON.stringify(priceInfo));
     sessionStorage.setItem("ticketArray", JSON.stringify(ticketArray));
 
 
@@ -296,3 +311,47 @@ function btnAnimation() {
         button.classList.add('blinking-button');
     }
 }
+
+//등급별 가격 추출 (뷰기준 - 향후 여기서 db 한번만 연결)
+function priceInfoCheck() {
+    let priceInfo = {};
+
+// 각 테이블 행을 순회하면서 정보 추출
+    let tableRows = document.querySelectorAll(".seat-remain-table tr");
+
+    tableRows.forEach(function(row) {
+        let cells = row.querySelectorAll("td");
+
+        if (cells.length === 4) {
+            let seatType = cells[1].textContent.trim(); // 좌석 유형 (VIP, R, S 등)
+            let price = cells[2].querySelector("span").textContent.trim(); // 가격
+            // let remainSeats = cells[3].querySelector("span").textContent.trim(); // 남은 좌석 수
+
+            // 추출한 정보를 JSON 객체에 저장
+            priceInfo[seatType] = {
+                "price": price  //,
+                // "remainSeats": remainSeats
+            };
+        }
+    });
+    return priceInfo;
+}
+// 숫자 포메팅 정규식
+function formatNumberWithCommas(number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+// 임시 숫자 포메팅 적용 위한 메솟
+function temp() {
+    let tableRows = document.querySelectorAll(".seat-remain-table tr");
+
+    tableRows.forEach(function(row) {
+        let cells = row.querySelectorAll("td");
+        let priceSpan = cells[2].querySelector("span");
+        let priceText = priceSpan.textContent;
+        let formattedPrice = formatNumberWithCommas(priceText);
+
+        // span 태그 내의 텍스트를 업데이트하여 콤마가 추가된 값으로 변경
+        priceSpan.textContent = formattedPrice;
+    });
+}
+temp();
