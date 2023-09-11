@@ -19,9 +19,9 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/ticket")
 @Slf4j
 
+@RequestMapping("/ticket")
 public class TicketController2 {
 
 	private final TicketService ticketService;

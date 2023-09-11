@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.choongang.concert.dto.ticket.ChoiceDateData;
+import com.choongang.concert.dto.ticket.ChoiceDateDto;
 import com.choongang.concert.dto.ticket.ConcertInfoDto;
 import com.choongang.concert.dto.ticket.RemainNumDto;
 import com.choongang.concert.dto.ticket.SeatListDto;
@@ -14,7 +14,7 @@ import com.choongang.concert.dto.ticket.SeatListDto;
 public interface ITicketDAO {
 
 	// 날짜 선택시 좌석 잔여석 갖고 오기 calendar 화면
-	List <ChoiceDateData> remainingSeat(@Param("concertId") int concertId);
+	List <ChoiceDateDto> remainingSeat(@Param("concertId") int concertId);
 	
 	// 좌석선택 페이지 랜더링 시 기 예매좌석 비활성화
     List<SeatListDto> seatRemainView(@Param("concertDate") String concertDate);

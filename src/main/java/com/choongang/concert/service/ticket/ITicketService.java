@@ -2,15 +2,18 @@ package com.choongang.concert.service.ticket;
 
 import java.util.List;
 
-import com.choongang.concert.dto.ticket.ChoiceDateData;
+import org.springframework.stereotype.Service;
+
+import com.choongang.concert.dto.ticket.ChoiceDateDto;
 import com.choongang.concert.dto.ticket.ConcertInfoDto;
 import com.choongang.concert.dto.ticket.RemainNumDto;
 import com.choongang.concert.dto.ticket.SeatListDto;
 
+@Service
 public interface ITicketService {
 
 	//	달력 선택한 날짜에 대한 좌석 잔여수 찾아오기
-	List<ChoiceDateData> selectedDate (int concertId);
+	List<ChoiceDateDto> selectedDate (int concertId);
 	
 	/**
      * 날짜별 좌석 뷰 업데이트

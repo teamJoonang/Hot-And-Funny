@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.choongang.concert.dto.ticket.ChoiceDateData;
+import com.choongang.concert.dto.ticket.ChoiceDateDto;
 import com.choongang.concert.service.ticket.TicketService;
 
 import lombok.RequiredArgsConstructor;
@@ -30,8 +30,8 @@ public class TicketRestController2 {
 	}
 
 	@GetMapping("/home/calendar/{concertId}")
-	public ResponseEntity<List<ChoiceDateData>> seat(@PathVariable String concertId) {
-		List<ChoiceDateData> cdd = ticketService.selectedDate(Integer.parseInt(concertId));
+	public ResponseEntity<List<ChoiceDateDto>> seat(@PathVariable String concertId) {
+		List<ChoiceDateDto> cdd = ticketService.selectedDate(Integer.parseInt(concertId));
 		return ResponseEntity.ok(cdd);
 	}
 

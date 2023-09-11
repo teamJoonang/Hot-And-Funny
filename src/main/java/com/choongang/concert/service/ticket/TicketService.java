@@ -5,24 +5,29 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.choongang.concert.dto.ticket.ChoiceDateData;
+import com.choongang.concert.dto.ticket.ChoiceDateDto;
 import com.choongang.concert.dto.ticket.ConcertInfoDto;
 import com.choongang.concert.dto.ticket.RemainNumDto;
 import com.choongang.concert.dto.ticket.SeatListDto;
 import com.choongang.concert.repository.ticket.ITicketDAO;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
 @Service
 @Log4j2
+@RequiredArgsConstructor
 public class TicketService implements ITicketService{
 
-	@Autowired
-	private ITicketDAO ticketDao;
+	private final ITicketDAO ticketDao;
 	
 	//	calendar 좌석 잔여석 갖고오기
-	public List<ChoiceDateData> selectedDate (int concertId){
-		List<ChoiceDateData> cdd = ticketDao.remainingSeat(concertId);
+	public List<ChoiceDateDto> selectedDate (int concertId){
+		List<ChoiceDateDto> cdd = ticketDao.remainingSeat(concertId);
+		log.info("---------------------------------------------------------cdd::{}" , cdd);
+		String abc = cdd.get(0).getRemainingSeat();
+		int cd = cdd.get(1).getRemainingSeatCount();
+		log.info("-----------------------------------1----------------------cd::{}" , cd);
 		return cdd;
 	}
 	

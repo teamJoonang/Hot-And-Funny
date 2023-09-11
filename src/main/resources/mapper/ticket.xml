@@ -5,7 +5,7 @@
 <mapper namespace="com.choongang.concert.repository.ticket.ITicketDAO">
 
 	<!-- 날짜 선택시 HOME_CALENDAR TITLE과 잔여석 표시 -->
-	<select id="remainingSeat" parameterType="int" resultType="ChoiceDateData">
+	<select id="remainingSeat" parameterType="int" resultType="ChoiceDateDto">
 		SELECT s.seat_type as remainingSeat, count(s.seat_number) as remainingSeatCount
 		FROM concert c
 		JOIN seat s ON c.id  = #{concertId} AND s.seat_type IN ("VIP", "R", "S")
