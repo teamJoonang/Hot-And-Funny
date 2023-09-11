@@ -39,7 +39,7 @@
                             </a>
                             
                             <!-- 아이디 찾기 -->
-                            <form action="" method="POST" id="findUserId" onsubmit="">
+                            <form method="post" id="findUserId" onsubmit="">
                                 
                                 <h4 class="mt-5" style="color: black;">로그인 아이디 찾기</h4>
                                 <p class="mt-1">가입하셨던 이메일을 입력해주세요.</p>
@@ -52,13 +52,13 @@
                                 </div>
                                 
                                 <div class="findBtnBox">
-                                    <button class="btn btn-lg m-3 border-0" type="submit" id="findIdBtn">Send</button>
+                                    <button class="btn btn-lg m-3 border-0" type="button" id="findIdBtn">Send</button>
                                 </div>
 
                             </form>
                             
                             <!-- 비밀번호 찾기 -->
-                            <form action="" method="POST" id="findUserPassword">
+                            <form method="post" id="findUserPassword">
                                 
                                 <h4 class="mt-5" style="color: black;">로그인 비빌번호 찾기</h4>
                                 <p class="mt-1">
@@ -85,7 +85,7 @@
                                 </div>
 
                                 <div class="findBtnBox">
-                                    <button class="btn btn-lg m-3 border-0" type="submit" id="findPwBtn">send</button>
+                                    <button class="btn btn-lg m-3 border-0" type="button" id="findPwBtn">send</button>
                                 </div>
                             </form>
                         </div>
@@ -100,5 +100,62 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- finduser js -->
     <script src="../../static/js/finduser.js" th:src="@{/js/finduser.js}"></script>
+
+<script>
+    // 아이디 찾기 버튼 클릭 시
+    document.getElementById('findUserIdBtn').addEventListener('click', function () {
+        const userEmail = document.getElementById('user_email').value;
+
+        // AJAX 요청을 수행하고 서버로 userEmail을 전송
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '/user/find', true);
+        xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    // 성공적으로 아이디를 찾았을 때의 처리
+                    // const response = JSON.parse(xhr.responseText);
+                    alert('존재하는 회원 아이디. ');
+                } else {
+                    // 아이디를 찾지 못했을 때의 처리
+                    alert('아이디를 찾을 수 없습니다.');
+                }
+            }
+        };
+
+        xhr.send(JSON.stringify({ email: userEmail }));
+    });
+
+    // 비밀번호 찾기 버튼 클릭 시
+    document.getElementById('findUserPwBtn').addEventListener('click', function () {
+        const userId = document.getElementById('user_id').value;
+        const userName = document.getElementById('user_name').value;
+        const userTel = document.getElementById('user_tel').value;
+
+        // AJAX 요청을 수행하고 서버로 userId, userName, userTel을 전송
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '/user/find', true);
+        xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    // 성공적으로 비밀번호를 찾았을 때의 처리
+                    const response = JSON.parse(xhr.responseText);
+                    alert('새로운 비밀번호는 ' + response.newPassword + ' 입니다.');
+                } else {
+                    // 비밀번호를 찾지 못했을 때의 처리
+                    alert('비밀번호를 찾을 수 없습니다.');
+                }
+            }
+        };
+
+        xhr.send(JSON.stringify({ id: userId, name: userName, tel: userTel }));
+    });
+
+
+</script>
+
 </body>
 </html>

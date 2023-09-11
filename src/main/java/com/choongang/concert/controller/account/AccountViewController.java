@@ -1,20 +1,25 @@
 package com.choongang.concert.controller.account;
 
+import com.choongang.concert.service.user.UserService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+@RequiredArgsConstructor
 @Controller
 @Slf4j
 @RequestMapping("/user")
-public class AccountController {
+public class AccountViewController {
+
+    private final UserService userService;
 
 //    로그인 페이지
     @GetMapping("/login")
     public String login(){
 
         log.info("get >> /user/login | login() 실행됨.");
+
         return "accounts/login";
     }
 
@@ -23,6 +28,7 @@ public class AccountController {
     public String signup(){
 
         log.info("get >> /user/signup | signup() 실행됨.");
+
         return "accounts/signup";
     }
 
@@ -31,6 +37,7 @@ public class AccountController {
     public String passwordReset(){
 
         log.info("get >> /user/reset | passwordReset() 실행됨.");
+
         return "accounts/pw_reset";
     }
 
@@ -39,6 +46,7 @@ public class AccountController {
     public String findUserAccount(){
 
         log.info("get >> /user/find | findUserAccount() 실행됨.");
+
         return "accounts/finduser";
     }
 }

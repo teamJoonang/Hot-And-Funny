@@ -103,7 +103,7 @@
     </header>
 
     <!-- content -->
-    <section id="wrap">111
+    <section id="wrap">
         <div class="container px-5">
             <div class="row d-flex py-5">
                 
@@ -129,13 +129,13 @@
                         <div class="card-body">
 
                             <!-- 회원정보 -->
-                            <form action="" method="">
+                            <form action="" method="" >
                                 <div class="row gx-3 mb-3">
                                     <!-- user email -->
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="user_login_id">이메일 ( Login ID )</label>
-                                        <input class="form-control" id="user_login_id" type="text" readonly="readonly" 
-                                        placeholder="이메일을 입력해주세요" value="test@gmail.com">
+                                        <input class="form-control" id="user_login_id" type="text" readonly="readonly" th:value="${userDto.loginId}"
+                                        placeholder="이메일을 입력해주세요">
                                     </div>
 
                                     <div class="col-md-6">
@@ -149,42 +149,37 @@
                                     <!-- name -->
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="user_name">이름</label>
-                                        <input class="form-control" id="user_name" type="text" value="홍길동" readonly
-                                        placeholder="이름을 입력해주세요.">
+                                        <input class="form-control" id="user_name" type="text" readonly placeholder="이름을 입력해주세요." th:value="${userDto.name}">
                                     </div>
                                     <!-- nickname -->
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="user_nickname">별명</label>
-                                        <input class="form-control" id="user_nickname" type="text" value="Denma5319" readonly
-                                        placeholder="별명은 다른 사용자와 소통하는 이름입니다.">
+                                        <input class="form-control" id="user_nickname" type="text" readonly placeholder="별명은 다른 사용자와 소통하는 이름입니다." >
                                     </div>
                                 </div>
                                 <!-- 주소 -->
                                 <div class="mb-3">
                                     <label class="small mb-1" for="user_addr">주소</label>
-                                    <input class="form-control" id="user_addr" type="text" readonly
-                                    value="서울특별시 마포구 만리재로 99길 4-5" placeholder="주소를 입력해주세요.">
+                                    <input class="form-control" id="user_addr" type="text" readonly placeholder="주소를 입력해주세요." >
                                 </div>
                                 <!-- 연락처 -->
                                 <div class="mb-3">
                                     <label class="small mb-1" for="user_tel">연락처</label>
-                                    <input class="form-control" id="user_tel" type="text" readonly
-                                    value="010-5039-6660" placeholder="연락처를 입력해주세요.">
+                                    <input class="form-control" id="user_tel" type="text" readonly placeholder="연락처를 입력해주세요.">
                                 </div>
                                 <!-- row -->
                                 <div class="row gx-3 mb-4">
                                     <!-- age -->
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="user_age">나이</label>
-                                        <input class="form-control" id="user_age" type="number" value="17" readonly
-                                        placeholder="나이를 입력해주세요.">
+                                        <input class="form-control" id="user_age" type="number" readonly placeholder="나이를 입력해주세요.">
                                     </div>
                                     <!-- gender -->
-                                    <div class="col-md-6">
-                                        <label class="small mb-1 mt-4" for="new_gender">성별</label>
-                                        <input class="chk_input" type="radio" name="chk_gender" id="new_gender" value="M"> 남자
-                                        <input class="chk_input" type="radio" name="chk_gender" id="new_gender" value="W" checked> 여자
-                                    </div>
+<!--                                    <div class="col-md-6">-->
+<!--                                        <label class="small mb-1 mt-4" for="new_gender">성별</label>-->
+<!--                                        <input class="chk_input" type="radio" name="chk_gender" id="new_gender" value="M"> 남자-->
+<!--                                        <input class="chk_input" type="radio" name="chk_gender" id="new_gender" value="W" checked> 여자-->
+<!--                                    </div>-->
                                 </div>
                                 <!-- 광고 승인여부 -->
                                 <div class="my-3 text-center mb-4">

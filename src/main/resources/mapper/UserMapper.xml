@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.choongang.concert.repository.user.UserMapper">
+<!--    <![CDATA[]]>-->
+
+    <!-- 사용자 정보 저장 -->
+    <insert id="saveUser" useGeneratedKeys="true" keyProperty="id" parameterType="addUserRequest" >
+        INSERT INTO user
+            (
+             login_id,
+             password,
+             name,
+             nickname,
+             address,
+             age,
+             tel
+            )
+        VALUES (
+            #{loginId},
+            #{password},
+            #{name},
+            #{nickname},
+            #{address},
+            #{age},
+            #{tel}
+        )
+    </insert>
+
+<!--    <select id="findByUserId" parameterType="long" resultType="userResponse">-->
+<!--        SELECT-->
+<!--            login_id,-->
+<!--            password,-->
+<!--            name,-->
+<!--            nickname,-->
+<!--            address,-->
+<!--            age,-->
+<!--            tel-->
+<!--        FROM-->
+<!--            user-->
+<!--        WHERE-->
+<!--            id = #{value}-->
+<!--    </select>-->
+
+    <select id="login" resultType="userResponse" parameterType="loginRequest">
+        SELECT
+            id,
+            login_id,
+            password,
+            name,
+            nickname,
+            address,
+            age,
+            tel
+        FROM
+            user
+        WHERE
+            login_id = #{loginId}
+            AND
+            password = #{password}
+    </select>
+
+    <select id="findByEmail" resultType="UserResponse" parameterType="findEmailRequest">
+        SELECT
+            *
+        FROM
+            user
+        WHERE
+            login_id = #{loginId}
+    </select>
+
+
+</mapper>
