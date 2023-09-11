@@ -82,9 +82,11 @@ renderCalendar();
 //  날짜 클릭시 타이틀 화면에 표시
 document.querySelector('.dates').addEventListener('click', (event) => {
 	const clickedDate = event.target.innerText;
+	console.log(clickedDate);
 	const [clickedDay] = clickedDate.split('\n');
+	//selectedDate = concertDates.find(date => date.date === Number(clickedDate));
 	selectedDate = concertDates.find(date => date.date === Number(clickedDay));
-
+	//console.log([clickedDay]);
 	console.log("날짜 고른 값 : " + selectedDate);
 	
 	//	선택 날짜 정보 title에 띄우기
@@ -125,7 +127,6 @@ document.querySelector('.dates').addEventListener('click', (event) => {
 
 });
 
-
 // 예매버튼 눌렀을때 팝업창 띄우기!
 
 function reservationSeat (){
@@ -137,11 +138,11 @@ function reservationSeat (){
 			window.open(
 			seatChoiceUrl,
 			'seatChoice',
-			'width=1200, height=800', 
-			'location=no', 
-			'status=no', 
-			'scrollbars=no');
+			'width=1250, height=850, location=true, status=no, scrollbars=no');
 			console.log("예매 날짜 : " + concertDate);
+			console.log(seatChoiceUrl);
+			console.log(typeof(seatChoiceUrl));
+			
 		})
 	}	
 	else {
