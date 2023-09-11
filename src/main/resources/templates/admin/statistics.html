@@ -125,6 +125,7 @@
                     <div class="mt-3 mx-auto">
                         <a href="../admin/user_info.html" th:href="@{/userinfo}" class="nav-link py-2">회원정보 조회</a>
                     </div>
+                    <!-- <div id="abcd" th:attr="abcde=${}"></div> -->
                 </nav>
             </div>
         </div>
@@ -162,7 +163,7 @@
                     </div>
                     <div class="card-body d-flex">
                     <div id="donutChart"></div>
-                    <div id="secondDonutChart"></div>
+                    <div id="secondDonutChart" data-teen=teen></div>
                     </div>
                         
                     </div>
@@ -266,5 +267,6 @@
 
 
 <script src="../../static/js/statistics.js" th:src="@{/js/statistics.js}"></script>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 </body>
 </html>

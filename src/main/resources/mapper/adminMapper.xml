@@ -16,7 +16,7 @@
         user
     ORDER BY
         id DESC
-    LIMIT #{offset}, #{recordSize}
+    LIMIT #{PaginationDto.limitStart}, #{recordSize}
 </select>
     
 
@@ -29,4 +29,16 @@
             user
     </select>
 
+
+
+	<!-- statics.html에 필요한 연령별 인원수 카운트-->
+	<select id="ageGroup" parameterType="com.choongang.concert.dto.StatDTO" resultType="int">
+		SELECT COUNT(age) AS ageGroup FROM user WHERE age BETWEEN 10 AND 19 UNION ALL
+		SELECT COUNT(age) FROM user WHERE age BETWEEN 20 AND 29 UNION ALL
+		SELECT COUNT(age) FROM user WHERE age BETWEEN 30 AND 39 UNION ALL
+		SELECT COUNT(age) FROM user WHERE age BETWEEN 40 AND 109
+	</select>
+		
+
+		
 </mapper>

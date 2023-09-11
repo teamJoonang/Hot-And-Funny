@@ -12,6 +12,8 @@ function drawCharts() {
   drawBar2Chart();
 }
 
+
+
 function drawAreaChart() {
   var data = google.visualization.arrayToDataTable([
     ['Day', '1일차 콘서트', '2일차 콘서트', '3일차 콘서트'],
@@ -77,30 +79,126 @@ function drawDonutChart() {
 }
 
 
-function drawSecondDonutChart() {
-    var data = google.visualization.arrayToDataTable([
-      ['연령대별', 'Count'],
-      ['10대', 110],
-      ['20대', 250],
-      ['30대', 80],
-      ['40대 이상', 60]
-    ]);
-  
-    var options = {
-      title: '연령대별',
-      pieHole: 0.4,
-      legend: { position: 'bottom' },
-      chartArea: { width: '80%', height: '80%'}
-      
-    };
 
-    
+
+
+
+
+
+
+
+			// AJAX 요청을 통해 데이터 가져오기
+//			$.ajax({
+//			  url: '/statistics-data',
+//			  method: 'GET',
+//			  dataType: 'JSON', // JSON 형식으로 데이터를 응답받음
+//			  success: function(data) {
+//			    // 데이터를 파싱하여 변수에 할당
+//			    let teen = data.Teen;
+//			    let twenty = data.Twenty;
+//			    let thirty = data.Thirty;
+//			    let forty = data.Forty;
+//			    
+//			    // 이제 이 변수들을 사용할 수 있음
+//			    console.log(teen, twenty, thirty, forty);
+//			    
+//			    // 그리고 원하는 함수(예: drawSecondDonutChart)를 호출하여 차트를 그릴 수 있음
+//			    drawSecondDonutChart(teen, twenty, thirty, forty);
+//			  },
+//			  error: function(error) {
+//			    console.error('데이터를 가져오는 중 오류 발생:', error);
+//			  }
+//			});
+//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function drawSecondDonutChart() {
+  // 연령대별 통계 데이터를 가져오는 AJAX 요청
+  $.ajax({
+    url: '/stat/api',
+    method: 'GET',
+    dataType: 'json',
+    success: function (ageGroupJsonArray) {
+      // 데이터를 DataTable 형식으로 변환
+      console.log(ageGroupJsonArray);
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', '연령대별');
+      data.addColumn('number', 'Count');
+      
+      for (var i = 0; i < ageGroupJsonArray.length; i++) {
+        // '연령대별'은 숫자 배열의 인덱스로 표현하고, 'Count'는 해당 숫자 값을 사용합니다.
+        data.addRow([i.toString(), ageGroupJsonArray[i]]);
+      }
+
+      var options = {
+        title: '연령대별 통계',
+        pieHole: 0.4,
+        legend: { position: 'bottom' },
+        chartArea: { width: '80%', height: '80%' }
+      };
+
+      // 차트 그리기
+      var chart = new google.visualization.PieChart(document.getElementById('secondDonutChart'));
+      chart.draw(data, options);
+    },
+    error: function (error) {
+      console.error('데이터를 가져오는 중 오류 발생:', error);
+    }
+  });
+}
+
   
-    var chart = new google.visualization.PieChart(document.getElementById('secondDonutChart'));
-  
-    chart.draw(data, options);
-    
-  }
+
+
+
+
+
+
+
+
+  // console.log(jsonData);
+
+  // var data1 = new google.visualization.DataTable(jsonData);
+  // console.log(data1);
+  // var data = google.visualization.arrayToDataTable([
+  //   ['연령대별', 'Count'],
+  //   ['10대', 10],
+  //   ['20대', 3],
+  //   ['30대', 1],
+  //   ['40대 이상', 2]
+  // ]);
+  // console.log(data);
+
+  // var options = {
+  //   title: '연령대별',
+  //   pieHole: 0.4,
+  //   legend: { position: 'bottom' },
+  //   chartArea: { width: '80%', height: '80%'}
+  //
+  // };
+
+  // var chart = new google.visualization.PieChart(document.getElementById('secondDonutChart'));
+  // chart.draw(data, options);
+
+
+
+
+
+
+
 
 
 
