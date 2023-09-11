@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.choongang.concert.entity.EventList;
 import com.choongang.concert.entity.Notice;
 import com.choongang.concert.entity.QnaList;
 
@@ -24,4 +25,12 @@ public interface BoardMapper {
 	QnaList qnaBoardFindByNum(Long qnaListNum);
 	
 	int qnaListFindAllCnt(QnaList qnaList);
+	
+	
+	// event_list 
+	List<EventList> eventBoardFindAll();
+	
+	EventList eventBoardFindByNum(Long eventListNum);
+	
+	int eventListFindAllCnt(EventList eventList);
 }

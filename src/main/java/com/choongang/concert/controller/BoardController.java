@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.choongang.concert.entity.EventList;
 import com.choongang.concert.entity.Notice;
 import com.choongang.concert.entity.QnaList;
 import com.choongang.concert.service.BoardService;
@@ -46,8 +47,13 @@ public class BoardController {
 		return "board/event_detail";
 	}
 
+	
+	
+	
 	@GetMapping("/event/list")
-	public String eventList() {
+	public String eventList(Model model) {
+		List<EventList> eventListBoard = boardService.eventListBoard();
+		model.addAttribute("eventListBoard", eventListBoard);
 		return "board/event_list";
 	}
 
@@ -80,7 +86,6 @@ public class BoardController {
 	public String noticeList(Model model) {
 		List<Notice> noticeBoard = boardService.noticeBoard();
 		model.addAttribute("noticeBoard", noticeBoard);
-		log.info("noticeBoard : " + noticeBoard);
 		return "board/notice_list";
 	}
 
@@ -102,9 +107,9 @@ public class BoardController {
 	
 
 	@GetMapping("/qna/list")
-	public String qnaListBoard(Model model2) {
+	public String qnaListBoard(Model model) {
 		List<QnaList> qnaListBoard = boardService.qnaListBoard();
-		model2.addAttribute("qnaListBoard", qnaListBoard);
+		model.addAttribute("qnaListBoard", qnaListBoard);
 		return "board/qna_list";
 	}
 	

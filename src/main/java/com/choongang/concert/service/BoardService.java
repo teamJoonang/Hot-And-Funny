@@ -31,4 +31,9 @@ public class BoardService {
 	public List<QnaList> qnaListBoard(){
 		return boardMapper.qnaBoardFindAll();
 	}
+	
+	// Event_Board 게시판 
+	public List<EventBoard> eventListBoard() {
+		return boardMapper.eventBoardFindAll();
+	}
 }
