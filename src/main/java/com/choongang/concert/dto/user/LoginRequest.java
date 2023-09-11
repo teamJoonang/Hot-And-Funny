@@ -7,6 +7,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
+// 로그인 양식 dto
 public class LoginRequest {
 
     private String loginId;     // 로그인 아이디 - 이메일

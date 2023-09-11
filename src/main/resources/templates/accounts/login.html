@@ -109,12 +109,12 @@
                 if (xhr.readyState === 4) {
                     if (xhr.status === 200) {
                         // 로그인 성공 처리
-                        alert('로그인 성공!');
+                        // alert('로그인 성공!');
                         window.location="/"
                     } else if(xhr.status === 400) {
                         // 로그인 실패 처리
                         alert('로그인 실패 : 모든 양식을 채워주세요.');
-                        // document.getElementById('login')
+
                     }
                     else{
                         alert('로그인 실패');

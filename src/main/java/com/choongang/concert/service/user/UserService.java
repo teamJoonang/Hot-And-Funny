@@ -1,14 +1,12 @@
 package com.choongang.concert.service.user;
 
-import com.choongang.concert.dto.user.AddUserRequest;
-import com.choongang.concert.dto.user.FindEmailRequest;
-import com.choongang.concert.dto.user.LoginRequest;
-import com.choongang.concert.dto.user.UserResponse;
+import com.choongang.concert.dto.user.*;
 import com.choongang.concert.repository.user.UserMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
-
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class UserService {
@@ -45,6 +43,28 @@ public class UserService {
 
         UserResponse userRes = userMapper.findByEmail(findEmailReq);
         return userRes;
+    }
+
+    /**
+     * 사용자 비밀번호 찾기 (정보확인)
+     * @param findPwReq - 컬럼과 일치하는 사용자 확인용 dto
+     * @return UserResponse - 사용자 정보
+     */
+    public UserResponse findByUser(FindPwRequest findPwReq) {
+
+        UserResponse userRes = userMapper.findByUser(findPwReq);
+        return userRes;
+    }
+
+    /**
+     * 사용자 비밀번호 재설정
+     * @param resetPwReq - 비밀번호 와 비밀번호 재확인 , 사용자 번호
+     * @return int - 성공적으로 레코드 변경? 0 < true
+     */
+    public int resetPassword(ResetPwRequest resetPwReq) {
+
+        int result = userMapper.resetPassword(resetPwReq);
+        return result;
     }
 
 

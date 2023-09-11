@@ -140,7 +140,12 @@
                 if (xhr.status === 201) {
                     // 회원가입 성공 처리
                     window.location="/user/login"
-                } else {
+                }
+                else if (xhr.status === 400) {
+                    // 아이디를 찾지 못했을 때의 처리
+                    alert('양식을 채워 주세요.');
+                }
+                else {
                     // 회원가입 실패 처리
                     console.error('회원가입 실패');
                 }

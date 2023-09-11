@@ -1,9 +1,6 @@
 package com.choongang.concert.repository.user;
 
-import com.choongang.concert.dto.user.AddUserRequest;
-import com.choongang.concert.dto.user.FindEmailRequest;
-import com.choongang.concert.dto.user.LoginRequest;
-import com.choongang.concert.dto.user.UserResponse;
+import com.choongang.concert.dto.user.*;
 import org.apache.ibatis.annotations.Mapper;
 
 
@@ -39,6 +36,20 @@ public interface UserMapper {
      * @return UserResponse - 사용자 정보
      */
     UserResponse findByEmail(FindEmailRequest findEmailReq);
+
+    /**
+     * 사용자 비밀번호 찾기 (정보 확인)
+     * @param findPwReq - 컬럼과 일치하는 사용자 확인용 dto
+     * @return UserResponse - 사용자 정보
+     */
+    UserResponse findByUser(FindPwRequest findPwReq);
+
+    /**
+     *  사용자 비밀번호 재설정
+     * @param resetPwReq - 비밀번호와 비밀번호 재확인 값
+     * @return int - 성공한 레코드 갯수 1
+     */
+    int resetPassword(ResetPwRequest resetPwReq);
 
 
 //    /**

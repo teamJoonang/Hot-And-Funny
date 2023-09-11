@@ -7,8 +7,8 @@ import lombok.ToString;
 
 @NoArgsConstructor
 @ToString
-@Setter
 @Getter
+// 서버의 응답용 사용자 dto
 public class UserResponse {
 
     private Long id;            // pk

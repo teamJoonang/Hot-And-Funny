@@ -12,6 +12,6 @@ import lombok.ToString;
 // 아이디/비번 찾기 , 이메일 찾기 dto
 public class FindEmailRequest {
 
-    private String loginId;
+    private String loginId; // 이메일형식 id
 
 }

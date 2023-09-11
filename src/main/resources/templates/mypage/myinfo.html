@@ -23,7 +23,7 @@
             <div class="container-fluid">
                 <div class="col-3">
                     <a href="" class="d-flex">
-                        <img src="../../static/img/concert_logo.png" class="img-fluid header-img-logo" alt="콘서트_이미지_로고">
+                        <img src="../../static/img/concert_logo.png" th:src="@{/img/concert_logo.png}" class="img-fluid header-img-logo" alt="콘서트_이미지_로고">
                     </a>
                 </div>
                 <button class="navbar-toggler bg-black" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
@@ -134,8 +134,7 @@
                                     <!-- user email -->
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="user_login_id">이메일 ( Login ID )</label>
-                                        <input class="form-control" id="user_login_id" type="text" readonly="readonly" th:value="${userDto.loginId}"
-                                        placeholder="이메일을 입력해주세요">
+                                        <input class="form-control" id="user_login_id" type="text" readonly="readonly" placeholder="이메일을 입력해주세요">
                                     </div>
 
                                     <div class="col-md-6">
