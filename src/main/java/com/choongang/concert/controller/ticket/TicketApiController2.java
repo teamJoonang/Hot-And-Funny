@@ -34,7 +34,7 @@ public class TicketApiController2 {
 	public ResponseEntity<List<ChoiceDateData>> seat(@PathVariable String concertId){
 		log.info("---------------1-----------"  + concertId);
 		List <ChoiceDateData> cdd = ticketService.selectedDate(Integer.parseInt(concertId));
-		log.info("---------------4-----------"  + concertId);
+		log.info("---------------4-----------"  + concertId + cdd);
 		return ResponseEntity.ok(cdd);
 	}
 

@@ -11,6 +11,11 @@
 		JOIN seat s ON c.id  = #{concertId} AND s.seat_type IN ("VIP", "R", "S")
 		LEFT JOIN ticket t ON s.seat_number = t.seat_number AND c.id = t.concert_id
 		WHERE t.seat_number IS NULL AND t.concert_id IS null
-		GROUP BY s.seat_type, c.concert_date;
+		GROUP BY s.seat_type, c.concert_date
+		ORDER BY 
+			CASE s.seat_type
+			WHEN 'VIP' then 1
+			WHEN 'R' then 2
+			WHEN 'S' then 3 end;
 	</select>
 </mapper>

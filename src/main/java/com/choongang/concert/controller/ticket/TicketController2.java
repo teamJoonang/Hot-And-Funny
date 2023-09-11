@@ -14,12 +14,13 @@ import lombok.RequiredArgsConstructor;
 
 public class TicketController2 {
 	
+	private final TicketService ticketService;
+
 	@GetMapping ("/home/calendar")
 	public String homeCalendar () {
 		return "ticket/home_calendar";
 	}
 	
-	private final TicketService ticketService;
 	
 	
 	@GetMapping ("/approval")

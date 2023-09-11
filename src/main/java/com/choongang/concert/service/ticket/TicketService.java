@@ -18,9 +18,9 @@ public class TicketService {
 	private TicketDAO ticketDao;
 	
 	public List<ChoiceDateData> selectedDate (int concertId){
-		log.info("---------------2-----------"  + concertId);
+//		log.info("---------------2-----------"  + concertId);
 		List<ChoiceDateData> cdd = ticketDao.remainingSeat(concertId);
-		log.info("---------------3-----------"  + concertId);	
+//		log.info("---------------3-----------"  + concertId);	
 		return cdd;
 	}
 }
