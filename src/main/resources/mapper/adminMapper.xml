@@ -16,7 +16,7 @@
         user
     ORDER BY
         id DESC
-    LIMIT #{PaginationDto.limitStart}, #{recordSize}
+    LIMIT #{paginationDto.limitStart}, #{recordSize}
 </select>
     
 

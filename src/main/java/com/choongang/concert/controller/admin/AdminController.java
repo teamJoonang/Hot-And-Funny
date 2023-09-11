@@ -29,16 +29,18 @@ public class AdminController {
 	private static final Logger log = LoggerFactory.getLogger(AdminController.class);
 	
 	//DI 의존성 주입 생성자 메서드 주입방식(bean으로 등록 되어 있기 때문에 가능한 방법)
+	@Autowired
 	private UserInfoService userInfoService;
+	@Autowired
 	private StatService statService;
 	
-	public AdminController(UserInfoService userInfoService) {
-		this.userInfoService = userInfoService;
-	}
-	@Autowired
-	public AdminController(StatService statService) {
-		this.statService = statService;
-	}
+//	public AdminController(UserInfoService userInfoService) {
+//		this.userInfoService = userInfoService;
+//	}
+//	@Autowired
+//	public AdminController(StatService statService) {
+//		this.statService = statService;
+//	}
 
 	
 	
@@ -53,9 +55,10 @@ public class AdminController {
 		
 //	    log.info("offset: {}", params.getOffset());
 		
-        PagingResponse<UserInfoDTO> response = userInfoService.findAllPost(params);
+        PagingResponse<UserInfoDTO> response = userInfoService.findAllUser(params);
         model.addAttribute("response", response);		
 		
+        log.info("response : " + response);
 		
 //		log.info("회원목록 개수: " + adminList.size());
 		return "admin/user_info";

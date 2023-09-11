@@ -44,7 +44,7 @@ public class UserInfoService {
      */
 	
 	
-	public PagingResponse<UserInfoDTO> findAllPost(final PageDto params) {
+	public PagingResponse<UserInfoDTO> findAllUser(final PageDto params) {
 
         // 조건에 해당하는 데이터가 없는 경우, 응답 데이터에 비어있는 리스트와 null을 담아 반환
         int count = adminMapper.count(params);

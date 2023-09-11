@@ -168,7 +168,7 @@
                         </thead>
                         <tbody>
 
-                            <tr th:each="user, rowStat : ${adminList}">
+                            <tr th:each="user, rowStat : ${response.list}">
                                 <td th:text="${rowStat.index + 1}"></td> <!-- 번호 -->
                                 <td th:text="${user.gender}"></td>
                                 <td th:text="${user.name}"></td>
@@ -198,9 +198,7 @@
                 </div>
                 
                 <!-- 페이지네이션시작 -->
-                <div class="paging">
-
-                </div>
+ 
                 <!-- 페이지네이션끝 -->
                 
             </div>

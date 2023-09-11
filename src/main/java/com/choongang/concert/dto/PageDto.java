@@ -78,7 +78,8 @@ public class PageDto {
     private String searchType;    // 검색 유형
     private PaginationDTO paginationDto;
     
-
+    
+    
     
     public PageDto() {
         this.page = 1;

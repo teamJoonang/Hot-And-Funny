@@ -13,6 +13,8 @@ public class PaginationDTO {
     private int limitStart;           // LIMIT 시작 위치
     private boolean existPrevPage;    // 이전 페이지 존재 여부
     private boolean existNextPage;    // 다음 페이지 존재 여부
+    
+    
 
     public PaginationDTO(int totalRecordCount, PageDto params) {
         if (totalRecordCount > 0) {

@@ -1,13 +1,21 @@
 package com.choongang.concert.dto;
 
-import lombok.Getter;
-
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
+import lombok.Data;
+
+@Data
 public class PagingResponse<T> {
 
+    private int id;
+    private String loginId;
+    private String name;
+    private String nickname;
+    private String address;
+    private String gender;
+    private String tel;  
+	
     private List<T> list = new ArrayList<>();
     private PaginationDTO paginationDto;
 
