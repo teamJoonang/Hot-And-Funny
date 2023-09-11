@@ -64,6 +64,7 @@ readme.md
 !/src/main/resources/static/js/myticket.js
 !/src/main/resources/static/js/signup.js
 !/src/main/resources/static/js/user_out.js
+!/src/main/resources/static/js/login.js
 
 # bootstrap css
 /src/main/resources/static/css/bootstrap.css

@@ -50,7 +50,6 @@ public class AccountApiController {
                     .body("비빌번호가 일치하지 않습니다.");
         }
 
-
         // db단에 넣고 return 레코드 갯수를 받는다.
         int result = userService.saveUser(userReq);
 

@@ -16,7 +16,8 @@
              nickname,
              address,
              age,
-             tel
+             tel,
+             gender
             )
         VALUES (
             #{loginId},
@@ -25,7 +26,8 @@
             #{nickname},
             #{address},
             #{age},
-            #{tel}
+            #{tel},
+            #{gender}
         )
     </insert>
 
@@ -53,7 +55,8 @@
             nickname,
             address,
             age,
-            tel
+            tel,
+            gender
         FROM
             user
         WHERE

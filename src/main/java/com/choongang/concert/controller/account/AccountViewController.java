@@ -67,12 +67,12 @@ public class AccountViewController {
 
 
     // 로그아웃 구현해야함.
-//    @GetMapping("/logout")
-//    public String logout(HttpSession session){
-//
-//        session.invalidate();
-//
-//        return "redirect:/";
-//    }
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+
+        session.invalidate();
+
+        return "redirect:/";
+    }
 
 }

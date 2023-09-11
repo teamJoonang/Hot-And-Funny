@@ -20,5 +20,6 @@ public class UserResponse {
     private String address;     // 주소
     private Integer age;        // 나이
     private String tel;         // 연락처
+    private Boolean gender;     // 성별 : true = 남자 = 1 | false = 여자 = 0
 
 }
