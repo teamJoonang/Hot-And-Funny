@@ -2,7 +2,6 @@ package com.choongang.concert.service.ticket;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.choongang.concert.dto.ticket.ChoiceDateDto;

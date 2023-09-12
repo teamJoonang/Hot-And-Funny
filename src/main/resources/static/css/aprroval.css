@@ -19,6 +19,6 @@ body {
     color: white;
     position: relative;
     top: 5px;
-    left: 29px;    
-
+    left: 29px;
+    line-height: 128px;
 }

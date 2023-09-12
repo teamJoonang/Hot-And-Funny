@@ -135,7 +135,7 @@ function reservationSeat (){
 		const concertDate = selectedDate.year+"-"+String(selectedDate.month).padStart(2, '0')+"-"+formattedDay;
 		const seatChoiceUrl = 'http://localhost:8080/ticket/seat/choice/' + concertDate;
 		btnReservaiton.addEventListener('click',function(){
-			window.open(
+			const popupWindw = window.open(
 			seatChoiceUrl,
 			'seatChoice',
 			'width=1250, height=850, location=true, status=no, scrollbars=no');
@@ -143,13 +143,17 @@ function reservationSeat (){
 			console.log(seatChoiceUrl);
 			console.log(typeof(seatChoiceUrl));
 			
+			// 크기 조절
+			popupWindw.resizeTo(1200,900);
+			popupWindw.onresize = (_=>{
+				popupWindw.resizeTo(1200,900);
+			})
 		})
 	}	
 	else {
 		alert("날짜를 선택해 주세요.");
 	}
 }
-
 
 
 

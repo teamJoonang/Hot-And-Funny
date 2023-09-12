@@ -227,3 +227,9 @@ function colorApply(dropBox) {
 prePage.addEventListener("click", () => {
     window.location.href = "seat_choice.html";
 });
+
+const abcd = document.getElementById('abcd');
+abcd.addEventListener("click", () => {
+	console.log("!!!!!!!!!!!!!!!!!!!!11");
+	window.location.href = "/ticket/approval";
+});
