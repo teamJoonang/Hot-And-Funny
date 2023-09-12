@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
+    <link rel="stylesheet" href="../../static/css/seat_choice.css" th:href="@{/css/seat_choice.css}">
+    <script src="https://kit.fontawesome.com/9547cb8259.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="sub-header">
+        <div class="sub-menu inline-div" style="background-color: red;">좌석 선택</div>
+        <div class="sub-menu inline-div">예매 내역 확인</div>
+        <div class="sub-menu inline-div">결제</div>
+    </div>
+    <!--  숨겨있는 요소 / 서버 데이터 js 전달용  -->
+    <div id="server-data" th:attr="data-seat-list=${remainSeat}"></div>
+    <div class="content">
+        <div class="seat-map inline-div">
+            <div id="back-pic">
+                <div class="container">
+                    <div class="left-seat total-seat">
+                        <div class="row"> <!-- 16 -->
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-s turn-l"></div>
+                            <div class="seat seat-s turn-l"></div>
+                            <div class="seat seat-s turn-l"></div>
+                            <div class="seat seat-s turn-l"></div>
+                            <div class="seat seat-s turn-l"></div>
+                            <div class="seat seat-s turn-l"></div>
+                            <div class="seat seat-s turn-l"></div>
+                            <div class="seat seat-s turn-l"></div>
+                        </div>
+                        <div class="row"> <!-- 16 -->
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-s turn-l"></div>
+                            <div class="seat seat-s turn-l"></div>
+                            <div class="seat seat-s turn-l"></div>
+                            <div class="seat seat-s turn-l"></div>
+                            <div class="seat seat-s turn-l"></div>
+                            <div class="seat seat-s turn-l"></div>
+                            <div class="seat seat-s turn-l"></div>
+                            <div class="seat seat-s turn-l"></div>
+                        </div>
+                        <div class="row"> <!-- 16 -->
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-s turn-l"></div>
+                            <div class="seat seat-s turn-l"></div>
+                            <div class="seat seat-s turn-l"></div>
+                            <div class="seat seat-s turn-l"></div>
+                            <div class="seat seat-s turn-l"></div>
+                            <div class="seat seat-s turn-l"></div>
+                            <div class="seat seat-s turn-l"></div>
+                            <div class="seat seat-s turn-l"></div>
+                        </div>
+                        <div class="row"> <!-- 16 -->
+                            <div class="seat seat-s"></div>
+                            <div class="seat seat-s"></div>
+                            <div class="seat seat-s"></div>
+                            <div class="seat seat-s"></div>
+                            <div class="seat seat-s"></div>
+                            <div class="seat seat-s"></div>
+                            <div class="seat seat-s"></div>
+                            <div class="seat seat-s"></div>
+                            <div class="seat seat-s turn-l"></div>
+                            <div class="seat seat-s turn-l"></div>
+                            <div class="seat seat-s turn-l"></div>
+                            <div class="seat seat-s turn-l"></div>
+                            <div class="seat seat-s turn-l"></div>
+                            <div class="seat seat-s turn-l"></div>
+                            <div class="seat seat-s turn-l"></div>
+                            <div class="seat seat-s turn-l"></div>
+                        </div>
+                        <div class="row"> <!-- 16 -->
+                            <div class="seat seat-s"></div>
+                            <div class="seat seat-s"></div>
+                            <div class="seat seat-s"></div>
+                            <div class="seat seat-s"></div>
+                            <div class="seat seat-s"></div>
+                            <div class="seat seat-s"></div>
+                            <div class="seat seat-s"></div>
+                            <div class="seat seat-s"></div>
+                            <div class="seat seat-s turn-l"></div>
+                            <div class="seat seat-s turn-l"></div>
+                            <div class="seat seat-s turn-l"></div>
+                            <div class="seat seat-s turn-l"></div>
+                            <div class="seat seat-s turn-l"></div>
+                            <div class="seat seat-s turn-l"></div>
+                            <div class="seat seat-s turn-l"></div>
+                            <div class="seat seat-s turn-l"></div>
+                        </div>
+                    </div>
+                    <div class="center-seat total-seat">
+                        <div class="row"> <!-- 15 -->
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                        </div>
+                        <div class="row"> <!-- 15 -->
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                        </div>
+                        <div class="row"> <!-- 15 -->
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                        </div>
+                        <div class="row"> <!-- 15 -->
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                        </div>
+                        <div class="row"> <!-- 15 -->
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                        </div>
+                        <div class="row"> <!-- 15 -->
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                            <div class="seat seat-vip"></div>
+                        </div>
+                        <div class="row"> <!-- 15 -->
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                        </div>
+                        <div class="row"> <!-- 15 -->
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                        </div>
+                        <div class="row"> <!-- 15 -->
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                        </div>
+                        <div class="row"> <!-- 15 -->
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                        </div>
+                        <div class="row"> <!-- 15 -->
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                        </div>
+                        <div class="row"> <!-- 15 -->
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                        </div>
+                    </div>
+                    <div class="right-seat total-seat">
+                        <div class="row"> <!-- 16 -->
+                            <div class="seat seat-s turn-r"></div>
+                            <div class="seat seat-s turn-r"></div>
+                            <div class="seat seat-s turn-r"></div>
+                            <div class="seat seat-s turn-r"></div>
+                            <div class="seat seat-s turn-r"></div>
+                            <div class="seat seat-s turn-r"></div>
+                            <div class="seat seat-s turn-r"></div>
+                            <div class="seat seat-s turn-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                        </div>
+                        <div class="row"> <!-- 16 -->
+                            <div class="seat seat-s turn-r"></div>
+                            <div class="seat seat-s turn-r"></div>
+                            <div class="seat seat-s turn-r"></div>
+                            <div class="seat seat-s turn-r"></div>
+                            <div class="seat seat-s turn-r"></div>
+                            <div class="seat seat-s turn-r"></div>
+                            <div class="seat seat-s turn-r"></div>
+                            <div class="seat seat-s turn-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                        </div>
+                        <div class="row"> <!-- 16 -->
+                            <div class="seat seat-s turn-r"></div>
+                            <div class="seat seat-s turn-r"></div>
+                            <div class="seat seat-s turn-r"></div>
+                            <div class="seat seat-s turn-r"></div>
+                            <div class="seat seat-s turn-r"></div>
+                            <div class="seat seat-s turn-r"></div>
+                            <div class="seat seat-s turn-r"></div>
+                            <div class="seat seat-s turn-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                            <div class="seat seat-r"></div>
+                        </div>
+                        <div class="row"> <!-- 16 -->
+                            <div class="seat seat-s turn-r"></div>
+                            <div class="seat seat-s turn-r"></div>
+                            <div class="seat seat-s turn-r"></div>
+                            <div class="seat seat-s turn-r"></div>
+                            <div class="seat seat-s turn-r"></div>
+                            <div class="seat seat-s turn-r"></div>
+                            <div class="seat seat-s turn-r"></div>
+                            <div class="seat seat-s turn-r"></div>
+                            <div class="seat seat-s"></div>
+                            <div class="seat seat-s"></div>
+                            <div class="seat seat-s"></div>
+                            <div class="seat seat-s"></div>
+                            <div class="seat seat-s"></div>
+                            <div class="seat seat-s"></div>
+                            <div class="seat seat-s"></div>
+                            <div class="seat seat-s"></div>
+                        </div>
+                        <div class="row"> <!-- 16 -->
+                            <div class="seat seat-s turn-r"></div>
+                            <div class="seat seat-s turn-r"></div>
+                            <div class="seat seat-s turn-r"></div>
+                            <div class="seat seat-s turn-r"></div>
+                            <div class="seat seat-s turn-r"></div>
+                            <div class="seat seat-s turn-r"></div>
+                            <div class="seat seat-s turn-r"></div>
+                            <div class="seat seat-s turn-r"></div>
+                            <div class="seat seat-s"></div>
+                            <div class="seat seat-s"></div>
+                            <div class="seat seat-s"></div>
+                            <div class="seat seat-s"></div>
+                            <div class="seat seat-s"></div>
+                            <div class="seat seat-s"></div>
+                            <div class="seat seat-s"></div>
+                            <div class="seat seat-s"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="seat-info inline-div">
+            <div class="concert-info">
+                <p style="font-weight: bold;" th:object="${concertInfo}"><span id="concert-name" th:text="${concertInfo.concertName}">콘서트명 자리</span></p>
+                <p th:object="${concertInfo}"><span id="concert-place" th:text="${concertInfo.concertPlace}">콘서트 장소</span>
+                    | <span id="concert-date" th:text="${concertDate} + ' '">${concertDate} + ' '</span>
+                    <span id="concert-time" th:text="${concertInfo.formattedTime}"></span></p>
+            </div>
+            <div class="seat-remain">
+                <p>좌석등급/잔여좌석</p>
+                <div>
+                    <table class="seat-remain-table" border="0">
+                        <tr>
+                            <td><p></p></td>
+                            <td>VIP</td>
+                            <td><span>100000</span> 원</td>
+                            <td><span id="vip-seat-remain">00</span> 석</td>
+                        </tr>
+                        <tr>
+                            <td><p></p></td>
+                            <td>R</td>
+                            <td><span>80000</span> 원</td>
+                            <td><span id="r-seat-remain">00</span> 석</td>
+                        </tr>
+                        <tr>
+                            <td><p></p></td>
+                            <td>S</td>
+                            <td><span>60000</span> 원</td>
+                            <td><span id="s-seat-remain">00</span> 석</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="seat-choice">
+                <p>선택 좌석 <span>선택된 좌석 수 : <span id="count">0</span></span></p>
+                <div>
+                    <table class="seat-choice-table" border="0">
+                        <tbody class="choice-body">
+                            <tr>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                            </tr>
+                            <tr>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                            </tr>
+                            <tr>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                            </tr>
+                            <tr>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+            <div class="button-box">
+                <div class="choice-info">
+                    10분 내로 좌석을 선택해 주세요! <i class="fa-solid fa-circle-question"></i>
+                    <div class="tooltip-content">
+                        10분내로 진행하지 않을 시 선택된 좌석의 선점이 없어질 수 있습니다.
+                    </div>
+                </div>
+                <div class="choice-button" id="next-page">좌석선택완료   <i class="fa-solid fa-chevron-right"></i></div>
+                <div class="sub-button inline-div close-window"><i class="fa-solid fa-chevron-left"></i> 이전단계</div>
+                <div class="sub-button inline-div all-clear"><i class="fa-solid fa-arrow-rotate-right"></i> 좌석 다시선택</div>
+            </div>
+        </div>
+    </div>
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script th:inline="javascript">
+        // js 에서 사용하기 위해 타임리프 방식으로 뷰컨트롤러에서 보낸 데이터 전달
+        let concertDate =  [[${concertDate}]];
+    </script>
+    <script src="../../static/js/seat_choice.js" th:src="@{/js/seat_choice.js}"></script>
+</body>
+</html>
