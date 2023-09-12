@@ -30,7 +30,7 @@
                                 th:src="@{/img/concert_logo_final2_black1.png}">
                             </a>
 
-                            <form class="my-3" method="post" action="/user/reset">
+                            <form class="my-3">
 
                                 <h4>비밀번호 재설정</h4>
                                 <!-- 사용자 이메일 -->
@@ -49,7 +49,7 @@
                                            autocomplete="off" required="required"  placeholder="Repeat Password"/>
                                 </div>
 
-                                <button class="btn btn-lg m-3 text-white border-0" type="submit" id="loginBtn">Send</button>
+                                <button class="btn btn-lg m-3 text-white border-0" type="button" id="loginBtn">Send</button>
                             </form>
                         </div>
                     </div>
@@ -61,5 +61,42 @@
     
     <!-- bootstrap.js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+
+        document.getElementById('loginBtn').addEventListener('click', function () {
+
+            let password = document.getElementById('password').value;
+            let repeatPassword = document.getElementById('repeatPassword').value;
+
+            let user = { password : password , repeatPassword : repeatPassword };
+
+            // AJAX 요청을 수행하고 서버로 userEmail을 전송
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '/user/reset', true);
+            xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        // 비밀번호 재설정 성공.
+                        alert('비밀번호 재설정 되었습니다.');
+                    }
+                    else if (xhr.status === 400) {
+                        // 칸을 다 채우지 않은 경우 또는 비밀번호 값이 일치하지 않을때.
+                        // 여기서 다시 if문 분류
+                        alert('비밀번호 일치하지 않음.');
+                    }
+                    else {
+                        alert('서버오류')
+                    }
+                }
+            };
+            // dto의 멤버와 자동파싱되도록 같은 이름으로.
+            xhr.send(JSON.stringify(user));
+        });
+
+
+
+    </script>
 </body>
 </html>

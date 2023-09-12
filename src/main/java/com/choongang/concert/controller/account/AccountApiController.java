@@ -216,7 +216,7 @@ public class AccountApiController {
 
     // 비밀번호 재설정
     @PostMapping("/reset")
-    public ResponseEntity<String> resetPassword(@ModelAttribute("user") ResetPwRequest resetPwReq , HttpSession session){
+    public ResponseEntity<String> resetPassword(@RequestBody ResetPwRequest resetPwReq , HttpSession session){
 
         log.info("Post >> /user/findPw | resetPassword() 실행됨.");
         log.info("ResetPwRequest::{}" , resetPwReq);
@@ -233,11 +233,13 @@ public class AccountApiController {
                     .body("양식을 모두 채워주세요");
         }
 
+        // 비밀번호가 일치하지 않는다면 bad request
         if(!resetPwReq.getPassword().equals(resetPwReq.getRepeatPassword())){
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body("비밀번호가 일치하지 않습니다.");
         }
+
 
         int result = userService.resetPassword(resetPwReq);
         log.info("result::{}" , result);
@@ -248,6 +250,7 @@ public class AccountApiController {
                     .body("비밀번호 재설정됨.");
         }
         else {
+            // 500 에러
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("서버에 문제 발생, 재설정 불가");
