@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.choongang.concert.dto.board.PageNoticeDto;
 import com.choongang.concert.entity.board.EventList;
 import com.choongang.concert.entity.board.Notice;
 import com.choongang.concert.entity.board.QnaList;
@@ -82,30 +84,25 @@ public class BoardController {
 //		
 //	}
 	
+//	@GetMapping("/notice/list")
+//	public String noticeList(Model model) {
+//		List<Notice> noticeBoard = boardService.noticeBoard();
+//		model.addAttribute("noticeBoard", noticeBoard);
+//		return "board/notice_list";
+//	}
+
+	
 	@GetMapping("/notice/list")
-	public String noticeList(Model model) {
+	public String noticeList(@ModelAttribute("params") final PageNoticeDto params, Model model) {
 		List<Notice> noticeBoard = boardService.noticeBoard();
+		
 		model.addAttribute("noticeBoard", noticeBoard);
+	log.info("노티스 : "+ noticeBoard);
 		return "board/notice_list";
 	}
 
 	
 	
-//	@GetMapping("/notice/{num}")
-//	public String displayNoticeDetail(@PathVariable Long num, 
-//												Model model) {
-//		Notice notice = boardService.findByNum(num);
-//		
-//		log.info("notice detail = {}", notice.toString());
-//		
-//		model.addAttribute("notice", notice);
-//		
-//		return "board/basic_detail";
-//	}
-//	
-	
-	
-
 	@GetMapping("/qna/list")
 	public String qnaListBoard(Model model) {
 		List<QnaList> qnaListBoard = boardService.qnaListBoard();
