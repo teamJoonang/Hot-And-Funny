@@ -260,7 +260,6 @@ function remainSeatCounter() {
     remainS.textContent = countS;
 }
 remainSeatCounter();
-
 //다음페이지로 데이터 전송
 nextPage.addEventListener("click", () => {
     let ticketArray = [];
@@ -276,7 +275,11 @@ nextPage.addEventListener("click", () => {
     const place = document.getElementById('concert-place').textContent;
     const date = document.getElementById('concert-date').textContent;
     const time = document.getElementById('concert-time').textContent;
+    // 추가 데이터 콘서트 아이디
+    const concertId = document.getElementById('concert-id').getAttribute('data-concert-id');
+
     let concert = {
+        "concertId": concertId,
         "concertName": name,
         "concertPlace": place,
         "concertDate": date,

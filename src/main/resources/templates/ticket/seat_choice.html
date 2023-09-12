@@ -420,7 +420,8 @@
                 <p style="font-weight: bold;" th:object="${concertInfo}"><span id="concert-name" th:text="${concertInfo.concertName}">콘서트명 자리</span></p>
                 <p th:object="${concertInfo}"><span id="concert-place" th:text="${concertInfo.concertPlace}">콘서트 장소</span>
                     | <span id="concert-date" th:text="${concertDate} + ' '">${concertDate} + ' '</span>
-                    <span id="concert-time" th:text="${concertInfo.formattedTime}"></span></p>
+                    <span id="concert-time" th:text="${concertInfo.formattedTime}"></span>
+                    <span id="concert-id" th:attr="data-concert-id=${concertInfo.id}" style="display: none;"></span></p>
             </div>
             <div class="seat-remain">
                 <p>좌석등급/잔여좌석</p>

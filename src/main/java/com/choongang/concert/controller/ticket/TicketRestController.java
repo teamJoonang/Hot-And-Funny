@@ -39,7 +39,6 @@ public class TicketRestController {
         String grade = accumulatePriceDto.getGrade();
         int diff = accumulatePriceDto.getDiff();
         boolean disCountYN = accumulatePriceDto.isDisCountYN();
-        System.out.println("CONTROLLER : "+ disCountYN);
         int accumulateResult = ticketService.accumulatePrice(grade, diff, disCountYN);
         return accumulateResult;
     }

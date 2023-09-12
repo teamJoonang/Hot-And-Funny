@@ -12,7 +12,7 @@
     </select>
     <!-- 날짜 기반 콘서트 정보 따오기 -->
     <select id="findConcertInfo" parameterType="String" resultType="ConcertInfoDto">
-        select concert_name, concert_place, DATE_FORMAT(concert_date, '%H:%i') AS formatted_time
+        select id, concert_name, concert_place, DATE_FORMAT(concert_date, '%H:%i') AS formatted_time
         from concert where date(concert_date) = #{concertDate}
     </select>
 

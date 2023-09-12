@@ -1,4 +1,5 @@
 const prePage = document.querySelector('.pre-view-btn');
+const nextViewBtn = document.querySelector('.next-view-btn');
 const storedData = sessionStorage.getItem("ticketArray");
 const ticketArray = JSON.parse(storedData);
 const tablePosition = document.querySelector('.left-upper');
@@ -11,6 +12,9 @@ const sNum = countingTicket("S");
 const concertInfo = JSON.parse(sessionStorage.getItem("concertInfo"));
 const priceInfo = JSON.parse(sessionStorage.getItem("priceInfo"));
 
+//로그인 세션 정보 담을 변수
+const userId = "1";
+
 //티켓 가격정보
 const VIPPrice = parseInt(deleteCommas(priceInfo["VIP"].price));
 const RPrice = parseInt(deleteCommas(priceInfo["R"].price));
@@ -20,7 +24,10 @@ let charge = 2000;
 
 //드롭박스용 ajax 전용 전역변수
 let totalPrice = 0;
-let totalcharge = 0;
+let totalCharge = 0;
+let countChoiceTicket = 0;
+//티켓 생성용
+let ticketInfoArray = [];
 
 ticketView();
 
@@ -38,12 +45,16 @@ discountPriceSet();
 dropBoxChoice();
 concertInfoUpdate();
 
+//최종 정보 중 불필요 정보 삭제
+deleteResult();
+
 //선택된 티켓 정보 업데이트 메소드
 function ticketView() {
     //권장되지 않는 동적 변수 선언
     const tGrades = [document.getElementById('t1-grade'), document.getElementById('t2-grade'), document.getElementById('t3-grade'), document.getElementById('t4-grade')];
     const tNums = [document.getElementById('t1-num'), document.getElementById('t2-num'), document.getElementById('t3-num'), document.getElementById('t4-num')];
 
+    //베이스 최종 티켓 정보 함께 업데이트
     for(let i = 0; i < ticketArray.length; i++) {
         if (ticketArray && ticketArray.length > i) {
             const ticket = ticketArray[i];
@@ -52,6 +63,15 @@ function ticketView() {
             const ticketView = document.querySelector(`.ticket-view p:nth-child(${i+1})`);
             ticketView.textContent =tGrades[i].textContent + '석 - ' + tNums[i].textContent;
         }
+        //티켓 정보 1차 업데이트 (seatGrade 는 향후 삭제처리)
+        let ticketInfo = {
+            "seatGrade": ticketArray[i].grade,
+            "seatNum": ticketArray[i].seatNum,
+            "concertId": concertInfo.concertId,
+            "userId": userId,
+            "discountYn": null
+        };
+        ticketInfoArray.push(ticketInfo);
     }
 }
 //티켓 table 생성 메소드
@@ -168,14 +188,7 @@ function setPrice(grade) {
         alert("가격 셋팅에 문제가 생겼어요");
     }
 }
-// 정규표현식 숫자 포멧팅
-function formatNumberWithCommas(number) {
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
-// 콤마 제거 정규식
-function deleteCommas(numberString) {
-    return parseInt(numberString.replace(/,/g, ''), 10);
-}
+
 //드롭박스 선택에 따른 동작 메소드
 function dropBoxChoice() {
     const dropDownBox = document.querySelectorAll('.input-opt');
@@ -196,61 +209,105 @@ function dropBoxChoice() {
             if (currentSelectedValue <= limitCond) {
                 let diff = selectedOptionValue- previousOptionValue;
                 let sendServer = {};
-                table.querySelectorAll('.input-opt').forEach((innerDropBox , index) => {
 
-                    if(index == 0) {
+                    if(index == 0 || index == 3 || index == 6) {
                         sendServer = {
                             "grade": seatGrade,
                             "diff": diff,
                             "disCountYN": false
                         }
-                        console.log(index);
+                        dropBoxAjax(sendServer);
+                        // 할인 티켓 배정 로직
+                        let count = 0;
+                        console.log(diff);
+                        if(diff > 0) {
+                            ticketInfoArray.forEach(function (ticket) {
+                                if(ticket.seatGrade == sendServer.grade && count < diff) {
+                                    // 반복 변경시 null 이 앞 객체에 배치되 예외 처리
+                                    if(ticket.discountYn == false) {
+                                        return;
+                                    } else if (ticket.discountYn == true) {
+                                        return;
+                                    }
+                                    ticket.discountYn = false;
+                                    // console.log("양수 작동");
+
+                                    count++;
+                                }
+                            });
+                        } else if (diff < 0) {
+                            ticketInfoArray.forEach(function (ticket) {
+                                if(ticket.seatGrade == sendServer.grade && count < -diff) {
+                                    // 반복 변경시 null 이 앞 객체에 배치되 예외 처리
+                                    if(ticket.discountYn == null) {
+                                        return;
+                                    } else if (ticket.discountYn == true) {
+                                        return;
+                                    }
+                                    ticket.discountYn = null;
+                                    // console.log("음수 작동");
+                                    count++;
+                                }
+                            });
+                        }
+                        // console.log("no discount counter : " + count);
+                        // console.log(ticketInfoArray);
                     } else {
                         sendServer = {
                             "grade": seatGrade,
                             "diff": diff,
                             "disCountYN": true
                         }
-                    }
-                });
-                $.ajax({
-                    url: '/ticket/payment/check',
-                    method: 'POST',
-                    contentType: 'application/json', // 헤더 설정
-                    data: JSON.stringify(sendServer), // 전송
-                    dataType: 'json',
-                    cache: false, // 캐싱 비활성
-                    success: function(data) {
-                        totalPrice += data;
-                        totalcharge += charge * getSign(data);
+                        dropBoxAjax(sendServer);
 
-                        console.log("총금액 : " + totalPrice);
-                        console.log("총차지 : " + totalcharge);
-                    },
-                    error: function(error) {
-                        console.error('에러:', error);
+                        // 할인 티켓 배정 로직
+                        let count = 0;
+                        console.log(diff);
+                        if(diff > 0) {
+                            ticketInfoArray.forEach(function (ticket) {
+                                if(ticket.seatGrade == sendServer.grade && count < diff) {
+                                    // 반복 변경시 null 이 앞 객체에 배치되 예외 처리
+                                    if(ticket.discountYn == false) {
+                                        return;
+                                    } else if (ticket.discountYn == true) {
+                                        return;
+                                    }
+                                    ticket.discountYn = true;
+                                    // console.log("양수 작동");
+
+                                    count++;
+                                }
+                            });
+                        } else if (diff < 0) {
+                            ticketInfoArray.forEach(function (ticket) {
+                                if(ticket.seatGrade == sendServer.grade && count < -diff) {
+                                    // 반복 변경시 null 이 앞 객체에 배치되 예외 처리
+                                    if(ticket.discountYn == null) {
+                                        return;
+                                    } else if (ticket.discountYn == false) {
+                                        return;
+                                    }
+                                    ticket.discountYn = null;
+                                    // console.log("음수 작동");
+                                    count++;
+                                }
+                            });
+                        }
+                        // console.log("no discount counter : " + count);
+                        // console.log(ticketInfoArray);
                     }
-                });
                 previousOptionValue = selectedOptionValue;
 
                 colorApply(dropBox);
-
-
             } else {
                 alert(`해당 등급의 티켓을 ${limitCond}장 이상 선택할 수 없습니다.`);
                 // 이전 선택값으로 돌아가도록 드롭박스 값을 변경
                 dropBox.value = previousOptionValue;
             }
-            // console.log("limit: " + limitCond);
-            // console.log("pre: " + previousOptionValue);
-            // console.log("current : " + currentSelectedValue);
-            // console.log("선택 옵션 벨류: " + selectedOptionValue);
-            // console.log("---------------------------------");
         });
     });
 }
-
-
+/**
 // function dropBoxChoice() {
 //     const dropDownBox = document.querySelectorAll('.input-opt');
 //     const totalSelectedNums = [0, 0, 0]; // 표 별 최대 선택수 관리
@@ -291,6 +348,7 @@ function dropBoxChoice() {
 //     const limitCond = parseInt(dropBox.closest('table').querySelector('.grade-su').textContent);
 //     return limitCond;
 // }
+*/
 // 드롭박스 조건부 색상변경
 function colorApply(dropBox) {
     if(dropBox.value != 0) {
@@ -311,13 +369,103 @@ function concertInfoUpdate() {
             pTag.textContent = concertInfo.concertPlace;
         }
     });
+    const myTicketTable = document.querySelectorAll(".my-ticket-table p");
+    myTicketTable.forEach((pTag, index) => {
+        if(index == 0) {
+            pTag.textContent = formatDate(concertInfo.concertDate);
+        } else if (index == 1) {
+            pTag.textContent = concertInfo.concertTime;
+        }
+    });
 }
-// 정수 부호 반환 메소드
-function getSign(number) {
-    return number > 0 ? 1 : number < 0 ? -1 : 0;
+
+//드롭박스 ajax 메소드
+function dropBoxAjax(sendServer) {
+    $.ajax({
+        url: '/ticket/payment/check',
+        method: 'POST',
+        contentType: 'application/json', // 헤더 설정
+        data: JSON.stringify(sendServer), // 전송
+        dataType: 'json',
+        cache: false, // 캐싱 비활성
+        success: function(data) {
+            totalPrice += data;
+            totalCharge += charge * sendServer.diff;
+
+            let htmlTotalPrice = document.getElementById('total-price');
+            let htmlTotalCharge = document.getElementById('total-charge');
+            let htmlTotalPriceReal = document.getElementById('total-price-real');
+
+            htmlTotalPrice.textContent = formatNumberWithCommas(totalPrice);
+            htmlTotalCharge.textContent = formatNumberWithCommas(totalCharge);
+            htmlTotalPriceReal.textContent = formatNumberWithCommas(totalPrice + parseInt(totalCharge));
+            countChoiceTicket += sendServer.diff;
+        },
+        error: function(error) {
+            console.error('에러:', error);
+        }
+    });
+}
+
+//최종정보 중 참조값 삭제 메소드
+function deleteResult() {
+    ticketInfoArray.forEach(function (ticket) {
+        delete ticket.seatGrade;
+        console.log(ticketInfoArray);
+    });
 }
 
 //이전페이지로 전환 이벤트
 prePage.addEventListener("click", () => {
     window.location.href = "/ticket/seat/choice/" + concertInfo.concertDate;
 });
+
+//결제하기 이벤트
+nextViewBtn.addEventListener("click" , () => {
+    //티켓 전체 미선택 시 예외처리
+    if(countChoiceTicket < (vipNum+rNum+sNum)) {
+        alert("현재 선택하신 티켓은 총" + countChoiceTicket + "장 입니다.\n" +
+            "선택하셔야 하는 티켓은 " + (vipNum+rNum+sNum) + "장 입니다.")
+        return;
+    }
+
+    $.ajax({
+        url: '/payment/check/approval',
+        method: 'POST',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify(ticketInfoArray),
+        success: function (serverData) {
+            alert("티켓이 성공적으로 발급 되었습니다!");
+            window.location.href = "/ticket/approval";
+        },
+        error: function (error) {
+            console.error('결제 ajax 에러 : ', error);
+        }
+
+    });
+
+
+});
+
+/**
+ // 정수 부호 반환 메소드
+ function getSign(number) {
+ return number > 0 ? 1 : number < 0 ? -1 : 0;
+ }
+ */
+// 날짜 포멧 함수
+function formatDate(inputDate) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
+    const date = new Date(inputDate);
+    return date.toLocaleDateString('ko-KR', options);
+}
+// 숫자 콤마 포멧팅
+function formatNumberWithCommas(number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+// 콤마 제거 정규식
+function deleteCommas(numberString) {
+    return parseInt(numberString.replace(/,/g, ''), 10);
+}
+

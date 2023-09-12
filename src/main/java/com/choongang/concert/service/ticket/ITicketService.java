@@ -1,9 +1,6 @@
 package com.choongang.concert.service.ticket;
 
-import com.choongang.concert.dto.ticket.ConcertInfoDto;
-import com.choongang.concert.dto.ticket.OriginSeatNumberDto;
-import com.choongang.concert.dto.ticket.RemainNumDto;
-import com.choongang.concert.dto.ticket.SeatListDto;
+import com.choongang.concert.dto.ticket.*;
 
 import java.util.Date;
 import java.util.List;
@@ -31,4 +28,8 @@ public interface ITicketService {
      * 금액 누적 ajax 용 서비스
      */
     int accumulatePrice(String grade, int diff, boolean discountYN);
+    /**
+     * 결재완료 트랜젝션 처리
+     */
+//    List<T> paymentAproval(AprovalRequestDto aprovalRequestDto);
 }

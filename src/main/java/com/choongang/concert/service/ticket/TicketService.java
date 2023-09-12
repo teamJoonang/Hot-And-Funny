@@ -38,7 +38,6 @@ public class TicketService implements ITicketService {
     public int accumulatePrice(String grade, int diff, boolean discountYN) {
         int basicPrice = ticketDao.gradePrice(grade);
         int diffPrice;
-        System.out.println(discountYN);
         if(discountYN == false) {
             diffPrice = basicPrice * diff;
         } else {
