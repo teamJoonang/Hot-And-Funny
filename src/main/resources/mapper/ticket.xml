@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- mapper DTD 선언 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.choongang.concert.repository.ticket.ITicketDAO">
+
+	<!-- 날짜 선택시 HOME_CALENDAR TITLE과 잔여석 표시 -->
+	<select id="remainingSeat" parameterType="int" resultType="ChoiceDateDto">
+		SELECT s.seat_type as remainingSeat, count(s.seat_number) as remainingSeatCount
+		FROM concert c
+		JOIN seat s ON c.id  = #{concertId} AND s.seat_type IN ("VIP", "R", "S")
+		LEFT JOIN ticket t ON s.seat_number = t.seat_number AND c.id = t.concert_id
+		WHERE t.seat_number IS NULL AND t.concert_id IS null
+		GROUP BY s.seat_type, c.concert_date
+		ORDER BY 
+			CASE s.seat_type
+			WHEN 'VIP' then 1
+			WHEN 'R' then 2
+			WHEN 'S' then 3 end;
+	</select>
+	
+	 <!-- 좌석선택 페이지 랜더링 시 기 예매좌석 비활성화 -->
+    <select id="seatRemainView" parameterType="String" resultType="SeatListDto">
+        SELECT seat.seat_number, seat.seat_index, seat.seat_type
+        FROM seat
+            INNER JOIN ticket ON seat.seat_number = ticket.seat_number
+            INNER JOIN concert ON ticket.concert_id = concert.id
+        WHERE DATE(concert.concert_date) = #{concertDate}
+    </select>
+    
+    <!-- 날짜 기반 콘서트 정보 따오기 -->
+    <select id="findConcertInfo" parameterType="String" resultType="ConcertInfoDto">
+        select concert_name, concert_place, DATE_FORMAT(concert_date, '%H:%i') AS formatted_time
+        from concert where date(concert_date) = #{concertDate}
+    </select>
+
+    <!-- 날짜기반 잔여좌석 수 및 가격  -->
+    <select id="findRemainNum" parameterType="String" resultType="RemainNumDto">
+        SELECT
+            'vip' AS seat_type,
+            (SELECT price FROM seat WHERE seat_type = 'vip' LIMIT 1) AS seat_price,
+    (SELECT COUNT(*) FROM seat WHERE seat_type = 'vip') -
+    (SELECT COUNT(*) FROM ticket
+        INNER JOIN seat ON ticket.seat_number = seat.seat_number
+        INNER JOIN concert ON ticket.concert_id = concert.id
+    WHERE seat.seat_type = 'vip' AND date(concert.concert_date) = #{concertDate}) AS remaining_seats
+        UNION ALL
+        SELECT
+            'r' AS seat_type,
+            (SELECT price FROM seat WHERE seat_type = 'r' LIMIT 1) AS seat_price,
+    (SELECT COUNT(*) FROM seat WHERE seat_type = 'r') -
+    (SELECT COUNT(*) FROM ticket
+        INNER JOIN seat ON ticket.seat_number = seat.seat_number
+        INNER JOIN concert ON ticket.concert_id = concert.id
+    WHERE seat.seat_type = 'r' AND date(concert.concert_date) = #{concertDate}) AS remaining_seats
+        UNION ALL
+        SELECT
+            's' AS seat_type,
+            (SELECT price FROM seat WHERE seat_type = 's' LIMIT 1) AS seat_price,
+    (SELECT COUNT(*) FROM seat WHERE seat_type = 's') -
+    (SELECT COUNT(*) FROM ticket
+        INNER JOIN seat ON ticket.seat_number = seat.seat_number
+        INNER JOIN concert ON ticket.concert_id = concert.id
+    WHERE seat.seat_type = 's' AND date(concert.concert_date) = #{concertDate}) AS remaining_seats;
+    </select>
+
+    <!-- html 좌석구조 및 실제 좌석번호 매핑용 데이터  -->
+    <select id="originSeatMapping"  parameterType="int" resultType="String">
+        select seat_number from seat where seat_index = #{seatIndex};
+    </select>
+</mapper>
