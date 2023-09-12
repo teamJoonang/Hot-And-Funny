@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <link rel="stylesheet" href="../../static/css/common.css">
+    <link rel="stylesheet" href="../../static/css/common.css" th:href="@{/css/common.css}">
     
     <title>Hot & Funny</title>
     
 </head>
-<body class="min-vh-100">
+<body class="min-vh-100 d-flex flex-column">
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-black" aria-label="Offcanvas navbar large">
             <div class="container-fluid">
                 <div class="col-3">
                     <a href="" class="d-flex">
-                        <img src="../../static/img/concert_logo.png" class="img-fluid header-img-logo" alt="콘서트_이미지_로고">
+                        <img src="/static/img/concert_logo.png" th:src="@{/img/concert_logo.png}" class="img-fluid header-img-logo" alt="콘서트_이미지_로고">
                     </a>
                 </div>
                 <button class="navbar-toggler bg-black" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
@@ -87,7 +87,7 @@
                         </div>
                         <div class="col-1 d-flex align-items-center justify-content-end fs-2 pe-4 footer-icon user-nav">
                             <a href="https://github.com/teamJoongang/Hot-And-Funny" class="text-secondary pe-3"><i class="bi bi-github"></i></a>
-                            <a href="https://hyunsense.notion.site/hyunsense/fd8584dc0730455aa340d328dba8beb6" class=""><img class="notion" src="/static/img/notion_icon2.png" alt=""></a>
+                            <a href="https://hyunsense.notion.site/hyunsense/fd8584dc0730455aa340d328dba8beb6" class=""><img class="notion" th:src="@{/img/notion_icon2.png}" alt=""></a>
                         </div>
                     </div>
               </div>
@@ -119,67 +119,84 @@
             </table>
 
             <table class="table">
-                <tbody class="class">
+                <thead class="class">
                     <tr class="border">
-                        <td class="fw-bold">번호</th>
-                        <td class="fw-bold">카테고리</th>
-                        <td class="fw-bold">제목</th>
-                        <td class="fw-boldr">날짜</th>
-                        <td class="fw-bold">조회수</th>
+                        <th class="fw-bold">번호</th>
+                        <th class="fw-bold">카테고리</th>
+                        <th class="fw-bold">제목</th>
+                        <th class="fw-boldr">날짜</th>
+                        <th class="fw-bold">조회수</th>
 
                     </tr>
                 </thead>
 
                 <tbody>
-                    <tr>
-                        <td>6</td>
-                        <td>티켓오픈</td>
-                        <td>티켓을 오픈합니다</td>
-                        <td>1238-04-18</td>
-                        <td>16857</td>
+                    <tr th:each="notice : ${noticeBoard}">
+                        <td th:text="${notice.id}">6</td>
+                        <td th:text="${notice.category}">티켓오픈</td>
+                        <td><a th:href="@{'/board/event/detail'+${notice.id}}" th:text="${notice.title}">티켓을 오픈합니다</a></td>
+                        <td th:text="${notice.cratedAt}">1238-04-18</td>
+                        <td th:text="${notice.viewCnt}">16857</td>
                     </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>시스템관련</td>
-                        <td>시스템</td>
-                        <td>1231-01-01</td>
-                        <td>18216</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>배송관련</td>
-                        <td>주문 시 7일 이내</td>
-                        <td>1231-02-03</td>
-                        <td>80021</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>2023-09-02</td>
-                        <td>내용</td>
-                        <td>홍길동</td>
-                        <td>398</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>2023-09-04</td>
-                        <td>내용</td>
-                        <td>홍길동</td>
-                        <td>1231</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>2023-09-05</td>
-                        <td>내용</td>
-                        <td>홍길동</td>
-                        <td>573</td>
-                    </tr>
+<!--                     <tr> -->
+<!--                     	<a href="#"> -->
+<!--                         <td>5</td> -->
+<!--                         <td>시스템관련</td> -->
+<!--                         <td>시스템</td> -->
+<!--                         <td>1231-01-01</td> -->
+<!--                         <td>18216</td> -->
+<!--                         </a> -->
+<!--                     </tr> -->
+<!--                     <tr> -->
+<!--                     	<a href="#"> -->
+<!--                         <td>4</td> -->
+<!--                         <td>배송관련</td> -->
+<!--                         <td>주문 시 7일 이내</td> -->
+<!--                         <td>1231-02-03</td> -->
+<!--                         <td>80021</td> -->
+<!--                         </a> -->
+<!--                     </tr> -->
+<!--                     <tr> -->
+<!--                     	<a href="#">	 -->
+<!--                         <td>3</td> -->
+<!--                         <td>2023-09-02</td> -->
+<!--                         <td>내용</td> -->
+<!--                         <td>홍길동</td> -->
+<!--                         <td>398</td> -->
+<!--                         </a> -->
+<!--                     </tr> -->
+<!--                     <tr> -->
+<!--                     	<a href="#"> -->
+<!--                         <td>2</td> -->
+<!--                         <td>2023-09-04</td> -->
+<!--                         <td>내용</td> -->
+<!--                         <td>홍길동</td> -->
+<!--                         <td>1231</td> -->
+<!--                         </a> -->
+<!--                     </tr> -->
+<!--                     <tr> -->
+<!--                     	<a href="#"> -->
+<!--                         <td>1</td> -->
+<!--                         <td>2023-09-05</td> -->
+<!--                         <td>내용</td> -->
+<!--                         <td>홍길동</td> -->
+<!--                         <td>573</td> -->
+<!--                         </a> -->
+<!--                     </tr> -->
 
                 </tbody>
             </table>
 
             <hr>
 
-            <div class="text-center mt-4">
+			<div class="text-center mt-4">
+		        <th:block th:if="${isAdmin}">
+		            <a href="/write-post" class="btn btn-primary">글쓰기</a>
+		        </th:block>
+		    </div>
+
+
+            <div class="text-center mt-3">
                 <ul class="pagination pagination-sm justify-content-center">
                     <li class="page-item">
                         <a class="page-link text-black" href="#">Previous</a>
@@ -207,7 +224,7 @@
 
             <div class="container">
                 <div class="row">
-                    <div class="col-md-15 mt-5 mb-5">
+                    <div class="col-md-15 mt-2 mb-5">
                         <div class="box-body ml-4">
                             <form class="d-flex justify-content-center">
                                 <select id='search_type' class="form-select me-1 w-auto border">
@@ -236,7 +253,7 @@
         <div class="container-fluid row">
             <div class="d-flex">
                 <div class="d-flex col-2 align-items-center justify-content-center">
-                    <img src="../../static/img/concert_logo_black.png" class="img-fluid footer-logo-img" alt="">
+                    <img src="../../static/img/concert_logo_black.png" th:src="@{/img/concert_logo_black.png}" class="img-fluid footer-logo-img" alt="">
                 </div>
                 <div class="d-flex col-3 align-items-center justify-content-center footer-content small">
                     <div class="align-items-center">
