@@ -14,7 +14,17 @@
 	
 	
 
-	
+	<select id="noticeFindByNum" parameterType=" com.choongang.concert.dto.board.PageNoticeDto" resultType="com.choongang.concert.entity.board.Notice">
+        SELECT
+            <include refid="postColumns" />
+        FROM
+            notice_board
+        WHERE
+            delete_yn = 0
+        ORDER BY
+            id DESC
+        LIMIT #{offset}, #{recordSize}
+    </select>
 	
 	 <!-- notice 게시글 수 카운팅 --> 
 	 <select id="noticeFindByNumCnt" parameterType="com.choongang.concert.dto.board.PageNoticeDto" resultType="int">
