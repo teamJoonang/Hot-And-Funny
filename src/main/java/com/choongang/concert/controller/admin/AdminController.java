@@ -50,14 +50,14 @@ public class AdminController {
 	@GetMapping("userinfo")
 	public String userInfo(@ModelAttribute("params") final PageDto params, Model model) {
 		log.info("회원목록요청");	//로그
-		
 //	    log.info("offset: {}", params.getOffset());
 		
         PagingResponse<UserInfoDTO> response = userInfoService.findAllUser(params);
         model.addAttribute("response", response);		
-		
+
 //        log.info("response : " + response);
         model.addAttribute("pageDto", params); // "pageDto"는 Thymeleaf에서 사용할 이름
+		log.info("파람::{}" , params);
 //		log.info("회원목록 개수: " + adminList.size());
 		return "admin/user_info";
 	}
@@ -72,31 +72,31 @@ public class AdminController {
 	
 	
 	@GetMapping("statistics")	
-	public String statistics(Model model) {
+	public String statistics() {
 		
-		int count = 4;
-		
-		List<Integer> ageGroup = statService.ageGroup();
-		
-		
-		JSONArray ageGroupJsonArray = new JSONArray();
-		
-		for(int i = 0; count > i; i++) {
-		    if (i < ageGroup.size()) {
-		        ageGroupJsonArray.add(ageGroup.get(i));
-		    }
-		};
-		
-		model.addAttribute("ageGroupJsonArray", ageGroupJsonArray);
-		
-		log.info("여기야여기 : " + ageGroupJsonArray);
+//		int count = 4;
+//		
+//		List<Integer> ageGroup = statService.ageGroup();
+//		
+//		
+//		JSONArray ageGroupJsonArray = new JSONArray();
+//		
+//		for(int i = 0; count > i; i++) {
+//		    if (i < ageGroup.size()) {
+//		        ageGroupJsonArray.add(ageGroup.get(i));
+//		    }
+//		};
+//		
+//		model.addAttribute("ageGroupJsonArray", ageGroupJsonArray);
+//		
+//		log.info("여기야여기 : " + ageGroupJsonArray);
 //		int teen = statService.getTeen();	
 //		int twenty = statService.getTwenty();
 //		int thirty = statService.getThirty();
 //		int forty = statService.getForty();
 		
 
-		log.info("ageGroup : " + statService.ageGroup());
+//		log.info("ageGroup : " + statService.ageGroup());
 //		log.info("getTeen : " + statService.getTeen());
 //		log.info("getTwety : " + statService.getTwenty());
 //		log.info("getThirty : " + statService.getThirty());
@@ -104,7 +104,7 @@ public class AdminController {
 
 		
 		
-		model.addAttribute("AgeGroup", ageGroup);
+//		model.addAttribute("AgeGroup", ageGroup);
 //		model.addAttribute("Teen", teen);
 //		model.addAttribute("Twenty", twenty);
 //		model.addAttribute("Thirty", thirty);
@@ -126,21 +126,21 @@ public class AdminController {
 //	}
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	@GetMapping("/stat/api")
+	@GetMapping("/stat/seconddonut")
 	@ResponseBody
-	public JSONArray stat() {
+	public JSONArray seconddonut() {
 
 		int count = 4;
 
 		
-		JSONObject data = new JSONObject();
 		
 		
-		
+		//SecondDonut차트 (고객통계 중 연령대별 통계 차트)
 		List<Integer> ageGroup = statService.ageGroup();
 		
 		// js googleChart 로 리턴할 Json 객체
 		JSONArray ageGroupJsonArray = new JSONArray();
+		
 		
 		for(int i = 0; count > i; i++) {
 		    if (i < ageGroup.size()) {
@@ -149,15 +149,35 @@ public class AdminController {
 		};
 		
 		
-		log.info("여기야여기 : " + ageGroupJsonArray);
+
+		
+		log.info("여기야여기 : " + ageGroup);
+//		log.info("여기야여기 : " + ageGroupJsonArray);
 
 
 		return ageGroupJsonArray;
-		
-		
-		
 	}
 	
 	
-	
+	@GetMapping("/stat/bar")
+	@ResponseBody
+	public JSONArray bar() {
+		
+		List<Integer> reservationGroup = statService.reservationGroup();
+		log.info("예매율 담은 값 : " + reservationGroup);
+		
+		//	js googleChart로 리턴할 JSON 객체
+		JSONArray reservationGroupJsonArray = new JSONArray();
+		
+		int count = 4;
+		
+		for(int i = 0; count > i; i++) {
+			if (i < reservationGroup.size()) {
+			reservationGroupJsonArray.add(reservationGroup.get(i));
+			}
+		};
+		
+		return reservationGroupJsonArray;
+	}
+
 }

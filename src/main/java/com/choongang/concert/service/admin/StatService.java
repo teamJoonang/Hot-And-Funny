@@ -17,12 +17,15 @@ public class StatService {
 	}
 	
 	
-	
-	
 
 	
-	
+	//	SecondDonut차트에서 쓸 내용(연령대별 통계)
 	public List<Integer> ageGroup(){
 		return adminMapper.ageGroup();
+	}
+	
+	//	Bar차트에서 쓸 내용(예매율)
+	public List<Integer> reservationGroup(){
+		return adminMapper.reservationGroup();
 	}
 }

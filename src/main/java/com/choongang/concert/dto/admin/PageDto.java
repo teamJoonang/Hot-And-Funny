@@ -1,6 +1,8 @@
 package com.choongang.concert.dto.admin;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Data
 public class PageDto {

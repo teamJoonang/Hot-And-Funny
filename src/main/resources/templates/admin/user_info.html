@@ -201,15 +201,17 @@
 <div class="text-center mt-4">
     <ul class="pagination pagination-sm justify-content-center">
         <li th:if="${pageDto.paginationDto.existPrevPage}" class="page-item">
-            <a class="page-link text-black" th:href="@{'/board/user_info?page=' + ${pageDto.paginationDto.page - 1}}" href="#">이전</a>
+            <a th:if="${pageDto.page > 1}" class="page-link text-black" th:href="@{'/userinfo?page=' + ${pageDto.page - 1}}">이전</a>
+            <a th:if="${pageDto.page == 1}" class="page-link text-black" href="?page=1">이전</a>
+            
         </li>
         <th:block th:each="pageNum : ${#numbers.sequence(pageDto.paginationDto.startPage, pageDto.paginationDto.endPage)}">
-            <li th:classappend="${pageDto.paginationDto.page == pageNum} ? 'active' : ''" class="page-item">
-                <a class="page-link text-black" th:href="@{'/board/user_info?page=' + ${pageNum}}" th:text="${pageNum}">1</a>
+            <li th:classappend="${pageDto.page} ? 'active' : ''" class="page-item">
+                <a class="page-link text-black bg-white border-secondary" th:href="@{'/userinfo?page=' + ${pageNum}}" th:text="${pageNum}">1</a>
             </li>
         </th:block>
         <li th:if="${pageDto.paginationDto.existNextPage}" class="page-item">
-            <a class="page-link text-black" th:href="@{'/board/user_info?page=' + ${pageDto.paginationDto.page + 1}}" href="#">다음</a>
+            <a class="page-link text-black" th:href="@{'/userinfo?page=' + ${pageDto.page + 1}}">다음</a>
         </li>
     </ul>
 </div>

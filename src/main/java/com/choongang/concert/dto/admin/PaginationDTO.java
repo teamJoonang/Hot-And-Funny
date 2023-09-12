@@ -15,6 +15,18 @@ public class PaginationDTO {
     private boolean existNextPage;    // 다음 페이지 존재 여부
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     public PaginationDTO(int totalRecordCount, PageDto params) {
         if (totalRecordCount > 0) {
@@ -27,7 +39,7 @@ public class PaginationDTO {
 
         // 전체 페이지 수 계산
         totalPageCount = ((totalRecordCount - 1) / params.getRecordSize()) + 1;
-
+        
         // 현재 페이지 번호가 전체 페이지 수보다 큰 경우, 현재 페이지 번호에 전체 페이지 수 저장
         if (params.getPage() > totalPageCount) {
             params.setPage(totalPageCount);
@@ -48,8 +60,9 @@ public class PaginationDTO {
         limitStart = (params.getPage() - 1) * params.getRecordSize();
 
         // 이전 페이지 존재 여부 확인
-        existPrevPage = startPage != 1;
-
+//        existPrevPage = startPage != 1;
+        existPrevPage = true;
+        
         // 다음 페이지 존재 여부 확인
         existNextPage = (endPage * params.getRecordSize()) < totalRecordCount;
     }

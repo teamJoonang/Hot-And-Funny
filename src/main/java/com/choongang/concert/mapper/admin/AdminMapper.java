@@ -25,14 +25,13 @@ public interface AdminMapper {
     
     
     
-    // statics.html에 필요한 연령별 인원수 카운트
+    ///// statics.html에 필요한 연령별 인원수 카운트
 //    public List<UserInfoDTO> getAgeList();
-    
-    public int getTeen();
-    public int getTwenty();
-    public int getThirty();
-    public int getForty();
-    
+   
+    //	SecondDonut 차트에서 쓸 내용 (연령대별 통계)
     public List<Integer> ageGroup();
 
+    //	Bar 차트에서 쓸 내용 (예매율 통계)
+    public List<Integer> reservationGroup();
+   
 }
