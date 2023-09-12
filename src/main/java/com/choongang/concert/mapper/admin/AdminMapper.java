@@ -1,12 +1,11 @@
-package com.choongang.concert.mapper;
+package com.choongang.concert.mapper.admin;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.choongang.concert.dto.PageDto;
-import com.choongang.concert.dto.StatDTO;
-import com.choongang.concert.dto.UserInfoDTO;
+import com.choongang.concert.dto.admin.PageDto;
+import com.choongang.concert.dto.admin.UserInfoDTO;
 
 @Mapper
 public interface AdminMapper {

@@ -1,16 +1,15 @@
-package com.choongang.concert.entity;
+package com.choongang.concert.dto.admin;
 
 import lombok.Data;
 
 @Data
-public class userEntity {
+public class UserInfoDTO {
     private int id;
     private String loginId;
-    private String password;
     private String name;
     private String nickname;
     private String address;
-    private int age;
     private String gender;
-    private String tel;
+    private String tel;    
+
 }

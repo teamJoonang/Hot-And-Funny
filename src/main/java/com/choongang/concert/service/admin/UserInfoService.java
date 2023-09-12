@@ -1,4 +1,4 @@
-package com.choongang.concert.service;
+package com.choongang.concert.service.admin;
 
 import java.util.Collections;
 import java.util.List;
@@ -6,12 +6,11 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
-import com.choongang.concert.dto.PageDto;
-import com.choongang.concert.dto.PaginationDTO;
-import com.choongang.concert.dto.PagingResponse;
-import com.choongang.concert.dto.UserInfoDTO;
-import com.choongang.concert.mapper.AdminMapper;
+import com.choongang.concert.dto.admin.PageDto;
+import com.choongang.concert.dto.admin.PaginationDTO;
+import com.choongang.concert.dto.admin.PagingResponse;
+import com.choongang.concert.dto.admin.UserInfoDTO;
+import com.choongang.concert.mapper.admin.AdminMapper;
 
 @Service
 @Transactional

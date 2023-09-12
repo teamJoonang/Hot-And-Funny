@@ -2,7 +2,6 @@ package com.choongang.concert.controller.admin;
 
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -16,12 +15,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.choongang.concert.dto.AgeGroupDto;
-import com.choongang.concert.dto.PageDto;
-import com.choongang.concert.dto.PagingResponse;
-import com.choongang.concert.dto.UserInfoDTO;
-import com.choongang.concert.service.StatService;
-import com.choongang.concert.service.UserInfoService;
+import com.choongang.concert.dto.admin.PageDto;
+import com.choongang.concert.dto.admin.PagingResponse;
+import com.choongang.concert.dto.admin.UserInfoDTO;
+import com.choongang.concert.service.admin.StatService;
+import com.choongang.concert.service.admin.UserInfoService;
 
 @Controller
 public class AdminController {
@@ -58,8 +56,8 @@ public class AdminController {
         PagingResponse<UserInfoDTO> response = userInfoService.findAllUser(params);
         model.addAttribute("response", response);		
 		
-        log.info("response : " + response);
-		
+//        log.info("response : " + response);
+        model.addAttribute("pageDto", params); // "pageDto"는 Thymeleaf에서 사용할 이름
 //		log.info("회원목록 개수: " + adminList.size());
 		return "admin/user_info";
 	}

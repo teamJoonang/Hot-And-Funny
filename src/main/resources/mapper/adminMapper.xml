@@ -3,13 +3,13 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.choongang.concert.mapper.AdminMapper">
+<mapper namespace="com.choongang.concert.mapper.admin.AdminMapper">
 
 
 
 
 
-<select id="getUserList" parameterType="com.choongang.concert.dto.PageDto" resultType="com.choongang.concert.dto.UserInfoDTO">
+<select id="getUserList" parameterType="com.choongang.concert.dto.admin.PageDto" resultType="com.choongang.concert.dto.admin.UserInfoDTO">
     SELECT
         *
     FROM
@@ -22,7 +22,7 @@
 
 
     <!-- 게시글 수 카운팅 -->
-    <select id="count" parameterType="com.choongang.concert.dto.PageDto" resultType="int">
+    <select id="count" parameterType="com.choongang.concert.dto.admin.PageDto" resultType="int">
         SELECT
             COUNT(*)
         FROM
@@ -32,7 +32,7 @@
 
 
 	<!-- statics.html에 필요한 연령별 인원수 카운트-->
-	<select id="ageGroup" parameterType="com.choongang.concert.dto.StatDTO" resultType="int">
+	<select id="ageGroup" parameterType="com.choongang.concert.dto.admin.StatDTO" resultType="int">
 		SELECT COUNT(age) AS ageGroup FROM user WHERE age BETWEEN 10 AND 19 UNION ALL
 		SELECT COUNT(age) FROM user WHERE age BETWEEN 20 AND 29 UNION ALL
 		SELECT COUNT(age) FROM user WHERE age BETWEEN 30 AND 39 UNION ALL

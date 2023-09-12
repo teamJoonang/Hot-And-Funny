@@ -37,4 +37,26 @@ out/
 .vscode/
 
 ### properties ###
-application-db.properties
+src/main/resources/application-db.properties
+
+### resources ###
+
+src/main/resources/templates/footer.html
+src/main/resources/templates/index.html
+src/main/resources/templates/**/
+!src/main/resources/templates/admin
+
+src/main/resources/static/css/**
+!src/main/resources/static/css/admin_post.css
+!src/main/resources/static/css/admin_refund.css
+!src/main/resources/static/css/admin_statistics.css
+!src/main/resources/static/css/admin_user_info.css
+!src/main/resources/static/css/statistics.css
+
+src/main/resources/static/js/**
+!src/main/resources/static/js/statistics.js
+
+
+src/main/resources/static/img
+
+.gitignore

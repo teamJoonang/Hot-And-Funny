@@ -1,4 +1,4 @@
-package com.choongang.concert.dto;
+package com.choongang.concert.dto.admin;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
