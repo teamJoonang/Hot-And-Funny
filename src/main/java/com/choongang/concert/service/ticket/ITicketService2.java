@@ -10,7 +10,7 @@ import com.choongang.concert.dto.ticket.RemainNumDto;
 import com.choongang.concert.dto.ticket.SeatListDto;
 
 @Service
-public interface ITicketService {
+public interface ITicketService2 {
 
 	//	달력 선택한 날짜에 대한 좌석 잔여수 찾아오기
 	List<ChoiceDateDto> selectedDate (int concertId);

@@ -8,7 +8,7 @@ import com.choongang.concert.dto.ticket.ChoiceDateDto;
 import com.choongang.concert.dto.ticket.ConcertInfoDto;
 import com.choongang.concert.dto.ticket.RemainNumDto;
 import com.choongang.concert.dto.ticket.SeatListDto;
-import com.choongang.concert.repository.ticket.ITicketDAO;
+import com.choongang.concert.repository.ticket.ITicketDAO2;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -16,9 +16,9 @@ import lombok.extern.log4j.Log4j2;
 @Service
 @Log4j2
 @RequiredArgsConstructor
-public class TicketService implements ITicketService{
+public class TicketService2 implements ITicketService2{
 
-	private final ITicketDAO ticketDao;
+	private final ITicketDAO2 ticketDao;
 	
 	//	calendar 좌석 잔여석 갖고오기
 	public List<ChoiceDateDto> selectedDate (int concertId){

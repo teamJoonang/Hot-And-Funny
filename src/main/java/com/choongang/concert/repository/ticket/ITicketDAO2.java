@@ -11,7 +11,7 @@ import com.choongang.concert.dto.ticket.RemainNumDto;
 import com.choongang.concert.dto.ticket.SeatListDto;
 
 @Mapper
-public interface ITicketDAO {
+public interface ITicketDAO2 {
 
 	// 날짜 선택시 좌석 잔여석 갖고 오기 calendar 화면
 	List <ChoiceDateDto> remainingSeat(@Param("concertId") int concertId);
