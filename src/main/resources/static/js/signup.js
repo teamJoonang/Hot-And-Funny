@@ -1,5 +1,5 @@
-//
-// // err 에러메시지
+
+// err 에러메시지
 // let email_err = document.getElementById('email_err');
 // let pw_err = document.getElementById('pw_err');
 // let repw_err = document.getElementById('repw_err');
@@ -28,9 +28,9 @@
 // // const addrRegex =
 // // 나이 - 숫자만 가능 , 최소1글자 ~ 3글자.
 // const ageRegex = /\d{1,3}/g;
-//
-//
-// // 회원가입 검증
+
+
+// 회원가입 검증
 // function valid_signup(){
 //
 //     // input
