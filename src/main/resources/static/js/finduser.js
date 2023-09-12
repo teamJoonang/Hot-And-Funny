@@ -29,4 +29,68 @@ findUserPwBtn.addEventListener('click' , function(){
 });
 
 
+// ***************************** ajax ********************************************
+
+// 아이디 찾기 버튼 클릭 시
+document.getElementById('findIdBtn').addEventListener('click', function () {
+    let userEmail = document.getElementById('user_email').value;
+
+    // AJAX 요청을 수행하고 서버로 userEmail을 전송
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/user/findId', true);
+    xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                // 성공적으로 아이디를 찾았을 때의 처리
+                alert('존재하는 회원 아이디 입니다. ');
+            }
+            else if (xhr.status === 400) {
+                // 아이디를 찾지 못했을 때의 처리
+                alert('양식을 채워 주세요.');
+            }
+            else {
+                alert('아이디를 찾을 수 없습니다.')
+            }
+        }
+    };
+    // dto의 멤버와 자동파싱되도록 같은 이름으로.
+    xhr.send(JSON.stringify({ loginId : userEmail }));
+});
+
+// 비밀번호 찾기 버튼 클릭 시
+document.getElementById('findPwBtn').addEventListener('click', function () {
+    const userId = document.getElementById('user_id').value;
+    const userName = document.getElementById('user_name').value;
+    const userTel = document.getElementById('user_tel').value;
+
+    // AJAX 요청을 수행하고 서버로 userId, userName, userTel을 전송
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/user/findPw', true);
+    xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                // 성공적으로 비밀번호를 찾았을 때의 처리
+                // const response = JSON.parse(xhr.responseText);
+                alert('비밀번호 재설정을 진행하겠습니다.');
+                window.location="/user/reset";
+            }
+            else if(xhr.status === 400) {
+                // 비밀번호를 찾지 못했을 때의 처리
+                alert('모든 양식을 채워 주세요.');
+            }
+            else {
+                alert('검색되는 회원을 찾을 수 없습니다.')
+            }
+        }
+    };
+
+    xhr.send(JSON.stringify({ loginId: userId, name: userName, tel: userTel }));
+});
+
+
+
 

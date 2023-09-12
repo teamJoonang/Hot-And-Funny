@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,9 +8,9 @@
     <!-- bootstrap cdn -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- common.css -->
-    <link rel="stylesheet" href="../../static/css/common.css">
+    <link rel="stylesheet" href="../../static/css/common.css" th:href="@{/css/common.css}">
     <!-- login.css -->
-    <link rel="stylesheet" href="../../static/css/login.css">
+    <link rel="stylesheet" href="../../static/css/login.css" th:href="@{/css/login.css}">
 
     <title>사용자 아이디/비밀번호 찾기</title>
 </head>
@@ -33,31 +33,32 @@
                             </ul>
 
                             <!-- 홈으로 돌아가기 로고 -->
-                            <a href="/index.html">
-                                <img src="/static/img/concert_logo_final2_black1.png" alt="logo">
+                            <a href="/index.html" th:href="@{/}">
+                                <img src="/static/img/concert_logo_final2_black1.png" alt="logo"
+                                th:src="@{/img/concert_logo_final2_black1.png}">
                             </a>
                             
                             <!-- 아이디 찾기 -->
-                            <form action="" method="POST" id="findUserId" onsubmit="">
+                            <form method="post" id="findUserId" onsubmit="">
                                 
                                 <h4 class="mt-5" style="color: black;">로그인 아이디 찾기</h4>
                                 <p class="mt-1">가입하셨던 이메일을 입력해주세요.</p>
                                 
                                 <!-- 기존 사용자 이메일 -->
                                 <div class="text-start">
-                                    <label class="form-label m-2" for="user_id">이메일</label>
-                                    <input type="email" class="form-control form-control-lg " id="user_id" 
+                                    <label class="form-label m-2" for="user_email">이메일</label>
+                                    <input type="email" class="form-control form-control-lg " id="user_email" required="required"
                                     autocomplete="off" placeholder="user@gmail.com"/>
                                 </div>
                                 
                                 <div class="findBtnBox">
-                                    <button class="btn btn-lg m-3 border-0" type="submit" id="findIdBtn">Send</button>
+                                    <button class="btn btn-lg m-3 border-0" type="button" id="findIdBtn">Send</button>
                                 </div>
 
                             </form>
                             
                             <!-- 비밀번호 찾기 -->
-                            <form action="" method="POST" id="findUserPassword">
+                            <form method="post" id="findUserPassword">
                                 
                                 <h4 class="mt-5" style="color: black;">로그인 비빌번호 찾기</h4>
                                 <p class="mt-1">
@@ -67,24 +68,24 @@
                                 <!-- 기존 사용자 이메일 -->
                                 <div class="text-start">
                                     <label class="form-label m-2" for="user_id">이메일</label>
-                                    <input type="email" class="form-control form-control-lg " id="user_id" 
+                                    <input type="email" class="form-control form-control-lg " id="user_id" required="required"
                                     autocomplete="off" placeholder="user@gmail.com"/>
                                 </div>
                                 <!-- 기존 사용자 이름 -->
                                 <div class="text-start">
                                     <label class="form-label m-2" for="user_name">이름</label>
-                                    <input type="email" class="form-control form-control-lg " id="user_name" 
+                                    <input type="email" class="form-control form-control-lg " id="user_name" required="required"
                                     autocomplete="off" placeholder="Name"/>
                                 </div>
                                 <!-- 기존 사용자 전화번호 -->
                                 <div class="text-start">
-                                    <label class="form-label m-2" for="login_id">연락처</label>
-                                    <input type="text" class="form-control form-control-lg " id="user_tel" 
+                                    <label class="form-label m-2" for="user_tel">연락처</label>
+                                    <input type="text" class="form-control form-control-lg " id="user_tel" required="required"
                                     autocomplete="off" placeholder="Tel 010-0000-0000"/>
                                 </div>
 
                                 <div class="findBtnBox">
-                                    <button class="btn btn-lg m-3 border-0" type="submit" id="findPwBtn">send</button>
+                                    <button class="btn btn-lg m-3 border-0" type="button" id="findPwBtn">send</button>
                                 </div>
                             </form>
                         </div>
@@ -98,6 +99,6 @@
     <!-- bootstrap.js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- finduser js -->
-    <script src="../../static/js/finduser.js"></script>
+    <script src="../../static/js/finduser.js" th:src="@{/js/finduser.js}"></script>
 </body>
 </html>

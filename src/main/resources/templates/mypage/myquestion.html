@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,11 +8,11 @@
     <!-- bootstrap icon cdn -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
     <!-- common.css -->
-    <link rel="stylesheet" href="../../static/css/common.css">
+    <link rel="stylesheet" href="../../static/css/common.css" th:href="@{/css/common.css}">
     <!-- login.css -->
-    <link rel="stylesheet" href="../../static/css/login.css">
-    <!-- mypage.css -->
-    <link rel="stylesheet" href="../../static/css/mypage.css">
+    <link rel="stylesheet" href="../../static/css/login.css" th:href="@{/css/login.css}">
+    <!-- myinfo.css -->
+    <link rel="stylesheet" href="../../static/css/myinfo.css" th:href="@{/css/myinfo.css}">
     
     <title>문의내역</title>
 </head>
@@ -23,7 +23,7 @@
             <div class="container-fluid">
                 <div class="col-3">
                     <a href="" class="d-flex">
-                        <img src="/static/img/concert_logo.png" class="img-fluid header-img-logo" alt="콘서트_이미지_로고">
+                        <img src="/static/img/concert_logo.png" th:src="@{/img/concert_logo.png}" class="img-fluid header-img-logo" alt="콘서트_이미지_로고">
                     </a>
                 </div>
                 <button class="navbar-toggler bg-black" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
@@ -94,7 +94,9 @@
                         </div>
                         <div class="col-1 d-flex align-items-center justify-content-end fs-2 pe-4 footer-icon user-nav">
                             <a href="https://github.com/teamJoongang/Hot-And-Funny" class="text-secondary pe-3"><i class="bi bi-github"></i></a>
-                            <a href="https://hyunsense.notion.site/hyunsense/fd8584dc0730455aa340d328dba8beb6" class=""><img class="notion" src="/static/img/notion_icon2.png" alt=""></a>
+                            <a href="https://hyunsense.notion.site/hyunsense/fd8584dc0730455aa340d328dba8beb6" class="">
+                                <img class="notion" src="/static/img/notion_icon2.png" th:src="@{/img/notion_icon2.png}" alt="">
+                            </a>
                         </div>
                     </div>
               </div>
@@ -112,10 +114,10 @@
                         <!-- 사이드 메뉴 -->
                         <div class="card-header justify-content-center text-white bg-black">메뉴</div>
                         <div class="card-body" id="mypage_menu">
-                            <a class="my-3 sidebar_link" href="myinfo.html">회원정보</a>
-                            <a class="my-3 sidebar_link" href="myticket.html">구매내역</a>
-                            <a class="my-3 sidebar_link" href="myquestion.html">문의내역</a>
-                            <a class="my-3 sidebar_link" href="user_out.html">회원탈퇴</a>
+                            <a class="my-3 sidebar_link" href="myinfo.html" th:href="@{/user/myinfo}">회원정보</a>
+                            <a class="my-3 sidebar_link" href="myticket.html" th:href="@{/user/myticket}">구매내역</a>
+                            <a class="my-3 sidebar_link" href="myquestion.html" th:href="@{/user/myqna}">문의내역</a>
+                            <a class="my-3 sidebar_link" href="user_out.html" th:href="@{/user/out}">회원탈퇴</a>
                         </div>
                     </div>
                 </div>
