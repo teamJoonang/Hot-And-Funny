@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.choongang.concert.mapper.admin.AdminMapper">
+
+
+
+
+
+<select id="getUserList" parameterType="com.choongang.concert.dto.admin.PageDto" resultType="com.choongang.concert.dto.admin.UserInfoDTO">
+    SELECT
+        *
+    FROM
+        user
+    ORDER BY
+        id DESC
+    LIMIT #{paginationDto.limitStart}, #{recordSize}
+</select>
+    
+
+
+    <!-- 게시글 수 카운팅 -->
+    <select id="count" parameterType="com.choongang.concert.dto.admin.PageDto" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            user
+    </select>
+
+
+
+	<!-- statics.html에 필요한 sql 쿼리들-->
+	
+	<!-- SecondDonut 차트 (연령대별 통계) -->
+	<select id="ageGroup" parameterType="com.choongang.concert.dto.admin.SecondDonutDto" resultType="int">
+		SELECT COUNT(age) AS ageGroup FROM user WHERE age BETWEEN 10 AND 19 UNION ALL
+		SELECT COUNT(age) FROM user WHERE age BETWEEN 20 AND 29 UNION ALL
+		SELECT COUNT(age) FROM user WHERE age BETWEEN 30 AND 39 UNION ALL
+		SELECT COUNT(age) FROM user WHERE age BETWEEN 40 AND 109
+	</select>
+		
+
+	<!-- Bar 차트 (예매율 통게) -->
+	<select id="reservationGroup" parameterType="com.choongang.concert.dto.admin.BarDto" resultType="int">
+SELECT COUNT(concert_id) AS reservationGroup FROM ticket WHERE concert_id = 1 union all
+		SELECT COUNT(concert_id) FROM ticket WHERE concert_id = 2 union all
+		SELECT COUNT(concert_id) FROM ticket WHERE concert_id = 3;
+	</select>
+</mapper>
