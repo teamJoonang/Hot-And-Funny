@@ -1,4 +1,4 @@
-package com.choongang.concert.entity;
+package com.choongang.concert.entity.board;
 
 import java.time.LocalDateTime;
 
@@ -9,11 +9,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Notice {
+public class QnaList {
 	
 	private Long id;
 	private String category;
 	private String title;
 	private LocalDateTime cratedAt;
-	private Long viewCnt;
+	private Long userId;
+	private Long responseYn;
 }

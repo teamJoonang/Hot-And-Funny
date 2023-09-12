@@ -37,4 +37,25 @@ out/
 .vscode/
 
 ### properties ###
-application-db.properties
+src/main/resources/application-db.properties
+
+### resources ###
+
+src/main/resources/templates/footer.html
+src/main/resources/templates/index.html
+src/main/resources/templates/**/
+!src/main/resources/templates/board
+
+src/main/resources/static/css/**
+!src/main/resources/static/css/board_control.css
+!src/main/resources/static/css/board_event_card.css
+
+src/main/resources/static/js/**
+!src/main/resources/static/js/finduser.js
+!src/main/resources/static/js/myinfo.js
+!src/main/resources/static/js/signup.js
+!src/main/resources/static/js/user_out.js
+
+src/main/resources/static/img
+
+.gitignore

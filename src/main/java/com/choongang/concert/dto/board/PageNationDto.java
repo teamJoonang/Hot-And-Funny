@@ -1,9 +1,14 @@
-package com.choongang.concert.dto;
+package com.choongang.concert.dto.board;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-public class PageEventListDto {
+@NoArgsConstructor
+@AllArgsConstructor
+public class PageNationDto {
+	
 	private int rowCount = 10; 
 	private int pageCount = 3;
 	private int totalCount;
@@ -15,7 +20,7 @@ public class PageEventListDto {
 	private boolean isNext = false; // 이전 페이지 
 	private int offset; 
 	
-	public PageEventListDto(final int totalCount, final int page) {
+	public PageNationDto(final int totalCount, final int page) {
 		
 		setTotalPageCount(totalCount, this.rowCount);
 		setStartPage(this.startPage, page, this.pageCount);

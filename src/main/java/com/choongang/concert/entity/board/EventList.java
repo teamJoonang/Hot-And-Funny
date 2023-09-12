@@ -1,4 +1,4 @@
-package com.choongang.concert.entity;
+package com.choongang.concert.entity.board;
 
 import java.time.LocalDateTime;
 
@@ -10,11 +10,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class EventList {
 
-	
 	private Long id;
 	private String category;
 	private String title;
-	private Long writer_id;
-	private LocalDateTime created_at;
-	private Long view_cnt;
+	private Long writerId;
+	private LocalDateTime createdAt;
+	private Long viewCnt;
 }

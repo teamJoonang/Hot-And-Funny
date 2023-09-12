@@ -1,4 +1,4 @@
-package com.choongang.concert.dto;
+package com.choongang.concert.dto.board;
 
 import lombok.Data;
 

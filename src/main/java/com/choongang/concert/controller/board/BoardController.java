@@ -1,4 +1,4 @@
-package com.choongang.concert.controller;
+package com.choongang.concert.controller.board;
 
 import java.util.List;
 
@@ -8,10 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.choongang.concert.entity.EventList;
-import com.choongang.concert.entity.Notice;
-import com.choongang.concert.entity.QnaList;
-import com.choongang.concert.service.BoardService;
+import com.choongang.concert.entity.board.EventList;
+import com.choongang.concert.entity.board.Notice;
+import com.choongang.concert.entity.board.QnaList;
+import com.choongang.concert.service.board.BoardService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -52,8 +52,8 @@ public class BoardController {
 	
 	@GetMapping("/event/list")
 	public String eventList(Model model) {
-		List<EventList> eventListBoard = boardService.eventListBoard();
-		model.addAttribute("eventListBoard", eventListBoard);
+		List<EventList> eventBoard = boardService.eventBoard();
+		model.addAttribute("eventBoard", eventBoard);
 		return "board/event_list";
 	}
 

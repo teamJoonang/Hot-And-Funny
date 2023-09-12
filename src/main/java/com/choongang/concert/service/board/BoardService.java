@@ -1,13 +1,14 @@
-package com.choongang.concert.service;
+package com.choongang.concert.service.board;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.choongang.concert.entity.Notice;
-import com.choongang.concert.entity.QnaList;
-import com.choongang.concert.repository.BoardMapper;
+import com.choongang.concert.entity.board.EventList;
+import com.choongang.concert.entity.board.Notice;
+import com.choongang.concert.entity.board.QnaList;
+import com.choongang.concert.repository.board.BoardMapper;
 
 import lombok.RequiredArgsConstructor;
 
@@ -33,7 +34,7 @@ public class BoardService {
 	}
 	
 	// Event_Board 게시판 
-	public List<EventBoard> eventListBoard() {
+	public List<EventList> eventBoard() {
 		return boardMapper.eventBoardFindAll();
 	}
 }

@@ -19,7 +19,7 @@
 	
 	<select id="eventBoardFindAll" resultType="EventList">
 		select category, title, writer_id, created_at, view_cnt
-		from event_list order by created_at desc limit 1,15;
+		from event_board order by created_at desc limit 1,15;
 	</select>
 	
 

@@ -1,12 +1,12 @@
-package com.choongang.concert.repository;
+package com.choongang.concert.repository.board;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.choongang.concert.entity.EventList;
-import com.choongang.concert.entity.Notice;
-import com.choongang.concert.entity.QnaList;
+import com.choongang.concert.entity.board.EventList;
+import com.choongang.concert.entity.board.Notice;
+import com.choongang.concert.entity.board.QnaList;
 
 @Mapper
 public interface BoardMapper {
@@ -32,5 +32,5 @@ public interface BoardMapper {
 	
 	EventList eventBoardFindByNum(Long eventListNum);
 	
-	int eventListFindAllCnt(EventList eventList);
+	int eventFindAllCnt(EventList eventList);
 }
