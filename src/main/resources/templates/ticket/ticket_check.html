@@ -14,32 +14,34 @@
         <img src="../../static/img/concert_logo_final2.png" th:src="@{/img/concert_logo_final2.png}" alt="">
     </header>
     <div>
-        <form class="ticket" th:each = "tickets : ${tickets}">
+    <th:block th:each = "ticket : ${tickets}">
+        <form class="ticket">
             <div class="ticket-left">
                 <div class="ticket-left-header">
                     <span class="ticket-name">Hot & Funny</span>
                     <img class="QR" src="../../static/img/QR.png" th:src="@{/img/QR.png}" alt="">
                 </div>
-                <div class="ticket-left-uuid" th:text="${tickets.uuid}"></div>
+                <div class="ticket-left-uuid" th:text="${ticket.uuid}"></div>
                 <ul class="ticket-left-content">
                     <li>장소 <span class="concert-site">서울시 강서구 양천로 125 문화세종예술관 B1F</span></li>
-                    <li>일시 <span class="concert-date" th:text="${tickets.concertDate}"></span></li>
-                    <li>좌석 <span class="concert-seat" th:text="${tickets.seatNum}"></span></li>
+                    <li>일시 <span class="concert-date" th:text="${ticket.concertDate}"></span></li>
+                    <li>좌석 <span class="concert-seat" th:text="${ticket.seatNum}"></span></li>
                 </ul>
      
             </div>
             <div class="ticket-right">
-                <div class="ticket-right-uuid" th:text="${tickets.uuid}">
+                <div class="ticket-right-uuid" th:text="${ticket.uuid}">
                     No.UUID
                 </div>
                 <hr>
                 <ul class="ticket-right-content">
                     <li> 콘서트 명 <span class="concert-name">Hot & Funny</span></li>
-                    <li> 일시 <span class="concert-date" th:text="${tickets.concertDate}"></span></li>
-                    <li> 좌석 <span class="concert-seat" th:text="${tickets.seatNum}"></span></li>
+                    <li> 일시 <span class="concert-date" th:text="${ticket.concertDate}"></span></li>
+                    <li> 좌석 <span class="concert-seat" th:text="${ticket.seatNum}"></span></li>
                 </ul>
             </div>
         </form>
+    </th:block>
     </div>
     <div>
         <div class="d-flex col-3 mx-auto"><a class="btn-home col-12 mx-auto btn-home" id="btn-home" href="../index.html">홈으로</a></div>

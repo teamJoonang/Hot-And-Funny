@@ -17,5 +17,5 @@ public interface ITicketDAO2 {
 	
 	// 티켓 정보 불러와서 ticket_check view 보여주기
 //	TicketShowDto ticketView(@Param("concertDate") String concertDate, @Param("seatNum")String SeatNum);
-	TicketShowDto ticketView(@Param ("DateSeatDto") DateSeatDto dsd);
+	List<TicketShowDto> ticketView(@Param ("DateSeatDto") DateSeatDto dsd);
 }

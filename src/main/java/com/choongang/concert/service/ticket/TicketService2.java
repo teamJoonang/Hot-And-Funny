@@ -27,8 +27,8 @@ public class TicketService2 implements ITicketService2{
 		return cdd;
 	}
 		
-	public TicketShowDto getTicketInfo(DateSeatDto dsd){
-		TicketShowDto tsd = ticketDao.ticketView(dsd);
+	public List<TicketShowDto> getTicketInfo(DateSeatDto dsd){
+		List<TicketShowDto> tsd = ticketDao.ticketView(dsd);
 		return tsd;
 	}
 	
