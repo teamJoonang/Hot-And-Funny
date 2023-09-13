@@ -1,4 +1,8 @@
 package com.choongang.concert.controller.ticket;
+
+import java.util.List;
+
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,14 +15,15 @@ import com.choongang.concert.dto.ticket.TicketShowDto;
 import com.choongang.concert.service.ticket.TicketService2;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 
 @Controller
 @RequiredArgsConstructor
-@Slf4j
+@Log4j2
 
 @RequestMapping("/ticket")
 public class TicketController2 {
+
 
 	private final TicketService2 ticketService;
 
@@ -33,14 +38,28 @@ public class TicketController2 {
 	}
 
 	@PostMapping("/ticket/check")
-	public String ticketCheck(@RequestBody DateSeatDto dst, Model model) {
-//		String concertDate = dst.getConcertDate();
-//		String seatNum = dst.getSeatNum();
-		TicketShowDto tsd = ticketService.getTicketInfo(dst);
-		model.addAttribute("uuid", tsd.getUuid());
-		model.addAttribute("concertDate", tsd.getConcertDate());
-		model.addAttribute("seatNum", tsd.getSeatNum());
+	public String ticketCheck2() {
+
 		return "ticket/ticket_check";
 	}
 
+//	@PostMapping(value = "/ticket/check", consumes = MediaType.APPLICATION_JSON_VALUE)
+//	public String ticketCheck(@RequestBody DateSeatDto dst, Model model) {
+//
+//		List <TicketShowDto> tsdList = ticketService.getTicketInfo(dst);
+//
+//		for (TicketShowDto tsd : tsdList) {
+//			String uuid = tsd.getUuid();
+//			String concertDate = tsd.getConcertDate();
+//			String seatNum = tsd.getSeatNum();
+//			model.addAttribute("uuid", uuid);
+//			model.addAttribute("concertDate", concertDate);
+//			model.addAttribute("seatNum", seatNum);
+//			log.info(uuid);
+//			log.info(concertDate);
+//			log.info(seatNum);
+//		}
+//
+//		return "ticket/ticket_check";
+//	}
 }
