@@ -5,7 +5,6 @@ package com.choongang.concert.controller.admin;
 import java.util.List;
 
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.choongang.concert.dto.admin.Bar2Dto;
 import com.choongang.concert.dto.admin.PageDto;
 import com.choongang.concert.dto.admin.PagingResponse;
 import com.choongang.concert.dto.admin.UserInfoDTO;
@@ -125,7 +125,9 @@ public class AdminController {
 //	    return statisticsData;
 //	}
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
-
+	
+	
+	//	secondDonut차트(연령대별 차트)에서 쓸 디비에서 가져온 데이터 JSON 데이터로 전송
 	@GetMapping("/stat/seconddonut")
 	@ResponseBody
 	public JSONArray seconddonut() {
@@ -159,6 +161,8 @@ public class AdminController {
 	}
 	
 	
+	
+	//	bar 차트(예매율 차트)에서 쓸 디비에서 가져온 데이터 JSON 데이터로 전송
 	@GetMapping("/stat/bar")
 	@ResponseBody
 	public JSONArray bar() {
@@ -178,6 +182,27 @@ public class AdminController {
 		};
 		
 		return reservationGroupJsonArray;
+	}
+	
+	
+	
+	
+	//	bar2 차트(실시간 좌석 확인)에서 쓸 디비에서 가져온 데이터 JSON 데이터로 전송
+	@GetMapping("/stat/bar2")
+	@ResponseBody
+	public JSONArray bar2() {
+		
+		List<Bar2Dto> seatGroup = statService.seatGroup();
+		
+		log.info("시트그룹 : " + seatGroup);
+		
+		// js 구글차트로 리턴할 제이슨 객체
+		JSONArray seatGroupJsonArray = new JSONArray();
+		
+		int count = 3;
+		
+		
+		return seatGroupJsonArray;
 	}
 
 }
