@@ -82,12 +82,12 @@ renderCalendar();
 //  날짜 클릭시 타이틀 화면에 표시
 document.querySelector('.dates').addEventListener('click', (event) => {
 	const clickedDate = event.target.innerText;
-	console.log(clickedDate);
+	//console.log(clickedDate);
 	const [clickedDay] = clickedDate.split('\n');
 	//selectedDate = concertDates.find(date => date.date === Number(clickedDate));
 	selectedDate = concertDates.find(date => date.date === Number(clickedDay));
 	//console.log([clickedDay]);
-	console.log("날짜 고른 값 : " + selectedDate);
+	//console.log("날짜 고른 값 : " + selectedDate);
 	
 	//	선택 날짜 정보 title에 띄우기
 	if (selectedDate !== null) {
@@ -103,7 +103,7 @@ document.querySelector('.dates').addEventListener('click', (event) => {
 
 	const concertId = selectedDate.number;
 	
-	console.log("concertId: " + concertId);
+	//console.log("concertId: " + concertId);
 
 	// 서버로 보낼 데이터 준비 : 파라미터로 만들기 . json 으로 만들기
 
@@ -138,16 +138,16 @@ function reservationSeat (){
 			const popupWindw = window.open(
 			seatChoiceUrl,
 			'seatChoice',
-			'width=1250, height=850, location=true, status=no, scrollbars=no');
-			console.log("예매 날짜 : " + concertDate);
-			console.log(seatChoiceUrl);
-			console.log(typeof(seatChoiceUrl));
+			'width=1230, height=820, location=true, status=no, scrollbars=no');
+			//console.log("예매 날짜 : " + concertDate);
+			//console.log(seatChoiceUrl);
+			//console.log(typeof(seatChoiceUrl));
 			
 			// 크기 조절
-			popupWindw.resizeTo(1200,900);
-			popupWindw.onresize = (_=>{
-				popupWindw.resizeTo(1200,900);
-			})
+			//popupWindw.resizeTo(1250,900);
+			//popupWindw.onresize = (_=>{
+				//popupWindw.resizeTo(1250,900);
+			//})
 		})
 	}	
 	else {

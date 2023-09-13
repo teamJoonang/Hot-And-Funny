@@ -2,8 +2,8 @@
 
 body {
 
-    width: 630px !important;
-    height: 430px !important;
+    width: 1200px !important;
+    height: 800px !important;
 
 }
 
@@ -18,7 +18,6 @@ body {
     background-color: #adb5bd;
     color: white;
     position: relative;
-    top: 5px;
-    left: 29px;
-    line-height: 128px;
+    right: 50%;
+
 }
