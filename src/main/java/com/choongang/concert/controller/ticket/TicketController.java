@@ -1,7 +1,6 @@
 package com.choongang.concert.controller.ticket;
 
 import com.choongang.concert.dto.ticket.ConcertInfoDto;
-import com.choongang.concert.dto.ticket.RemainNumDto;
 import com.choongang.concert.dto.ticket.SeatListDto;
 import com.choongang.concert.service.ticket.TicketService;
 import com.fasterxml.jackson.core.JsonProcessingException;
