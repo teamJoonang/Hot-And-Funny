@@ -45,9 +45,6 @@ discountPriceSet();
 dropBoxChoice();
 concertInfoUpdate();
 
-//최종 정보 중 불필요 정보 삭제
-deleteResult();
-
 //선택된 티켓 정보 업데이트 메소드
 function ticketView() {
     //권장되지 않는 동적 변수 선언
@@ -66,10 +63,11 @@ function ticketView() {
         //티켓 정보 1차 업데이트 (seatGrade 는 향후 삭제처리)
         let ticketInfo = {
             "seatGrade": ticketArray[i].grade,
-            "seatNum": ticketArray[i].seatNum,
+            "seatNumber": ticketArray[i].seatNum,
             "concertId": concertInfo.concertId,
             "userId": userId,
-            "discountYn": null
+            "discountYn": null,
+            "seatPrice": setPrice(ticketArray[i].grade)
         };
         ticketInfoArray.push(ticketInfo);
     }
@@ -411,7 +409,6 @@ function dropBoxAjax(sendServer) {
 function deleteResult() {
     ticketInfoArray.forEach(function (ticket) {
         delete ticket.seatGrade;
-        console.log(ticketInfoArray);
     });
 }
 
@@ -429,10 +426,13 @@ nextViewBtn.addEventListener("click" , () => {
         return;
     }
 
+    //최종 정보 중 불필요 정보 삭제
+    // deleteResult();
+
+    console.log(ticketInfoArray);
     $.ajax({
-        url: '/payment/check/approval',
+        url: '/ticket/payment/check/approval',
         method: 'POST',
-        dataType: 'json',
         contentType: 'application/json',
         data: JSON.stringify(ticketInfoArray),
         success: function (serverData) {
