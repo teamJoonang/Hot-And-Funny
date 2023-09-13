@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class PageEventListDto {
-	private int rowCount = 10; 
-	private int pageCount = 3;
+	private int rowCount = 5; 
+	private int pageCount = 5;
 	private int totalCount;
 	private int page;
 	private int startPage = 1; 

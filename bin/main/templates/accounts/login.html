@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- font awesome cdn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+    <!-- bootstrap cdn -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- common.css -->
+    <link rel="stylesheet" href="../../static/css/common.css">
+    <!-- login.css -->
+    <link rel="stylesheet" href="../../static/css/login.css">
+    
+    <title>Login</title>
+</head>
+<body id="securityBody">  
+
+    <!-- content -->
+    <section class="h-100" id="wrap">
+        <div class="container h-100 w-100">
+            <div class="row d-flex h-100 justify-content-center align-items-center">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                    <div class="card shadow-lg" >
+                        <div class="card-body p-4 text-center shadow-lg" style="border-radius: 1rem;">
+                            
+                            <h1 class="mb-5" style="color:#ea10ac;">Sign in</h1>
+                            
+                            <!-- 홈으로 돌아가기 위한 로고 -->
+                            <a href="../../index.html">
+                                <img src="../../static/img/concert_logo_final2_black1.png" alt="logo">
+                            </a>
+
+                            <p class="mb-4 mt-3" style="font-size: 1.2rem;">Hot and Funny에 오신 것을 환영합니다.</p>
+                            
+                            <!-- 로그인 양식 -->
+                            <form action="" method="POST" onsubmit="return valid_loginForm()" id="loginForm">
+                                <!-- 이메일 -->
+                                <div class="text-start">
+                                    <label class="form-label m-2" for="login_id">Email</label>
+                                    <input type="email" class="form-control form-control-lg input" id="login_id" 
+                                    autocomplete="off" required placeholder="user@gmail.com"/>
+                                </div>
+                                <!-- 비밀번호 -->
+                                <div class="text-start">
+                                    <label class="form-label m-2" for="login_password">Password</label>
+                                    <input type="password" class="form-control form-control-lg input" id="login_password"
+                                    required placeholder="Password"/>
+                                    
+                                <hr class="my-4">    
+                                
+                                </div>
+                                <!-- 로그인 버튼 -->
+                            <button class="btn btn-lg m-3 text-white border-0" type="submit" id="loginBtn">Login</button>
+                            </form>
+                            <!-- sns 로그인 버튼 -->
+                            <!-- 각 SNS API로 전송되도록 -->
+                            <button class="btn btn-lg btn-block btn-primary mb-2 border-0" id="kakaoLoginBtn"
+                            type="submit"><i class="fas fa-solid fa-comment mb-2" style="color: #1a1a1c;"> </i> Sign in with Kakao</button>
+                            <button class="btn btn-lg btn-block btn-primary mb-2 border-0" id="naverLoginBtn"
+                            type="submit"><i class="fas fa-solid fa-comment mb-2" style="color: #1a1a1c;"> </i> Sign in with Naver</button>
+
+
+                            <ul>
+                                <!-- 각 사이트로 이동 -->
+                                <li class="m-1 ">아직 회원이 아니신가요? <a href="signup.html">회원가입</a></li>
+                                <li class="m-1"><a href="finduser.html">아이디 / 비밀번호 찾기</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- bootstrap js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- login js -->
+</body>
+</html>

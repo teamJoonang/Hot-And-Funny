@@ -11,9 +11,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Notice {
 	
+	
 	private Long id;
 	private String category;
 	private String title;
 	private LocalDateTime cratedAt;
 	private Long viewCnt;
+	
 }
