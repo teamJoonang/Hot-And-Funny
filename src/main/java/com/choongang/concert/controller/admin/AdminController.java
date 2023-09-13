@@ -53,7 +53,15 @@ public class AdminController {
 //	    log.info("offset: {}", params.getOffset());
 		
         PagingResponse<UserInfoDTO> response = userInfoService.findAllUser(params);
-        model.addAttribute("response", response);		
+        model.addAttribute("response", response);
+        for (UserInfoDTO userInfoDTO : response.getList()) {
+            String gender = userInfoDTO.getGender();
+            if (gender.equals(0)) {
+                userInfoDTO.setGender("여성");
+            } else {
+                userInfoDTO.setGender("남성");
+            }
+        };
 
 //        log.info("response : " + response);
         model.addAttribute("pageDto", params); // "pageDto"는 Thymeleaf에서 사용할 이름
@@ -202,7 +210,95 @@ public class AdminController {
 		int count = 3;
 		
 		
+		for(int i = 0; count > i; i++) {
+			if (i < seatGroup.size()) {
+			seatGroupJsonArray.add(seatGroup.get(i));
+			}
+		};
+		
+		
+		
 		return seatGroupJsonArray;
 	}
+	
+	
+	
+	//	donut 차트(성비별 통계)
+	@GetMapping("/stat/donut")
+	@ResponseBody
+	public JSONArray donut() {
+		
+		List<Integer> genderGroup = statService.genderGroup();
+		log.info("성비별 통계 담은값 : " + genderGroup);
+		
+		//	js 구글차트 리턴 제이슨 객체
+		JSONArray genderGroupJsonArray = new JSONArray();
+		
+		int count = 2;
+		
+		for(int i = 0; count > i; i++) {
+			if(i < genderGroup.size()) {
+				genderGroupJsonArray.add(genderGroup.get(i));
+			}
+		};
+		
+		return genderGroupJsonArray;		
+	}
+	
+	//	매출 추이
+	@GetMapping("/stat/area")
+	@ResponseBody
+	public JSONArray area() {
+		
+		List<Integer> areaGroup = statService.areaGroup();
+		log.info("매출 현황 : " + areaGroup);
+		JSONArray areaGroupJsonArray = new JSONArray();
+		
+		int count = 3332;
+		
+		for(int i = 0; count > i; i++) {
+			if(i < areaGroup.size()) {
+				areaGroupJsonArray.add(areaGroup.get(i));
+			}
+		};
+		
+	return areaGroupJsonArray;
+	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//	@GetMapping("/find")
+//	public String findUserAccount(HttpServletRequest request) throws ServletException{
+//
+//	    log.info("get >> /user/find | findUserAccount() 실행됨.");
+//	    // 세션이 만약 있고 세션 안에 loginId라는 속성도 갖고 있다면 index 페이지로 리다이렉트.
+//	    HttpSession session = request.getSession(false);
+//	    if(session != null && session.getAttribute("loginId") != null){
+//	        return "redirect:/";
+//	    }
+//	    return "redirect:/user/login";
+//	}
+	
+	
+	
+	
+	
 }

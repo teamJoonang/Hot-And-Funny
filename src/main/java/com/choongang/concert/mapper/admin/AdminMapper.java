@@ -37,5 +37,11 @@ public interface AdminMapper {
     
 	//	Bar2차트에서 쓸 내용(실시간 좌석 확인)
     public List<Bar2Dto> seatGroup();
-   
+    
+    //	Donut 차트에서 쓸 내용(성비별 통계)
+    public List<Integer> genderGroup();
+    
+    //	Area 차트에서 쓸 내용 (매출 현황)
+    public List<Integer> areaGroup();
+    
 }

@@ -33,4 +33,14 @@ public class StatService {
 	public List<Bar2Dto> seatGroup(){
 		return adminMapper.seatGroup();
 	}
+	
+	//	Donut차트에서 쓸 내용(성비별 통계)
+	public List<Integer> genderGroup(){
+		return adminMapper.genderGroup();
+	}
+	
+	//	Area차트에서 쓸 내용 (매출 현황)
+	public List<Integer> areaGroup(){
+		return adminMapper.areaGroup();
+	}
 }

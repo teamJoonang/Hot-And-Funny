@@ -16,17 +16,7 @@ public class PaginationDTO {
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
 
     public PaginationDTO(int totalRecordCount, PageDto params) {
         if (totalRecordCount > 0) {
