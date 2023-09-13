@@ -1,7 +1,6 @@
 package com.choongang.concert.service.board;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,17 +20,17 @@ public class BoardService {
 
 
 	@Autowired
-	private BoardMapper boardMapper;
+	private final BoardMapper boardMapper;
 	
 	
 	// notice_Board 게시판
-	public List<Notice> noticeBoard() {
-		return boardMapper.noticeBoardFindAll();
-	}
+//	public List<Notice> noticeBoard() {
+//		return boardMapper.noticeBoardFindAll();
+//	}
 	
-	// notice 페이징 기능 
-	public List<Notice> noticeFindByNumPost(final PageNoticeDto params) {
-		 return boardMapper.noticeFindByNum(params);
+	// notice 게시글 리스트 조회
+	public List<Notice> noticeBoard() {
+		 return boardMapper.noticeFindAll();
 	}
 
 
@@ -41,9 +40,9 @@ public class BoardService {
 	
 	
 	// Qna_Board 게시판 
-	public List<QnaList> qnaListBoard(){
-		return boardMapper.qnaBoardFindAll();
-	}
+//	public List<QnaList> qnaListBoard(){
+//		return boardMapper.qnaBoardFindAll();
+//	}
 
 
 //--------------------------------------------------------------------------------------------------------------------
@@ -51,7 +50,7 @@ public class BoardService {
 	
 	
 	// Event_Board 게시판 
-	public List<EventList> eventBoard() {
-		return boardMapper.eventBoardFindAll();
-	}
+//	public List<EventList> eventBoard() {
+//		return boardMapper.eventBoardFindAll();
+//	}
 }

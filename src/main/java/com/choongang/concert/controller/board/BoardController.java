@@ -6,13 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.choongang.concert.dto.board.PageNoticeDto;
-import com.choongang.concert.entity.board.EventList;
 import com.choongang.concert.entity.board.Notice;
-import com.choongang.concert.entity.board.QnaList;
 import com.choongang.concert.service.board.BoardService;
 
 import lombok.RequiredArgsConstructor;
@@ -49,41 +45,14 @@ public class BoardController {
 		return "board/event_detail";
 	}
 
-	
-	
-	
-	@GetMapping("/event/list")
-	public String eventList(Model model) {
-		List<EventList> eventBoard = boardService.eventBoard();
-		model.addAttribute("eventBoard", eventBoard);
-		return "board/event_list";
-	}
+	/*
+	 * @GetMapping("/event/list") public String eventList(Model model) {
+	 * List<EventList> eventBoard = boardService.eventBoard();
+	 * model.addAttribute("eventBoard", eventBoard); return "board/event_list"; }
+	 */
 
-//	@GetMapping("/notice/list")
-//	// @ModelAttribute Notice notice: HTTP 요청 파라미터를 자동으로 Notice 클래스에 매핑합니다. 
-//	public String displayNotice(@ModelAttribute Notice notice,
-//			
-//	// @RequestParam(value = "page", defaultValue = "1") 
-//	// int page: page라는 이름의 요청 파라미터를 받습니다. 만약 요청 파라미터가 없으면 기본값으로 1을 사용합니다.
-//			@RequestParam(value = "page", defaultValue = "1") 
-//			int page, Model model) {
-//		int count = boardService.findByNoticeCount(notice);
-//		log.info("---------------------------count");
-//		PageNationDto pageNationDto = new PageNationDto(count, page);
-//		List<Notice> noticeList = boardService.findNoticeList(pageNationDto);
-//		
-//		log.info("-------------------------------Notice = {}", noticeList.get(0));
-//		log.info("notice count = {}", count);
-//		
-//		model.addAttribute("noticeList", noticeList);
-//		model.addAttribute("page", page);
-//		model.addAttribute("pageDto", pageNationDto);
-//		model.addAttribute("count", count);
-//		
-//		return "board/notice_list";
-//		
-//	}
-	
+
+
 //	@GetMapping("/notice/list")
 //	public String noticeList(Model model) {
 //		List<Notice> noticeBoard = boardService.noticeBoard();
@@ -91,25 +60,30 @@ public class BoardController {
 //		return "board/notice_list";
 //	}
 
-	
 	@GetMapping("/notice/list")
-	public String noticeList(@ModelAttribute("params") final PageNoticeDto params, Model model) {
-		List<Notice> noticeBoard = boardService.noticeBoard();
-		
-		model.addAttribute("noticeBoard", noticeBoard);
-	log.info("노티스 : "+ noticeBoard);
+	public String noticePost(Model model) {
+		List<Notice> noti = boardService.noticeBoard();
+		model.addAttribute("noti", noti);
+	log.info("noticeBoard : " + noti);
 		return "board/notice_list";
+//	public String noticeList(@ModelAttribute("params") final PageNoticeDto params, Model model) {
+////		List<Notice> noticeBoard = boardService.noticeBoard();
+//		List<Notice> noticeFindByNumPost = boardService.noticeFindByNumPost(params);
+//		model.addAttribute("noticeFindByNumPost", noticeFindByNumPost);
+////		model.addAttribute("noticeBoard", noticeBoard);
+////		/log.info("노티스 : " + noticeBoard);
+//		return "board/notice_list";
 	}
 
 	
 	
-	@GetMapping("/qna/list")
-	public String qnaListBoard(Model model) {
-		List<QnaList> qnaListBoard = boardService.qnaListBoard();
-		model.addAttribute("qnaListBoard", qnaListBoard);
-		return "board/qna_list";
-	}
-	
+//	@GetMapping("/qna/list")
+//	public String qnaListBoard(Model model) {
+//		List<QnaList> qnaListBoard = boardService.qnaListBoard();
+//		model.addAttribute("qnaListBoard", qnaListBoard);
+//		return "board/qna_list";
+//	}
+
 //	@GetMapping("/qna/list")
 ////	 @ModelAttribute QnaList qnaList :@ModelAttribute 어노테이션은 메서드의 파라미터로 사용되며,
 ////	 요청 파라미터를 QnaList 객체에 자동으로 바인딩합니다.
@@ -130,8 +104,6 @@ public class BoardController {
 //		
 //		return "board/qna_list";
 //	}
-
-
 
 	@GetMapping("/user/write?{id}")
 	public String userwrite() {

@@ -15,8 +15,8 @@ public class PageNoticeDto {
 	
 	public PageNoticeDto() {
 		this.page = 1;
-		this.recordSize = 5;
-		this.pageSize = 5;
+		this.recordSize = 10;
+		this.pageSize = 10;
 		
 	}
 	

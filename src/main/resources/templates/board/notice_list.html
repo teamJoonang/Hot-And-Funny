@@ -189,20 +189,27 @@
 
             <hr>
 
-			<div class="text-center mt-4">
+			 <div class="text-center mt-4">
+			 
 		        <th:block th:if="${isAdmin}">
 		            <a href="/write-post" class="btn btn-primary">글쓰기</a>
 		         </th:block>
-		  	<ul class="pagination pagination-sm justify-content-center">
+		         
+		         
+		         
+<!-- 		  	<ul class="pagination pagination-sm justify-content-center"> -->
 <!-- 		  		<li th:if="${pageDto.isPrev == true}" class="page-item"> -->
 <!-- 		  			<a class ="page-link text-black" th:href="@{'/board/notice?page='+ ${pageDto.startPage - 1}}" href="#">이전</a> -->
 <!-- 		  		</li> -->
 		  		
-		  		<th:block th:each="pageNum : ${#numbers.sequence(PageNationDto.startPage, pageDto.endPage)}">
-		  		<li class="page-item">
-		  			<a class="page-link text-black" th:href="@{'/board/notice?page='+${pageNum}}" href="?p=" th:text="${pageNum}">1</a>
-				</li>	  			
-         		</th:block>
+<!-- 		  		<th:block th:each="pageNum : ${#numbers.sequence(PageNationDto.startPage, pageDto.endPage)}"> -->
+<!-- 		  		<li class="page-item"> -->
+<!-- 		  			<a class="page-link text-black" th:href="@{'/board/notice?page='+${pageNum}}" href="?p=" th:text="${pageNum}">1</a> -->
+<!-- 				</li>	  			 -->
+<!--          		</th:block>  -->
+         		
+         		
+         		
                    <!--  <li class="page-item">
                         <a class="page-link text-black" href="#">1</a>
                     </li>
@@ -220,8 +227,12 @@
                     </li> -->
 <!--                     <li th:if="${pageDto.isNext == true}" class="page-item"> -->
 <!--                     	<a class="page-link text-black" th:href="@{'/board/notice?page=' + ${pageDto.endPage + 1}}" href="#">다음</a> -->
-<!--                     </li>  -->
-  	</ul>
+<!--                     </li>  
+  	</ul>-->
+            
+            
+            
+            
             </div>
 
             <div class="container">
