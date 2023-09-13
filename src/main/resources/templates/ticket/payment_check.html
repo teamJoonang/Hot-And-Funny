@@ -80,30 +80,31 @@
                         </tr>
                         <tr>
                             <td>티켓금액</td>
-                            <td>드롭다운 선택시 활성화</td>
+                            <td><span id="total-price">0</span> 원</td>
                         </tr>
                         <tr>
                             <td>수수료</td>
-                            <td>드롭다운 선택시 활성화</td>
+                            <td><span id="total-charge">0</span> 원</td>
                         </tr>
                         <tr>
                             <td>배송료</td>
-                            <td>default : null</td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>총 결재금액</td>
-                            <td><span>0</span> 원</td>
+                            <td><span id="total-price-real">0</span> 원</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <div class="button-box">
                 <div class="pre-view-btn"><i class="fa-solid fa-chevron-left"></i>이전단계</div>
-                <div id = "abcd" class="next-view-btn">결제하기<i class="fa-solid fa-chevron-right"></i></div>
+                <div class="next-view-btn">결제하기<i class="fa-solid fa-chevron-right"></i></div>
             </div>
         </div>
     </div>
     </form>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../static/js/payment_check.js" th:src="@{/js/payment_check.js}"></script>
 </body>
 </html>
