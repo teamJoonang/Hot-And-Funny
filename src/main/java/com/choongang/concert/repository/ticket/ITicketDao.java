@@ -1,9 +1,6 @@
 package com.choongang.concert.repository.ticket;
 
-import com.choongang.concert.dto.ticket.ConcertInfoDto;
-import com.choongang.concert.dto.ticket.OriginSeatNumberDto;
-import com.choongang.concert.dto.ticket.RemainNumDto;
-import com.choongang.concert.dto.ticket.SeatListDto;
+import com.choongang.concert.dto.ticket.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -25,4 +22,11 @@ public interface ITicketDao {
 
     // 금액 누적 ajax 용 서비스
     int gradePrice(@Param("grade") String grade);
+
+    // 티켓 생성(insert into)
+    void insertTickets(List<MakeTicketDto> makeTicketDtos);
+    // 고객 잔액 확인 메소드
+    int findUserCash(int userId);
+    // 잔액 업데이트
+    void updateCash(@Param("userId") int userId, @Param("remainCash") int remainCash);
 }

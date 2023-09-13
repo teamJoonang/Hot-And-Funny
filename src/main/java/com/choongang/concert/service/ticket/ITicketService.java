@@ -2,7 +2,6 @@ package com.choongang.concert.service.ticket;
 
 import com.choongang.concert.dto.ticket.*;
 
-import java.util.Date;
 import java.util.List;
 
 public interface ITicketService {
@@ -29,7 +28,8 @@ public interface ITicketService {
      */
     int accumulatePrice(String grade, int diff, boolean discountYN);
     /**
-     * 결재완료 트랜젝션 처리
+     * 결재완료 티켓생성 및 트랜젝션 처리
      */
-//    List<T> paymentAproval(AprovalRequestDto aprovalRequestDto);
+
+    void insertTickets(List<MakeTicketDto> makeTicketDtos);
 }

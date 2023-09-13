@@ -1,13 +1,11 @@
 package com.choongang.concert.controller.ticket;
 
 import com.choongang.concert.dto.ticket.AccumulatePriceDto;
-import com.choongang.concert.dto.ticket.OriginSeatNumberDto;
-import com.choongang.concert.dto.ticket.SeatListDto;
+import com.choongang.concert.dto.ticket.MakeTicketDto;
 import com.choongang.concert.service.ticket.TicketService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,8 +16,12 @@ import java.util.List;
 @Slf4j
 public class TicketRestController {
 
-    @Autowired
+
     private TicketService ticketService;
+    @Autowired
+    public TicketRestController(TicketService ticketService) {
+        this.ticketService = ticketService;
+    }
 
 //    // 기 예매 좌석 체크 및 js 사용 api컨트롤러  -- 비동기방식이 아니여서 일반컨트롤러 쓰자 동일 url 충돌 발생함
 //    @GetMapping("/seat/choice/{concertDate}")
@@ -43,6 +45,11 @@ public class TicketRestController {
         return accumulateResult;
     }
 
+    // 티켓생성 트랜잭션
+    @PostMapping("/payment/check/approval")
+    public void ticketApproval(@RequestBody List<MakeTicketDto> makeTicketDtos) {
+        ticketService.insertTickets(makeTicketDtos);
+    }
 
     //재훈이 방법
 //
