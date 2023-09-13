@@ -17,6 +17,8 @@ public class LoginCheckFilter implements Filter, jakarta.servlet.Filter {
             {"/" , "/user/signup" , "/user/login" , "/user/logout" , "/user/find" , "/css/*" , "/img/*" , "/js/*" , "/user/reset"
             , "/user/findId" , "/user/findPw" , "/user/IdCheck" , "/user/nicknameCheck"};
 
+
+
     @Override
     public void destroy(){
         log.info("loginCheckFilter destroy");
