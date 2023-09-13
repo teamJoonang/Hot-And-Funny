@@ -48,4 +48,23 @@ SELECT COUNT(concert_id) AS reservationGroup FROM ticket WHERE concert_id = 1 un
 		SELECT COUNT(concert_id) FROM ticket WHERE concert_id = 2 union all
 		SELECT COUNT(concert_id) FROM ticket WHERE concert_id = 3;
 	</select>
+	
+	<!-- Bar 차트 (예매율 통게) -->
+    <resultMap id="bar2DtoResultMap" type="com.choongang.concert.dto.admin.Bar2Dto">
+        <id property="concert_id" column="concert_id"/>
+        <result property="firstConDay" column="firstConDay"/>
+        <result property="secondConDay" column="secondConDay"/>
+        <result property="thirdConDay" column="thirdConDay"/>
+    </resultMap>
+
+    <select id="seatGroup" resultMap="bar2DtoResultMap">
+        SELECT t.concert_id,
+               SUM(CASE WHEN s.seat_type = 'R' THEN 1 ELSE 0 END) AS firstConDay,
+               SUM(CASE WHEN s.seat_type = 'S' THEN 1 ELSE 0 END) AS secondConDay,
+               SUM(CASE WHEN s.seat_type = 'Vip' THEN 1 ELSE 0 END) AS thirdConDay
+        FROM ticket t 
+        LEFT OUTER JOIN seat s ON t.seat_num = s.seat_num
+        GROUP BY t.concert_id;
+    </select>
+	
 </mapper>

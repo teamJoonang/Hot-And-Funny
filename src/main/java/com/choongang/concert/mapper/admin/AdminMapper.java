@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.choongang.concert.dto.admin.Bar2Dto;
 import com.choongang.concert.dto.admin.PageDto;
 import com.choongang.concert.dto.admin.UserInfoDTO;
 import org.apache.ibatis.annotations.Param;
@@ -34,5 +35,8 @@ public interface AdminMapper {
 
     //	Bar 차트에서 쓸 내용 (예매율 통계)
     public List<Integer> reservationGroup();
+    
+	//	Bar2차트에서 쓸 내용(실시간 좌석 확인)
+    public List<Bar2Dto> seatGroup();
    
 }
