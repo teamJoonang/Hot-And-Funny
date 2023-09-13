@@ -13,7 +13,7 @@ const concertInfo = JSON.parse(sessionStorage.getItem("concertInfo"));
 const priceInfo = JSON.parse(sessionStorage.getItem("priceInfo"));
 
 //로그인 세션 정보 담을 변수
-const userId = "1";
+const userId = "5";
 
 //티켓 가격정보
 const VIPPrice = parseInt(deleteCommas(priceInfo["VIP"].price));
@@ -425,9 +425,11 @@ nextViewBtn.addEventListener("click" , () => {
             "선택하셔야 하는 티켓은 " + (vipNum+rNum+sNum) + "장 입니다.")
         return;
     }
-
     //최종 정보 중 불필요 정보 삭제
     // deleteResult();
+
+    // 다음페이지 필요 데이터 전달
+    nextPageData();
 
     console.log(ticketInfoArray);
     $.ajax({
@@ -441,12 +443,34 @@ nextViewBtn.addEventListener("click" , () => {
         },
         error: function (error) {
             console.error('결제 ajax 에러 : ', error);
+            alert("오류가 발생: " + error.responseText);
         }
 
     });
 
 
 });
+// 다음페이지 데이터 전달 메소드
+function nextPageData() {
+    let noDiscountPrice = 0;
+    let discountPrice = 0;
+    let totalCharge = 0;
+    ticketInfoArray.forEach(function (ticket) {
+        noDiscountPrice += ticket.seatPrice;
+        totalCharge += charge;
+        if(ticket.discountYn) {
+            let typeChange = ticket.seatPrice * 0.7;
+            let price = (typeChange/100) * 100;
+            discountPrice += ticket.seatPrice - price;
+        }
+    });
+    const approvalPrice = {
+        "noDiscountPrice": noDiscountPrice,
+        "discountPrice": discountPrice,
+        "totalCharge": totalCharge
+    }
+    sessionStorage.setItem("approvalPrice", JSON.stringify(approvalPrice));
+}
 
 /**
  // 정수 부호 반환 메소드

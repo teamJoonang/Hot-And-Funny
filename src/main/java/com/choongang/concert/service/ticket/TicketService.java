@@ -1,6 +1,7 @@
 package com.choongang.concert.service.ticket;
 
 import com.choongang.concert.dto.ticket.*;
+import com.choongang.concert.exception.ticket.CashNotSufficientException;
 import com.choongang.concert.repository.ticket.ITicketDao;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,7 +76,8 @@ public class TicketService implements ITicketService {
         int userCash = ticketDao.findUserCash(userId);
         int remainCash = userCash - totalPrice;
         if(remainCash < 0 ) {
-            //예외처리
+            // 예외 처리: 사용자의 현금이 부족한 경우
+            throw new CashNotSufficientException("사용자의 현금이 부족합니다.");
         }
         ticketDao.updateCash(userId, remainCash);
 
