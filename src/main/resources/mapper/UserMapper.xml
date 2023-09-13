@@ -96,6 +96,24 @@
             login_id = #{loginId}
     </update>
 
+    <select id="checkId" parameterType="String" >
+        SELECT
+            ifnull(count(login_id) , 0) login_id
+        FROM
+            user
+        WHERE
+            login_id = #{loginId}
+    </select>
+
+    <select id="checkNickname" parameterType="String" >
+        SELECT
+            ifnull(count(nickname) , 0) nickname
+        FROM
+            user
+        WHERE
+            nickname = #{nickname}
+    </select>
+
 
 
 </mapper>

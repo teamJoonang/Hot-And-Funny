@@ -40,35 +40,49 @@
                                 <!-- 회원가입 양식 -->
                                 <div class="text-start">
                                     <!-- 이메일 -->    
-                                    <label class="form-label m-1" for="new_email">이메일</label>
-                                    <span class="small" style="color: #ea10ac;" id="email_err">30자의 영문 소문자, 숫자와 특수기호는 (_)만 사용 가능합니다.</span>
-                                    <input type="email" class="form-control" id="new_email"
-                                           autocomplete="off" required="required" placeholder="5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다."/>
+                                    <div class="row">
+                                        <div class="col-9" >
+                                            <label class="form-label m-1" for="new_email">이메일</label> 
+                                            <span class="small" style="color: #ea10ac;" id="email_err">30자 이내의 대소문자, 숫자 , 특수기호는 (_) 사용 가능.</span>
+                                            <input type="email" class="form-control" id="new_email"
+                                                autocomplete="off" required="required" placeholder="5~30자의 영문 소문자, 숫자와 특수기호(_),(-)만 가능."/>
+                                        </div>
+                                        <div class="col-3 text-center">
+                                            <button class="btn btn-primary" id="idCheck">중복체크</button>
+                                        </div>
+                                    </div>
                                     <!-- 비밀번호 -->
                                     <label class="form-label m-1" for="new_password">비밀번호</label>
                                     <span class="small" style="color: #ea10ac;" id="pw_err">8~16자의 영문 대/소문자, 숫자, 특수문자를 사용해 주세요.</span>
                                     <input type="password" class="form-control" id="new_password"
-                                           required="required" placeholder="8~16자의 영문 대/소문자, 숫자, 특수문자를 사용해 주세요."/>
+                                        required="required" placeholder="8~16자의 영문 대/소문자, 숫자, 특수문자를 사용해 주세요."/>
                                     <!-- 비밀번호 재확인 -->
                                     <label class="form-label m-1" for="new_password">비밀번호 확인</label>
                                     <span class="small" style="color: #ea10ac;" id="repw_err">비밀번호를 일치 시켜주세요.</span>
                                     <input type="password" class="form-control" id="new_re_password"
-                                           required="required" placeholder="비밀번호를 일치 시켜주세요."/>
+                                        required="required" placeholder="비밀번호를 일치 시켜주세요."/>
                                     <!-- 이름 -->
                                     <label class="form-label m-1" for="new_name">이름</label>
                                     <span class="small" style="color: #ea10ac" id="name_err">한글, 6글자 이내.</span>
                                     <input type="text" class="form-control" id="new_name"
-                                           required placeholder="한글 , 6글자 이내로 입력해주세요."/>
-                                    <!-- 별명 -->
-                                    <label class="form-label m-1" for="new_name">별명</label>
-                                    <span class="small" style="color: #ea10ac; " id="nickname_err">'_'를 제외한 특수문자 불가.</span>
-                                    <input type="text" class="form-control" id="new_nickname" required="required"
-                                           placeholder="다른 사용자와 소통할 이름입니다.">
+                                        required placeholder="한글 , 6글자 이내로 입력해주세요."/>
+                                    <div class="row">
+                                        <div class="col-9" >
+                                            <!-- 별명 -->
+                                            <label class="form-label m-1" for="new_nickname">별명</label>
+                                            <span class="small" style="color: #ea10ac; " id="nickname_err">'_'를 제외한 특수문자 불가.</span>
+                                            <input type="text" class="form-control" id="new_nickname" required="required"
+                                                placeholder="다른 사용자와 소통할 이름입니다.">
+                                        </div>
+                                        <div class="col-3 text-center">
+                                            <button class="btn btn-primary border-0" id="nickNameCheck">중복체크</button>
+                                        </div>
+                                    </div>
                                     <!-- 연락처 -->
                                     <label class="form-label m-1" for="new_tel">연락처</label>
                                     <span class="small" style="color: #ea10ac;" id="tel_err">-빼고 숫자 11자리만 입력해주세요.</span>
                                     <input type="number" class="form-control" id="new_tel"
-                                           required="required" placeholder="-빼고 숫자 11자리를 입력해주세요."/>
+                                        required="required" placeholder="-빼고 숫자 11자리를 입력해주세요."/>
                                     <!-- 주소 -->
                                     <label class="form-label m-1" for="new_addr">주소</label>
                                     <span class="small" style="color: #ea10ac;" id="addr_err">도로명 주소로 입력해주세요.</span>
@@ -115,6 +129,8 @@
 
     <!-- bootstrap js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- sweetalert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- signup js -->
     <script src="../../static/js/signup.js" th:src="@{/js/signup.js}"></script>
 </body>
