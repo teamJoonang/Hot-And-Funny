@@ -3,18 +3,16 @@ package com.choongang.concert.controller.account;
 import com.choongang.concert.dto.user.*;
 import com.choongang.concert.service.user.InputValidation;
 import com.choongang.concert.service.user.UserService;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Slf4j
 @Controller
@@ -26,6 +24,42 @@ public class AccountApiController {
     private final UserService userService;
     private final InputValidation inputValidation;
 
+    // 아이디 중복 체크 확인 (회원가입 등록)
+    @PostMapping("/IdCheck")
+    public ResponseEntity<String> checkId(@RequestBody AddUserRequest userReq){
+        // 실행로그 , dto의 LoginId만 확인.
+        log.info("POST >> /user/IdCheck | checkId() 실행됨.");
+        log.info("userReq.getLoginId : " + userReq.getLoginId());
+
+        int result = userService.checkId(userReq.getLoginId());
+        log.info("result : " + result);
+
+        if(result <= 0){
+            return setSuccesResponse("사용가능한 아이디.");
+        }
+        else {
+            return setBadResponse("아이디 중복 , 다른 아이디를 사용해주세요.");
+        }
+    }
+
+    @PostMapping("/nicknameCheck")
+    public ResponseEntity<String> CheckNickname(@RequestBody AddUserRequest userReq){
+        // 실행로그 , dto의 nickname만 확인
+        log.info("POST >> /user/nicknameCheck | checkNickname() 실행됨.");
+        log.info("userReq.getNickname() : " + userReq.getNickname());
+
+        int result = userService.checkNickname(userReq.getNickname());
+        log.info("result : " + result );
+
+        if(result <= 0){
+            return setSuccesResponse("사용가능한 별명");
+        }
+        else {
+            return setBadResponse("별명 중복 , 다른 별명을 사용해주세요.");
+        }
+
+    }
+
 
     // 새로운 사용자 생성(회원가입 등록)
     @PostMapping("/signup")
@@ -34,13 +68,21 @@ public class AccountApiController {
         log.info("Post >> /user/signup | saveUser() 실행됨.");
         log.info("userReq::{}" , userReq);
         // 회원가입 양식 폼 중 하나라도 비어있다면 bad request 응답
-        if(!inputValidation.isSignupEmpty(userReq)) {
-            log.info("양식 중 하나가 비어있음.");
+        if(inputValidation.isSignupEmpty(userReq)) {
             return setBadResponse("양식을 모두 채워주세요.");
+        }
+        if(inputValidation.isPwSame(userReq)){
+            return setBadResponse("비밀번호가 일치하지 않습니다.");
         }
 
         // db단에 넣고 return 레코드 갯수를 받는다.
-        int result = userService.saveUser(userReq);
+        int result = 0;
+        try {
+            result = userService.saveUser(userReq);
+        }
+        catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         // 성공 레코드 갯수가 0 보다 많다면, 성공적.
         if(result > 0){
             log.info("새로운 사용자 회원가입 성공");
@@ -57,7 +99,7 @@ public class AccountApiController {
     ///////////////////////////////////////////////////////////////////////////////////////
     // 사용자 로그인 (아직 검증 없음 , session 고급지게 뭔가 추가 필요 , password 암호화 필요 )//
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginRequest loginReq , HttpSession session , HttpServletResponse res) throws Exception {
+    public ResponseEntity<String> login(@RequestBody LoginRequest loginReq , HttpSession session , HttpServletResponse res) {
 
         log.info("Post >> /user/login | login() 실행됨.");
         log.info("loginReq::{}" , loginReq);
@@ -154,9 +196,9 @@ public class AccountApiController {
     @PostMapping("/reset")
     public ResponseEntity<String> resetPassword(@RequestBody ResetPwRequest resetPwReq , HttpSession session){
 
-        log.info("Post >> /user/findPw | resetPassword() 실행됨.");
+        log.info("Post >> /user/reset | resetPassword() 실행됨.");
         log.info("ResetPwRequest::{}" , resetPwReq);
-        log.info("POST단에서의 session = " + session.getAttribute("loginId"));
+        log.info("POST단에서의 session.loginId = " + session.getAttribute("loginId"));
 
         // session에서 loginId 가져와서 dto에 넣어주기
         String loginId = (String)session.getAttribute("loginId");

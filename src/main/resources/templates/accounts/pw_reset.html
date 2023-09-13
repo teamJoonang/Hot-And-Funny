@@ -61,6 +61,8 @@
     
     <!-- bootstrap.js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- sweetalert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
 
         document.getElementById('loginBtn').addEventListener('click', function () {
@@ -76,18 +78,22 @@
             xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
 
             xhr.onreadystatechange = function () {
+                let responseBody = xhr.responseText;
                 if (xhr.readyState === 4) {
                     if (xhr.status === 200) {
                         // 비밀번호 재설정 성공.
-                        alert('비밀번호 재설정 되었습니다.');
+                        window.location = '/user/login';
                     }
-                    else if (xhr.status === 400) {
+                    else if (xhr.status === 400 && responseBody == '양식을 모두 채워주세요') {
                         // 칸을 다 채우지 않은 경우 또는 비밀번호 값이 일치하지 않을때.
                         // 여기서 다시 if문 분류
-                        alert('비밀번호 일치하지 않음.');
+                        alert('양식을 모두 채워주세요.');
+                    }
+                    else if(responseBody == '비밀번호가 일치하지 않습니다.'){
+                        alert('비밀번호 일치하지 않습니다.');
                     }
                     else {
-                        alert('서버오류')
+                        alert('서버 오류 발생 , firetrap5319@gmail.com 으로 연락바랍니다.');
                     }
                 }
             };

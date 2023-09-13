@@ -51,6 +51,20 @@ public interface UserMapper {
      */
     int resetPassword(ResetPwRequest resetPwReq);
 
+    /**
+     * 아이디 중복 체크
+     * @param loginId - 로그인 아이디(이메일)
+     * @return  int - 검색된 레코드 갯수 , 0이어야 중복없음.
+     */
+    int checkId(String loginId);
+
+    /**
+     * 별명 중복체크
+     * @param nickname - 별명
+     * @return int  - 검색된 레코드 갯수 , 0이어야 중복없음.
+     */
+    int checkNickname(String nickname);
+
 
 //    /**
 //     * 사용자 정보 수정

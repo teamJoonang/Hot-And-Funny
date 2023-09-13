@@ -38,11 +38,11 @@ public class InputValidation {
            userReq.getNickname().isEmpty() || userReq.getTel().isEmpty() ||
            userReq.getAddress().isEmpty() || userReq.getAge() == null ){
             log.info("회원가입 : 양식 중 하나, 빈 값 또는 null ");
-            return false;
+            return true;
         }
         else {
             log.info("회원가입 : 양식에 값은 존재.");
-            return true;
+            return false;
         }
     }
 
@@ -50,11 +50,11 @@ public class InputValidation {
     public boolean isPwSame(AddUserRequest userReq){
         if(userReq.getPassword().equals(userReq.getRepeatPw())){
             log.info("회원가입 : 비밀번호와 비밀번호 재확인 통과.");
-            return true;
+            return false;   // 값이 일치하니 if문이 실행되지 않도록 false 반환
         }
         else {
             log.info("회원가입 : 비밀번호와 비밀번호 재확인 불일치");
-            return false;
+            return true;    // 일치하지 않으니 if문 실행하도록 true 반환
         }
     }
 
@@ -62,11 +62,11 @@ public class InputValidation {
     public boolean isFindPwEmpty(FindPwRequest findPwReq){
         if (findPwReq.getLoginId().isEmpty() || findPwReq.getName().isEmpty() || findPwReq.getTel().isEmpty()){
             log.info("user/find : 양식 중 하나가 빈값 또는 null");
-            return false;
+            return true;
         }
         else {
             log.info("user/find : 양식에 값은 존재. ");
-            return true;
+            return false;
         }
     }
 
@@ -74,11 +74,11 @@ public class InputValidation {
     public boolean isResetPwEmpty(ResetPwRequest resetPwReq){
         if(resetPwReq.getPassword().isEmpty() || resetPwReq.getRepeatPassword().isEmpty()){
             log.info("user/reset : 빈값 또는 null 존재");
-            return false;
+            return true;
         }
         else {
             log.info("user/reset : 양식에 값은 존재.");
-            return true;
+            return false;
         }
     }
 

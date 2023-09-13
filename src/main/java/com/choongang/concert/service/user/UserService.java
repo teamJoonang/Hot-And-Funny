@@ -17,7 +17,7 @@ public class UserService {
      * @param req - 사용자 가입 정보
      * @return int - 성공 레코드 > 0 true
      */
-    public int saveUser(AddUserRequest req){
+    public int saveUser(AddUserRequest req) throws Exception{
 
         int result = userMapper.saveUser(req);
         return result;
@@ -64,6 +64,28 @@ public class UserService {
     public int resetPassword(ResetPwRequest resetPwReq) {
 
         int result = userMapper.resetPassword(resetPwReq);
+        return result;
+    }
+
+    /**
+     *
+     * @param loginId - 아이디(이메일)
+     * @return int - 검색된 레코드 수?(예상)
+     */
+    public int checkId(String loginId) {
+
+        int result = userMapper.checkId(loginId);
+        return result;
+    }
+
+    /**
+     *
+     * @param nickname  - 별명
+     * @return int - 검색된 레코드 수
+     */
+    public int checkNickname(String nickname) {
+
+        int result = userMapper.checkNickname(nickname);
         return result;
     }
 

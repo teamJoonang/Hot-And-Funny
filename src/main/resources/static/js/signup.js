@@ -1,13 +1,5 @@
 
-// err 에러메시지
-// let email_err = document.getElementById('email_err');
-// let pw_err = document.getElementById('pw_err');
-// let repw_err = document.getElementById('repw_err');
-// let name_err = document.getElementById('name_err');
-// let nickname_err = document.getElementById('nickname_err');
-// let tel_err = document.getElementById('tel_err');
-// let addr_err = document.getElementById('addr_err');
-// let age_err = document.getElementById('age_err');
+
 //
 //
 //
@@ -93,57 +85,159 @@
 //     }
 // }
 
+// err 에러메시지
+let email_err = document.getElementById('email_err');
+let pw_err = document.getElementById('pw_err');
+let repw_err = document.getElementById('repw_err');
+let name_err = document.getElementById('name_err');
+let nickname_err = document.getElementById('nickname_err');
+let tel_err = document.getElementById('tel_err');
+let addr_err = document.getElementById('addr_err');
+let age_err = document.getElementById('age_err');
+
+
+// 이메일 & 별명 중복체크 판별 변수
+let idCheck = false;
+let nicknameCheck = false;
+
+
+// eamil 칸을 건들면 중복체크 성공해도 false 변경
+document.getElementById('new_email').addEventListener('change' , function(){
+    idCheck = false;
+});
+
+// nickname 칸을 건들면 중복체크 성공해도 false 변경;
+document.getElementById('new_nickname').addEventListener('change' , function(){
+    nicknameCheck = false;
+});
+
+// idCheck 버튼이 눌리면 ajax 요청. (중복체크)
+document.getElementById('idCheck').addEventListener('click' , function(){
+
+    let loginId = document.getElementById('new_email').value;
+    let data = { loginId : loginId };
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST' , '/user/IdCheck' , true);
+    xhr.setRequestHeader('Content-Type' , 'application/json; charset=UTF-8');
+
+    xhr.onreadystatechange = function(){
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                // ok 응답시 
+                alert('사용가능한 이메일 입니다.');
+                // 체크 확인.
+                idCheck = true;
+            }
+            else{
+                // bad request 응답시
+                alert('이미 사용중인 이메일 입니다.');
+                document.getElementById('new_email').focus();
+            }
+        }
+    };
+    xhr.send(JSON.stringify(data));
+});
+
+// nickNameCheck 버튼 눌리면 ajax 요청. (중복체크)
+document.getElementById('nickNameCheck').addEventListener('click' , function(){
+
+    let nickname = document.getElementById('new_nickname').value;
+    let data = { nickname : nickname };
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST','/user/nicknameCheck' , true);
+    xhr.setRequestHeader('Content-Type' , 'application/json; charset=UTF-8');
+
+    xhr.onreadystatechange = function(){
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                // ok 응답시 
+                alert('사용가능한 별명 입니다.');
+                // 체크 확인.
+                nicknameCheck = true;
+            }
+            else{
+                // bad request 응답시
+                alert('이미 사용중인 별명 입니다.');
+                document.getElementById('new_nickname').focus();
+            }
+        }
+    };
+    xhr.send(JSON.stringify(data));
+
+});
+
 
 // send버튼 클릭시 ajax 요청
 document.getElementById('loginBtn').addEventListener('click', function() {
 
-    let maleGender = document.getElementById('new_gender_male');
-    let femaleGender = document.getElementById('new_gender_female');
+    // 모든 중복체크를 진행하여 true 상태일때, 가입 진행.
+    if(idCheck == true && nicknameCheck == true){
 
-    let selectedGender="";
-
-    if(maleGender.checked){
-        selectedGender = true;
-    }
-    else if(femaleGender.checked){
-        selectedGender = false;
-    }
-
-
-
-    let userData = {
-        loginId: document.getElementById('new_email').value,
-        password: document.getElementById('new_password').value,
-        repeatPw: document.getElementById('new_re_password').value,
-        name: document.getElementById('new_name').value,
-        nickname: document.getElementById('new_nickname').value,
-        tel: document.getElementById('new_tel').value,
-        address: document.getElementById('new_addr').value,
-        age: document.getElementById('new_age').value,
-        gender : selectedGender
-    };
-
-    let xhr = new XMLHttpRequest();
-    xhr.open('POST', '/user/signup', true);
-    xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 201) {
-                // 회원가입 성공 처리
-                window.location="/user/login"
-            }
-            else if (xhr.status === 400) {
-                // 아이디를 찾지 못했을 때의 처리
-                alert('양식을 채워 주세요.');
-            }
-            else {
-                // 회원가입 실패 처리
-                console.error('회원가입 실패');
-            }
+        // gender radio 버튼들 가져오기
+        let maleGender = document.getElementById('new_gender_male');
+        let femaleGender = document.getElementById('new_gender_female');
+        // gender 값 담을 변수 생성.
+        let selectedGender="";
+        // db는 tinyint(1) true 넣어주면 1 들어가짐.
+        // 남자 체크되어 있으면 변수에 true 여자체크면 false 담기.
+        if(maleGender.checked){
+            selectedGender = true;
         }
-    };
-
-    xhr.send(JSON.stringify(userData));
+        else if(femaleGender.checked){
+            selectedGender = false;
+        }
+    
+        let userData = {
+            loginId: document.getElementById('new_email').value,
+            password: document.getElementById('new_password').value,
+            repeatPw: document.getElementById('new_re_password').value,
+            name: document.getElementById('new_name').value,
+            nickname: document.getElementById('new_nickname').value,
+            tel: document.getElementById('new_tel').value,
+            address: document.getElementById('new_addr').value,
+            age: document.getElementById('new_age').value,
+            gender : selectedGender
+        };
+    
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', '/user/signup', true);
+        xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+    
+        xhr.onreadystatechange = function() {
+            let responseBody = xhr.responseText;
+            if (xhr.readyState === 4) {
+                if (xhr.status === 201) {
+                    // 회원가입 성공 처리
+                    window.location="/user/login"
+                }
+                else if (xhr.status === 400 && responseBody === '양식을 모두 채워주세요.') {
+                    alert('양식을 모두 채워주세요.');
+                }
+                else if (responseBody === '비밀번호가 일치하지 않습니다.'){
+                    alert('비밀번호가 일치하지 않습니다.');
+                }
+                else {
+                    // 회원가입 실패 처리
+                    alert('회원가입 실패');
+                }
+            }
+        };
+    
+        xhr.send(JSON.stringify(userData));
+    }
+    else if(idCheck == false){
+        alert('아이디 중복 체크를 진행해주세요.');
+    }
+    else if(nicknameCheck == false){
+        alert('별명 중복체크를 진행해주세요.');
+    }
+    else {
+        alert('중복체크를 진행해주세요.');
+    }
 });
+
+
+
 
