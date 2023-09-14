@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.choongang.concert.dto.ticket.ChoiceDateDto;
-import com.choongang.concert.dto.ticket.DateSeatDto;
 import com.choongang.concert.dto.ticket.TicketShowDto;
+import com.choongang.concert.dto.ticket.TicketCountDto;
 
 @Service
 public interface ITicketService2 {
@@ -16,6 +16,9 @@ public interface ITicketService2 {
 	
 	//	티켓 정보 가져오기
 	List<TicketShowDto> getTicketInfo (String concertDate, String userId);
+	
+	//	티켓 수 정보 가져오기
+	List<TicketCountDto> ticketCountInfo (String userId);
 	
     
 }

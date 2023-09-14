@@ -1,5 +1,6 @@
 package com.choongang.concert.controller.ticket;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.choongang.concert.dto.ticket.TicketCountDto;
 import com.choongang.concert.dto.ticket.TicketShowDto;
 import com.choongang.concert.service.ticket.TicketService2;
 
@@ -26,18 +28,41 @@ public class TicketController2 {
 	
 	private final TicketService2 ticketService;
 
-//	@GetMapping("/home/calendar")
-//	public String homeCalendar(HttpServletRequest req, Model model) {
-//		HttpSession session = req.getSession();
-//		Long userId = (Long) session.getAttribute("id");
-//		model.addAttribute("userId", userId);
-//		return "ticket/home_calendar";
-//	}
 	@GetMapping("/home/calendar")
-	public String homeCalendar() {
-	
+	public String homeCalendar(HttpServletRequest req, Model model) {
+		
+		HttpSession session = req.getSession(false);
+		if(session != null && session.getAttribute("id") != null) {
+			long id = (long) session.getAttribute("id");
+			
+			String userId = String.valueOf(id);
+			List<TicketCountDto> tcdList = ticketService.ticketCountInfo(userId);
+			List<String> checkUserIds = new ArrayList<>();
+			List<String> limitConcertDates = new ArrayList<>();
+			
+			for (TicketCountDto tcd : tcdList) {
+				String checkUserId = tcd.getCheckUserId();
+				String limitConcertDate = tcd.getConcertDate();
+				checkUserIds.add(checkUserId);
+				limitConcertDates.add(limitConcertDate);
+			}
+			model.addAttribute("checkUserId", checkUserIds);
+			model.addAttribute("limitConcertDate", limitConcertDates);
+			log.info("-------------1--------" + checkUserIds);
+			log.info("-------------2--------" + limitConcertDates);
+			
+			
+//			return "redirect:/user/login";
+//			return "redirect:/ticket/home_calendar";
+		}
+
 		return "ticket/home_calendar";
 	}
+//	@GetMapping("/home/calendar")
+//	public String homeCalendar() {
+//	
+//		return "ticket/home_calendar";
+//	}
 
 	@GetMapping("/approval")
 	public String approval() {
@@ -47,7 +72,7 @@ public class TicketController2 {
 	@GetMapping("/ticket/check")
 	public String ticketCheck(@RequestParam String concertDate, Model model, HttpSession session) {
 		
-		Long id = (Long)session.getAttribute("id");
+		long id = (long)session.getAttribute("id");
 		String userId = String.valueOf(id);
 
 		List<TicketShowDto> tsdList = ticketService.getTicketInfo(concertDate, userId);

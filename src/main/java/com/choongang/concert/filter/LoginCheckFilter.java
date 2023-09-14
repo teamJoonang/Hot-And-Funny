@@ -15,7 +15,7 @@ public class LoginCheckFilter implements Filter, jakarta.servlet.Filter {
     // 세션없이도 입장가능한 view , api 들의 매핑주소를 whitelist에 담는다.
     private static final String[] whitelist =
             {"/" , "/user/signup" , "/user/login" , "/user/logout" , "/user/find" , "/css/*" , "/img/*" , "/js/*" , "/user/reset"
-            , "/user/findId" , "/user/findPw" , "/user/IdCheck" , "/user/nicknameCheck" , "/ticket/home/calendar", "/home/calendar/{concertId}"};
+            , "/user/findId" , "/user/findPw" , "/user/IdCheck" , "/user/nicknameCheck" , "/ticket/home/calendar"};
 
     @Override
     public void destroy(){

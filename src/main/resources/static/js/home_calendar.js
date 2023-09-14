@@ -81,7 +81,7 @@ function renderCalendar() {
 //  달력
 renderCalendar();
 
-//  날짜 클릭시 타이틀 화면에 표시
+//  날짜선택 타이틀 화면
 document.querySelector('.dates').addEventListener('click', (event) => {
 	const clickedDate = event.target.innerText;
 	//console.log(clickedDate);
@@ -101,7 +101,7 @@ document.querySelector('.dates').addEventListener('click', (event) => {
 		concertDate.innerHTML = `• ${selectedDate.year}
 								-${String(selectedDate.month).padStart(2, '0')}
 								-${formattedDay} 
-								/ time. ${formattedTime}`;
+								/ Time. ${formattedTime}`;
 		concertGrade.innerText = `• 18등급`;
 		concertRuntime.innerText = `• 180분`;
 	}
@@ -110,10 +110,10 @@ document.querySelector('.dates').addEventListener('click', (event) => {
 	}
 
 	const concertId = selectedDate.number;
-	
+	///////////////////////////////////////////////2023-09-14 이거 할차례 티켓 같은날 4개초과 구매 불가능하게하기
 	//console.log("concertId: " + concertId);
-	//console.log(userId);
-
+	console.log("checkUserIds: " + checkUserIds);
+	console.log("limitConcertDates: " + limitConcertDates);
 	// 서버로 보낼 데이터 준비 : 파라미터로 만들기 . json 으로 만들기
 	if (selectedDate !== null && selectedDate.date > day){
 		$.ajax({
@@ -128,7 +128,10 @@ document.querySelector('.dates').addEventListener('click', (event) => {
 				console.log(errorThrown);
 				console.log(jqXHR);
 				console.log(textStatus);
-	
+				
+				if (userId === null){
+					alert("회원가입 및 로그인을 해주세요.");
+				}
 				//alert("실패");
 			}
 		});

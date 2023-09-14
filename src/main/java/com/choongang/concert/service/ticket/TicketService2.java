@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.choongang.concert.dto.ticket.ChoiceDateDto;
-import com.choongang.concert.dto.ticket.DateSeatDto;
+import com.choongang.concert.dto.ticket.TicketCountDto;
 import com.choongang.concert.dto.ticket.TicketShowDto;
 import com.choongang.concert.repository.ticket.ITicketDAO2;
 
@@ -33,5 +33,11 @@ public class TicketService2 implements ITicketService2{
 		return tsd;
 	}
 	
+	public List<TicketCountDto> ticketCountInfo (String userId) {
+
+		List<TicketCountDto> tcm = ticketDao.ticketCountMapper(userId);
+		
+		return tcm;
+	};
 
 }
