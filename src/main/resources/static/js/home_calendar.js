@@ -12,7 +12,9 @@ const btnReservaiton = document.querySelector('.btn-reservation');
 const concertDates = [
 	{ number: 1, date: 9, month: 9, year: 2023, time: "20:30:00" },
 	{ number: 2, date: 10, month: 9, year: 2023, time: "18:30:00" },
-	{ number: 3, date: 11, month: 9, year: 2023, time: "21:30:00" }
+	{ number: 3, date: 11, month: 9, year: 2023, time: "21:30:00" },
+	{ number: 4, date: 23, month: 9, year: 2023, time: "21:30:00" },
+	{ number: 5, date: 24, month: 9, year: 2023, time: "21:30:00" }
 ];
 
 const viewYear = date.getFullYear();
@@ -88,9 +90,11 @@ document.querySelector('.dates').addEventListener('click', (event) => {
 	selectedDate = concertDates.find(date => date.date === Number(clickedDay));
 	//console.log([clickedDay]);
 	//console.log("날짜 고른 값 : " + selectedDate);
+	const today = new Date();
+	const day = today.getDate()-1;
 	
 	//	선택 날짜 정보 title에 띄우기
-	if (selectedDate !== null) {
+	if (selectedDate !== null && selectedDate.date > day) {
 		const formattedDay = String(clickedDay).padStart(2, '0'); // 두 자리로 포맷팅
 		concertSite.innerText = `• 서울시 강서구 양천로 125 서울문화예관 B1F`;
 		concertDate.innerHTML = `• ${selectedDate.year}-${String(selectedDate.month).padStart(2, '0')}-${formattedDay} P.M ${selectedDate.time}`;
@@ -98,7 +102,7 @@ document.querySelector('.dates').addEventListener('click', (event) => {
 		concertRuntime.innerText = `• 180분`;
 	}
 	else {
-		alert("날짜를 선택해 주세요.");
+
 	}
 
 	const concertId = selectedDate.number;
@@ -106,22 +110,23 @@ document.querySelector('.dates').addEventListener('click', (event) => {
 	//console.log("concertId: " + concertId);
 
 	// 서버로 보낼 데이터 준비 : 파라미터로 만들기 . json 으로 만들기
-
-	$.ajax({
-		url: 'calendar/' + concertId
-		, method: 'GET'
-		, dataType: 'json'
-		, success: function(data) {
-			showSeatCount(data);
-
-		},
-		error: function(jqXHR, textStatus, errorThrown) {
-			console.log(errorThrown);
-			console.log(jqXHR);
-			console.log(textStatus);
-			alert("실패");
-		}
-	});
+	if (selectedDate !== null && selectedDate.date > day){
+		$.ajax({
+			url: 'calendar/' + concertId
+			, method: 'GET'
+			, dataType: 'json'
+			, success: function(data) {
+				showSeatCount(data);
+	
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				console.log(errorThrown);
+				console.log(jqXHR);
+				console.log(textStatus);
+				alert("실패");
+			}
+		});
+	}
 
 	reservationSeat();
 
@@ -130,15 +135,23 @@ document.querySelector('.dates').addEventListener('click', (event) => {
 // 예매버튼 눌렀을때 팝업창 띄우기!
 
 function reservationSeat (){
-	if (selectedDate !== null){
+	const today = new Date();
+	const day = today.getDate()-1;
+	 
+	if (selectedDate !== null && selectedDate.date > day){
+				
 		const formattedDay = String(selectedDate.date).padStart(2, '0'); // 두 자리로 포맷팅
 		const concertDate = selectedDate.year+"-"+String(selectedDate.month).padStart(2, '0')+"-"+formattedDay;
 		const seatChoiceUrl = 'http://localhost:8080/ticket/seat/choice/' + concertDate;
 		btnReservaiton.addEventListener('click',function(){
-			const popupWindw = window.open(
-			seatChoiceUrl,
-			'seatChoice',
-			'width=1230, height=820, location=true, status=no, scrollbars=no');
+			window.open(
+				seatChoiceUrl,
+				'seatChoice',
+				'width=1230, height=820, location=true, status=no, scrollbars=no');
+			//const popupWindw = window.open(
+			//seatChoiceUrl,
+			//'seatChoice',
+			//'width=1230, height=820, location=true, status=no, scrollbars=no');
 			//console.log("예매 날짜 : " + concertDate);
 			//console.log(seatChoiceUrl);
 			//console.log(typeof(seatChoiceUrl));
@@ -151,7 +164,7 @@ function reservationSeat (){
 		})
 	}	
 	else {
-		alert("날짜를 선택해 주세요.");
+		alert("날짜를 확인 해주세요. 공연 이틀 전까지 예매 가능합니다.");
 	}
 }
 
@@ -248,18 +261,29 @@ function generateClickableDates(concertDates) {
 //  날짜 클릭 시 색상 구분
 function concertDateColor() {
 	const choiceDates = document.querySelectorAll('.selected');
+	const today = new Date();
+	const day = today.getDate()-1;
+
 	choiceDates.forEach(choiceDate => {
 		choiceDate.addEventListener('click', (event) => {
-			choiceDates.forEach(element => element.classList.remove('choice'));
-			let existngChoice = document.querySelector('.choice');
-
-			if (existngChoice) {
-				existngChoice.classList.remove('choice');
-			}
-			event.target.classList.add('choice');
-			const subSpan = event.target.closest('.selected');
-			if (subSpan) {
-				subSpan.classList.add('choice');
+		let choiceDateDay = choiceDate.textContent;	//	예매 불가능한 날짜 선택 불가능하게 만들기
+			if (day < choiceDateDay){
+				choiceDates.forEach(element => element.classList.remove('choice'));
+				let existingChoice = document.querySelector('.choice');
+				
+				
+				//	클릭한 이벤트 날짜가 있다면 색 제거			
+				if (existingChoice) {
+					existingChoice.classList.remove('choice');
+				}	
+				// div 태그 선택하기위함
+				event.target.classList.add('choice');								
+				
+				// span 값도 선택시키기 위함			
+				const subSpan = event.target.closest('.selected');
+				if (subSpan) {
+					subSpan.classList.add('choice');						
+				}	
 			}
 		});
 	});

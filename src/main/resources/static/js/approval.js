@@ -4,9 +4,12 @@
 const ticketArray = JSON.parse(sessionStorage.getItem("ticketArray"));
 const concertInfo = JSON.parse(sessionStorage.getItem("concertInfo"));
 
-const abc = sessionStorage.getItem("concertInfo");
+const noDiscountPrice = JSON.parse(sessionStorage.getItem("noDiscountPrice"));
+const discountPrice = JSON.parse(sessionStorage.getItem("discountPrice"));
+const totalCharge = JSON.parse(sessionStorage.getItem("totalCharge"));
+
 const totalPrice = document.getElementById("total-price");
-const discountPrice = document.getElementById("discount-price");
+const finalDiscountPrice = document.getElementById("discount-price");
 const commissionPrice = document.getElementById("commission-price");
 const finalPrice = document.getElementById("final-price");
 
@@ -21,7 +24,7 @@ const btnTicket = document.getElementById("btn-ticket");
 
 // 나중에 추가해야함
 const userId = "1";
-
+const concertDateEx = "2023-09-09"
 
 selectedDate();
 selectedSeat();
@@ -31,10 +34,11 @@ resultPrice();
 
 // 선택된 날짜 및 시간 출력
 function selectedDate(){
-	// concertDate.innerText = concertInfo.concertDate;
-	// concertTime.innerText = concertInfo.concertTime;
-	concertDate.innerText = "2023-09-09";
-	concertTime.innerText = "19:00";
+	 concertDate.innerText = concertInfo.concertDate;
+	 concertTime.innerText = concertInfo.concertTime;
+	
+	//concertDate.innerText = "2023-09-09";
+	//concertTime.innerText = "19:00";
 }
 
 // 선택된 좌석 출력
@@ -51,10 +55,10 @@ function selectedSeat(){
 
 //	최종 가격 표시
 function resultPrice(){
-	const totalPrice = "30000";
-	const discountPrice = "3000";
-	const commissionPrice = "6000";
-	finalPrice.innerText = Number(totalPrice) - Number(discountPrice) + Number(commissionPrice);		
+	const totalPrice = noDiscountPrice;
+	const finalDiscountPrice = discountPrice;
+	const commissionPrice = totalCharge;
+	finalPrice.innerText = Number(totalPrice) - Number(finalDiscountPrice) + Number(commissionPrice);		
 }
 
 // 확인 버튼을 눌렀을 때 index 화면으로 전환
@@ -65,8 +69,8 @@ btnConfirm.addEventListener("click",()=>{
 
 // 티켓 버튼을 눌렀을 때 ticket_check 화면으로 전환
 btnTicket.addEventListener("click",()=>{
-	//window.location.href="/ticket/ticket/check"
 	dateSend();
+	
 
 })
 
@@ -75,31 +79,43 @@ btnTicket.addEventListener("click",()=>{
 //	티켓 보기 버튼을 클릭했을때 ajax 
 
 function dateSend(){
+window.location.href="/ticket/ticket/check?concertDate="+concertDateEx;
+//window.location.href="/ticket/ticket/check?concertDate="+concertDateEx+"&userId="+userId; 
+
+/*
+const data = [{concertDate : "2023-09-09", userId : userId}];
+
+var infoToPass = data; 
+var form = $('<form action="/next-page" method="post"></form>');
+form.append('<input type="hidden" name="info" value="' + infoToPass + '">');
+form.appendTo($('body')).submit();
+*/
+
+
+/*
 	$.ajax({
 		url: '/ticket/ticket/check'
-		,method: 'POST'
-	//	,data : JSON.stringify(params)
-		,data: JSON.stringify({
-        concertDate: '2023-09-09',
-        userId: userId
-    	})
+		,method: 'GET'
+		,data: {
+			concertDate : concertDateEx,
+			userId : userId
+		}
 		,contentType: 'application/json'
 		,dataType: 'json'
-		,async: false
-		,success:function(resp){
+		//,async: false
+		,success:function(data){
 			alert("성공");
-			console.log(resp);
-			
-			//location.href="/ticket/ticket/check"
+			console.log(data);
+			//location.href="/ticket/ticket/check"+concertDateEx + "/" + userId
 		},
 		error: function(jqXHR, textStatus, errorThrown) {
 			console.log(errorThrown);
 			console.log(jqXHR);
 			console.log(textStatus);
 			alert("실패");
-			connsole.log(userId);
 		}
-	});	
+	});
+*/
 }
 
 

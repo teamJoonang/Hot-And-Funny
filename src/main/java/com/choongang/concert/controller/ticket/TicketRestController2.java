@@ -35,24 +35,23 @@ public class TicketRestController2 {
 		return ResponseEntity.ok(cdd);
 	}
 
-
-	@PostMapping(value = "/ticket/check", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<TicketShowDto>> ticketCheck(@RequestBody DateSeatDto dst, Model model) {
-
-		List <TicketShowDto> tsd = ticketService.getTicketInfo(dst);
-		log.info(tsd);
-//		for (TicketShowDto tsd : tsdList) {
-//			String uuid = tsd.getUuid();
-//			String concertDate = tsd.getConcertDate();
-//			String seatNum = tsd.getSeatNum();
-//			model.addAttribute("uuid", uuid);
-//			model.addAttribute("concertDate", concertDate);
-//			model.addAttribute("seatNum", seatNum);
-//			log.info(uuid);
-//			log.info(concertDate);
-//			log.info(seatNum);
-//		}
-		
-		return ResponseEntity.ok(tsd);
-	}
+//	@GetMapping("/ticket/check/{concertDate}/{userId}")
+//	public ResponseEntity<List<TicketShowDto>> ticketCheck(@PathVariable String concertDate, @PathVariable String userId) {
+//		//consumes = MediaType.APPLICATION_JSON_VALUE
+//
+//		List <TicketShowDto> tsd = ticketService.getTicketInfo(concertDate, userId);
+//		log.info(tsd);
+////		for (TicketShowDto tsd : tsdList) {
+////			String uuid = tsd.getUuid();
+////			String concertDate = tsd.getConcertDate();
+////			String seatNum = tsd.getSeatNum();
+////			model.addAttribute("uuid", uuid);
+////			model.addAttribute("concertDate", concertDate);
+////			model.addAttribute("seatNum", seatNum);
+////			log.info(uuid);
+////			log.info(concertDate);
+////			log.info(seatNum);
+////		}		
+//		return ResponseEntity.ok(tsd);
+//	}
 }

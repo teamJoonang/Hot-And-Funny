@@ -15,7 +15,7 @@ public interface ITicketService2 {
 	List<ChoiceDateDto> selectedDate (int concertId);
 	
 	//	티켓 정보 가져오기
-	List<TicketShowDto> getTicketInfo (DateSeatDto dst);
+	List<TicketShowDto> getTicketInfo (String concertDate, String userId);
 	
     
 }
