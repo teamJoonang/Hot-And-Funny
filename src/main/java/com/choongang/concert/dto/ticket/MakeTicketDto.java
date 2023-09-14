@@ -5,9 +5,9 @@ import lombok.Data;
 @Data
 public class MakeTicketDto {
     private String seatNumber;
-    private int concertId;
-    private int userId;
+    private long concertId;
+    private long userId;
     private boolean discountYn;
     private String seatGrade;
-    private int seatPrice;
+    private long seatPrice;
 }

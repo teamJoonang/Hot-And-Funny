@@ -91,7 +91,7 @@
                             <td></td>
                         </tr>
                         <tr>
-                            <td>총 결재금액</td>
+                            <td>총 결제금액</td>
                             <td><span id="total-price-real">0</span> 원</td>
                         </tr>
                     </tbody>
@@ -103,8 +103,15 @@
             </div>
         </div>
     </div>
-    </form>
+    <script th:inline="javascript">
+        // httpsession 값
+        const userId =[[${userId}]]
+        //로그인 세션 정보 담을 변수 (테스트용 - 본버전 뷰단하단)
+        // const userId = "1";
+    </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!--  부트페이 CDN  -->
+    <script src="https://js.bootpay.co.kr/bootpay-4.3.3.min.js" type="application/javascript"></script>
     <script src="../../static/js/payment_check.js" th:src="@{/js/payment_check.js}"></script>
 </body>
 </html>

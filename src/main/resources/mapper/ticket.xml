@@ -63,11 +63,11 @@
         </foreach>
     </insert>
     <!-- 고객 잔액 확인  -->
-    <select id="findUserCash"  parameterType="int" resultType="int">
+    <select id="findUserCash"  parameterType="long" resultType="int">
         select cash from user where id = #{userId}
     </select>
     <!-- 고객 잔액 업데이트 -->
-    <update id="updateCash" parameterType="int">
+    <update id="updateCash" parameterType="long">
         UPDATE user SET cash = #{remainCash} WHERE id = #{userId}
     </update>
 </mapper>

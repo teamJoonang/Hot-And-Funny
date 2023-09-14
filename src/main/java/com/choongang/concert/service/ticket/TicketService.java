@@ -1,24 +1,17 @@
 package com.choongang.concert.service.ticket;
 
-import java.util.List;
-
+import com.choongang.concert.dto.ticket.*;
+import com.choongang.concert.exception.ticket.CashNotSufficientException;
+import com.choongang.concert.repository.ticket.ITicketDao;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.choongang.concert.dto.ticket.ConcertInfoDto;
-import com.choongang.concert.dto.ticket.MakeTicketDto;
-import com.choongang.concert.dto.ticket.RemainNumDto;
-import com.choongang.concert.dto.ticket.SeatListDto;
-import com.choongang.concert.repository.ticket.ITicketDao;
-import com.choongang.concert.repository.ticket.ITicketDao;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import java.util.List;
 
 @Service
 @Slf4j
-
 public class TicketService implements ITicketService {
 
 
@@ -62,12 +55,12 @@ public class TicketService implements ITicketService {
     // 티켓 생성 서비스
     public void insertTickets(List<MakeTicketDto> makeTicketDtos) {
         int totalPrice = 0;
-        int userId = 0;
+        long userId = 0;
         int charge = 2000;
         for (MakeTicketDto makeTicketDto : makeTicketDtos) {
             userId = makeTicketDto.getUserId();
             String seatGrade = makeTicketDto.getSeatGrade();
-            int seatPrice = makeTicketDto.getSeatPrice();
+            long seatPrice = makeTicketDto.getSeatPrice();
             boolean discountYn = makeTicketDto.isDiscountYn();
             if (discountYn) {
                 int typeChange = (int) (seatPrice * 0.7);
@@ -83,7 +76,8 @@ public class TicketService implements ITicketService {
         int userCash = ticketDao.findUserCash(userId);
         int remainCash = userCash - totalPrice;
         if(remainCash < 0 ) {
-            //예외처리
+            // 예외 처리: 사용자의 현금이 부족한 경우
+            throw new CashNotSufficientException("사용자의 현금이 부족합니다.");
         }
         ticketDao.updateCash(userId, remainCash);
 

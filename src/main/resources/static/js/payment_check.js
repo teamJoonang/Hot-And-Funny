@@ -12,9 +12,6 @@ const sNum = countingTicket("S");
 const concertInfo = JSON.parse(sessionStorage.getItem("concertInfo"));
 const priceInfo = JSON.parse(sessionStorage.getItem("priceInfo"));
 
-//로그인 세션 정보 담을 변수
-const userId = "1";
-
 //티켓 가격정보
 const VIPPrice = parseInt(deleteCommas(priceInfo["VIP"].price));
 const RPrice = parseInt(deleteCommas(priceInfo["R"].price));
@@ -217,7 +214,7 @@ function dropBoxChoice() {
                         dropBoxAjax(sendServer);
                         // 할인 티켓 배정 로직
                         let count = 0;
-                        console.log(diff);
+
                         if(diff > 0) {
                             ticketInfoArray.forEach(function (ticket) {
                                 if(ticket.seatGrade == sendServer.grade && count < diff) {
@@ -297,6 +294,7 @@ function dropBoxChoice() {
                 previousOptionValue = selectedOptionValue;
 
                 colorApply(dropBox);
+
             } else {
                 alert(`해당 등급의 티켓을 ${limitCond}장 이상 선택할 수 없습니다.`);
                 // 이전 선택값으로 돌아가도록 드롭박스 값을 변경
@@ -398,6 +396,7 @@ function dropBoxAjax(sendServer) {
             htmlTotalCharge.textContent = formatNumberWithCommas(totalCharge);
             htmlTotalPriceReal.textContent = formatNumberWithCommas(totalPrice + parseInt(totalCharge));
             countChoiceTicket += sendServer.diff;
+            btnAnimation();
         },
         error: function(error) {
             console.error('에러:', error);
@@ -417,19 +416,56 @@ prePage.addEventListener("click", () => {
     window.location.href = "/ticket/seat/choice/" + concertInfo.concertDate;
 });
 
-//결제하기 이벤트
-nextViewBtn.addEventListener("click" , () => {
+nextViewBtn.addEventListener("click" , async() => {
     //티켓 전체 미선택 시 예외처리
     if(countChoiceTicket < (vipNum+rNum+sNum)) {
         alert("현재 선택하신 티켓은 총" + countChoiceTicket + "장 입니다.\n" +
             "선택하셔야 하는 티켓은 " + (vipNum+rNum+sNum) + "장 입니다.")
         return;
     }
-
     //최종 정보 중 불필요 정보 삭제
     // deleteResult();
 
-    console.log(ticketInfoArray);
+    // 부트페이
+    try {
+        const response = await Bootpay.requestPayment({
+            "application_id": "6501abe500be04001ed42b93",
+            "price": 100,
+            "order_name": "테스트결제",
+            "order_id": "TEST_ORDER_ID",
+            "pg": "nicepay",
+            "method": "card",
+            "tax_free": 0,
+            "user": {
+                "id": "회원아이디",
+                "username": "회원이름",
+                "phone": "01000000000",
+                "email": "test@test.com"
+            },
+            "items": [
+                {
+                    "id": "item_id",
+                    "name": "테스트아이템",
+                    "qty": 1,
+                    "price": 100
+                }
+            ],
+            "extra": {
+                "open_type": "iframe",
+                "card_quota": "0,2,3",
+                "escrow": false
+            }
+        })
+        console.log('실결제 완료 ', response);
+    } catch (error) {
+        console.error('실결제 오류 : ' , error);
+        alert("결제가 취소되었습니다");
+        return;
+    }
+
+    // 다음페이지 필요 데이터 전달
+    nextPageData();
+
     $.ajax({
         url: '/ticket/payment/check/approval',
         method: 'POST',
@@ -441,12 +477,40 @@ nextViewBtn.addEventListener("click" , () => {
         },
         error: function (error) {
             console.error('결제 ajax 에러 : ', error);
+            alert("오류가 발생: " + error.responseText);
         }
 
     });
-
-
 });
+// 다음페이지 데이터 전달 메소드
+function nextPageData() {
+    let noDiscountPrice = 0;
+    let discountPrice = 0;
+    let totalCharge = 0;
+    ticketInfoArray.forEach(function (ticket) {
+        noDiscountPrice += ticket.seatPrice;
+        totalCharge += charge;
+        if(ticket.discountYn) {
+            let typeChange = ticket.seatPrice * 0.7;
+            let price = (typeChange/100) * 100;
+            discountPrice += ticket.seatPrice - price;
+        }
+    });
+    const approvalPrice = {
+        "noDiscountPrice": noDiscountPrice,
+        "discountPrice": discountPrice,
+        "totalCharge": totalCharge
+    }
+    sessionStorage.setItem("approvalPrice", JSON.stringify(approvalPrice));
+}
+//조건부 애니메이션 적용
+function btnAnimation() {
+    if(parseInt(countChoiceTicket) == (vipNum+rNum+sNum)) {
+        nextViewBtn.classList.add('blinking-button');
+    } else {
+        nextViewBtn.classList.remove('blinking-button');
+    }
+}
 
 /**
  // 정수 부호 반환 메소드
