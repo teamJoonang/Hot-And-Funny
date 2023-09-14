@@ -21,7 +21,7 @@
 	
 	<!-- 최종 ticket에 대한 화면 보여주기 -->
 	<select id="ticketView" parameterType="String" resultType="TicketShowDto">
-		SELECT t.uuid as uuid, c.concert_date as concertDate, t.seat_number as seatNum
+		SELECT t.uuid as uuid, date_format(c.concert_date, '%Y-%m-%d %H:%i') as concertDate, t.seat_number as seatNum
 		FROM ticket t
 		INNER JOIN concert c ON t.concert_id = c.id 
 		WHERE DATE(c.concert_date) = #{concertDate} AND t.user_id = #{userId};	

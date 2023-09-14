@@ -4,9 +4,7 @@
 const ticketArray = JSON.parse(sessionStorage.getItem("ticketArray"));
 const concertInfo = JSON.parse(sessionStorage.getItem("concertInfo"));
 
-const noDiscountPrice = JSON.parse(sessionStorage.getItem("noDiscountPrice"));
-const discountPrice = JSON.parse(sessionStorage.getItem("discountPrice"));
-const totalCharge = JSON.parse(sessionStorage.getItem("totalCharge"));
+const approvalPrice = JSON.parse(sessionStorage.getItem("approvalPrice"));
 
 const totalPrice = document.getElementById("total-price");
 const finalDiscountPrice = document.getElementById("discount-price");
@@ -21,11 +19,9 @@ const seatNumber = document.querySelectorAll(".seat-number");
 const btnConfirm = document.getElementById("btn-confirm");
 const btnTicket = document.getElementById("btn-ticket");
 
-
-// 나중에 추가해야함
-const userId = "1";
-const concertDateEx = "2023-09-09"
-
+// 나중에 추가해야함 더미로 사용함
+//const userId = "1";
+//const concertDateEx = "2023-09-09"
 selectedDate();
 selectedSeat();
 
@@ -55,10 +51,17 @@ function selectedSeat(){
 
 //	최종 가격 표시
 function resultPrice(){
-	const totalPrice = noDiscountPrice;
-	const finalDiscountPrice = discountPrice;
-	const commissionPrice = totalCharge;
-	finalPrice.innerText = Number(totalPrice) - Number(finalDiscountPrice) + Number(commissionPrice);		
+	const totalPriceApproval = approvalPrice.noDiscountPrice;
+	const finalDiscountPriceApproval = approvalPrice.discountPrice;
+	const commissionPriceApproval = approvalPrice.totalCharge;
+	
+	totalPrice.innerText = totalPriceApproval;
+	finalDiscountPrice.innerText = finalDiscountPriceApproval;
+	commissionPrice.innerText = commissionPriceApproval;
+	
+	finalPrice.innerText = Number(totalPriceApproval) - Number(finalDiscountPriceApproval) + Number(commissionPriceApproval);
+	
+
 }
 
 // 확인 버튼을 눌렀을 때 index 화면으로 전환
@@ -79,7 +82,8 @@ btnTicket.addEventListener("click",()=>{
 //	티켓 보기 버튼을 클릭했을때 ajax 
 
 function dateSend(){
-window.location.href="/ticket/ticket/check?concertDate="+concertDateEx;
+	const choiceDate = concertInfo.concertDate 
+	window.location.href="/ticket/ticket/check?concertDate="+choiceDate;
 //window.location.href="/ticket/ticket/check?concertDate="+concertDateEx+"&userId="+userId; 
 
 /*

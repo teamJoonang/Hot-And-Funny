@@ -83,12 +83,12 @@ body {
 }
 
 .ticket-right-uuid {
-    font-size : 1rem;
+    font-size : 0.7rem;
     font-weight: 700;
     line-height: 20px;
     margin-top : 10px;
     margin-left : 10px;
-    height : 5%;
+    height : 15%;
 }
 
 .ticket-right-content {
@@ -97,7 +97,7 @@ body {
     font-weight: 500;
 }
 .ticket-right-content li {
-    margin-top : 25px;
+    margin-top : 20px;
     margin-left : -20px;
 }
 .ticket-right-content span {
