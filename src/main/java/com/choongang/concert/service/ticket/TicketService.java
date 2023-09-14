@@ -55,12 +55,12 @@ public class TicketService implements ITicketService {
     // 티켓 생성 서비스
     public void insertTickets(List<MakeTicketDto> makeTicketDtos) {
         int totalPrice = 0;
-        int userId = 0;
+        long userId = 0;
         int charge = 2000;
         for (MakeTicketDto makeTicketDto : makeTicketDtos) {
             userId = makeTicketDto.getUserId();
             String seatGrade = makeTicketDto.getSeatGrade();
-            int seatPrice = makeTicketDto.getSeatPrice();
+            long seatPrice = makeTicketDto.getSeatPrice();
             boolean discountYn = makeTicketDto.isDiscountYn();
             if (discountYn) {
                 int typeChange = (int) (seatPrice * 0.7);

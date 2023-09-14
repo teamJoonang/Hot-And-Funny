@@ -26,7 +26,7 @@ public interface ITicketDao {
     // 티켓 생성(insert into)
     void insertTickets(List<MakeTicketDto> makeTicketDtos);
     // 고객 잔액 확인 메소드
-    int findUserCash(int userId);
+    int findUserCash(long userId);
     // 잔액 업데이트
-    void updateCash(@Param("userId") int userId, @Param("remainCash") int remainCash);
+    void updateCash(@Param("userId") long userId, @Param("remainCash") long remainCash);
 }
