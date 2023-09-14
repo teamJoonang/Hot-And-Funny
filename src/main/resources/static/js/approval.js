@@ -21,7 +21,9 @@ const seatNumber = document.querySelectorAll(".seat-number");
 const btnConfirm = document.getElementById("btn-confirm");
 const btnTicket = document.getElementById("btn-ticket");
 
-
+console.log(discountPrice);
+console.log(noDiscountPrice);
+console.log(totalCharge);
 // 나중에 추가해야함
 const userId = "1";
 const concertDateEx = "2023-09-09"
