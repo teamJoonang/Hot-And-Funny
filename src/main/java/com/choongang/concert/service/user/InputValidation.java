@@ -3,10 +3,12 @@ package com.choongang.concert.service.user;
 import com.choongang.concert.dto.user.AddUserRequest;
 import com.choongang.concert.dto.user.FindPwRequest;
 import com.choongang.concert.dto.user.ResetPwRequest;
+import com.choongang.concert.dto.user.UserResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.regex.Pattern;
+
 
 // 검증식으로 검증하여 true , false 돌려주자.
 @Slf4j
@@ -55,6 +57,19 @@ public class InputValidation {
         else {
             log.info("회원가입 : 비밀번호와 비밀번호 재확인 불일치");
             return true;    // 일치하지 않으니 if문 실행하도록 true 반환
+        }
+    }
+
+    public boolean isModifyEmpty(UserResponse userReq){
+        if(userReq.getName().isEmpty() || userReq.getNickname().isEmpty() ||
+           userReq.getTel().isEmpty() || userReq.getAddress().isEmpty() ||
+           userReq.getAge() == null ){
+            log.info("회원정보 수정 : 양식 중 하나, 빈 값 또는 null ");
+            return true;
+        }
+        else {
+            log.info("회원정보 : 양식에 값은 존재.");
+            return false;
         }
     }
 

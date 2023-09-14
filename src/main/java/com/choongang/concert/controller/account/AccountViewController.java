@@ -43,8 +43,7 @@ public class AccountViewController {
     public String signup(HttpServletRequest request) throws ServletException{
 
         log.info("get >> /user/signup | signup() 실행됨.");
-        HttpServletRequest httpReq = (HttpServletRequest) request;
-        HttpSession session = httpReq.getSession(false);
+        HttpSession session = request.getSession(false);
         if(session != null && session.getAttribute("loginId") != null){
             return "redirect:/";
         }
@@ -59,8 +58,7 @@ public class AccountViewController {
 
         log.info("get >> /user/find | findUserAccount() 실행됨.");
         // 세션이 만약 있고 세션 안에 loginId라는 속성도 갖고 있다면 index 페이지로 리다이렉트.
-        HttpServletRequest httpReq = (HttpServletRequest) request;
-        HttpSession session = httpReq.getSession(false);
+        HttpSession session = request.getSession(false);
         if(session != null && session.getAttribute("loginId") != null){
             return "redirect:/";
         }
@@ -69,11 +67,11 @@ public class AccountViewController {
 
     //    비밀번호 변경 페이지
     @GetMapping("/reset")
-    public String passwordReset(@ModelAttribute("user") ResetPwRequest resetPwReq , ServletRequest req) throws ServletException{
+    public String passwordReset(@ModelAttribute("user") ResetPwRequest resetPwReq , HttpServletRequest req) throws ServletException{
 
         log.info("get >> /user/reset | passwordReset() 실행됨.");
-        HttpServletRequest httpReq = (HttpServletRequest) req;
-        HttpSession session = httpReq.getSession(false);
+
+        HttpSession session = req.getSession(false);
 
         if(session == null || session.getAttribute("id") == null || session.getAttribute("loginId") == null){
             return "redirect:/";
@@ -98,8 +96,7 @@ public class AccountViewController {
     public String logout(HttpServletRequest request , HttpServletResponse response) throws ServletException{
 
         // 세션이 만약 있고 세션 안에 loginId라는 속성도 갖고 있다면 index 페이지로 리다이렉트.
-        HttpServletRequest httpReq = (HttpServletRequest) request;
-        HttpSession session = httpReq.getSession(false);
+        HttpSession session = request.getSession(false);
         if(session != null && session.getAttribute("loginId") != null){
             session.removeAttribute("loginId");
             session.setMaxInactiveInterval(0);
