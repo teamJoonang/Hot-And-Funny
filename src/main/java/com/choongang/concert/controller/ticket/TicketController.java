@@ -33,7 +33,9 @@ public class TicketController {
         try {
             // remainSeat 객체를 JSON 문자열로 변환
             String jsonSeatList = objectMapper.writeValueAsString(remainSeat);
+            
             model.addAttribute("remainSeat", jsonSeatList);
+
         } catch (JsonProcessingException e) {
             return "좌석 파싱 에러";
         }
@@ -55,6 +57,7 @@ public class TicketController {
         model.addAttribute("concertInfo", concertInfo);
         model.addAttribute("concertDate", concertDate);
         return "ticket/seat_choice";
+
     }
 
     @GetMapping("/payment/check")

@@ -30,7 +30,7 @@ public class MyPageViewController {
     private final MyPageService myPageService;
 
 //  회원정보 조회 및 수정 가능페이지
-    @GetMapping("/myinfo")
+    @GetMapping(value = {"/myinfo", ""})
     public String getMyInfo(HttpServletRequest req , Model model) throws ServletException {
         log.info("get >> /user/myinfo | getMyinfo() 실행됨.");
 
