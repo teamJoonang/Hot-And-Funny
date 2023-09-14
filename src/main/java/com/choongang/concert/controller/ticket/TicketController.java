@@ -58,19 +58,19 @@ public class TicketController {
         return "ticket/seat_choice";
     }
 
-//    @GetMapping("/payment/check")
-//    public String paymentCheck(HttpServletRequest req, Model model) {
-//        HttpSession session = req.getSession();
-//        long userId = (long)session.getAttribute("id");
-//        System.out.println("sessionId : " + userId);
-//        model.addAttribute("userId", userId);
-//        return "ticket/payment_check";
-//    }
-
     @GetMapping("/payment/check")
-    public String paymentCheck() {
+    public String paymentCheck(HttpServletRequest req, Model model) {
+        HttpSession session = req.getSession();
+        long userId = (long)session.getAttribute("id");
+        System.out.println("sessionId : " + userId);
+        model.addAttribute("userId", userId);
         return "ticket/payment_check";
     }
+
+//    @GetMapping("/payment/check")
+//    public String paymentCheck() {
+//        return "ticket/payment_check";
+//    }
 
 
 }
