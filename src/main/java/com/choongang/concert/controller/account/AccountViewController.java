@@ -27,7 +27,7 @@ public class AccountViewController {
     @GetMapping("/login")
     public String login(ServletRequest request) throws ServletException {
 
-        log.info("get >> /user/login | login() 실행됨.");
+//        log.info("get >> /user/login | login() 실행됨.");
         // 세션이 만약 있고 세션 안에 loginId라는 속성도 갖고 있다면 index 페이지로 리다이렉트.
         HttpServletRequest httpReq = (HttpServletRequest) request;
 
