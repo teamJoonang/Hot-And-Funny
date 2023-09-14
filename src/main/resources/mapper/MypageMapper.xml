@@ -11,4 +11,10 @@
         WHERE user_id = #{id}
         ORDER BY id desc
     </select>
+
+
+    <select id="findMyTicketList" resultType="com.choongang.concert.dto.mypage.MyTicketDto">
+
+
+    </select>
 </mapper>
