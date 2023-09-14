@@ -1,8 +1,10 @@
 package com.choongang.concert.controller.mypage;
 
 
+import com.choongang.concert.dto.mypage.MyPageDto;
 import com.choongang.concert.dto.user.FindEmailRequest;
 import com.choongang.concert.dto.user.UserResponse;
+import com.choongang.concert.service.user.MyPageService;
 import com.choongang.concert.service.user.UserService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,6 +17,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Controller
 @Slf4j
@@ -22,6 +26,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MyPageViewController {
 
     private final UserService userService;
+    // mypage service
+    private final MyPageService myPageService;
 
 //  회원정보 조회 및 수정 가능페이지
     @GetMapping("/myinfo")
@@ -43,9 +49,16 @@ public class MyPageViewController {
 
 //    사용자 문의사항 조회 페이지
     @GetMapping("/myqna")
-    public String getMyQna(){
+    public String getMyQna(HttpSession session, Model model){
 
         log.info("get >> /user/myqna  | getMyQna() 실행됨.");
+        Long id = (Long) session.getAttribute("id");
+
+        log.info("session key : value = {} : {}","id", id);
+
+        List<MyPageDto> list = myPageService.findMyQna(id);
+        model.addAttribute("list", list);
+
         return "mypage/myquestion";
     }
 

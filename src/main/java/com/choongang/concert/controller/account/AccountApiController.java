@@ -28,6 +28,9 @@ public class AccountApiController {
     private final InputValidation inputValidation;
     private final ResponseService responseService;
 
+//    static final LoginRequest req = new LoginRequest();
+
+
     // 아이디 중복 체크 확인 (회원가입 등록)
     @PostMapping("/IdCheck")
     public ResponseEntity<String> checkId(@RequestBody AddUserRequest userReq){

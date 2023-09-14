@@ -3,6 +3,7 @@ package com.choongang.concert.controller.mypage;
 import com.choongang.concert.dto.user.AddUserRequest;
 import com.choongang.concert.dto.user.UserResponse;
 import com.choongang.concert.service.user.InputValidation;
+import com.choongang.concert.service.user.MyPageService;
 import com.choongang.concert.service.user.ResponseService;
 import com.choongang.concert.service.user.UserService;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,8 @@ public class MyPageApiController {
     private final UserService userService;
     private final InputValidation inputValidation;
     private final ResponseService responseService;
+
+
 
     @PostMapping("/nicknameModifyCk")
     public ResponseEntity<String> checkNicknameList(@RequestBody AddUserRequest userReq){

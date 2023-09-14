@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.choongang.concert.repository.mypage.MyPageMapper">
+
+    <select id="findMyQnaList" resultType="com.choongang.concert.dto.mypage.MyPageDto" parameterType="long">
+        SELECT
+            id, title, category ,created_at, response_yn
+        FROM
+            qna_board
+        WHERE user_id = #{id}
+        ORDER BY id desc
+    </select>
+</mapper>
