@@ -8,6 +8,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Getter
+@Setter
 // 서버의 응답용 사용자 dto
 public class UserResponse {
 
@@ -21,5 +22,5 @@ public class UserResponse {
     private Integer age;        // 나이
     private String tel;         // 연락처
     private Boolean gender;     // 성별 : true = 남자 = 1 | false = 여자 = 0
-
 }
+

@@ -2,9 +2,12 @@ package com.choongang.concert.controller.account;
 
 import com.choongang.concert.dto.user.*;
 import com.choongang.concert.service.user.InputValidation;
+import com.choongang.concert.service.user.ResponseService;
 import com.choongang.concert.service.user.UserService;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.websocket.SessionException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -23,6 +26,7 @@ public class AccountApiController {
 
     private final UserService userService;
     private final InputValidation inputValidation;
+    private final ResponseService responseService;
 
     // 아이디 중복 체크 확인 (회원가입 등록)
     @PostMapping("/IdCheck")
@@ -35,10 +39,10 @@ public class AccountApiController {
         log.info("result : " + result);
 
         if(result <= 0){
-            return setSuccesResponse("사용가능한 아이디.");
+            return responseService.setSuccesResponse("사용가능한 아이디.");
         }
         else {
-            return setBadResponse("아이디 중복 , 다른 아이디를 사용해주세요.");
+            return responseService.setBadResponse("아이디 중복 , 다른 아이디를 사용해주세요.");
         }
     }
 
@@ -52,10 +56,10 @@ public class AccountApiController {
         log.info("result : " + result );
 
         if(result <= 0){
-            return setSuccesResponse("사용가능한 별명");
+            return responseService.setSuccesResponse("사용가능한 별명");
         }
         else {
-            return setBadResponse("별명 중복 , 다른 별명을 사용해주세요.");
+            return responseService.setBadResponse("별명 중복 , 다른 별명을 사용해주세요.");
         }
 
     }
@@ -69,10 +73,10 @@ public class AccountApiController {
         log.info("userReq::{}" , userReq);
         // 회원가입 양식 폼 중 하나라도 비어있다면 bad request 응답
         if(inputValidation.isSignupEmpty(userReq)) {
-            return setBadResponse("양식을 모두 채워주세요.");
+            return responseService.setBadResponse("양식을 모두 채워주세요.");
         }
         if(inputValidation.isPwSame(userReq)){
-            return setBadResponse("비밀번호가 일치하지 않습니다.");
+            return responseService.setBadResponse("비밀번호가 일치하지 않습니다.");
         }
 
         // db단에 넣고 return 레코드 갯수를 받는다.
@@ -87,26 +91,26 @@ public class AccountApiController {
         if(result > 0){
             log.info("새로운 사용자 회원가입 성공");
              // 201 , ok 반환 및 body에 회원가입 성공이라는 메시지 보냄.
-             return setCreatedResponse("회원가입 성공!");
+             return responseService.setCreatedResponse("회원가입 성공!");
          }
          else {
              log.info("db단까지의 접근 이루어졌으나 문제 발생.");
              // 실패한 경우 , 0보다 작은 경우.
-             return setServerErrorResponse("회원가입 실패.");
+             return responseService.setServerErrorResponse("회원가입 실패.");
          }
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////
     // 사용자 로그인 (아직 검증 없음 , session 고급지게 뭔가 추가 필요 , password 암호화 필요 )//
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginRequest loginReq , HttpSession session , HttpServletResponse res) {
-
+    public ResponseEntity<String> login(@RequestBody LoginRequest loginReq , HttpSession session)
+    throws SessionException {
         log.info("Post >> /user/login | login() 실행됨.");
         log.info("loginReq::{}" , loginReq);
 
         // ajax로 받은 값 null 확인 , null 이라면 bad request 보내라.
         if(loginReq.getLoginId().isEmpty() || loginReq.getPassword().isEmpty()){
-            return setBadResponse("모든 양식을 채워주세요.");
+            return responseService.setBadResponse("모든 양식을 채워주세요.");
         }
 
         // service를 이용해 db 조회해보고 userResponse정보 반환
@@ -121,10 +125,10 @@ public class AccountApiController {
             session.setAttribute("id" , result.getId());
             session.setAttribute("loginId" , result.getLoginId());
             // 로그인 성공 success 200 요청 처리
-            return setSuccesResponse("로그인 성공");
+            return responseService.setSuccesResponse("로그인 성공");
         }
         else {
-            return setNotFoundResponse("존재하지 않는 사용자.");
+            return responseService.setNotFoundResponse("존재하지 않는 사용자.");
         }
 
     }
@@ -138,7 +142,7 @@ public class AccountApiController {
 
         // null 체크 : Req의 loginid가 null 이라면 400 bad req 응답
         if(findEmailReq.getLoginId().isEmpty()){
-            return setBadResponse("모든 양식을 채워주세요");
+            return responseService.setBadResponse("모든 양식을 채워주세요");
         }
         // service를 통해 db 접근, loginId(email) 조회해서 객체 담기.
         UserResponse result = userService.findByEmail(findEmailReq);
@@ -146,10 +150,10 @@ public class AccountApiController {
 
         // 조회결과가 없을 경우 또는 요청 이메일과 db 이메일이 일치하지 않는 경우 , 404 not found 응답 전송
         if(result == null || !result.getLoginId().equals(findEmailReq.getLoginId())){
-            return setNotFoundResponse("존재하지 않는 회원");
+            return responseService.setNotFoundResponse("존재하지 않는 회원");
         }else {
             // 위의 식 통과의 경우, db 존재 및 일치 이므로 ok 200 응답
-            return setSuccesResponse("존재하는 회원");
+            return responseService.setSuccesResponse("존재하는 회원");
         }
 
     }
@@ -162,7 +166,7 @@ public class AccountApiController {
         log.info("findPwReq::{}" , findPwReq);
         // null 체크 : Req의 필드멤버 중 하나라도 null 이라면 400 bad req 응답
         if(inputValidation.isFindPwEmpty(findPwReq)) {
-            return setBadResponse("모든 양식을 채워주세요");
+            return responseService.setBadResponse("모든 양식을 채워주세요");
         }
         // service를 통해 db 접근, 검색 조건은 req(dto)의 값들... 조회 해서 객체 담기.
         UserResponse result = userService.findByUser(findPwReq);
@@ -172,7 +176,7 @@ public class AccountApiController {
            !result.getName().equals(findPwReq.getName()) ||
            !result.getTel().equals(findPwReq.getTel()) ){
             // 404 not found 응답 전송
-            return setBadResponse("존재하지 않는 회원");
+            return responseService.setBadResponse("존재하지 않는 회원");
         }
         // 위의 식들을 통과할 경우, 혹시 세션이 존재하는가?
         if (session.isNew()){
@@ -189,7 +193,7 @@ public class AccountApiController {
                 session.setAttribute("loginId" , result.getLoginId());
         }
         // db 존재 및 일치이므로 ok 200 응답 보냄.
-        return setSuccesResponse("존재하는 회원");
+        return responseService.setSuccesResponse("존재하는 회원");
     }
 
     // 비밀번호 재설정
@@ -206,45 +210,25 @@ public class AccountApiController {
 
         // null 체크 : 넘어온 값이 제대로 들어있는가 확인, 없다면 해당 값에 따른 응답.
         if(inputValidation.isResetPwEmpty(resetPwReq)){
-            return setBadResponse("양식을 모두 채워주세요");
+            return responseService.setBadResponse("양식을 모두 채워주세요");
         }
         // 비밀번호가 일치하지 않는다면 bad request
         if(!resetPwReq.getPassword().equals(resetPwReq.getRepeatPassword())){
-            return setBadResponse("비밀번호가 일치하지 않습니다.");
+            return responseService.setBadResponse("비밀번호가 일치하지 않습니다.");
         }
         // db에 새로운 비밀번호 넣고 성공한 레코드 수 반환.
         int result = userService.resetPassword(resetPwReq);
         log.info("result::{}" , result);
 
         if(result > 0){
-            return setSuccesResponse("비밀번호 재설정됨.");
+            return responseService.setSuccesResponse("비밀번호 재설정됨.");
         }
         else {
-            return setServerErrorResponse("서버에 문제 발생, 재설정 불가");
+            return responseService.setServerErrorResponse("서버에 문제 발생, 재설정 불가");
         }
     }
 
-    // return 응답요청, 코드 중복과 가독성 하락 임시방편
-    // 200 ok 응답
-    private ResponseEntity<String> setSuccesResponse(String msg){
-        return ResponseEntity.status(HttpStatus.OK).body(msg);
-    }
-    // 201 created 응답
-    private ResponseEntity<String> setCreatedResponse(String msg){
-        return ResponseEntity.status(HttpStatus.CREATED).body(msg);
-    }
-    // 400 bad request 응답
-    private ResponseEntity<String> setBadResponse(String msg){
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(msg);
-    }
-    // 404 not found 응답
-    private ResponseEntity<String> setNotFoundResponse(String msg){
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(msg);
-    }
-    // 500 server error 응답
-    private ResponseEntity<String> setServerErrorResponse(String msg){
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(msg);
-    }
+
 
 
 }

@@ -129,6 +129,9 @@ document.getElementById('idCheck').addEventListener('click' , function(){
                 // 체크 확인.
                 idCheck = true;
             }
+            else if(xhr.readyState === 500){
+                alert('서버에러 , firetrap5319@gmail.com 으로 연락바랍니다.');
+            }
             else{
                 // bad request 응답시
                 alert('이미 사용중인 이메일 입니다.');
