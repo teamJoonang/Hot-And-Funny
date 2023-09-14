@@ -5,6 +5,7 @@ package com.choongang.concert.controller.admin;
 import java.util.List;
 
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,16 +13,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.choongang.concert.dto.admin.Bar2Dto;
 import com.choongang.concert.dto.admin.PageDto;
 import com.choongang.concert.dto.admin.PagingResponse;
+import com.choongang.concert.dto.admin.QnaPostDto;
 import com.choongang.concert.dto.admin.UserInfoDTO;
+import com.choongang.concert.service.admin.BoardControlService;
 import com.choongang.concert.service.admin.StatService;
 import com.choongang.concert.service.admin.UserInfoService;
 
 @Controller
+@RequestMapping("/admin")
 public class AdminController {
 
 	private static final Logger log = LoggerFactory.getLogger(AdminController.class);
@@ -31,6 +39,8 @@ public class AdminController {
 	private UserInfoService userInfoService;
 	@Autowired
 	private StatService statService;
+	@Autowired
+	private BoardControlService boardControlService;
 	
 //	public AdminController(UserInfoService userInfoService) {
 //		this.userInfoService = userInfoService;
@@ -42,12 +52,30 @@ public class AdminController {
 
 	
 	
-	@GetMapping("boardcontrol")
-	public String boardControl() {
+	@GetMapping("/boardcontrol")
+	public String boardControl(Model model) {
+		List<QnaPostDto> qnaPostList = boardControlService.qnaPostList();
+		model.addAttribute("qnaPostList", qnaPostList);
+		
+		log.info("qnaPostList : " + qnaPostList);
+		
 		return "admin/board_control";
 	}
 	
-	@GetMapping("userinfo")
+	
+
+
+	@PostMapping("/boardcontrol/delete")
+	public String deleteQnaPost(@RequestBody List<Long> ids) {
+		System.out.println(ids);
+	    boardControlService.deleteQna(ids);
+	    return "redirect:/boardcontrol";
+	}
+	
+	
+	
+	
+	@GetMapping("/userinfo")
 	public String userInfo(@ModelAttribute("params") final PageDto params, Model model) {
 		log.info("회원목록요청");	//로그
 //	    log.info("offset: {}", params.getOffset());
@@ -70,7 +98,7 @@ public class AdminController {
 		return "admin/user_info";
 	}
 	
-	@GetMapping("refund")
+	@GetMapping("/refund")
 	public String refund() {
 		return "admin/refund";
 	}
@@ -79,7 +107,7 @@ public class AdminController {
 	
 	
 	
-	@GetMapping("statistics")	
+	@GetMapping("/statistics")
 	public String statistics() {
 		
 //		int count = 4;
@@ -254,7 +282,7 @@ public class AdminController {
 		log.info("매출 현황 : " + areaGroup);
 		JSONArray areaGroupJsonArray = new JSONArray();
 		
-		int count = 3332;
+		int count = 3;
 		
 		for(int i = 0; count > i; i++) {
 			if(i < areaGroup.size()) {
@@ -265,22 +293,6 @@ public class AdminController {
 	return areaGroupJsonArray;
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
@@ -299,6 +311,28 @@ public class AdminController {
 	
 	
 	
+	@GetMapping("/boardCon")
+	@ResponseBody
+	public JSONObject qnaPostList() {
+
+		List<QnaPostDto> qnaPostList = boardControlService.qnaPostList();
+		
+		
+		JSONObject qnaPostListJsonObject = new JSONObject();
+		
+		
+	    // qnaPostList 데이터를 JSON 객체에 추가
+	    qnaPostListJsonObject.put("qnaPostList", qnaPostList);
+		
+		
+		log.info("qna 오브젝트 : " + qnaPostListJsonObject);
+		return qnaPostListJsonObject;
+		
+	}
+	
+	
+	
 	
 	
 }
+

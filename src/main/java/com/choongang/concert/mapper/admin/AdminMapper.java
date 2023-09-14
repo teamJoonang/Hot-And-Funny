@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.choongang.concert.dto.admin.Bar2Dto;
 import com.choongang.concert.dto.admin.PageDto;
+import com.choongang.concert.dto.admin.QnaPostDto;
 import com.choongang.concert.dto.admin.UserInfoDTO;
 
 @Mapper
@@ -44,4 +45,15 @@ public interface AdminMapper {
     //	Area 차트에서 쓸 내용 (매출 현황)
     public List<Integer> areaGroup();
     
+    
+    
+    ////////	게시판 관리		//////////////
+    
+    ///	qna 게시판 관리
+    public List<QnaPostDto> getQnaList();
+    
+    //	qna 게시판 수정
+    public void updateQna(QnaPostDto qnaPostDto);
+    //	qna 게시판 삭제
+    public void deleteQna(List<Long> ids);
 }
