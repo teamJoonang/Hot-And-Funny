@@ -1,89 +1,88 @@
-
-
+// 이메일 인증번호
+// document.getElementById('checkEmail')
+//     .addEventListener('click' , function () {
+//     console.log("눌림");
+//
+//     let memail = document.getElementById('memail').value;
+//     let data = {email : memail};
+//
+//     let xhr = new XMLHttpRequest();
+//     xhr.open('POST', '/user/mailConfirm', true);
+//     xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+//
+//     xhr.onreadystatechange = function () {
+//         if (xhr.readyState === 4) {
+//             if (xhr.status === 200) {
 //
 //
+//             } else {
+//                 // bad request 응답시
+//                 alert('못보냄');
 //
-// // 대쉬 제거 검증식
-// const dashRegex = /\-/g;
+//             }
+//        }
+//         xhr.send(JSON.stringify(data));
 //
-// // 이메일 검증식 - 대소문자 , 숫자로 1자~30자 @ 소문자,숫자에 마지막은 .소문자
-// const emailRegex = /^[A-Za-z0-9_]{1,30}@([a-z0-9_]+\.)+[a-z]+$/g;
-// // 패스워드 검증식 - 대소문자, 숫자 , 특수문자 무조건 하나 포함, 최소 8자 최대 16자
-// const pwRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,16}$/g;
-// // 이름 검증식 - 영어(대소문자), 한글 최소 1자~10자 , 숫자와 특수문자 제외.
-// const nameRegex = /^[A-Za-z가-힝]{1,10}[^\d$!%*#?&]$/g;
-// // 별명 - 언더바'_' 제외 특수문자 사용불가.
-// const nicknameRegex =  /^[가-힣ㄱ-ㅎa-zA-z0-9]{2,10}[^$!%*#?&]$/g;
-// // 연락처 - 숫자 11글자.
-// const telRegex = /\d{11}/g;
-// // // 주소 - 한글 , 영어(대소문자) 가능 , 특수문자 사용불가. -는 가능.
-// // const addrRegex =
-// // 나이 - 숫자만 가능 , 최소1글자 ~ 3글자.
-// const ageRegex = /\d{1,3}/g;
-
-
-// 회원가입 검증
-// function valid_signup(){
-//
-//     // input
-//     let new_email = document.getElementById('new_email');
-//     let new_password = document.getElementById('new_password');
-//     let new_re_password = document.getElementById('new_re_password');
-//     let new_name = document.getElementById('new_name');
-//     let new_nickname = document.getElementById('new_nickname');
-//     let new_tel = document.getElementById('new_tel');
-//     let new_age = document.getElementById('new_age');
-//
-//     // 혹시 모르니 -(대쉬)제거한 tel 값
-//     let tel_value = new_tel.value.replace(dashRegex, '');
-//     // 혹시 모르니 -(대쉬)제거한 tel 값
-//     let age_value = new_age.value.replace(dashRegex , '');
-//
-//     // 에러 메시지를 숨김으로 초기화
-//     email_err.style.display = 'none';
-//     pw_err.style.display = 'none';
-//     repw_err.style.display = 'none';
-//     name_err.style.display = 'none';
-//     nickname_err.style.display = 'none';
-//     tel_err.style.display = 'none';
-//     age_err.style.display = 'none';
-//
-//
-//     if(emailRegex.test(new_email.value)){
-//         email_err.style.display = 'block';
-//         return false;
 //     }
+// });
+// let emconfirmchk = false;
 //
-//     if(pwRegex.test(new_password.value)){
-//         pw_err.style.display = 'block';
-//         return false;
-//     }
+// $("#checkEmail").click(function() {
+//     console.log($("#memail").val());
+//     $.ajax({
+//         type : "POST",
+//         url : "user/mailconfirm",
+//         contentType: "application/json",
+//         data : $("#memail").val(),
+//         success : function(data){
+//             alert("해당 이메일로 인증번호 발송이 완료되었습니다. \n 확인부탁드립니다.")
+//             console.log("data : "+data);
+//             chkEmailConfirm(data, $("#memailconfirm"), $("#memailconfirmTxt"));
+//         }
+//     })
+// });
 //
-//     if(new_password.value !== new_re_password.value){
-//         repw_err.style.display = 'block';
-//         return false;
-//     }
+// // // 이메일 인증번호 체크 함수
+// function chkEmailConfirm(data , $memailconfirm , $memailconfirmTxt){
+//     $("#memailconfirm").on("keyup", function(){
+//         if (data != $memailconfirm.val()) { //
+//             emconfirmchk = false;
+//             $memailconfirmTxt.html("<span id='emconfirmchk'>인증번호가 잘못되었습니다</span>")
+//             $("#emconfirmchk").css({
+//                 "color" : "#FA3E3E",
+//                 "font-weight" : "bold",
+//                 "font-size" : "10px"
 //
-//     if(nameRegex.test(new_name.value)){
-//         name_err.style.display = 'block';
-//         return false;
-//     }
-//
-//     if(nicknameRegex.test(new_nickname.value)){
-//         nickname_err.style.display = 'block';
-//         return false;
-//     }
-//
-//     if(telRegex.test(tel_value)){
-//         tel_err.style.display = 'block';
-//         return false;
-//     }
-//
-//     if(ageRegex.test(age_value)){
-//         age_err.style.display = 'block';
-//         return false;
-//     }
+//             })
+//             //console.log("중복아이디");
+//         }
+//         else { // 아니면 중복아님
+//             emconfirmchk = true;
+//             $("#memailconfirmTxt").html("<span id='emconfirmchk'>인증번호 확인 완료</span>")
+//             }
+//     })
 // }
+
+
+
+//***********************************************************************************************
+// 대쉬 제거 검증식
+const dashRegex = /\-/g;
+// 이메일 검증식 - 대소문자 , 숫자로 1자~30자 @ 소문자,숫자에 마지막은 .소문자
+const emailRegex = /^[A-Za-z0-9_]{1,30}@([a-z0-9_]+\.)+[a-z]+$/g;
+// 패스워드 검증식 - 대소문자, 숫자 , 특수문자 무조건 하나 포함, 최소 8자 최대 16자
+const pwRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,30}$/g;
+// 이름 검증식 - 영어(대소문자), 한글 최소 1자~10자 , 숫자와 특수문자 제외.
+const nameRegex = /^[A-Za-z가-힝]{1,20}[^\d$!%*#?&]$/g;
+// 별명 - 언더바'_' 제외 특수문자 사용불가.
+const nicknameRegex =  /^[가-힣ㄱ-ㅎa-zA-z0-9]{2,20}[^$!%*#?&]$/g;
+// 연락처 - 숫자 11글자.
+const telRegex = /\d{11}/g;
+// // 주소 - 한글 , 영어(대소문자) 가능 , 특수문자 사용불가. -는 가능.
+// const addrRegex =
+// 나이 - 숫자만 가능 , 최소1글자 ~ 3글자.
+const ageRegex = /\d{1,3}/g;
+
 
 // err 에러메시지
 let email_err = document.getElementById('email_err');
@@ -95,10 +94,47 @@ let tel_err = document.getElementById('tel_err');
 let addr_err = document.getElementById('addr_err');
 let age_err = document.getElementById('age_err');
 
+// 모든 input 값들
+let loginId = document.getElementById('new_email').value
+let password = document.getElementById('new_password').value
+let repeatPw = document.getElementById('new_re_password').value
+let name = document.getElementById('new_name').value
+let nickname = document.getElementById('new_nickname').value
+let tel = document.getElementById('new_tel').value
+let address = document.getElementById('new_addr').value
+let age = document.getElementById('new_age').value
+
 
 // 이메일 & 별명 중복체크 판별 변수
 let idCheck = false;
 let nicknameCheck = false;
+// input 검증 판별 변수
+let inputCheck = false;
+
+// 이메일 체크
+function isEmailGood (loginId) {
+    if(emailRegex.test(loginId)){
+        email_err.style.display = 'none';
+        return true;
+    }else {
+        email_err.style.display = 'block';
+        return false;
+    }
+};
+// 비밀번호 체크
+function isPasswordGood (password) {
+    if(pwRegex.test(password)){
+        pw_err.style.display = 'none';
+        return true;
+    }else{
+        pw_err.style.display = 'block';
+        return false;
+    }
+}
+
+// let isGood = {emailRegex , }
+
+
 
 
 // eamil 칸을 건들면 중복체크 성공해도 false 변경
@@ -124,7 +160,7 @@ document.getElementById('idCheck').addEventListener('click' , function(){
     xhr.onreadystatechange = function(){
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
-                // ok 응답시 
+                // ok 응답시
                 alert('사용가능한 이메일 입니다.');
                 // 체크 확인.
                 idCheck = true;
@@ -155,7 +191,7 @@ document.getElementById('nickNameCheck').addEventListener('click' , function(){
     xhr.onreadystatechange = function(){
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
-                // ok 응답시 
+                // ok 응답시
                 alert('사용가능한 별명 입니다.');
                 // 체크 확인.
                 nicknameCheck = true;
@@ -191,7 +227,7 @@ document.getElementById('loginBtn').addEventListener('click', function() {
         else if(femaleGender.checked){
             selectedGender = false;
         }
-    
+
         let userData = {
             loginId: document.getElementById('new_email').value,
             password: document.getElementById('new_password').value,
@@ -203,11 +239,11 @@ document.getElementById('loginBtn').addEventListener('click', function() {
             age: document.getElementById('new_age').value,
             gender : selectedGender
         };
-    
+
         let xhr = new XMLHttpRequest();
         xhr.open('POST', '/user/signup', true);
         xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-    
+
         xhr.onreadystatechange = function() {
             let responseBody = xhr.responseText;
             if (xhr.readyState === 4) {
@@ -227,7 +263,7 @@ document.getElementById('loginBtn').addEventListener('click', function() {
                 }
             }
         };
-    
+
         xhr.send(JSON.stringify(userData));
     }
     else if(idCheck == false){
@@ -240,7 +276,3 @@ document.getElementById('loginBtn').addEventListener('click', function() {
         alert('중복체크를 진행해주세요.');
     }
 });
-
-
-
-

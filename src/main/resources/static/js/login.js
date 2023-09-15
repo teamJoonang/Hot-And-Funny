@@ -1,14 +1,6 @@
-// function validLoginForm() {
-//     // 필요한 유효성 검사를 수행하세요.
-//     // 예를 들어, 이메일과 비밀번호의 형식을 확인하는 등의 작업을 수행할 수 있습니다.
-//
-//     // AJAX 요청 전송 코드
-//     sendLoginRequest();
-//
-//     // 폼 제출을 막음
-//     return false;
-// }
+let redirectURL = null;
 
+let hiddenBox = document.getElementById('hiddenBox');
 
 document.getElementById('loginBtn').addEventListener('click' , function (){
     sendLoginRequest();
@@ -42,8 +34,15 @@ function sendLoginRequest() {
         }
     };
 
+    if(hiddenBox != null && hiddenBox != undefined){
+        redirectURL = hiddenBox.value;
+        let data = JSON.stringify({
+            loginId: loginId, password: loginPassword , redirectURL : redirectURL});
+    }
     // 요청 전송
-    const data = JSON.stringify({ loginId: loginId, password: loginPassword });
+    let data = JSON.stringify({
+        loginId: loginId, password: loginPassword});
+
     xhr.send(data);
 }
 

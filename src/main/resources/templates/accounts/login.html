@@ -36,6 +36,7 @@
                             
                             <!-- 로그인 양식 -->
                             <form method="POST" id="loginForm">
+                                <input type="hidden" th:if="${redirectURL != null}" th:field="*{redirectURL}" id="hiddenBox"/>
                                 <!-- 이메일 -->
                                 <div class="text-start">
                                     <label class="form-label m-2" for="login_id">Email</label>
@@ -57,10 +58,10 @@
                             </form>
                             <!-- sns 로그인 버튼 -->
                             <!-- 각 SNS API로 전송되도록 -->
-                            <button class="btn btn-lg btn-block btn-primary mb-2 border-0" id="kakaoLoginBtn"
-                            type="submit"><i class="fas fa-solid fa-comment mb-2" style="color: #1a1a1c;"> </i> Sign in with Kakao</button>
-                            <button class="btn btn-lg btn-block btn-primary mb-2 border-0" id="naverLoginBtn"
-                            type="submit"><i class="fas fa-solid fa-comment mb-2" style="color: #1a1a1c;"> </i> Sign in with Naver</button>
+<!--                            <button class="btn btn-lg btn-block btn-primary mb-2 border-0" id="kakaoLoginBtn"-->
+<!--                            type="submit"><i class="fas fa-solid fa-comment mb-2" style="color: #1a1a1c;"> </i> Sign in with Kakao</button>-->
+<!--                            <button class="btn btn-lg btn-block btn-primary mb-2 border-0" id="naverLoginBtn"-->
+<!--                            type="submit"><i class="fas fa-solid fa-comment mb-2" style="color: #1a1a1c;"> </i> Sign in with Naver</button>-->
 
 
                             <ul>

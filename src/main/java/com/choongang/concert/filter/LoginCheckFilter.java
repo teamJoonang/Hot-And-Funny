@@ -15,7 +15,7 @@ public class LoginCheckFilter implements Filter, jakarta.servlet.Filter {
     // 세션없이도 입장가능한 view , api 들의 매핑주소를 whitelist에 담는다.
     private static final String[] whitelist =
             {"/" , "/user/signup" , "/user/login" , "/user/logout" , "/user/find" , "/css/*" , "/img/*" , "/js/*" , "/user/reset"
-            , "/user/findId" , "/user/findPw" , "/user/IdCheck" , "/user/nicknameCheck"};
+            , "/user/findId" , "/user/findPw" , "/user/IdCheck" , "/user/nicknameCheck" , "/user/user/mailconfirm" };
 
     @Override
     public void destroy(){
@@ -45,8 +45,7 @@ public class LoginCheckFilter implements Filter, jakarta.servlet.Filter {
                 if (session == null || session.getAttribute("loginId") == null) {
                     log.info("미인증 사용자 요청 {}", requestURI);
                     //로그인으로 redirect
-                    httpResponse.sendRedirect("/user/login?redirectURL=" +
-                            requestURI);
+                    httpResponse.sendRedirect("/user/login?redirectURL=" + requestURI);
                     return; //
                 }
             }
