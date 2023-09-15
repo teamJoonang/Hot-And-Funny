@@ -40,13 +40,13 @@ function selectedDate(){
 // 선택된 좌석 출력
 function selectedSeat(){
 	
-	seatNumber[0].textContent = "B-08";
-	seatNumber[1].textContent = "A-09";
-	seatNumber[2].textContent = "A-10";
-	seatNumber[3].textContent = "A-11";
-	// for(let i=0; i<ticketArray.length; i++){
-	// 	seatNumber[i].textContent = ticketArray[i].seatNum;
-	// }	
+	//seatNumber[0].textContent = "B-08";
+	//seatNumber[1].textContent = "A-09";
+	//seatNumber[2].textContent = "A-10";
+	//seatNumber[3].textContent = "A-11";
+	 for(let i=0; i<ticketArray.length; i++){
+	 	seatNumber[i].textContent = ticketArray[i].seatNum;
+	}	
 }
 
 //	최종 가격 표시

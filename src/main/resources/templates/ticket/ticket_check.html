@@ -16,10 +16,12 @@
     <div>
     <th:block th:each = "ticket : ${tickets}">
         <form class="ticket">
+            <div class="color"></div>
             <div class="ticket-left">
+                <p class="seat-grade" th:text="${ticket.seatType}"></p>
                 <div class="ticket-left-header">
                     <span class="ticket-name">Hot & Funny</span>
-                    <img class="QR" src="../../static/img/QR.png" th:src="@{/img/QR.png}" alt="">
+                    <img class="QR" src="../../static/img/QR.png" th:src="@{'https://chart.apis.google.com/chart?cht=qr&chs=250x250&chl=' + ${ticket.uuid}}" alt="">
                 </div>
                 <div class="ticket-left-uuid" th:text="${ticket.uuid}"></div>
                 <ul class="ticket-left-content">

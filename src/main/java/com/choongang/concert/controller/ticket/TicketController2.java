@@ -1,6 +1,5 @@
 package com.choongang.concert.controller.ticket;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -9,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.choongang.concert.dto.ticket.TicketCountDto;
+import com.choongang.concert.dto.ticket.TicketLimitDto;
 import com.choongang.concert.dto.ticket.TicketShowDto;
 import com.choongang.concert.service.ticket.TicketService2;
 
@@ -36,20 +35,26 @@ public class TicketController2 {
 			long id = (long) session.getAttribute("id");
 			
 			String userId = String.valueOf(id);
-			List<TicketCountDto> tcdList = ticketService.ticketCountInfo(userId);
-			List<String> checkUserIds = new ArrayList<>();
-			List<String> limitConcertDates = new ArrayList<>();
+			List<TicketLimitDto> tldList = ticketService.ticketLimit(userId);
 			
-			for (TicketCountDto tcd : tcdList) {
-				String checkUserId = tcd.getCheckUserId();
-				String limitConcertDate = tcd.getConcertDate();
-				checkUserIds.add(checkUserId);
-				limitConcertDates.add(limitConcertDate);
-			}
-			model.addAttribute("checkUserId", checkUserIds);
-			model.addAttribute("limitConcertDate", limitConcertDates);
-			log.info("-------------1--------" + checkUserIds);
-			log.info("-------------2--------" + limitConcertDates);
+			model.addAttribute("tldList", tldList);
+			
+			
+			
+//			List<TicketCountDto> tcdList = ticketService.ticketCountInfo(userId);
+//			List<String> checkUserIds = new ArrayList<>();
+//			List<String> limitConcertDates = new ArrayList<>();
+//			
+//			for (TicketCountDto tcd : tcdList) {
+//				String checkUserId = tcd.getCheckUserId();
+//				String limitConcertDate = tcd.getConcertDate();
+//				checkUserIds.add(checkUserId);
+//				limitConcertDates.add(limitConcertDate);
+//			}
+//			model.addAttribute("checkUserId", checkUserIds);
+//			model.addAttribute("limitConcertDate", limitConcertDates);
+//			log.info("-------------1--------" + checkUserIds);
+//			log.info("-------------2--------" + limitConcertDates);
 			
 			
 //			return "redirect:/user/login";
@@ -58,11 +63,6 @@ public class TicketController2 {
 
 		return "ticket/home_calendar";
 	}
-//	@GetMapping("/home/calendar")
-//	public String homeCalendar() {
-//	
-//		return "ticket/home_calendar";
-//	}
 
 	@GetMapping("/approval")
 	public String approval() {
