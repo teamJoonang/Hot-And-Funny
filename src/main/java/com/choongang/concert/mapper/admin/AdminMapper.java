@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.choongang.concert.dto.admin.Bar2Dto;
 import com.choongang.concert.dto.admin.PageDto;
 import com.choongang.concert.dto.admin.QnaPostDto;
+import com.choongang.concert.dto.admin.TotalPostDto;
 import com.choongang.concert.dto.admin.UserInfoDTO;
 
 @Mapper
@@ -49,11 +50,24 @@ public interface AdminMapper {
     
     ////////	게시판 관리		//////////////
     
+    ///	전체 게시판 관리
+    public List<TotalPostDto> getTotalList();
+    
+    
+    //	전체 게시판 삭제(서버단에서 동작)
+    public void deleteTotal(List<Long> totalDataForm);
+    //	전체 게시판 삭제(서버단에서 동작한 값을 디비에 저장)
+    public void resTotalDelete(List<Long> totalDataForm);
+    
+    
+    
     ///	qna 게시판 관리
     public List<QnaPostDto> getQnaList();
     
     //	qna 게시판 수정
     public void updateQna(QnaPostDto qnaPostDto);
-    //	qna 게시판 삭제
-    public void deleteQna(List<Long> ids);
+    //	qna 게시판 삭제(서버단에서 동작)
+    public void deleteQna(List<Long> dataForm);
+    //	qna 게시판 삭제(서버단에서 동작한 값을 디비에 저장)
+    public void resDelete(List<Long> dataForm);
 }

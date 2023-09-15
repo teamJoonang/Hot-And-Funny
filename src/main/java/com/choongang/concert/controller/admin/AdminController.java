@@ -16,13 +16,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.choongang.concert.dto.admin.Bar2Dto;
 import com.choongang.concert.dto.admin.PageDto;
 import com.choongang.concert.dto.admin.PagingResponse;
 import com.choongang.concert.dto.admin.QnaPostDto;
+import com.choongang.concert.dto.admin.TotalPostDto;
 import com.choongang.concert.dto.admin.UserInfoDTO;
 import com.choongang.concert.service.admin.BoardControlService;
 import com.choongang.concert.service.admin.StatService;
@@ -57,7 +57,11 @@ public class AdminController {
 		List<QnaPostDto> qnaPostList = boardControlService.qnaPostList();
 		model.addAttribute("qnaPostList", qnaPostList);
 		
-		log.info("qnaPostList : " + qnaPostList);
+		List<TotalPostDto> totalPostList = boardControlService.totalPostList();
+		model.addAttribute("totalPostList", totalPostList);
+//		log.info("totalPostList : {}", totalPostList);
+		
+//		log.info("qnaPostList : " + qnaPostList);
 		
 		return "admin/board_control";
 	}
@@ -65,14 +69,24 @@ public class AdminController {
 	
 
 
+//	@PostMapping(value = "/boardcontrol/delete", consumes = MediaType.APPLICATION_JSON_VALUE)
 	@PostMapping("/boardcontrol/delete")
-	public String deleteQnaPost(@RequestBody List<Long> ids) {
-		System.out.println(ids);
-	    boardControlService.deleteQna(ids);
-	    return "redirect:/boardcontrol";
+	public String deleteQnaPost(@RequestBody List<Long> dataForm, Model model) {
+		log.info("데이터폼 :{}", dataForm);
+
+		boardControlService.resDelete(dataForm);
+	    
+		return "redirect:/admin/boardcontrol";
 	}
 	
-	
+	@PostMapping("/boardcontrol/totalDelete")
+	public String totalDeletePost(@RequestBody List<Long> totalDataForm, Model model) {
+		log.info("토탈데이터폼:{}", totalDataForm);
+		
+		boardControlService.resTotalDelete(totalDataForm);
+		
+	    return "redirect:/admin/boardcontrol";
+	}
 	
 	
 	@GetMapping("/userinfo")
