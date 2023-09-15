@@ -16,11 +16,16 @@ class MyPageServiceTest {
 
 
     @Test
-    void getQuery() {
+    void getMyQnaList() {
 
         List<MyPageDto> myQnaList = myPageMapper.findMyQnaList(4L);
 
         myQnaList.iterator().forEachRemaining(q -> System.out.println(q.toString()));
+    }
 
+    @Test
+    void getMyTicketList() {
+
+        myPageMapper.findMyTicketList()
     }
 }

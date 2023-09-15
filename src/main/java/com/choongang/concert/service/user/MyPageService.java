@@ -2,6 +2,7 @@ package com.choongang.concert.service.user;
 
 
 import com.choongang.concert.dto.mypage.MyPageDto;
+import com.choongang.concert.dto.mypage.MyTicketDto;
 import com.choongang.concert.repository.mypage.MyPageMapper;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -16,9 +17,10 @@ public class MyPageService {
     private final MyPageMapper myPageMapper;
 
     public List<MyPageDto> findMyQna(Long id){
-
-
         return myPageMapper.findMyQnaList(id);
+    }
 
+    public List<MyTicketDto> findMyTicketList(Long id) {
+        return myPageMapper.findMyTicketList(id);
     }
 }
