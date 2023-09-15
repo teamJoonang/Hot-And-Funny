@@ -2,6 +2,7 @@ package com.choongang.concert.controller.mypage;
 
 
 import com.choongang.concert.dto.mypage.MyPageDto;
+import com.choongang.concert.dto.mypage.MyTicketDto;
 import com.choongang.concert.dto.user.FindEmailRequest;
 import com.choongang.concert.dto.user.UserResponse;
 import com.choongang.concert.service.user.MyPageService;
@@ -64,9 +65,13 @@ public class MyPageViewController {
 
 //    티켓 구매 조회 페이지
     @GetMapping("/myticket")
-    public String getMyTicket(){
+    public String getMyTicket(HttpSession session, Model model){
 
         log.info("get >> /user/myticket | getMyTicket() 실행됨.");
+        Long id = (Long) session.getAttribute("id");
+        List<MyTicketDto> list = myPageService.findMyTicketList(id);
+        log.info("User Session Id = {}", id);
+        model.addAttribute("list", list);
         return "mypage/myticket";
     }
 

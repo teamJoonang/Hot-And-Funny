@@ -1,5 +1,6 @@
 package com.choongang.concert.controller.mypage;
 
+import com.choongang.concert.dto.mypage.MyTicketDto;
 import com.choongang.concert.dto.user.AddUserRequest;
 import com.choongang.concert.dto.user.UserResponse;
 import com.choongang.concert.service.user.InputValidation;
@@ -21,6 +22,7 @@ public class MyPageApiController {
     private final UserService userService;
     private final InputValidation inputValidation;
     private final ResponseService responseService;
+    private final MyPageService myPageService;
 
 
 
@@ -64,6 +66,18 @@ public class MyPageApiController {
             log.info("db단까지의 접근 이루어졌으나 문제 발생");
             return responseService.setServerErrorResponse("회원정보 수정 실패.");
         }
+    }
+
+    @PostMapping("/myticket/api")
+    @ResponseBody
+    public String changeStatus(@RequestBody String uuid) {
+        log.info("MY UUID = [{}]", uuid);
+        myPageService.updateMyTicketStatus(uuid);
+
+        MyTicketDto myTicketDto = myPageService.findMyTicketByUuid(uuid);
+        log.info("My Ticket Dto = {}", myTicketDto.toString());
+        log.info("Update Status -> {}", myTicketDto.getStatus().getValue());
+        return myTicketDto.getStatus().getValue();
     }
 
 

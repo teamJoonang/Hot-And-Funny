@@ -65,43 +65,43 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>dkalfk836</td>
-                                            <td>Tintop 콘서트 1일차</td>
-                                            <td>D-A53</td>
-                                            <td>2023.09.09</td>
-                                            <td>18:30</td>
-                                            <td>LG아트센터</td>
-                                            <td>2023.08.31 21시:32분:12초</td>
-                                            <td>이현승</td>
-                                            <td>유효</td>
+                                        <tr th:each="i : ${list}">
+                                            <td th:text="${i.uuid}">dkalfk836</td>
+                                            <td th:text="${i.concertName}">Tintop 콘서트 1일차</td>
+                                            <td th:text="${i.seatNumber}">D-A53</td>
+                                            <td th:text="${i.concertDate}">2023.09.09</td>
+                                            <td th:text="${i.concertTime}">18:30</td>
+                                            <td th:text="${i.concertPlace}">LG아트센터</td>
+                                            <td th:text="${i.createdAt}">2023.08.31 21시:32분:12초</td>
+                                            <td>준영</td>
+                                            <td class="status" th:text="${i.status.value}">유효</td>
                                             <td>취소</td>
                                             <!-- <td><input type="checkbox" name="ticket_refund" value="Y" class="ticketCkBox"></td> -->
                                         </tr>
-                                        <tr>
-                                            <td>wd1LmD!e86</td>
-                                            <td>Tintop 콘서트 1일차</td>
-                                            <td>D-A53</td>
-                                            <td>2023.09.09</td>
-                                            <td>18:30</td>
-                                            <td>LG아트센터</td>
-                                            <td>2023.08.31 21시:32분:12초</td>
-                                            <td>박거성</td>
-                                            <td>취소대기</td>
-                                            <td>취소</td>
-                                        </tr>
-                                        <tr>
-                                            <td>wwrmal!e86</td>
-                                            <td>Tintop 콘서트 2일차</td>
-                                            <td>D-A52</td>
-                                            <td>2023.09.10</td>
-                                            <td>18:30</td>
-                                            <td>LG아트센터</td>
-                                            <td>2023.08.31 21시:32분:12초</td>
-                                            <td>이현승</td>
-                                            <td>대기</td>
-                                            <td>취소</td>
-                                        </tr>
+<!--                                        <tr>-->
+<!--                                            <td>wd1LmD!e86</td>-->
+<!--                                            <td>Tintop 콘서트 1일차</td>-->
+<!--                                            <td>D-A53</td>-->
+<!--                                            <td>2023.09.09</td>-->
+<!--                                            <td>18:30</td>-->
+<!--                                            <td>LG아트센터</td>-->
+<!--                                            <td>2023.08.31 21시:32분:12초</td>-->
+<!--                                            <td>박거성</td>-->
+<!--                                            <td>취소대기</td>-->
+<!--                                            <td>취소</td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>wwrmal!e86</td>-->
+<!--                                            <td>Tintop 콘서트 2일차</td>-->
+<!--                                            <td>D-A52</td>-->
+<!--                                            <td>2023.09.10</td>-->
+<!--                                            <td>18:30</td>-->
+<!--                                            <td>LG아트센터</td>-->
+<!--                                            <td>2023.08.31 21시:32분:12초</td>-->
+<!--                                            <td>이현승</td>-->
+<!--                                            <td>대기</td>-->
+<!--                                            <td>취소</td>-->
+<!--                                        </tr>-->
                                     </tbody>
                                 </table>
                                 
@@ -120,6 +120,10 @@
     <!-- footer -->
     <footer th:replace="fragment/white_footer :: white-footer"></footer>
 
+
+
+
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <!-- bootstrap js -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
         <!-- sweetalert2 -->

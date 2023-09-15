@@ -15,5 +15,9 @@ public interface MyPageMapper {
 
     List<MyTicketDto> findMyTicketList(Long id);
 
+    void updateMyTicketStatus(String uuid);
+
+    MyTicketDto findMyTicketByUuid(String uuid);
+
 
 }

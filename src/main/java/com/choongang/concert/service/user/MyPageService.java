@@ -23,4 +23,13 @@ public class MyPageService {
     public List<MyTicketDto> findMyTicketList(Long id) {
         return myPageMapper.findMyTicketList(id);
     }
+
+    public void updateMyTicketStatus(String uuid) {
+        myPageMapper.updateMyTicketStatus(uuid);
+
+    }
+
+    public MyTicketDto findMyTicketByUuid(String uuid) {
+        return myPageMapper.findMyTicketByUuid(uuid);
+    }
 }
