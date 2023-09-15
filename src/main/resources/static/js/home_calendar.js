@@ -115,35 +115,49 @@ document.querySelector('.dates').addEventListener('click', (event) => {
 
 	const concertId = selectedDate.number;
 
+	const concertIdCheck = selectedDate.number;
+	let ticketCountCheck;
+
+	for (let i = 0; i < tldList.length; i++) {
+		if (tldList[i].concertId === concertIdCheck) {
+
+			ticketCountCheck = tldList[i].ticketCount;
+		}
+	}
+
 	///////////////////////////////////////////////2023-09-14 이거 할차례 티켓 같은날 4개초과 구매 불가능하게하기
 	//console.log("concertId: " + concertId);
 	// 서버로 보낼 데이터 준비 : 파라미터로 만들기 . json 으로 만들기
 	if (selectedDate !== null && selectedDate.date > day) {
+		if (ticketCountCheck < ticketMaxCount) {
+			$.ajax({
+				url: 'calendar/' + concertId
+				, method: 'GET'
+				, dataType: 'json'
+				, success: function(data) {
+					showSeatCount(data);
 
-		$.ajax({
-			url: 'calendar/' + concertId
-			, method: 'GET'
-			, dataType: 'json'
-			, success: function(data) {
-				showSeatCount(data);
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					console.log(errorThrown);
+					console.log(jqXHR);
+					console.log(textStatus);
 
-			},
-			error: function(jqXHR, textStatus, errorThrown) {
-				console.log(errorThrown);
-				console.log(jqXHR);
-				console.log(textStatus);
-
-				if (userId === null) {
-					alert("회원가입 및 로그인을 해주세요.");
+					if (userId === null) {
+						alert("회원가입 및 로그인을 해주세요.");
+					}
+					//alert("실패");
 				}
-				//alert("실패");
-			}
-		});
+			});
+		} else {
+			alert("선택하신 날짜에 티켓 구매 가능 수량을 초과하였습니다.");
+			showInit();
+		}
 	} else {
 		alert("날짜를 확인 해주세요. 공연 이틀 전까지 예매 가능합니다.");
 	}
 
-	reservationSeat();
+	reservationSeat();	
 	
 });
 
@@ -151,57 +165,40 @@ document.querySelector('.dates').addEventListener('click', (event) => {
 
 // 예매버튼 눌렀을때 팝업창 띄우기!
 function reservationSeat() {
-	const choiceDate = document.querySelector('.choice');
-	console.log(choiceDate);
-	const choiceDateNumber = choiceDate.textContent;
-	
-	selectedDate = concertDates.find(date => date.date === Number(choiceDateNumber));
+	//const choiceDate = document.querySelector('.choice');
+	//console.log(choiceDate);
+	//const choiceDateNumber = choiceDate.textContent;
 
-	const concertIdCheck = selectedDate.number;
-	
+	//selectedDate = concertDates.find(date => date.date === Number(choiceDateNumber));
+
 	const today = new Date();
 	const day = today.getDate() - 1;
 
-	let ticketCountCheck;
-	
-	for (let i = 0; i < tldList.length; i++) {
-		if (tldList[i].concertId === concertIdCheck) {
-			
-			ticketCountCheck = tldList[i].ticketCount;
-		}
-	}
+
 	if (selectedDate !== null && selectedDate.date > day) {
 
 		const formattedDay = String(selectedDate.date).padStart(2, '0'); // 두 자리로 포맷팅
 		const concertDate = selectedDate.year + "-" + String(selectedDate.month).padStart(2, '0') + "-" + formattedDay;
 		const seatChoiceUrl = 'http://localhost:8080/ticket/seat/choice/' + concertDate;
 
-
 		btnReservaiton.addEventListener('click', function() {
+			window.open(
+				seatChoiceUrl,
+				'seatChoice',
+				'width=1230, height=820, location=true, status=no, scrollbars=no');
+			//const popupWindw = window.open(
+			//seatChoiceUrl,
+			//'seatChoice',
+			//'width=1230, height=820, location=true, status=no, scrollbars=no');
+			//console.log("예매 날짜 : " + concertDate);
+			//console.log(seatChoiceUrl);
+			//console.log(typeof(seatChoiceUrl));
 
-			if (ticketCountCheck < ticketMaxCount) {
-				
-				window.open(
-					seatChoiceUrl,
-					'seatChoice',
-					'width=1230, height=820, location=true, status=no, scrollbars=no');
-				//const popupWindw = window.open(
-				//seatChoiceUrl,
-				//'seatChoice',
-				//'width=1230, height=820, location=true, status=no, scrollbars=no');
-				//console.log("예매 날짜 : " + concertDate);
-				//console.log(seatChoiceUrl);
-				//console.log(typeof(seatChoiceUrl));
-
-				// 크기 조절
-				//popupWindw.resizeTo(1250,900);
-				//popupWindw.onresize = (_=>{
-				//popupWindw.resizeTo(1250,900);
-				//})
-			} else {
-				alert("선택하신 날짜에 티켓 구매 가능 수량을 초과하였습니다.");
-				//showInit();
-			}
+			// 크기 조절
+			//popupWindw.resizeTo(1250,900);
+			//popupWindw.onresize = (_=>{
+			//popupWindw.resizeTo(1250,900);
+			//})
 		})
 	}
 
