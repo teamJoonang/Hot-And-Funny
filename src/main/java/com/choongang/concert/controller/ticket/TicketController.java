@@ -64,7 +64,6 @@ public class TicketController {
     public String paymentCheck(HttpServletRequest req, Model model) {
         HttpSession session = req.getSession();
         long userId = (long)session.getAttribute("id");
-        System.out.println("sessionId : " + userId);
         model.addAttribute("userId", userId);
         return "ticket/payment_check";
     }
