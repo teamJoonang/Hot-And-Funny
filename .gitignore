@@ -39,32 +39,5 @@ out/
 ### properties ###
 src/main/resources/application-db.properties
 
-### resources ###
-
-src/main/resources/templates/footer.html
-src/main/resources/templates/index.html
-src/main/resources/templates/**
-!src/main/resources/templates/ticket/home_calendar.html
-!src/main/resources/templates/ticket/aprroval.html
-!src/main/resources/templates/ticket/ticket_check.html
-
-src/main/resources/static/css/**
-!src/main/resources/static/css/ticket_approval.css
-!src/main/resources/static/css/home_calendar.css
-!src/main/resources/static/css/aprroval.css
-!src/main/resources/static/css/ticket_check.css
-
-
-src/main/resources/static/js/**
-!src/main/resources/static/js/home_calendar.js
-!src/main/resources/static/js/payment_check.js
-!src/main/resources/static/js/approval.js
-
-src/main/resources/static/img
-
-.gitignore
-
-
-
 
 
