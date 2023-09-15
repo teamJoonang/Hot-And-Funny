@@ -3,7 +3,7 @@
 <body>
 
 <header th:fragment="header">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-black" aria-label="Offcanvas navbar large">
+    <nav class="navbar navbar-expand-lg navbar-dark" aria-label="Offcanvas navbar large">
         <div class="container-fluid">
             <div class="col-3">
                 <a href="" class="d-flex">
@@ -32,7 +32,13 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-center flex-grow-1 pe-3 fs-5">
                         <li class="nav-item">
-                            <a href="/admin" class="nav-link text-warning px-3" hidden>ADMIN</a>
+                            <a href="/admin" class="nav-link text-warning fw-semibold px-3">ADMIN</a>
+                            <ul class="sub-menu">
+                                <li><a href="">회원조회</a></li>
+                                <li><a href="">게시글 관리</a></li>
+                                <li><a href="">환불관리</a></li>
+                                <li><a href="">통계자료</a></li>
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a href="/about.html" class="nav-link custom-atag px-3">ABOUT</a>
@@ -40,35 +46,16 @@
                         <li class="nav-item">
                             <a href="/ticket" class="nav-link custom-atag px-3">TICKET</a>
                             <ul class="sub-menu">
+                                <li><a href="">티켓예매</a></li>
                                 <li><a href="">구매내역</a></li>
-                                <li><a href="">예매정보</a></li>
-                                <li><a href=""></a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="/notice" class="nav-link custom-atag px-3">NOTICE</a>
+                            <a href="/notice" class="nav-link custom-atag px-3">FORUM</a>
                             <ul class="sub-menu">
-                                <li><a href="">티켓소식</a></li>
-                                <li><a href="">시스템관련</a></li>
-                                <li><a href="">배송관련</a></li>
-                                <li><a href="">기타</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/qna" class="nav-link custom-atag px-3">Q N A</a>
-                            <ul class="sub-menu pe-2">
-                                <li><a href="">예매/취소</a></li>
-                                <li><a href="">결제</a></li>
-                                <li><a href="">기타</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/event" class="nav-link custom-atag px-3">EVENT</a>
-                            <ul class="sub-menu">
+                                <li><a href="">공지사항</a></li>
+                                <li><a href="">QNA</a></li>
                                 <li><a href="">이벤트</a></li>
-                                <li><a href="">당첨자발표</a></li>
-                                <li><a href="">자유</a></li>
-                                <li><a href="">후기/리뷰</a></li>
                             </ul>
                         </li>
                     </ul>

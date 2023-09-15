@@ -37,31 +37,6 @@ body {
 }
 
 
-/* ----- custom <a> tag ----- */
-/* .custom-atag {
-    text-decoration: none;
-    color: #ffffff;
-}
-
-.custom-atag::after {
-    display: block !important;
-    content: '' !important;
-    border-bottom: solid 2px #f517fe !important;  
-    transform: scaleX(0) !important;  
-    transition: 0.35s ease-in-out !important;
-    transform-origin: 0% 50% !important;
-
-}
-
-.custom-atag:hover {
-    color: #f517fe !important;
-}
-
-.custom-atag:hover:after {
-    transform: scaleX(1) !important;
-} */
-
-
 .custom-atag {
 
     background-image: linear-gradient(currentcolor, currentcolor);
@@ -75,7 +50,6 @@ body {
     color: #ffffff;
     font-size: 1.3rem;
     font-weight: 600;
-    /* text-transform: uppercase; */
 
 }
 
@@ -155,7 +129,9 @@ body {
 
 
 /* ----- HEADER ----- */
-
+.header-img-logo {
+    width: 70%;
+}
 
 
 /*----- MAIN -----*/
