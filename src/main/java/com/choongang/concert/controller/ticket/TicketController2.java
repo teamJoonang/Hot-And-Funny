@@ -38,6 +38,7 @@ public class TicketController2 {
 			List<TicketLimitDto> tldList = ticketService.ticketLimit(userId);
 			
 			model.addAttribute("tldList", tldList);
+			model.addAttribute("userId", userId);
 			
 			
 			

@@ -74,11 +74,11 @@ public class TicketService2 implements ITicketService2 {
 			int concertId = entry.getKey();
 		    int count = entry.getValue();
 		    
-		    
 		    TicketLimitDto tld = new TicketLimitDto();
 		    tld.setConcertId(concertId);
 		    tld.setTicketCount(count);
 		    tldList.add(tld);
+		    log.info(tld);
 		}
 	
 		

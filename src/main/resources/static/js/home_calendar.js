@@ -14,7 +14,10 @@ const concertDates = [
 	{ number: 2, date: 10, month: 9, year: 2023, time: "18:30:00" },
 	{ number: 3, date: 11, month: 9, year: 2023, time: "21:30:00" },
 	{ number: 4, date: 23, month: 9, year: 2023, time: "21:30:00" },
-	{ number: 5, date: 24, month: 9, year: 2023, time: "21:30:00" }
+	{ number: 5, date: 24, month: 9, year: 2023, time: "21:30:00" },
+	{ number: 6, date: 17, month: 9, year: 2023, time: "21:30:00" },
+	{ number: 7, date: 18, month: 9, year: 2023, time: "21:30:00" },
+	{ number: 8, date: 19, month: 9, year: 2023, time: "21:30:00" }
 ];
 
 const viewYear = date.getFullYear();
@@ -85,7 +88,7 @@ function renderCalendar() {
 renderCalendar();
 
 
-//  날짜선택 타이틀 화면
+//  날짜 클릭시 타이틀 화면
 document.querySelector('.dates').addEventListener('click', (event) => {
 	const clickedDate = event.target.innerText;
 	//console.log(clickedDate);
@@ -95,70 +98,89 @@ document.querySelector('.dates').addEventListener('click', (event) => {
 	//console.log([clickedDay]);
 	//console.log("날짜 고른 값 : " + selectedDate);
 	const today = new Date();
-	const day = today.getDate() - 1;
+	const day = today.getDate() + 1;
 
-	//	선택 날짜 정보 title에 띄우기
-	if (selectedDate !== null && selectedDate.date > day) {
+	const concertId = selectedDate.number;
+	if (selectedDate !== null && selectedDate.date > day && userId !== null) {
+
+		// 서버에서 갖고온 ID값에 대한 ConcertId와 TicketCount 수 찾기
+		const concertIdCheck = selectedDate.number;
+		let impossibleId;
+		let ticketCountCheck;
+
+		for (let i = 0; i < tldList.length; i++) {
+			if (tldList[i].concertId === concertIdCheck) {
+				ticketCountCheck = tldList[i].ticketCount;
+
+			} else if (ticketCountCheck === undefined) {
+
+				ticketCountCheck = 0;
+			}
+			if (tldList[i].ticketCount === ticketMaxCount) {
+				impossibleId = tldList[i].concertId;
+			}
+		}
+
+		//	선택 날짜 정보 title에 띄우기
 		const formattedDay = String(clickedDay).padStart(2, '0'); // 두 자리로 포맷팅
 		const formattedTime = selectedDate.time.substring(0, 5);
 		concertSite.innerText = `• 서울시 강서구 양천로 125 서울문화예관 B1F`;
 		concertDate.innerHTML = `• ${selectedDate.year}
-								-${String(selectedDate.month).padStart(2, '0')}
-								-${formattedDay} 
-								/ Time. ${formattedTime}`;
+							-${String(selectedDate.month).padStart(2, '0')}
+							-${formattedDay} 
+							/ Time. ${formattedTime}`;
 		concertGrade.innerText = `• 15세 관람가`;
 		concertRuntime.innerText = `• 60분`;
-	}
-	else {
 
-	}
 
-	const concertId = selectedDate.number;
+		// 서버로 보낼 데이터 준비 : 파라미터로 만들기 . json 으로 만들기
+		$.ajax({
+			url: 'calendar/' + concertId
+			, method: 'GET'
+			, dataType: 'json'
+			, success: function(data) {
+				showSeatCount(data);
 
-	const concertIdCheck = selectedDate.number;
-	let ticketCountCheck;
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				console.log(errorThrown);
+				console.log(jqXHR);
+				console.log(textStatus);
 
-	for (let i = 0; i < tldList.length; i++) {
-		if (tldList[i].concertId === concertIdCheck) {
-
-			ticketCountCheck = tldList[i].ticketCount;
-		}
-	}
-
-	///////////////////////////////////////////////2023-09-14 이거 할차례 티켓 같은날 4개초과 구매 불가능하게하기
-	//console.log("concertId: " + concertId);
-	// 서버로 보낼 데이터 준비 : 파라미터로 만들기 . json 으로 만들기
-	if (selectedDate !== null && selectedDate.date > day) {
-		if (ticketCountCheck < ticketMaxCount) {
-			$.ajax({
-				url: 'calendar/' + concertId
-				, method: 'GET'
-				, dataType: 'json'
-				, success: function(data) {
-					showSeatCount(data);
-
-				},
-				error: function(jqXHR, textStatus, errorThrown) {
-					console.log(errorThrown);
-					console.log(jqXHR);
-					console.log(textStatus);
-
-					if (userId === null) {
-						alert("회원가입 및 로그인을 해주세요.");
-					}
-					//alert("실패");
+				if (userId === null) {
+					alert("회원가입 및 로그인을 해주세요.");
 				}
-			});
+				//alert("실패");
+			}
+		});
+		if (ticketCountCheck < ticketMaxCount) {
+
+			// 팝업창 주소
+			const concertDate = selectedDate.year + "-" + String(selectedDate.month).padStart(2, '0') + "-" + formattedDay;
+			const seatChoiceUrl = 'http://localhost:8080/ticket/seat/choice/' + concertDate;
+			console.log(ticketCountCheck);
+			function reservationClickHandler() {
+				if (impossibleId !== selectedDate.number) {
+					window.open(
+						seatChoiceUrl,
+						'seatChoice',
+						'width=1230, height=820, location=true, status=no, scrollbars=no'
+					);
+				}
+			};
+			btnReservaiton.addEventListener('click', reservationClickHandler);
 		} else {
 			alert("선택하신 날짜에 티켓 구매 가능 수량을 초과하였습니다.");
-			showInit();
 		}
-	} else {
-		alert("날짜를 확인 해주세요. 공연 이틀 전까지 예매 가능합니다.");
-	}
 
-	reservationSeat();	
-	
+
+	} else if (userId === null) {
+		alert(" 로그인 해 주세요.");
+		location.href = "idnex.html";
+	}
+	else {
+		alert("날짜를 확인 해주세요. \n마감된 공연이거나 공연 이틀 전까지 예매 가능합니다.");
+	}
 });
 
 
@@ -166,13 +188,13 @@ document.querySelector('.dates').addEventListener('click', (event) => {
 // 예매버튼 눌렀을때 팝업창 띄우기!
 function reservationSeat() {
 	//const choiceDate = document.querySelector('.choice');
-	//console.log(choiceDate);
+	//console.log(selectedDate.date);
 	//const choiceDateNumber = choiceDate.textContent;
 
 	//selectedDate = concertDates.find(date => date.date === Number(choiceDateNumber));
 
 	const today = new Date();
-	const day = today.getDate() - 1;
+	const day = today.getDate() + 1;
 
 
 	if (selectedDate !== null && selectedDate.date > day) {
@@ -231,6 +253,7 @@ function showInit() {
 		$("#remainSeat").append(tr);
 	}
 }
+
 /*
 fetch('/ticket/home/caledar')
 			.then(response => response.json())
@@ -310,7 +333,7 @@ function generateClickableDates(concertDates) {
 function concertDateColor() {
 	const choiceDates = document.querySelectorAll('.selected');
 	const today = new Date();
-	const day = today.getDate() - 1;
+	const day = today.getDate() + 1;
 
 	choiceDates.forEach(choiceDate => {
 		choiceDate.addEventListener('click', (event) => {
