@@ -1,6 +1,7 @@
 package com.choongang.concert.controller.ticket;
 
 import com.choongang.concert.dto.ticket.ConcertInfoDto;
+import com.choongang.concert.dto.ticket.RemainNumDto;
 import com.choongang.concert.dto.ticket.SeatListDto;
 import com.choongang.concert.service.ticket.TicketService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -33,9 +34,7 @@ public class TicketController {
         try {
             // remainSeat 객체를 JSON 문자열로 변환
             String jsonSeatList = objectMapper.writeValueAsString(remainSeat);
-            
             model.addAttribute("remainSeat", jsonSeatList);
-
         } catch (JsonProcessingException e) {
             return "좌석 파싱 에러";
         }
@@ -57,7 +56,6 @@ public class TicketController {
         model.addAttribute("concertInfo", concertInfo);
         model.addAttribute("concertDate", concertDate);
         return "ticket/seat_choice";
-
     }
 
     @GetMapping("/payment/check")

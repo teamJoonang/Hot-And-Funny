@@ -1,14 +1,10 @@
 package com.choongang.concert.repository.ticket;
 
-import java.util.List;
-
+import com.choongang.concert.dto.ticket.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.choongang.concert.dto.ticket.ConcertInfoDto;
-import com.choongang.concert.dto.ticket.MakeTicketDto;
-import com.choongang.concert.dto.ticket.RemainNumDto;
-import com.choongang.concert.dto.ticket.SeatListDto;
+import java.util.List;
 
 @Mapper
 public interface ITicketDao {

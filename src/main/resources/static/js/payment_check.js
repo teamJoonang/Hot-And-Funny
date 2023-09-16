@@ -460,7 +460,7 @@ nextViewBtn.addEventListener("click" , async() => {
     } catch (error) {
         console.error('실결제 오류 : ' , error);
         alert("결제가 취소되었습니다");
-        // return;
+        return;
     }
 
     // 다음페이지 필요 데이터 전달
