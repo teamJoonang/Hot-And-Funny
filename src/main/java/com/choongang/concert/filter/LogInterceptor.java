@@ -20,7 +20,7 @@ public class LogInterceptor implements HandlerInterceptor {
 
         String requestURI = request.getRequestURI();
 
-        String uuid = UUID.randomUUID().toString();
+//        String uuid = UUID.randomUUID().toString();
 
         //@RequestMapping: HandlerMethod
         //정적 resource: ResourceHttpRequestHandler
@@ -31,7 +31,7 @@ public class LogInterceptor implements HandlerInterceptor {
 
         }
 
-        log.info("REQUEST [{}] [{}] [{}]", uuid, requestURI, handler);
+        log.info("REQUEST [{}] [{}]", requestURI, handler);
 
         return true; // false 일경우 진행하지 않음, true일 경우 다음 인터셉터 or 컨트롤러 호출
     }
