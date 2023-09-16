@@ -179,7 +179,7 @@ document.querySelector('.dates').addEventListener('click', (event) => {
 		location.href = "idnex.html";
 	}
 	else {
-		alert("날짜를 확인 해주세요. \n마감된 공연이거나 공연 이틀 전까지 예매 가능합니다.");
+		alert("날짜를 확인 해주세요. \n1. 마감된 공연 Check! \n2. 공연 이틀 전까지 예매 가능 Check!");
 	}
 });
 
