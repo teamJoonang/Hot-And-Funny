@@ -31,7 +31,7 @@
                 </div>
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-center flex-grow-1 pe-3 fs-5">
-                        <li class="nav-item">
+                        <li class="nav-item" th:if="${session.loginId != null && #strings.toString(session.loginId).contains('admin')}">
                             <a href="/admin" class="nav-link text-warning fw-semibold px-3">ADMIN</a>
                             <ul class="sub-menu">
                                 <li><a href="">회원조회</a></li>
@@ -61,7 +61,10 @@
                     </ul>
                     <div class="col-3 navbar-nav justify-content-end user-nav pe-3">
                         <a href="/ticket" class="nav-link custom-atag">티켓예매</a>
-                        <a href="/accounts/login.html" class="nav-link custom-atag ">로그인</a>
+                        <a th:if="${!session.isEmpty()}" th:href="@{/user/myinfo}" class="nav-link custom-atag">마이페이지</a>
+                        <a th:if="${session.isEmpty()}" href="/accounts/login.html" th:href="@{/user/login}" class="nav-link custom-atag">로그인</a>
+                        <a th:if="${!session.isEmpty()}" th:href="@{/user/logout}" class="nav-link custom-atag">로그아웃</a>
+
                     </div>
                     <div class="col-1 d-flex align-items-center justify-content-end fs-2 pe-4 footer-icon user-nav">
                         <a href="https://github.com/teamJoongang/Hot-And-Funny" class="text-secondary pe-3"><i class="bi bi-github"></i></a>

@@ -15,7 +15,9 @@
             </button>
             <div class="offcanvas offcanvas-end offcanvas-size-sm bg-black col-6" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
-                    <h6 class="offcanvas-title text-white" id="offcanvasNavbarLabel">로그인이 필요합니다.</h6>
+                    <h6 class="offcanvas-title text-white" id="offcanvasNavbarLabel" th:if="${session.isEmpty()}">로그인이 필요합니다.</h6>
+                    <h5 class="offcanvas-title text-white" id="offcanvasNavbarLabel" th:if="${!session.isEmpty()}" th:text="'환영합니다.' + ${session.loginId} + '님'"></h5>
+
                     <div class="col-3 navbar justify-content-center user-nav">
                         <div class="d-flex">
                             <a href="/ticket" class="nav-link text-decoration-none text-white fw-semibold">
@@ -58,6 +60,9 @@
                                 <li><a href="">QNA</a></li>
                                 <li><a href="">이벤트</a></li>
                             </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/notice" class="nav-link custom-atag px-3">CONTACT</a>
                         </li>
                     </ul>
                     <div class="col-3 navbar-nav justify-content-end user-nav pe-3">

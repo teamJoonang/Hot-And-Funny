@@ -20,8 +20,7 @@ public class HomeController {
 	private final UserService userService;
 
 	@GetMapping("/")
-	public String home(Model model) {
-
+	public String home() {
 
 
 		return "index";
