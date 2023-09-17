@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -35,6 +36,15 @@ public class BoardController {
 		model.addAttribute("pageDto", pageDto);
 
 		return "/board/notice";
+	}
+
+	@GetMapping("/notice/detail/{id}")
+	public String getNoticeDetailView(@PathVariable Long id, Model model) {
+
+		NoticeDto noticeDetail = boardService.findNoticeDetail(id);
+		model.addAttribute("notice", noticeDetail);
+
+		return "board/basic_detail";
 	}
 
 }

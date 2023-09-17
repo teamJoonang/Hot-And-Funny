@@ -50,7 +50,7 @@
                     <tr th:each="notice : ${noticeList}">
                         <td th:text="${notice.id}">6</td>
                         <td th:text="${notice.category}">티켓오픈</td>
-                        <td><a th:text="${notice.title}">티켓을 오픈합니다</a></td>
+                        <td><a th:text="${notice.title}" th:href="@{'notice/detail/' + ${notice.id}}">티켓을 오픈합니다</a></td>
                         <td th:text="${notice.createdAt}">1238-04-18</td>
                         <td th:text="${notice.hit}">16857</td>
                     </tr>

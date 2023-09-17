@@ -25,4 +25,9 @@ public class BoardService {
 
         return boardMapper.allCount(createPageDto);
     }
+
+    public NoticeDto findNoticeDetail(Long id) {
+
+        return boardMapper.findById(id);
+    }
 }

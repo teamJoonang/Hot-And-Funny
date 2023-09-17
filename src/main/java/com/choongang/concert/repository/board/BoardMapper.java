@@ -12,6 +12,8 @@ public interface BoardMapper {
 
     List<NoticeDto> findAll(CreatePageDto createPageDto);
 
+    NoticeDto findById(Long id);
+
     int allCount(CreatePageDto createPageDto);
 
 

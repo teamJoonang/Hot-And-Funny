@@ -45,5 +45,11 @@
             concat('%', #{keyword}, '%')
         </if>
     </select>
+    <select id="findById" resultType="com.choongang.concert.dto.board.NoticeDto">
+        select title, writer, created_at, content
+        from
+        notice
+        where id = #{id}
+    </select>
 </mapper>
 
