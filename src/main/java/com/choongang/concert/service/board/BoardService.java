@@ -36,4 +36,8 @@ public class BoardService {
 
         return boardMapper.createPost(noticeEditDto);
     }
+
+    public int editPost(NoticeEditDto noticeEditDto) {
+        return boardMapper.updatePost(noticeEditDto);
+    }
 }

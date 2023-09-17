@@ -8,6 +8,7 @@ import lombok.ToString;
 @ToString
 public class NoticeEditDto {
 
+    private String id;
     private String title;
     private String writer;
     private String content;

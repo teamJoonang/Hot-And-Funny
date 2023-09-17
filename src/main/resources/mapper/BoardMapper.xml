@@ -8,6 +8,12 @@
         value (1, #{title}, #{writer}, #{content}, #{category})
     </insert>
 
+    <update id="updatePost">
+        update notice
+        set category = #{category}, title = #{title} , content = #{content}
+        where id = #{id}
+    </update>
+
 
     <select id="findAll" resultType="com.choongang.concert.dto.board.NoticeDto">
         select id, category, title, created_at, writer, content, hit
@@ -42,7 +48,7 @@
         </if>
     </select>
     <select id="findById" resultType="com.choongang.concert.dto.board.NoticeDto">
-        select title, writer, created_at, content
+        select id, category, title, writer, created_at, content, hit
         from
         notice
         where id = #{id}

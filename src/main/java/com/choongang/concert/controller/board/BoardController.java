@@ -50,22 +50,42 @@ public class BoardController {
 		return "board/basic_detail";
 	}
 
-	@GetMapping("/notice/edit")
-	public String getNoticeEditView() {
+	@GetMapping("/notice/create")
+	public String getNoticeCreateView() {
 
 		return "board/admin_write";
 	}
 
-	@PostMapping("/notice/edit")
+	@PostMapping("/notice/create")
 	public String createPost(@ModelAttribute NoticeEditDto noticeEditDto){
 
 		log.info("NoticeEditDto = {}", noticeEditDto);
-		int postCnt = boardService.createPost(noticeEditDto);
+		int row = boardService.createPost(noticeEditDto);
 
-		log.info("add Post Count = {}", postCnt);
-
-
+		log.info("INSERT ROW = {}", row);
 		return "redirect:/notice";
 	}
+
+	@GetMapping("/notice/edit/{id}")
+	public String getNoticeEditView(@PathVariable Long id, Model model){
+
+		log.info("GET ID = {}", id);
+		NoticeDto noticeDetail = boardService.findNoticeDetail(id);
+		model.addAttribute("edit", noticeDetail);
+
+		return "/board/edit";
+	}
+
+
+	@PostMapping("/notice/edit/{id}")
+	public String updateNoticeEdit(@PathVariable Long id, @ModelAttribute NoticeEditDto noticeEditDto, Model model){
+
+		int row = boardService.editPost(noticeEditDto);
+		log.info("UPDATE ROW = {}", row);
+
+		return "redirect:/notice/detail/{id}";
+	}
+
+
 
 }

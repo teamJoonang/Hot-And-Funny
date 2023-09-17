@@ -19,5 +19,7 @@ public interface BoardMapper {
 
     int createPost(NoticeEditDto noticeEditDto);
 
+    int updatePost(NoticeEditDto noticeEditDto);
+
 
 }
