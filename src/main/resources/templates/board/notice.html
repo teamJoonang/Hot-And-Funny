@@ -65,14 +65,27 @@
             <div class="text-center mt-4">
 
                 <ul class="pagination pagination-sm justify-content-center">
+                        <li class="page-item" th:if="${pageDto.prev}">
+                            <a class ="page-link text-black" href="#" th:href="${pageDto.cp.makeQueryString(pageDto.pageStart-1)}">이전</a>
+                        </li>
+                        <li class="page-item" th:if="${!pageDto.prev}">
+                            <a class ="page-link text-black" href="#" onclick="alert('이전 페이지는 존재하지 않습니다.')" th:href="${pageDto.cp.makeQueryString(pageDto.cp.pageNum)}">이전</a>
+                        </li>
 
-                    <li class="page-item"><a class ="page-link text-black" href="#">이전</a></li>
-                    <li class="page-item"><a class="page-link text-black" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link text-black" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link text-black" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link text-black" href="#">4</a></li>
-                    <li class="page-item"><a class="page-link text-black" href="#">5</a></li>
-                    <li class="page-item"><a class="page-link text-black" href="#">다음</a></li>
+                    <th:block th:with="pageDto = ${pageDto}">
+                        <th:block  th:each="num : ${#numbers.sequence(pageDto.pageStart, pageDto.pageEnd)}">
+                            <li class="page-item" th:classappend="${pageDto.cp.pageNum == num} ? 'active' :''">
+                                <a class="page-link text-black" th:href="${pageDto.cp.makeQueryString(num)}" th:text="${num}"></a>
+                            </li>
+                        </th:block>
+                    </th:block>
+
+                    <li class="page-item" th:if="${pageDto.next}">
+                        <a class ="page-link text-black" href="#" th:href="${pageDto.cp.makeQueryString(pageDto.pageEnd+1)}">다음</a>
+                    </li>
+                    <li class="page-item" th:if="${!pageDto.next}">
+                        <a class ="page-link text-black" href="#" onclick="alert('다음페이지는 존재하지 않습니다.')" th:href="${pageDto.cp.makeQueryString(pageDto.cp.pageNum)}">다음</a>
+                    </li>
                 </ul>
             </div>
             <div class="container">

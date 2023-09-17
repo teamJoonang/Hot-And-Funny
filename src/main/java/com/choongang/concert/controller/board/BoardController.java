@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class BoardController {
 
 
 	@GetMapping("/notice")
-	public String getNoticeView(CreatePageDto createPageDto, Model model){
+	public String getNoticeView(@ModelAttribute CreatePageDto createPageDto, Model model){
 
 
 		List<NoticeDto> noticeList = boardService.getNoticeList(createPageDto);

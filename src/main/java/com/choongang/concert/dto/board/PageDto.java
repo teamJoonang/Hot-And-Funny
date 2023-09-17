@@ -18,9 +18,9 @@ public class PageDto {
     public PageDto(CreatePageDto cp, int total) {
         this.cp = cp;
         this.total = total;
-        this.pageEnd = (int) (Math.ceil(cp.getPageNum() / 10.0)) * 10;
-        this.pageStart = this.pageEnd - 9;
-        int realEnd = (int) (Math.ceil(total * 1.0) / cp.getAmount());
+        this.pageEnd = (int) ((Math.ceil(cp.getPageNum() / 5.0)) * 5);
+        this.pageStart = this.pageEnd - 4;
+        int realEnd = (int) (Math.ceil(total * 1.0 / cp.getAmount()));
 
         if (realEnd < pageEnd) {
             this.pageEnd = realEnd;

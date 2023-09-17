@@ -43,8 +43,8 @@ public class CreatePageDto {
     public String makeQueryString(int pageNum) {
         UriComponents uriComponents = UriComponentsBuilder.newInstance()
                 .queryParam("pageNum", pageNum)
-                .queryParam("amount", amount)
-                .queryParam("searchType", type)
+//                .queryParam("amount", amount)
+                .queryParam("type", type)
                 .queryParam("keyword", keyword)
                 .build()
                 .encode();
