@@ -15,104 +15,11 @@
 <title>Purchase</title>
 </head>
 <body>
-	<header>
-		<nav class="navbar navbar-expand-lg navbar-dark bg-black"
-			aria-label="Offcanvas navbar large">
-			<div class="container-fluid">
-				<div class="col-3">
-					<a href="" class="d-flex"> <img
-						src="../../static/img/concert_logo.png"
-						th:src="@{/img/concert_logo.png}"
-						class="img-fluid header-img-logo" alt="콘서트_이미지_로고">
-					</a>
-				</div>
-				<button class="navbar-toggler bg-black" type="button"
-					data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-					aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div
-					class="offcanvas offcanvas-end offcanvas-size-sm bg-black col-6"
-					tabindex="-1" id="offcanvasNavbar"
-					aria-labelledby="offcanvasNavbarLabel">
-					<div class="offcanvas-header">
-						<h6 class="offcanvas-title text-white" id="offcanvasNavbarLabel">로그인이
-							필요합니다.</h6>
-						<div class="col-3 navbar justify-content-center user-nav">
-							<div class="d-flex">
-								<a href="../ticket"
-									class="nav-link text-decoration-none text-white fw-semibold">
-									<i class="bi bi-ticket-detailed custom-atag fs-4"></i>
-								</a> <a href="../accounts/login.html"
-									class="nav-link text-decoration-none text-white fw-semibold mx-2">
-									<i class="bi bi-person custom-atag fs-4"></i>
-								</a>
-								<!-- <a href="#" class="nav-link text-decoration-none text-white fw-semibold custom-atag">회원가입</a> -->
-							</div>
-						</div>
-						<button type="button" class="btn-close btn-close-white"
-							data-bs-dismiss="offcanvas" aria-label="Close"></button>
-					</div>
-					<div class="offcanvas-body">
-						<ul
-							class="navbar-nav justify-content-center flex-grow-1 pe-3 fs-5">
-							<li class="nav-item"><a href="../admin"
-								class="nav-link text-warning px-3" hidden>ADMIN</a></li>
-							<li class="nav-item"><a href="../about.html"
-								class="nav-link custom-atag px-3">ABOUT</a></li>
-							<li class="nav-item"><a href="../ticket"
-								class="nav-link custom-atag px-3">TICKET</a>
-								<ul class="sub-menu">
-									<li><a href="">구매내역</a></li>
-									<li><a href="">예매정보</a></li>
-									<li><a href=""></a></li>
-								</ul></li>
-							<li class="nav-item"><a href="../notice"
-								class="nav-link custom-atag px-3">NOTICE</a>
-								<ul class="sub-menu">
-									<li><a href="">티켓소식</a></li>
-									<li><a href="">시스템관련</a></li>
-									<li><a href="">배송관련</a></li>
-									<li><a href="">기타</a></li>
-								</ul></li>
-							<li class="nav-item"><a href="../qna"
-								class="nav-link custom-atag px-3">Q N A</a>
-								<ul class="sub-menu pe-2">
-									<li><a href="">예매/취소</a></li>
-									<li><a href="">결제</a></li>
-									<li><a href="">기타</a></li>
-								</ul></li>
-							<li class="nav-item"><a href="/event"
-								class="nav-link custom-atag px-3">EVENT</a>
-								<ul class="sub-menu">
-									<li><a href="">이벤트</a></li>
-									<li><a href="">당첨자발표</a></li>
-									<li><a href="">자유</a></li>
-									<li><a href="">후기/리뷰</a></li>
-								</ul></li>
-						</ul>
-						<div class="col-3 navbar-nav justify-content-end user-nav pe-3">
-							<a href="/ticket" class="nav-link custom-atag">티켓예매</a> <a
-								href="/accounts/login.html" class="nav-link custom-atag ">로그인</a>
-						</div>
-						<div
-							class="col-1 d-flex align-items-center justify-content-end fs-2 pe-4 footer-icon user-nav">
-							<a href="https://github.com/teamJoongang/Hot-And-Funny"
-								class="text-secondary pe-3"><i class="bi bi-github"></i></a> <a
-								href="https://hyunsense.notion.site/hyunsense/fd8584dc0730455aa340d328dba8beb6"
-								class=""><img class="notion"
-								src="../../static/img/notion_icon2.png"
-								th:src="@{/img/notion_icon2.png}" alt=""></a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</nav>
-	</header>
+<header th:replace="fragment/header :: header"></header>
+	<main class="min-vh-100">
 	<div class="container-fruid row">
 		<div class="col-lg-4 col-md-12">
-			<img class="post-img" src="../../static/img/concert_ticket2.png"
-				th:src="@{/img/concert_ticket2.png}" alt="">
+			<img class="post-img rounded-3" src="../../static/img/concert_ticket2.png" th:src="@{/img/paulkim.png}" alt="">
 		</div>
 		<div
 			class="col-lg-7 col-md-8 offset-lg-1 offset-md-2 offset-sm-0 mt-5">
@@ -207,6 +114,8 @@
 			</div>
 		</div>
 	</div>
+	</main>
+	<footer th:replace="fragment/white_footer :: footer"></footer>
 	<script th:inline="javascript">
 		const tldList = /*[[${tldList}]]*/[];
 		const userId = /*[[${userId}]]*/ [];
