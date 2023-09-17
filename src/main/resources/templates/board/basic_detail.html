@@ -13,6 +13,7 @@
 <body class="min-vh-100 d-flex flex-column">
         <header th:replace="fragment/header :: header"></header>
         <main>
+            <form method="post" th:action="@{'/notice/delete/' + ${notice.id}}">
             <div class="container w-75 my-2 py-4">
                 <div class="border-bottom-3">
                     <hr class="border-5 mt-5">
@@ -34,6 +35,7 @@
                     </div>
                 </div>
             </div>
+            </form>
         </main>
 
     <footer th:replace="fragment/white_footer :: white-footer"></footer>

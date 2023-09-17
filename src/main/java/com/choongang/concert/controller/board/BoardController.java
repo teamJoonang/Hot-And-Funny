@@ -86,6 +86,15 @@ public class BoardController {
 		return "redirect:/notice/detail/{id}";
 	}
 
+	@PostMapping("/notice/delete/{id}")
+	public String deleteNotice(@PathVariable Long id) {
+
+		int row = boardService.deletePost(id);
+		log.info("DELETE ROW = {} ID = {}", row, id);
+
+		return "redirect:/notice";
+	}
+
 
 
 }

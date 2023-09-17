@@ -21,5 +21,7 @@ public interface BoardMapper {
 
     int updatePost(NoticeEditDto noticeEditDto);
 
+    int deletePost(Long id);
+
 
 }

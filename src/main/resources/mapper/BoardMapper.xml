@@ -14,6 +14,12 @@
         where id = #{id}
     </update>
 
+    <delete id="deletePost">
+        delete from notice
+        where id = #{id}
+
+    </delete>
+
 
     <select id="findAll" resultType="com.choongang.concert.dto.board.NoticeDto">
         select id, category, title, created_at, writer, content, hit

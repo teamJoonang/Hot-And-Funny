@@ -40,4 +40,8 @@ public class BoardService {
     public int editPost(NoticeEditDto noticeEditDto) {
         return boardMapper.updatePost(noticeEditDto);
     }
+
+    public int deletePost(Long id) {
+        return boardMapper.deletePost(id);
+    }
 }
