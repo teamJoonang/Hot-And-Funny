@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.choongang.concert.dto.ticket.TicketLimitDto;
 import com.choongang.concert.dto.ticket.TicketShowDto;
 import com.choongang.concert.service.ticket.TicketService2;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -26,7 +28,40 @@ public class TicketController2 {
 	private final TicketService2 ticketService;
 
 	@GetMapping("/home/calendar")
-	public String homeCalendar() {
+	public String homeCalendar(HttpServletRequest req, Model model) {
+		
+		HttpSession session = req.getSession(false);
+		if(session != null && session.getAttribute("id") != null) {
+			long id = (long) session.getAttribute("id");
+			
+			String userId = String.valueOf(id);
+			List<TicketLimitDto> tldList = ticketService.ticketLimit(userId);
+			
+			model.addAttribute("tldList", tldList);
+			model.addAttribute("userId", userId);
+			
+			
+			
+//			List<TicketCountDto> tcdList = ticketService.ticketCountInfo(userId);
+//			List<String> checkUserIds = new ArrayList<>();
+//			List<String> limitConcertDates = new ArrayList<>();
+//			
+//			for (TicketCountDto tcd : tcdList) {
+//				String checkUserId = tcd.getCheckUserId();
+//				String limitConcertDate = tcd.getConcertDate();
+//				checkUserIds.add(checkUserId);
+//				limitConcertDates.add(limitConcertDate);
+//			}
+//			model.addAttribute("checkUserId", checkUserIds);
+//			model.addAttribute("limitConcertDate", limitConcertDates);
+//			log.info("-------------1--------" + checkUserIds);
+//			log.info("-------------2--------" + limitConcertDates);
+			
+			
+//			return "redirect:/user/login";
+//			return "redirect:/ticket/home_calendar";
+		}
+
 		return "ticket/home_calendar";
 	}
 
@@ -38,26 +73,11 @@ public class TicketController2 {
 	@GetMapping("/ticket/check")
 	public String ticketCheck(@RequestParam String concertDate, Model model, HttpSession session) {
 		
-//		sesssion {id : 2}
-		Long id = (Long)session.getAttribute("Id");
+		long id = (long)session.getAttribute("id");
 		String userId = String.valueOf(id);
-//		concertDto user = new ConcertDto();
-//		user.setId(id);
-		log.info("-----------------1-------------------" + id);
-		log.info("-----------------2-------------------" + userId);
+
 		List<TicketShowDto> tsdList = ticketService.getTicketInfo(concertDate, userId);
-	
-//		for (TicketShowDto tsd : tsdList) {
-//			String uuid = tsd.getUuid();
-//			String choiceDate = tsd.getConcertDate();
-//			String seatNum = tsd.getSeatNum();
-//			model.addAttribute("uuid", uuid);
-//			model.addAttribute("concertDate", choiceDate);
-//			model.addAttribute("seatNum", seatNum);
-//			log.info(uuid);
-//			log.info(choiceDate);
-//			log.info(seatNum);
-//		}
+
 		model.addAttribute("tickets", tsdList);
 		return "ticket/ticket_check";
 	}
