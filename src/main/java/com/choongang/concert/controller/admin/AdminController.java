@@ -85,12 +85,18 @@ public class AdminController {
 		log.info("데이터폼 :{}", dataForm);
 
 		boardControlService.resDelete(dataForm);
-
 	    
 		return "redirect:/admin/boardcontrol";
 	}
 	
-	
+	@PostMapping("/boardcontrol/totalDelete")
+	public String totalDeletePost(@RequestBody List<Long> totalDataForm, Model model) {
+		log.info("토탈데이터폼:{}", totalDataForm);
+		
+		boardControlService.resTotalDelete(totalDataForm);
+		
+	    return "redirect:/admin/boardcontrol";
+	}
 	
 	@PostMapping("/boardcontrol/totalDelete")
 	public String totalDeletePost(@RequestBody List<ResponseTotalPostDto> totalDataForm, Model model) {
