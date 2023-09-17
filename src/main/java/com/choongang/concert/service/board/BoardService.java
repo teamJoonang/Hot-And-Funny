@@ -2,6 +2,7 @@ package com.choongang.concert.service.board;
 
 import com.choongang.concert.dto.board.CreatePageDto;
 import com.choongang.concert.dto.board.NoticeDto;
+import com.choongang.concert.dto.board.NoticeEditDto;
 import com.choongang.concert.dto.board.PageDto;
 import com.choongang.concert.repository.board.BoardMapper;
 import lombok.RequiredArgsConstructor;
@@ -29,5 +30,10 @@ public class BoardService {
     public NoticeDto findNoticeDetail(Long id) {
 
         return boardMapper.findById(id);
+    }
+
+    public int createPost(NoticeEditDto noticeEditDto) {
+
+        return boardMapper.createPost(noticeEditDto);
     }
 }

@@ -3,15 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.choongang.concert.repository.board.BoardMapper">
+    <insert id="createPost">
+        insert into notice (admin_id, title, writer, content, category)
+        value (1, #{title}, #{writer}, #{content}, #{category})
+    </insert>
 
-<!--    <sql id="search">-->
-<!--        <if test="condition == title">-->
-<!--            where title like concat('%',#{keyword},'%')-->
-<!--        </if>-->
-<!--        <if test="condition == content">-->
-<!--            where content like concat('%',#{keyword},'%')-->
-<!--        </if>-->
-<!--    </sql>-->
 
     <select id="findAll" resultType="com.choongang.concert.dto.board.NoticeDto">
         select id, category, title, created_at, writer, content, hit
