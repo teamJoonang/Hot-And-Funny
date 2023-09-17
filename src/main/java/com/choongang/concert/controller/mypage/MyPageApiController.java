@@ -30,10 +30,10 @@ public class MyPageApiController {
     public ResponseEntity<String> checkNicknameList(@RequestBody AddUserRequest userReq){
         // 실행로그 , dto의 nickname만 확인
         log.info("POST >> /user/nicknameModifyCk | checkNicknameList() 실행됨.");
-        log.info("userReq.getNickname() : " + userReq.getNickname());
+        log.info("userReq::{} " , userReq);
 
-        Integer result = userService.checkModifyNickname(userReq.getNickname());
-        log.info("result : " + result );
+        int result = userService.checkModifyNickname(userReq);
+        log.info("result : " + result);
 
         if(result <= 0){
             return responseService.setSuccesResponse("사용가능한 별명");

@@ -1,5 +1,12 @@
+// 기존 별명 저장 변수.
+let oldNickname = "";
+// html이 로드되는 순간 기존 별명값을 저장하라.
+window.onload = function (){
+    oldNickname = document.getElementById('user_nickname').value;
+};
+
 // 별명 중복체크 판별 변수
-let nicknameCheck = false
+let nicknameCheck = false;
 
 // nickname 칸을 건들면 중복체크 성공해도 false 변경;
 document.getElementById('user_nickname').addEventListener('change' , function(){
@@ -9,7 +16,7 @@ document.getElementById('user_nickname').addEventListener('change' , function(){
 // nickNameCheck 버튼 눌리면 ajax 요청. (중복체크)
 document.getElementById('nickNameCk').addEventListener('click' , function (){
     let nickname = document.getElementById('user_nickname').value;
-    let data = {nickname : nickname};
+    let data = {nickname : nickname , oldNickname : oldNickname};
 
     let xhr = new XMLHttpRequest();
     xhr.open('POST','/user/nicknameModifyCk' , true);
@@ -83,58 +90,56 @@ saveBtn.addEventListener('click', function () {
             confirmButtonText: '등록',
             denyButtonText: `취소`,
         }).then((result) => {
-                // 등록을 누를 경우와 아닌 경우.
-                if (result.isConfirmed) {
+            // 등록을 누를 경우와 아닌 경우.
+            if (result.isConfirmed) {
 
-                    let userData = {
-                        loginId: document.getElementById('user_login_id').value,
-                        name: document.getElementById('user_name').value,
-                        nickname: document.getElementById('user_nickname').value,
-                        tel: document.getElementById('user_tel').value,
-                        address: document.getElementById('user_addr').value,
-                        age: document.getElementById('user_age').value,
-                        gender : selectedGender
-                    };
+                let userData = {
+                    loginId: document.getElementById('user_login_id').value,
+                    name: document.getElementById('user_name').value,
+                    nickname: document.getElementById('user_nickname').value,
+                    tel: document.getElementById('user_tel').value,
+                    address: document.getElementById('user_addr').value,
+                    age: document.getElementById('user_age').value,
+                    gender : selectedGender
+                };
 
-                    // ajax 사용
-                    let xhr = new XMLHttpRequest();
-                    xhr.open('POST', '/user/myinfo', true);
-                    xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+                // ajax 사용
+                let xhr = new XMLHttpRequest();
+                xhr.open('POST', '/user/myinfo', true);
+                xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
 
-                    xhr.onreadystatechange = function() {
-                        let responseBody = xhr.responseText;
-                        if (xhr.readyState === 4) {
-                            if (xhr.status === 200) {
-                                // update 성공처리 , 다시 내정보로 이동.
-                                Swal.fire('등록되었습니다.', '새로운 회원정보!', 'success');
+                xhr.onreadystatechange = function() {
+                    let responseBody = xhr.responseText;
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            // update 성공처리 , 다시 내정보로 이동.
+                            Swal.fire('새로운 회원 정보로 등록되었습니다.', '', 'success');
 
-                                // 모든 input 태그의 속성 readonly 설정
-                                inputTag.forEach(function (input) {
-                                    input.setAttribute('readonly' , 'readonly');
-                                });
+                            // 모든 input 태그의 속성 readonly 설정
+                            inputTag.forEach(function (input) {
+                                input.setAttribute('readonly' , 'readonly');
+                            });
 
-                                //  수정버튼은 보이고 등록버튼은 비활성화하기.
-                                saveBox.style.display = 'none';
-                                modifiyBox.style.display = 'block';
-                            }
-                            else if (xhr.status === 400 && responseBody === '양식을 모두 채워주세요.') {
-                                Swal.fire('양식을 모두 채워주세요.');
-                            }
-                            else if(responseBody === '회원정보 수정 실패.') {
-                                // 회원가입 실패 처리
-                                Swal.fire('서버 오류');
-                            }
-                            else {
-                                alert('모르겠다..');
-                            }
+                            //  수정버튼은 보이고 등록버튼은 비활성화하기.
+                            saveBox.style.display = 'none';
+                            modifiyBox.style.display = 'block';
                         }
-                    };
-                    xhr.send(JSON.stringify(userData));
-                }
-                else if (result.isDenied) {
-                    Swal.fire('등록되지 않았습니다.', '', 'error')
-                }
-            });
+                        else if (xhr.status === 400 && responseBody === '양식을 모두 채워주세요.') {
+                            Swal.fire('양식을 모두 채워주세요.' , '' , 'error');
+                        }
+                        else if(responseBody === '회원정보 수정 실패.') {
+                            // 회원가입 실패 처리
+                            Swal.fire('서버 오류' , '' , 'error');
+                        }
+
+                    }
+                };
+                xhr.send(JSON.stringify(userData));
+            }
+            else if (result.isDenied) {
+                Swal.fire('등록되지 않았습니다.', '', 'error')
+            }
+        });
     }
     else {
         Swal.fire({
@@ -144,6 +149,7 @@ saveBtn.addEventListener('click', function () {
     }
 
 });
+
 
 
 

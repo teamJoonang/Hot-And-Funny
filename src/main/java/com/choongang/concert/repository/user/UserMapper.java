@@ -74,10 +74,10 @@ public interface UserMapper {
 
     /**
      * 회원 정보 수정시 , 닉네임 중복 체크
-     * @param nickname  - 새로운 닉네임 또는 기존 닉네임에 해당
-     * @return Integer - 조회된 레코드 수
+     * @param userReq  - 새로운 닉네임 또는 기존 닉네임에 해당
+     * @return int - 조회된 레코드 수
      */
-    Integer checkModifyNickname(String nickname);
+    int checkModifyNickname(AddUserRequest userReq);
 
 
 //    /**

@@ -11,9 +11,13 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.io.PrintWriter;
 
 @RequiredArgsConstructor
 @Controller
@@ -25,7 +29,9 @@ public class AccountViewController {
 
 //    로그인 페이지
     @GetMapping("/login")
-    public String login(ServletRequest request) throws ServletException {
+    public String login(ServletRequest request ,
+                        @RequestParam(required = false , name = "redirectURL") String redirectURL ,
+                        Model model) throws ServletException {
 
 //        log.info("get >> /user/login | login() 실행됨.");
         // 세션이 만약 있고 세션 안에 loginId라는 속성도 갖고 있다면 index 페이지로 리다이렉트.
@@ -35,6 +41,12 @@ public class AccountViewController {
         if(session != null && session.getAttribute("loginId") != null){
             return "redirect:/";
         }
+
+//        log.info("redirectURL : " + redirectURL);
+//        if(redirectURL != null){
+//            model.addAttribute("redirectURL" ,redirectURL);
+//        }
+
         return "accounts/login";
     }
 

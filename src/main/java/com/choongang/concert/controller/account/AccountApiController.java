@@ -2,6 +2,7 @@ package com.choongang.concert.controller.account;
 
 import com.choongang.concert.dto.user.*;
 import com.choongang.concert.service.user.InputValidation;
+import com.choongang.concert.service.user.RegisterMail;
 import com.choongang.concert.service.user.ResponseService;
 import com.choongang.concert.service.user.UserService;
 import jakarta.servlet.ServletException;
@@ -10,12 +11,15 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.websocket.SessionException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.Console;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 @Slf4j
 @Controller
@@ -27,6 +31,16 @@ public class AccountApiController {
     private final UserService userService;
     private final InputValidation inputValidation;
     private final ResponseService responseService;
+    private final RegisterMail registerMail;
+
+    @PostMapping("/user/mailconfirm")
+    public String mailConfirm(@RequestBody String email) throws Exception{
+        log.info("email = " + email);
+        String code = registerMail.sendSimpleMessage(email);
+        log.info("사용자에게 발송한 인증코드 ==> " + code );
+
+        return code;
+    }
 
 //    static final LoginRequest req = new LoginRequest();
 
@@ -49,6 +63,7 @@ public class AccountApiController {
         }
     }
 
+    // 별명 중복체크 (회원가입 등록)
     @PostMapping("/nicknameCheck")
     public ResponseEntity<String> CheckNickname(@RequestBody AddUserRequest userReq){
         // 실행로그 , dto의 nickname만 확인
@@ -66,7 +81,6 @@ public class AccountApiController {
         }
 
     }
-
 
     // 새로운 사용자 생성(회원가입 등록)
     @PostMapping("/signup")
@@ -106,8 +120,8 @@ public class AccountApiController {
     ///////////////////////////////////////////////////////////////////////////////////////
     // 사용자 로그인 (아직 검증 없음 , session 고급지게 뭔가 추가 필요 , password 암호화 필요 )//
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginRequest loginReq , HttpSession session)
-    throws SessionException {
+    public ResponseEntity<String> login(
+            @RequestBody LoginRequest loginReq , HttpSession session , HttpServletResponse res) throws SessionException, IOException {
         log.info("Post >> /user/login | login() 실행됨.");
         log.info("loginReq::{}" , loginReq);
 
@@ -127,7 +141,15 @@ public class AccountApiController {
             log.info("session에 담을 loginId : " + result.getLoginId());
             session.setAttribute("id" , result.getId());
             session.setAttribute("loginId" , result.getLoginId());
-            // 로그인 성공 success 200 요청 처리
+
+
+//            if(loginReq.getRedirectURL() != null && !loginReq.getRedirectURL().isEmpty()){
+//                res.setStatus(200);
+//                PrintWriter writer = res.getWriter();
+//                writer.write("로그인 성공");
+//                res.sendRedirect(loginReq.getRedirectURL());
+//            }
+
             return responseService.setSuccesResponse("로그인 성공");
         }
         else {

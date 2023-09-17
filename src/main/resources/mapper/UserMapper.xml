@@ -47,22 +47,35 @@
 <!--    </select>-->
 
     <select id="login" resultType="userResponse" parameterType="loginRequest">
-        SELECT
-            id,
-            login_id,
-            password,
-            name,
-            nickname,
-            address,
-            age,
-            tel,
-            gender
-        FROM
-            user
-        WHERE
-            login_id = #{loginId}
-            AND
-            password = #{password}
+--         SELECT
+--             id,
+--             login_id,
+--             password,
+--             name,
+--             nickname,
+--             address,
+--             age,
+--             tel,
+--             gender
+--         FROM
+--             user
+--         WHERE
+--             login_id = #{loginId}
+--             AND
+--             password = #{password}
+
+            select
+                login_id , password , id
+            from
+                (
+                select login_id , password , id from user union all
+                select admin_login_id , admin_password , id from admin
+                )
+                    as combined_data
+            where
+                login_id = #{loginId}
+              and
+                password = #{password};
     </select>
 
     <select id="findByEmail" resultType="UserResponse" parameterType="findEmailRequest">
@@ -125,14 +138,21 @@
             tel = #{tel},
             gender = #{gender}
         WHERE
-            id = #{id};
+            login_id = #{loginId}
     </update>
 
-<!--    <select id="checkModifyNickname" parameterType="String">-->
-<!--        SELECT-->
-<!--            ifnull(count(nickname) , 0) nickname-->
-<!--        FROM-->
-<!--            user-->
-<!--        WHERE-->
-<!--    </select>-->
+    <select id="checkModifyNickname" parameterType="AddUserRequest">
+            SELECT
+                IFNULL(COUNT(nickname) , 0)
+            FROM
+                user
+            WHERE
+                <if test="oldNickname != null">
+                    nickname != #{oldNickname}
+                </if>
+                <if test="nickname != null">
+                    AND nickname = #{nickname}
+                </if>
+
+    </select>
 </mapper>
