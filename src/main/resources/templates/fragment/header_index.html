@@ -31,14 +31,15 @@
                 </div>
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-center flex-grow-1 pe-3 fs-5">
-                        <li class="nav-item">
-                            <a href="/admin" class="nav-link text-warning fw-semibold px-3">ADMIN</a>
-                            <ul class="sub-menu">
-                                <li><a href="">회원조회</a></li>
-                                <li><a href="">게시글 관리</a></li>
-                                <li><a href="">환불관리</a></li>
-                                <li><a href="">통계자료</a></li>
-                            </ul>
+
+                        <li class="nav-item" th:if="${session.loginId != null && #strings.toString(session.loginId).contains('admin')}">
+                                <a href="/admin" class="nav-link text-warning fw-semibold px-3">ADMIN</a>
+                                <ul class="sub-menu">
+                                    <li><a href="">회원조회</a></li>
+                                    <li><a href="">게시글 관리</a></li>
+                                    <li><a href="">환불관리</a></li>
+                                    <li><a href="">통계자료</a></li>
+                                </ul>
                         </li>
                         <li class="nav-item">
                             <a href="/about.html" class="nav-link custom-atag px-3">ABOUT</a>

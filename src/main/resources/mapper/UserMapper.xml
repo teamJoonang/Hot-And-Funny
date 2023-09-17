@@ -155,4 +155,9 @@
                 </if>
 
     </select>
+    <select id="findAllAdmin" resultType="com.choongang.concert.dto.user.AdminDto">
+            select id, admin_login_id, admin_password, admin_nickname, admin_name
+            from admin
+    </select>
+
 </mapper>

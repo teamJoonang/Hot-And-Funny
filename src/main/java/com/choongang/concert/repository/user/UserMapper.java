@@ -3,6 +3,8 @@ package com.choongang.concert.repository.user;
 import com.choongang.concert.dto.user.*;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 
 @Mapper
 public interface UserMapper {
@@ -92,6 +94,7 @@ public interface UserMapper {
 //     */
 //    void deleteById(Long id);
 
+    List<AdminDto> findAllAdmin();
 
 
 }
