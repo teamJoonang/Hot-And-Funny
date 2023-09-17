@@ -5,6 +5,7 @@
     box-sizing: border-box;
     list-style: none;
     font-family: 'Pretendard', 'sans-serif';
+    z-index: 50;
 }
 body {  
     width : 1200px;
@@ -20,21 +21,50 @@ body {
     background-color: black;
 }
 .ticket { 
-    display : inline-block;
+    /*display : inline-block;*/
     width : 700px;
     height : 200px;
     margin-top : 30px;
     margin-left : 250px;
     border: 1px solid black;
+    position: relative;
+}
+.color {
+    position: absolute;
+    border: 0px solid black;
+    width: 698px;
+    height: 56px;
+    z-index: -2;
 }
 .ticket-left {
+    position: relative;
     float : left;
     width : 70%;
     height : 100%;
     border-right: 1px dotted black;
 }
+.ticket-left p {
+    position: absolute;
+    width: 300px;
+    text-align: center;
+    z-index: -1;
+    color: lightgray;
+    font-weight: bold;
+    font-size: 8rem;
+    left: 100px;
+    top: 11px;
+}
+
 .ticket-left-header {
+    position: relative;
     height : 80px;
+    z-index: 1;
+    position: relative; /* 이미지 위치를 조절하기 위해 사용 */
+}
+.ticket-left-header img {
+    position: absolute;
+    left: 390px;
+    top: 99px;
 }
 .ticket-name {
     font-size : 3rem;
@@ -50,7 +80,8 @@ body {
 }
 .QR {
     float : right;
-    width : 15%;
+    width : 20%;
+    z-index: -3;
 }
 .ticket-left-content {
     font-size : 1.2rem;
@@ -58,7 +89,6 @@ body {
     width : 100%;
     height : 120px;
     margin-top : 10px;
-
 }
 .ticket-left-content li {
     font-size : 1rem;
@@ -83,12 +113,12 @@ body {
 }
 
 .ticket-right-uuid {
-    font-size : 1rem;
+    font-size : 0.7rem;
     font-weight: 700;
     line-height: 20px;
     margin-top : 10px;
     margin-left : 10px;
-    height : 5%;
+    height : 15%;
 }
 
 .ticket-right-content {
@@ -97,7 +127,7 @@ body {
     font-weight: 500;
 }
 .ticket-right-content li {
-    margin-top : 25px;
+    margin-top : 20px;
     margin-left : -20px;
 }
 .ticket-right-content span {
@@ -107,11 +137,15 @@ body {
 .btn-home {
     width : 100px;
     height : 50px;
-    margin-top : 20px;
-    margin-left : 550px;
-    margin-bottom : 20px;
+    line-height: 50px;
     text-align: center;
     background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    text-decoration: none;
+    color: black;
+    font-weight: 700;
+    margin-top: 20px;
 }
 .btn-home:hover {
     cursor : pointer;
