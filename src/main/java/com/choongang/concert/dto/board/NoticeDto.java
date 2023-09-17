@@ -9,10 +9,11 @@ import lombok.ToString;
 @ToString
 public class NoticeDto {
 
-    private String title;
-    private String writer;
-    private String content;
-    private Integer hit;
-    private String createdAt;
+    private Long id;
     private String category;
+    private String title;
+    private String content;
+    private String createdAt;
+    private String writer;
+    private Integer hit;
 }
