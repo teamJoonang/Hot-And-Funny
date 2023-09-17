@@ -52,7 +52,6 @@ public class BoardController {
 
 	@GetMapping("/notice/create")
 	public String getNoticeCreateView() {
-
 		return "board/admin_write";
 	}
 
