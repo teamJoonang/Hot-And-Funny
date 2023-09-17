@@ -18,10 +18,17 @@
         from
         notice
         <if test="keyword != null">
-            where
-                title
-            like
-                concat('%', #{keyword}, '%')
+            <choose>
+                <when test="type == 'title'">
+                    where title like concat('%', #{keyword}, '%')
+                </when>
+                <when test="type == 'content'">
+                    where content like concat('%', #{keyword}, '%')
+                </when>
+                <when test="type == 'writer'">
+                    where writer like concat('%', #{keyword}, '%')
+                </when>
+            </choose>
         </if>
         order by id desc
         limit #{offset}, #{amount}

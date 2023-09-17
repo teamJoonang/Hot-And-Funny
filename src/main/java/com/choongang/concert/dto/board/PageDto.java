@@ -24,6 +24,9 @@ public class PageDto {
 
         if (realEnd < pageEnd) {
             this.pageEnd = realEnd;
+            if (pageEnd == 0) {
+                pageEnd = 1;
+            }
         }
 
         this.prev = this.pageStart > 1;
