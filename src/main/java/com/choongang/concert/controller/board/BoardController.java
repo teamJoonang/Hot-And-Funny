@@ -59,7 +59,12 @@ public class BoardController {
 	public String createPost(@ModelAttribute NoticeEditDto noticeEditDto){
 
 		log.info("NoticeEditDto = {}", noticeEditDto);
+		// title입력 안할 경우 빈문자열 삽입됨, 클릭불가 현상 (임시조치)
+		if (noticeEditDto.getTitle() == null || noticeEditDto.getTitle().isEmpty()){
+			noticeEditDto.setTitle("제목없음");
+		}
 		int row = boardService.createPost(noticeEditDto);
+
 
 		log.info("INSERT ROW = {}", row);
 		return "redirect:/notice";
