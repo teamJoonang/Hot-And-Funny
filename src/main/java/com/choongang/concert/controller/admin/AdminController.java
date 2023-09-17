@@ -2,6 +2,7 @@ package com.choongang.concert.controller.admin;
 
 
 
+import java.util.Collections;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -16,15 +17,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.choongang.concert.dto.admin.Bar2Dto;
 import com.choongang.concert.dto.admin.PageDto;
 import com.choongang.concert.dto.admin.PagingResponse;
 import com.choongang.concert.dto.admin.QnaPostDto;
+import com.choongang.concert.dto.admin.RefundDto;
+import com.choongang.concert.dto.admin.ResponseTotalPostDto;
+import com.choongang.concert.dto.admin.TotalPostDto;
 import com.choongang.concert.dto.admin.UserInfoDTO;
 import com.choongang.concert.service.admin.BoardControlService;
+import com.choongang.concert.service.admin.RefundService;
 import com.choongang.concert.service.admin.StatService;
 import com.choongang.concert.service.admin.UserInfoService;
 
@@ -41,6 +45,8 @@ public class AdminController {
 	private StatService statService;
 	@Autowired
 	private BoardControlService boardControlService;
+	@Autowired
+	private RefundService refundService;
 	
 //	public AdminController(UserInfoService userInfoService) {
 //		this.userInfoService = userInfoService;
@@ -57,7 +63,15 @@ public class AdminController {
 		List<QnaPostDto> qnaPostList = boardControlService.qnaPostList();
 		model.addAttribute("qnaPostList", qnaPostList);
 		
-		log.info("qnaPostList : " + qnaPostList);
+		List<TotalPostDto> totalPostList = boardControlService.totalPostList();
+		model.addAttribute("totalPostList", totalPostList);
+//		log.info("totalPostList : {}", totalPostList);
+		
+//		log.info("qnaPostList : " + qnaPostList);
+		
+
+		
+		
 		
 		return "admin/board_control";
 	}
@@ -65,12 +79,39 @@ public class AdminController {
 	
 
 
+//	@PostMapping(value = "/boardcontrol/delete", consumes = MediaType.APPLICATION_JSON_VALUE)
 	@PostMapping("/boardcontrol/delete")
-	public String deleteQnaPost(@RequestBody List<Long> ids) {
-		System.out.println(ids);
-	    boardControlService.deleteQna(ids);
-	    return "redirect:/boardcontrol";
+	public String deleteQnaPost(@RequestBody List<Long> dataForm, Model model) {
+		log.info("데이터폼 :{}", dataForm);
+
+		boardControlService.resDelete(dataForm);
+
+	    
+		return "redirect:/admin/boardcontrol";
 	}
+	
+	
+	
+	@PostMapping("/boardcontrol/totalDelete")
+	public String totalDeletePost(@RequestBody List<ResponseTotalPostDto> totalDataForm, Model model) {
+	    log.info("토탈데이터폼:{}", totalDataForm);
+
+	    for (ResponseTotalPostDto postDto : totalDataForm) {
+	        String boardType = postDto.getBoardType();
+	        if ("이벤트".equals(boardType)) {
+	            boardControlService.deleteEventBoard(Collections.singletonList(postDto));
+	        } else if ("qna".equals(boardType)) {
+	            boardControlService.deleteQnaBoard(Collections.singletonList(postDto));
+	        } else if ("노티스".equals(boardType)) {
+	            boardControlService.deleteNoticeBoard(Collections.singletonList(postDto));
+	        }
+	    }
+
+	    return "redirect:/admin/boardcontrol";
+	}
+	
+	
+	
 	
 	
 	
@@ -99,9 +140,25 @@ public class AdminController {
 	}
 	
 	@GetMapping("/refund")
-	public String refund() {
+	public String refund(Model model) {
+		
+		List<RefundDto> refund = refundService.getRefundList();
+		model.addAttribute("refund", refund);
+		
+		log.info("refund : " + refund);
 		return "admin/refund";
 	}
+	
+	
+	
+	
+	@PostMapping("/refund/process")
+	public String refundProcess(@RequestBody RefundDto refundDto) {
+		log.info("refundDataList:{}", refundDto);
+		refundService.getResRefund(refundDto);
+		return "redirect:/admin/refund";
+	}
+	
 	
 	
 	

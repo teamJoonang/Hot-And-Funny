@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,11 +8,11 @@
     <!-- bootstrap icon cdn -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
     <!-- common.css -->
-    <link rel="stylesheet" href="../../static/css/common.css">
+    <link rel="stylesheet" href="../../static/css/common.css" th:href="@{/css/common.css}">
     <!-- login.css -->
-    <link rel="stylesheet" href="../../static/css/login.css">
-    <!-- mypage.css -->
-    <link rel="stylesheet" href="../../static/css/mypage.css">
+    <link rel="stylesheet" href="../../static/css/login.css" th:href="@{/css/login.css}">
+    <!-- myinfo.css -->
+    <link rel="stylesheet" href="../../static/css/myinfo.css" th:href="@{/css/myinfo.css}">
     
     <title>회원정보</title>
 </head>
@@ -23,7 +23,7 @@
             <div class="container-fluid">
                 <div class="col-3">
                     <a href="" class="d-flex">
-                        <img src="../../static/img/concert_logo.png" class="img-fluid header-img-logo" alt="콘서트_이미지_로고">
+                        <img src="../../static/img/concert_logo.png" th:src="@{/img/concert_logo.png}" class="img-fluid header-img-logo" alt="콘서트_이미지_로고">
                     </a>
                 </div>
                 <button class="navbar-toggler bg-black" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
@@ -94,7 +94,9 @@
                         </div>
                         <div class="col-1 d-flex align-items-center justify-content-end fs-2 pe-4 footer-icon user-nav">
                             <a href="https://github.com/teamJoongang/Hot-And-Funny" class="text-secondary pe-3"><i class="bi bi-github"></i></a>
-                            <a href="https://hyunsense.notion.site/hyunsense/fd8584dc0730455aa340d328dba8beb6" class=""><img class="notion" src="/static/img/notion_icon2.png" alt=""></a>
+                            <a href="https://hyunsense.notion.site/hyunsense/fd8584dc0730455aa340d328dba8beb6" class="">
+                                <img class="notion" th:src="@{/img/notion_icon2.png}" src="/static/img/notion_icon2.png" alt="">
+                            </a>
                         </div>
                     </div>
               </div>
@@ -112,10 +114,10 @@
                         <!-- 사이드 메뉴 -->
                         <div class="card-header bg-black text-white">메뉴</div>
                         <div class="card-body" id="mypage_menu">
-                            <a class="my-3 sidebar_link" href="myinfo.html">회원정보</a>
-                            <a class="my-3 sidebar_link" href="myticket.html">구매내역</a>
-                            <a class="my-3 sidebar_link" href="myquestion.html">문의내역</a>
-                            <a class="my-3 sidebar_link" href="user_out.html">회원탈퇴</a>
+                            <a class="my-3 sidebar_link" href="myinfo.html" th:href="@{/user/myinfo}">회원정보</a>
+                            <a class="my-3 sidebar_link" href="myticket.html" th:href="@{/user/myticket}">구매내역</a>
+                            <a class="my-3 sidebar_link" href="myquestion.html" th:href="@{/user/myqna}">문의내역</a>
+                            <a class="my-3 sidebar_link" href="user_out.html" th:href="@{/user/out}">회원탈퇴</a>
                         </div>
                     </div>
                 </div>
@@ -129,17 +131,18 @@
                         <div class="card-body">
 
                             <!-- 회원정보 -->
-                            <form action="" method="">
+                            <form action="" method="" >
                                 <div class="row gx-3 mb-3">
                                     <!-- user email -->
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="user_login_id">이메일 ( Login ID )</label>
-                                        <input class="form-control" id="user_login_id" type="text" readonly="readonly" 
-                                        placeholder="이메일을 입력해주세요" value="test@gmail.com">
+                                        <input class="form-control" id="user_login_id" type="text" readonly="readonly" placeholder="이메일을 입력해주세요">
                                     </div>
 
                                     <div class="col-md-6">
-                                        <a href="../accounts/pw_reset.html" class="btn btn-primary text-white mt-4">비밀번호 재설정</a>
+                                        <a href="../accounts/pw_reset.html" class="btn btn-primary text-white mt-4" th:href="@{/user/reset}">
+                                            비밀번호 재설정
+                                        </a>
                                     </div>
                                 </div>
                                 <!-- Form Row-->
@@ -147,48 +150,43 @@
                                     <!-- name -->
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="user_name">이름</label>
-                                        <input class="form-control" id="user_name" type="text" value="홍길동" readonly
-                                        placeholder="이름을 입력해주세요.">
+                                        <input class="form-control" id="user_name" type="text" readonly placeholder="이름을 입력해주세요." th:value="${userDto.name}">
                                     </div>
                                     <!-- nickname -->
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="user_nickname">별명</label>
-                                        <input class="form-control" id="user_nickname" type="text" value="Denma5319" readonly
-                                        placeholder="별명은 다른 사용자와 소통하는 이름입니다.">
+                                        <input class="form-control" id="user_nickname" type="text" readonly placeholder="별명은 다른 사용자와 소통하는 이름입니다." >
                                     </div>
                                 </div>
                                 <!-- 주소 -->
                                 <div class="mb-3">
                                     <label class="small mb-1" for="user_addr">주소</label>
-                                    <input class="form-control" id="user_addr" type="text" readonly
-                                    value="서울특별시 마포구 만리재로 99길 4-5" placeholder="주소를 입력해주세요.">
+                                    <input class="form-control" id="user_addr" type="text" readonly placeholder="주소를 입력해주세요." >
                                 </div>
                                 <!-- 연락처 -->
                                 <div class="mb-3">
                                     <label class="small mb-1" for="user_tel">연락처</label>
-                                    <input class="form-control" id="user_tel" type="text" readonly
-                                    value="010-5039-6660" placeholder="연락처를 입력해주세요.">
+                                    <input class="form-control" id="user_tel" type="text" readonly placeholder="연락처를 입력해주세요.">
                                 </div>
                                 <!-- row -->
                                 <div class="row gx-3 mb-4">
                                     <!-- age -->
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="user_age">나이</label>
-                                        <input class="form-control" id="user_age" type="number" value="17" readonly
-                                        placeholder="나이를 입력해주세요.">
+                                        <input class="form-control" id="user_age" type="number" readonly placeholder="나이를 입력해주세요.">
                                     </div>
                                     <!-- gender -->
-                                    <div class="col-md-6">
-                                        <label class="small mb-1" for="user_gender">성별</label><br>
-                                        <input class="chk_input" type="radio" name="chk_gender" id="user_gender" value="M"> 남자
-                                        <input class="chk_input" type="radio" name="chk_gender" id="user_gender" value="W" checked> 여자
-                                    </div>
+<!--                                    <div class="col-md-6">-->
+<!--                                        <label class="small mb-1 mt-4" for="new_gender">성별</label>-->
+<!--                                        <input class="chk_input" type="radio" name="chk_gender" id="new_gender" value="M"> 남자-->
+<!--                                        <input class="chk_input" type="radio" name="chk_gender" id="new_gender" value="W" checked> 여자-->
+<!--                                    </div>-->
                                 </div>
                                 <!-- 광고 승인여부 -->
                                 <div class="my-3 text-center mb-4">
-                                    <label for="chk_marketing">Hot and Funny의 다양한 이벤트 소식을 전해드립니다.</label><br>
-                                    <input class="chk_input" type="radio" name="chk_marketing" value="y"> 수신
-                                    <input class="chk_input" type="radio" name="chk_marketing" value="n" checked> 수신거부
+                                    <label>Hot and Funny의 다양한 이벤트 소식을 전해드립니다.</label>
+                                        <input class="chk_input" type="radio" name="ch_marketing" value="y"> 수신
+                                        <input class="chk_input" type="radio" name="ch_marketing" value="n" checked> 수신거부
                                 </div>
                                 
                                 <hr>
@@ -291,6 +289,6 @@
         <!-- sweetalert2 -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <!-- mypage js -->
-        <script src="../../static/js/myinfo.js"></script>
+        <script src="../../static/js/myinfo.js" th:src="@{/js/myinfo.js}"></script>
 </body>
 </html>

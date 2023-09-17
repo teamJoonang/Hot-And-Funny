@@ -6,15 +6,37 @@ const allClear = document.querySelector('.all-clear');
 const seatChoiceTable = document.querySelector('.seat-choice-table');
 const nextPage = document.getElementById('next-page');
 
-console.log(count);
 //로그번호
 let logIndex = 0;
+
+// 기 예약 좌석 비활성화 메소드
+function remainSeatUpdate() {
+    //서버에서 온 데이터 json 화 및 seatIndex 추출 --> 배열
+    const remainSeatData = JSON.parse(document.getElementById('server-data').getAttribute('data-seat-list'));
+    let occupiedSeatArray = remainSeatData.map(function(item) {return item.seatIndex;});
+    seats.forEach(function (seat, index) {
+        occupiedSeatArray.forEach(function (occupiedIndex) {
+            if(occupiedIndex == index) {
+                seat.classList.add('occupied');
+            }
+        }) ;
+    });
+    remainSeatData.forEach(function(seat) {
+        if (seat.occupied) {
+            let seatIndex = seat.seatIndex;
+            let divElements = document.querySelectorAll('.seat'); // .seat 클래스를 가진 모든 하위 div 요소 선택
+            let targetDiv = divElements[seatIndex]; // seatIndex에 해당하는 div 선택
+            targetDiv.classList.add('occupied'); // 선택한 div에 occupied 클래스 추가
+        }
+    });
+}
+remainSeatUpdate();
 
 function updateSelectedCount() {
     const selectedSeats = document.querySelectorAll('.row .selected');
     const selectedSeatCount = +selectedSeats.length;
   
-    const selectedSeatsIndex = [...selectedSeats].map((seat) => [...seats].indexOf(seat));
+    // const selectedSeatsIndex = [...selectedSeats].map((seat) => [...seats].indexOf(seat));
   
     // localStorage.setItem('selectedSeats', JSON.stringify(selectedSeatsIndex));
   
@@ -27,13 +49,14 @@ function updateSelectedCount() {
 }
 
 //log 내용 create 메소드
-function createLog(seatIndex, grade) {
+function createLog(serverData, seatIndex, grade) {
     logIndex++;
 
     let tdElement1 = document.querySelector(`.seat-choice-table tr:nth-child(${logIndex}) td:nth-child(1)`);
     let tdElement2 = document.querySelector(`.seat-choice-table tr:nth-child(${logIndex}) td:nth-child(2)`);
     let tdElement3 = document.querySelector(`.seat-choice-table tr:nth-child(${logIndex}) td:nth-child(3)`);
     let tdElement4 = document.querySelector(`.seat-choice-table tr:nth-child(${logIndex}) td:nth-child(4)`);
+    let tdElement5 = document.querySelector(`.seat-choice-table tr:nth-child(${logIndex}) td:nth-child(5)`);
 
     let addP = document.createElement('p');
     tdElement1.appendChild(addP);
@@ -52,8 +75,9 @@ function createLog(seatIndex, grade) {
     gradeColorCheck();
 
     tdElement2.textContent = grade;
-    tdElement3.textContent = seatIndex;
-    tdElement4.textContent = '취소';
+    tdElement3.textContent = serverData;
+    tdElement4.textContent = seatIndex;
+    tdElement5.textContent = '취소';
 }
 
 //좌석등급 확인용 메소드
@@ -72,7 +96,7 @@ function gradeCheck(event) {
 function deleteLog(seatIndex) {
     let repeatConuter = 0;
     for(let i = 1; i <= logIndex; i++) {
-        let choicedLogIndex = document.querySelector(`.seat-choice-table tr:nth-child(${i}) td:nth-child(3)`);
+        let choicedLogIndex = document.querySelector(`.seat-choice-table tr:nth-child(${i}) td:nth-child(4)`);
 
         let choicedLogIndexNum = Number(choicedLogIndex.textContent);
         repeatConuter++;
@@ -105,7 +129,7 @@ function deleteLog(seatIndex) {
 function createTr() {
     const seatChoiceTable = document.querySelector('.seat-choice-table .choice-body');
     const newTr = document.createElement('tr');
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 5; i++) {
         const newTd = document.createElement('td');
         newTr.appendChild(newTd);
     }
@@ -119,23 +143,37 @@ container.addEventListener('click', (event) => {
         let selectedSeatCount = +selectedSeats.length;
 
         let clickedSeatIndex = [...seats].indexOf(event.target);  // 현재 클릭한 좌석 인덱스
-        let clickedSeatGrade = gradeCheck(event);  // 현재 클릭한 좌석 등급 확인
 
-        // 4장 선택 후 취소시 예외사항 처리
-        if (event.target.classList.contains('selected')) {
-            event.target.classList.toggle('selected');
-            deleteLog(clickedSeatIndex);
-            updateSelectedCount();
-            return;
-        } else if (selectedSeatCount > 3) {
-            alert("예매는 최대 4장까지만 가능합니다.");
-            return;
-        }
-        
-        event.target.classList.toggle('selected');
-        createLog(clickedSeatIndex, clickedSeatGrade);
-        updateSelectedCount();
-        btnAnimation();
+        // 실제 좌석 번호 매핑용 ajax
+        $.ajax({
+            url: concertDate + '/' + clickedSeatIndex,
+            method: 'GET',
+            dataType: 'text',
+            success: function (data) {
+
+                let clickedSeatGrade = gradeCheck(event);  // 현재 클릭한 좌석 등급 확인
+
+                // 4장 선택 후 취소시 예외사항 처리
+                if (event.target.classList.contains('selected')) {
+                    event.target.classList.toggle('selected');
+                    deleteLog(clickedSeatIndex);
+                    updateSelectedCount();
+                    return;
+                } else if (selectedSeatCount > 3) {
+                    alert("예매는 최대 4장까지만 가능합니다.");
+                    return;
+                }
+
+                event.target.classList.toggle('selected');
+                createLog(data, clickedSeatIndex, clickedSeatGrade);
+                updateSelectedCount();
+                btnAnimation();
+            },
+            error: function (error) {
+                console.error('ajax 오류:', error);
+            }
+        });
+
     }
 });
 
@@ -180,7 +218,7 @@ seatChoiceTable.addEventListener('click', (event) => {
     const clickedRow = clickedButton.closest('tr'); // 현재 버튼이 속한 tr 요소
     const rowIndex = [...clickedRow.parentElement.children].indexOf(clickedRow) + 1; // 행의 인덱스
 
-    const seatObj = document.querySelector(`.seat-choice-table tr:nth-child(${rowIndex}) td:nth-child(3)`)
+    const seatObj = document.querySelector(`.seat-choice-table tr:nth-child(${rowIndex}) td:nth-child(4)`)
     const seatNum = Number(seatObj.textContent);
 
     if (clickedButton.textContent == '취소') {
@@ -222,18 +260,37 @@ function remainSeatCounter() {
     remainS.textContent = countS;
 }
 remainSeatCounter();
-
 //다음페이지로 데이터 전송
 nextPage.addEventListener("click", () => {
     let ticketArray = [];
     for (let i = 1; i <= logIndex; i++) {
         const grade = document.querySelector(`.seat-choice-table tr:nth-child(${i}) td:nth-child(2)`).textContent;
         const seatNum = document.querySelector(`.seat-choice-table tr:nth-child(${i}) td:nth-child(3)`).textContent;
-        const ticket = { grade: grade, seatNum: seatNum };
+        const seatIndex = document.querySelector(`.seat-choice-table tr:nth-child(${i}) td:nth-child(4)`).textContent;
+        const ticket = { grade: grade, seatNum: seatNum, seatIndex: seatIndex };
         ticketArray.push(ticket);
     }
 
+    const name = document.getElementById('concert-name').textContent;
+    const place = document.getElementById('concert-place').textContent;
+    const date = document.getElementById('concert-date').textContent;
+    const time = document.getElementById('concert-time').textContent;
+    // 추가 데이터 콘서트 아이디
+    const concertId = document.getElementById('concert-id').getAttribute('data-concert-id');
+
+    let concert = {
+        "concertId": concertId,
+        "concertName": name,
+        "concertPlace": place,
+        "concertDate": date,
+        "concertTime": time
+    };
+    let priceInfo = priceInfoCheck();
+
+
     // ticketArray를 세션에 저장
+    sessionStorage.setItem("concertInfo", JSON.stringify(concert));
+    sessionStorage.setItem("priceInfo", JSON.stringify(priceInfo));
     sessionStorage.setItem("ticketArray", JSON.stringify(ticketArray));
 
 
@@ -241,7 +298,8 @@ nextPage.addEventListener("click", () => {
     if(!ticketArray.length) {
         alert("좌석을 선택해 주세요.");
     } else {
-        window.location.href = "payment_check.html";
+        // 절대경로
+        window.location.href = "/ticket/payment/check";
     }
 
 });
@@ -256,3 +314,47 @@ function btnAnimation() {
         button.classList.add('blinking-button');
     }
 }
+
+//등급별 가격 추출 (뷰기준 - 향후 여기서 db 한번만 연결)
+function priceInfoCheck() {
+    let priceInfo = {};
+
+// 각 테이블 행을 순회하면서 정보 추출
+    let tableRows = document.querySelectorAll(".seat-remain-table tr");
+
+    tableRows.forEach(function(row) {
+        let cells = row.querySelectorAll("td");
+
+        if (cells.length === 4) {
+            let seatType = cells[1].textContent.trim(); // 좌석 유형 (VIP, R, S 등)
+            let price = cells[2].querySelector("span").textContent.trim(); // 가격
+            // let remainSeats = cells[3].querySelector("span").textContent.trim(); // 남은 좌석 수
+
+            // 추출한 정보를 JSON 객체에 저장
+            priceInfo[seatType] = {
+                "price": price  //,
+                // "remainSeats": remainSeats
+            };
+        }
+    });
+    return priceInfo;
+}
+// 숫자 포메팅 정규식
+function formatNumberWithCommas(number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+// 임시 숫자 포메팅 적용 위한 메솟
+function temp() {
+    let tableRows = document.querySelectorAll(".seat-remain-table tr");
+
+    tableRows.forEach(function(row) {
+        let cells = row.querySelectorAll("td");
+        let priceSpan = cells[2].querySelector("span");
+        let priceText = priceSpan.textContent;
+        let formattedPrice = formatNumberWithCommas(priceText);
+
+        // span 태그 내의 텍스트를 업데이트하여 콤마가 추가된 값으로 변경
+        priceSpan.textContent = formattedPrice;
+    });
+}
+temp();

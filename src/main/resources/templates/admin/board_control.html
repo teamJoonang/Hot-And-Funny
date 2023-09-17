@@ -136,7 +136,8 @@
 		<div class="card mb-4 overflow-y-scroll w-75 mx-auto" style="border: 1px solid #ccc">
 
 			<div class="card-body">
-                <form action="" method="get">
+                <form id="totalDeleteForm" action="" method="post" enctype="application/json">
+               	<input type="hidden" name="totalDataForm" id="totalDataForm">
                     <table class="table">
                         
                         
@@ -156,104 +157,23 @@
                                 <th scope="col">카테고리</th>
                                 <th scope="col">작성일</th>
 
-                                <input type = button class="btn btn-primary text-black bg-white float-end" value="수정" style="border: 1px solid #444444d8;"></input>
 
-                                <input type = button class="btn btn-primary text-black bg-white float-end" value="삭제" style="border: 1px solid #444444d8;"></input>
+                                <input type = button id = deleteTotalBtn onclick="totalDeleteheck()" class="btn btn-primary text-black bg-white float-end" value="삭제" style="border: 1px solid #444444d8;"></input>
                             </tr>
                         </thead>
 
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td><a href="상세보기" th:href="@{상세보기}">제목1</a></td>
-                                <td>test1</td>
-                                <td>공지사항</td>
-                                <td>09.01</td>
-                                <td><input type="checkbox"></td>
+                            <tr th:each="totalPost : ${totalPostList}">
+                                <!-- <!-- <td class="qnaInfo" th:text="${post.id}"></td> -->
+                                <td id="infoId" th:text="${totalPost.id}"></td>
+                                <td th:text="${totalPost.title}"></td>
+                                <td th:text="${totalPost.writer}"></td>
+                                <td id="infoBoardType" th:text="${totalPost.boardType}"></td>                               
+                                <td th:text="${totalPost.date}"></td>                               
+                                <td><input type="checkbox" id = "totalCheckBox" name = "checkBox"></td>
                             </tr>
-                                                        <tr>
-                                <td>1</td>
-                                <td><a href="상세보기" th:href="@{상세보기}">제목1</a></td>
-                                <td>test1</td>
-                                <td>공지사항</td>
-                                <td>09.01</td>
-                                <td><input type="checkbox"></td>
-                            </tr>
-                                                        <tr>
-                                <td>1</td>
-                                <td><a href="상세보기" th:href="@{상세보기}">제목1</a></td>
-                                <td>test1</td>
-                                <td>공지사항</td>
-                                <td>09.01</td>
-                                <td><input type="checkbox"></td>
-                            </tr>
-                                                        <tr>
-                                <td>1</td>
-                                <td><a href="상세보기" th:href="@{상세보기}">제목1</a></td>
-                                <td>test1</td>
-                                <td>공지사항</td>
-                                <td>09.01</td>
-                                <td><input type="checkbox"></td>
-                            </tr>
-                                                        <tr>
-                                <td>1</td>
-                                <td><a href="상세보기" th:href="@{상세보기}">제목1</a></td>
-                                <td>test1</td>
-                                <td>공지사항</td>
-                                <td>09.01</td>
-                                <td><input type="checkbox"></td>
-                            </tr>
-                                                        <tr>
-                                <td>1</td>
-                                <td><a href="상세보기" th:href="@{상세보기}">제목1</a></td>
-                                <td>test1</td>
-                                <td>공지사항</td>
-                                <td>09.01</td>
-                                <td><input type="checkbox"></td>
-                            </tr>
-                                                        <tr>
-                                <td>1</td>
-                                <td><a href="상세보기" th:href="@{상세보기}">제목1</a></td>
-                                <td>test1</td>
-                                <td>공지사항</td>
-                                <td>09.01</td>
-                                <td><input type="checkbox"></td>
-                            </tr>
-                                                        <tr>
-                                <td>1</td>
-                                <td><a href="상세보기" th:href="@{상세보기}">제목1</a></td>
-                                <td>test1</td>
-                                <td>공지사항</td>
-                                <td>09.01</td>
-                                <td><input type="checkbox"></td>
-                            </tr>
-                                                        <tr>
-                                <td>1</td>
-                                <td><a href="상세보기" th:href="@{상세보기}">제목1</a></td>
-                                <td>test1</td>
-                                <td>공지사항</td>
-                                <td>09.01</td>
-                                <td><input type="checkbox"></td>
-                            </tr>
-                                                        <tr>
-                                <td>1</td>
-                                <td><a href="상세보기" th:href="@{상세보기}">제목1</a></td>
-                                <td>test1</td>
-                                <td>공지사항</td>
-                                <td>09.01</td>
-                                <td><input type="checkbox"></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td><a href="상세보기" th:href="@{상세보기}">제목1</a></td>
-                                <td>test1</td>
-                                <td>공지사항</td>
-                                <td>09.01</td>
-                                <td><input type="checkbox"></td>
-                            </tr>
-                            
-                            
                         </tbody>
+                        
                     </table>
                 </form>
 			</div>
@@ -263,9 +183,10 @@
         <h2 class="mt-5 text-center">Q&A 게시판 관리</h2>
  
 		<div class="card mb-4 overflow-y-scroll w-75 mx-auto" style="border: 1px solid #ccc">
-
+	
 			<div class="card-body">
-                <form action="" method="post">
+                <form id="deleteForm" action="" method="post" enctype="application/json">
+                	<input type="hidden" name="dataForm" id="dataForm">
                     <table class="table">
 
                         <colgroup>
@@ -282,18 +203,18 @@
                                 <th scope="col">작성자</th>
                                 <th scope="col">작성일</th>
 
-                                <input type = button id = updateBtn class="btn btn-primary text-black bg-white float-end" value="수정" style="border: 1px solid #444444d8;"></input>
 
                                 <input type = button id = deleteBtn onclick="deleteCheck()" class="btn btn-primary text-black bg-white float-end" value="삭제" style="border: 1px solid #444444d8;"></input>
                             </tr>
                         </thead>
                         <tbody>
                             <tr th:each="post : ${qnaPostList}">
+                                <!-- <!-- <td class="qnaInfo" th:text="${post.id}"></td> -->
                                 <td class="qnaInfo" th:text="${post.id}"></td>
                                 <td th:text="${post.title}"></td>
                                 <td th:text="${post.writer}"></td>
                                 <td th:text="${post.date}"></td>
-                                <td><input type="checkbox" id = "checkBox" name = "checkBox"></td>
+                                <td><input type="checkbox" id = "qnaCheckBox" name = "checkBox"></td>
                             </tr>
                         </tbody>
                         
@@ -414,75 +335,103 @@
 <script>
 
 
-    function deleteCheck() {
-        // 체크된 항목을 모두 찾습니다.
-        var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-        // 삭제할 항목이 없으면 경고창을 띄우고 함수를 종료합니다.
-        if (checkboxes.length === 0) {
-            alert("선택된 항목이 없습니다.");
-            return;
+
+function totalDeleteheck(){
+	let totalArr = [];
+
+	let totalCheckboxes = document.querySelectorAll('#totalCheckBox:checked');
+
+	/* console.log(totalCheckboxes); */
+	if (totalCheckboxes.length ===0){
+        alert("선택된 항목이 없습니다.");
+        return;
+	}
+	
+	let infoArray = [];
+    totalCheckboxes.forEach(function (totalCheckbox) {
+    	 let totalPost = totalCheckbox.closest('tr');
+    	 let id = totalPost.querySelector('#infoId').textContent;
+         let boardType = totalPost.querySelector('#infoBoardType').textContent;
+    	 
+	   	
+        // 가져온 값을 배열에 추가합니다.
+
+    	    let infoObj = { id: id, boardType: boardType };
+    	    infoArray.push(infoObj);
+    });
+
+
+		totalRequestData = JSON.stringify(infoArray)
+    	// infoArray 배열에 JSON 데이터가 포함됩니다.
+    	console.log(totalRequestData);
+/*     let totalRequestData = JSON.stringify(totalArr); */
+    
+    /* console.log(totalRequestData); */
+
+    // AJAX 요청을 보냅니다.
+    $.ajax({
+        type: 'POST',
+        url: 'boardcontrol/totalDelete', // 컨트롤러의 엔드포인트 URL
+        data: totalRequestData, // 삭제할 게시물 ID 목록을 JSON 형식으로 전달
+        contentType: 'application/json', // 전송 데이터의 형식을 JSON으로 지정
+        success: function(totalResponse) {
+
+            // 삭제 성공 시 화면에서 삭제한 항목을 제거합니다.
+            totalCheckboxes.forEach(function(checkbox) {
+                checkbox.closest('tr').remove();
+            });
+        },
+        error: function(error) {
+            alert("게시물 삭제 중 오류가 발생했습니다.");
         }
-            console.log(checkboxes);
-        
+    });
+}
 
-            
-            function deleteCheck() {
-                // 체크한 데이터를 담을 배열 선언
-                const arr = [];
-                // Name이 checkBox인 체크박스를 모두 가져옵니다.
-                const checkboxes = document.getElementsByName("checkBox");
-                // 취득한 체크박스를 루프합니다.
-                checkboxes.forEach(function (checkbox) {
-                    // 체크된 체크박스인 경우
-                    if (checkbox.checked) {
-                        // 체크된 체크박스의 값을 배열에 추가합니다.
-                        arr.push(checkbox.value);
-                    }
-                });
-                console.log(arr);
+///////////////////////////////////////////////////////////////////////////////////
 
-                // 이후에 서버로 값을 전송하거나 다른 작업을 수행할 수 있습니다.
-            }
-            
-            
-            
-            
-          // 삭제할 항목의 ID를 배열에 저장합니다.
-/*        var qnaIds = [];
-        checkboxes.forEach(function (checkbox) {
-        	let qnaInfoElement = checkbox.closest('tr').querySelector('.qnaInfo');
-        	let qnaId = qnaInfoElement.textContent;
-			qnaIds.push(qnaId);            
-        });
-        
-        var requestData = JSON.stringify(qnaIds);  
-        console.log(requestData);
-        // AJAX 요청을 보냅니다.
-        $.ajax({
-            type: 'POST',
-            url: 'boardcontrol/delete', // 컨트롤러의 엔드포인트 URL
-            data: requestData, // 삭제할 게시물 ID 목록을 JSON 형식으로 전달
-            contentType: 'application/json', // 전송 데이터의 형식을 JSON으로 지정
-            success: function(response) {
-                // 삭제 성공 시 화면에서 삭제한 항목을 제거합니다.
-                checkboxes.forEach(function(checkbox) {
-                    checkbox.closest('tr').remove();
-                });
-                alert(response); // 서버에서 반환한 메시지를 표시
-            },
-            error: function(error) {
-                alert("게시물 삭제 중 오류가 발생했습니다.");
-            }
-        });  */
-        
 
-        // 서버로 삭제 요청을 보냅니다.
-        // 여기서는 AJAX를 사용하지만, 실제로는 서버와의 통신 방식에 맞게 수정해야 합니다.
-        // 서버로 삭제 요청을 보낼 때 qnaIds 배열을 함께 보냅니다.
-        // 삭제 요청이 성공하면 해당 항목을 화면에서도 제거합니다.
-        // 예: checkboxes.forEach(function (checkbox) { checkbox.closest('tr').remove(); });
+
+function deleteCheck() {
+    let arr = [];
+    // 체크된 항목을 모두 찾습니다.
+	let qnaCheckboxes = document.querySelectorAll('#qnaCheckBox:checked');
+    // 삭제할 항목이 없으면 경고창을 띄우고 함수를 종료합니다.
+    if (qnaCheckboxes.length === 0) {
+        alert("선택된 항목이 없습니다.");
+        return;
     }
-            
+	console.log(qnaCheckboxes);
+
+    qnaCheckboxes.forEach(function (checkbox) {
+        var postId = checkbox.closest('tr').querySelector('.qnaInfo').textContent;
+
+        // 가져온 값을 배열에 추가합니다.
+        arr.push(postId);
+    });
+
+    var requestData = JSON.stringify(arr);
+    
+    console.log(requestData);
+
+    // AJAX 요청을 보냅니다.
+    $.ajax({
+        type: 'POST',
+        url: 'boardcontrol/delete', // 컨트롤러의 엔드포인트 URL
+        data: requestData, // 삭제할 게시물 ID 목록을 JSON 형식으로 전달
+        contentType: 'application/json', // 전송 데이터의 형식을 JSON으로 지정
+        success: function(response) {
+
+            // 삭제 성공 시 화면에서 삭제한 항목을 제거합니다.
+            qnaCheckboxes.forEach(function(checkbox) {
+                checkbox.closest('tr').remove();
+            });
+        },
+        error: function(error) {
+            alert("게시물 삭제 중 오류가 발생했습니다.");
+        }
+    });
+}
+    
 
 </script>
 

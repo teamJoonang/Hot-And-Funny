@@ -185,3 +185,14 @@ textarea:focus:-ms-input-placeholder { /* Internet Explorer 10+ */
   border: 1px solid #ccc;
   border-radius: 0.5rem;
 }
+
+#idCheck , #nickNameCheck {
+  margin-top: 1.7rem;
+  background-color: rgba(0, 0, 0, 0.938);
+}
+
+#idCheck:hover , #nickNameCheck:hover {
+  /* background-color: rgba(0, 0, 0, 0.658); */
+  box-shadow: 0 0 0 0.25rem rgba(234, 16, 161, 0.476);
+  color: white !important;
+}

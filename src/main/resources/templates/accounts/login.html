@@ -8,9 +8,9 @@
     <!-- bootstrap cdn -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- common.css -->
-    <link rel="stylesheet" href="../../static/css/common.css">
+    <link rel="stylesheet" href="../../static/css/common.css" th:href="@{/css/common.css}">
     <!-- login.css -->
-    <link rel="stylesheet" href="../../static/css/login.css">
+    <link rel="stylesheet" href="../../static/css/login.css" th:href="@{/css/login.css}">
     
     <title>Login</title>
 </head>
@@ -27,31 +27,33 @@
                             <h1 class="mb-5" style="color:#ea10ac;">Sign in</h1>
                             
                             <!-- 홈으로 돌아가기 위한 로고 -->
-                            <a href="../../index.html">
-                                <img src="../../static/img/concert_logo_final2_black1.png" alt="logo">
+                            <a href="../../index.html" th:href="@{/}">
+                                <img src="../../static/img/concert_logo_final2_black1.png" alt="logo"
+                                th:src="@{/img/concert_logo_final2_black1.png}">
                             </a>
 
                             <p class="mb-4 mt-3" style="font-size: 1.2rem;">Hot and Funny에 오신 것을 환영합니다.</p>
                             
                             <!-- 로그인 양식 -->
-                            <form action="" method="POST" onsubmit="return valid_loginForm()" id="loginForm">
+                            <form method="POST" id="loginForm">
                                 <!-- 이메일 -->
                                 <div class="text-start">
                                     <label class="form-label m-2" for="login_id">Email</label>
                                     <input type="email" class="form-control form-control-lg input" id="login_id" 
-                                    autocomplete="off" required placeholder="user@gmail.com"/>
+                                    autocomplete="off" required="required" placeholder="user@gmail.com"/>
+
                                 </div>
                                 <!-- 비밀번호 -->
                                 <div class="text-start">
                                     <label class="form-label m-2" for="login_password">Password</label>
                                     <input type="password" class="form-control form-control-lg input" id="login_password"
-                                    required placeholder="Password"/>
+                                    required="required" placeholder="Password"/>
                                     
                                 <hr class="my-4">    
                                 
                                 </div>
                                 <!-- 로그인 버튼 -->
-                            <button class="btn btn-lg m-3 text-white border-0" type="submit" id="loginBtn">Login</button>
+                            <button class="btn btn-lg m-3 text-white border-0" type="button" id="loginBtn">Login</button>
                             </form>
                             <!-- sns 로그인 버튼 -->
                             <!-- 각 SNS API로 전송되도록 -->
@@ -63,8 +65,8 @@
 
                             <ul>
                                 <!-- 각 사이트로 이동 -->
-                                <li class="m-1 ">아직 회원이 아니신가요? <a href="signup.html">회원가입</a></li>
-                                <li class="m-1"><a href="finduser.html">아이디 / 비밀번호 찾기</a></li>
+                                <li class="m-1 ">아직 회원이 아니신가요? <a href="signup.html" th:href="@{/user/signup}">회원가입</a></li>
+                                <li class="m-1"><a href="finduser.html" th:href="@{/user/find}">아이디 / 비밀번호 찾기</a></li>
                             </ul>
                         </div>
                     </div>
@@ -75,6 +77,6 @@
 
     <!-- bootstrap js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- login js -->
+    <script src="../../static/js/login.js" th:src="@{/js/login.js}"></script>
 </body>
 </html>
