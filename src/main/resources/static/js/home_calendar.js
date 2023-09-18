@@ -11,13 +11,6 @@ const clickableDates = generateClickableDates(concertDataList);
 
 const btnReservaiton = document.querySelector('.btn-reservation');
 
-
-const concertDates = [
-	{ id: 1, date: 20, month: 9, year: 2023, time: "20:30:00" },
-	{ id: 2, date: 21, month: 9, year: 2023, time: "18:30:00" },
-	{ id: 3, date: 22, month: 9, year: 2023, time: "19:30:00" }
-];
-
 const viewYear = date.getFullYear();
 const viewMonth = date.getMonth();
 
