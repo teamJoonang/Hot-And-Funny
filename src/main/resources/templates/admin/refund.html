@@ -1,30 +1,27 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
-<title>게시글 관리</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
- 
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 환불 관리</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css}" rel="stylesheet">
-
-    <link rel="stylesheet" href="../../static/css/board_control.css" th:href="@{/css/refund.css}">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="../../static/css/common.css" th:href="@{/css/common.css}">
+    <link rel="stylesheet" href="../../static/css/refund.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+<link rel="stylesheet" href="../../static/css/common.css">
 
 
 </head>
-
-
 <body class="d-flex flex-column min-vh-100">
     <!--헤더-->
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-black" aria-label="Offcanvas navbar large">
             <div class="container-fluid">
                 <div class="col-3">
-                    <a href="" class="d-flex" th:href="@{/}">
-                        <img src="/static/img/concert_logo.png" th:src="@{/img/concert_logo.png}" class="img-fluid header-img-logo" alt="콘서트_이미지_로고">
+                    <a href="" class="d-flex">
+                        <img src="/static/img/concert_logo.png" class="img-fluid header-img-logo" alt="콘서트_이미지_로고">
                     </a>
                 </div>
                 <button class="navbar-toggler bg-black" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
@@ -35,10 +32,10 @@
                         <h6 class="offcanvas-title text-white" id="offcanvasNavbarLabel">로그인이 필요합니다.</h6>
                         <div class="col-3 navbar justify-content-center user-nav">
                             <div class="d-flex">
-                                <a href="/ticket" th:href="@{/ticket}"class="nav-link text-decoration-none text-white fw-semibold">
+                                <a href="/ticket" class="nav-link text-decoration-none text-white fw-semibold">
                                     <i class="bi bi-ticket-detailed custom-atag fs-4"></i>
                                 </a>
-                                <a href="/accounts/login.html" th:href="@{/acounts/login.html}"class="nav-link text-decoration-none text-white fw-semibold mx-2">
+                                <a href="/accounts/login.html" class="nav-link text-decoration-none text-white fw-semibold mx-2">
                                     <i class="bi bi-person custom-atag fs-4"></i>
                                 </a>
                                 <!-- <a href="#" class="nav-link text-decoration-none text-white fw-semibold custom-atag">회원가입</a> -->
@@ -49,13 +46,13 @@
                     <div class="offcanvas-body">
                         <ul class="navbar-nav justify-content-center flex-grow-1 pe-3 fs-5">
                             <li class="nav-item">
-                                <a href="/admin" th:href="@{/admin}" class="nav-link text-warning px-3" hidden>ADMIN</a>
+                                <a href="/admin" class="nav-link text-warning px-3" hidden>ADMIN</a>
                             </li>
                             <li class="nav-item">
-                                <a href="/about.html" th:href="@{/about.html}" class="nav-link custom-atag px-3">ABOUT</a>
+                                <a href="/about.html" class="nav-link custom-atag px-3">ABOUT</a>
                             </li>
                             <li class="nav-item">
-                                <a href="/ticket" th:href="@{/ticket}" class="nav-link custom-atag px-3">TICKET</a>
+                                <a href="/ticket" class="nav-link custom-atag px-3">TICKET</a>
                                 <ul class="sub-menu">
                                     <li><a href="">구매내역</a></li>
                                     <li><a href="">예매정보</a></li>
@@ -63,7 +60,7 @@
                                 </ul>
                             </li>
                             <li class="nav-item">
-                                <a href="/notice" th:href="@{/notice}" class="nav-link custom-atag px-3">NOTICE</a>
+                                <a href="/notice" class="nav-link custom-atag px-3">NOTICE</a>
                                 <ul class="sub-menu">
                                     <li><a href="">티켓소식</a></li>
                                     <li><a href="">시스템관련</a></li>
@@ -72,7 +69,7 @@
                                 </ul>
                             </li>
                             <li class="nav-item">
-                                <a href="/qna" th:href="@{/qna}"class="nav-link custom-atag px-3">Q N A</a>
+                                <a href="/qna" class="nav-link custom-atag px-3">Q N A</a>
                                 <ul class="sub-menu pe-2">
                                     <li><a href="">예매/취소</a></li>
                                     <li><a href="">결제</a></li>
@@ -80,7 +77,7 @@
                                 </ul>
                             </li>
                             <li class="nav-item">
-                                <a href="/event" th:href="@{/event}"class="nav-link custom-atag px-3">EVENT</a>
+                                <a href="/event" class="nav-link custom-atag px-3">EVENT</a>
                                 <ul class="sub-menu">
                                     <li><a href="">이벤트</a></li>
                                     <li><a href="">당첨자발표</a></li>
@@ -90,12 +87,12 @@
                             </li>
                         </ul>
                         <div class="col-3 navbar-nav justify-content-end user-nav pe-3">
-                            <a href="/ticket" th:href="@{/ticket}" class="nav-link custom-atag">티켓예매</a>
-                            <a href="/accounts/login.html" th:href="@{/accounts/login.html}" class="nav-link custom-atag ">로그인</a>
+                            <a href="/ticket" class="nav-link custom-atag">티켓예매</a>
+                            <a href="/accounts/login.html" class="nav-link custom-atag ">로그인</a>
                         </div>
                         <div class="col-1 d-flex align-items-center justify-content-end fs-2 pe-4 footer-icon user-nav">
-                            <a href="https://github.com/teamJoongang/Hot-And-Funny" th:href="@{https://github.com/teamJoongang/Hot-And-Funny}" class="text-secondary pe-3"><i class="bi bi-github"></i></a>
-                            <a href="https://hyunsense.notion.site/hyunsense/fd8584dc0730455aa340d328dba8beb6" th:href="@{https://hyunsense.notion.site/hyunsense/fd8584dc0730455aa340d328dba8beb6}" class=""><img class="notion" src="/static/img/notion_icon2.png" th:src="@{/img/notion_icon2.png}" alt=""></a>
+                            <a href="https://github.com/teamJoongang/Hot-And-Funny" class="text-secondary pe-3"><i class="bi bi-github"></i></a>
+                            <a href="https://hyunsense.notion.site/hyunsense/fd8584dc0730455aa340d328dba8beb6" class=""><img class="notion" src="/static/img/notion_icon2.png" alt=""></a>
                         </div>
                     </div>
               </div>
@@ -112,19 +109,19 @@
                 <h4 class="mt-5">관리자 목록</h4>
                 <nav class="mt-5">
                     <div class="mx-auto">
-                        <a href="../admin/dashboard.html" th:href="@{/admin/dashborad.html}" class="nav-link py-2">대시보드</a>
+                        <a href="../admin/dashboard.html" class="nav-link py-2">대시보드</a>
                     </div>
                     <div class="mt-3 mx-auto">
-                        <a href="../admin/statistics.html" th:href="@{/statistics}" class="nav-link py-2">통계자료</a>
+                        <a href="../admin/statistics.html" class="nav-link py-2">통계자료</a>
                     </div>
                     <div class="mt-3 mx-auto">
-                        <a href="../admin/refund.html" th:href="@{/refund}" class="nav-link py-2 fs-5">환불관리</a>
+                        <a href="../admin/refund.html" class="nav-link py-2 fs-5">환불관리</a>
                     </div>
                     <div class="mt-3 mx-auto">
-                        <a href="../admin/board_control.html" th:href="@{/boardcontrol}" class="nav-link py-2">게시글 관리</a> 
+                        <a href="../admin/board_control.html" class="nav-link py-2">게시글 관리</a> 
                     </div>
                     <div class="mt-3 mx-auto">
-                        <a href="../admin/user_info.html" th:href="@{/userinfo}" class="nav-link py-2">회원정보 조회</a>
+                        <a href="../admin/user_info.html" class="nav-link py-2">회원정보 조회</a>
                     </div>
                 </nav>
             </div>
@@ -211,7 +208,7 @@
     <div class="container-fluid row">
         <div class="d-flex">
             <div class="d-flex col-2 align-items-center justify-content-center">
-                <img src="/static/img/concert_logo_black.png" th:src="@{/img/concert_logo_black.png}" class="img-fluid footer-logo-img" alt="">
+                <img src="/static/img/concert_logo_black.png" class="img-fluid footer-logo-img" alt="">
             </div>
             <div class="d-flex col-3 align-items-center justify-content-center footer-content small">
                 <div class="align-items-center">
@@ -255,31 +252,30 @@
             <div class="col-2 d-flex justify-content-end fw-semibold">
                 <ul class="navbar-nav flex-row align-items-center">
                     <li class="nav-item pe-2">
-                        <a href="/about.html" th:href="@{/about.html}" class="nav-link pb-1 pt-0">ABOUT</a>
+                        <a href="/about.html" class="nav-link pb-1 pt-0">ABOUT</a>
                     </li>
                     <li class="nav-item pe-2">
-                        <a href="/ticket" th:href="@{/ticket}" class="nav-link pb-1 pt-0">TICKET</a>
+                        <a href="/ticket" class="nav-link pb-1 pt-0">TICKET</a>
                     </li>
                     <li class="nav-item pe-2">
-                        <a href="/notice" th:href="@{/notice}" class="nav-link pb-1 pt-0">NOTICE</a>
+                        <a href="/notice" class="nav-link pb-1 pt-0">NOTICE</a>
                     </li>
                     <li class="nav-item pe-2">
-                        <a href="/qna" th:href="@{/qna}" class="nav-link pb-1 pt-0">QNA</a>
+                        <a href="/qna" class="nav-link pb-1 pt-0">QNA</a>
                     </li>
                     <li class="nav-item">
-                        <a href="/event" th:href="@{/event}" class="nav-link pb-1 pt-0">EVENT</a>
+                        <a href="/event" class="nav-link pb-1 pt-0">EVENT</a>
                     </li>
                 </ul>
             </div>
             <div class="col-1 d-flex align-items-center justify-content-end fs-2 footer-icon pb-2">
-                <a href="https://github.com/teamJoongang/Hot-And-Funny" th:href="@{https://github.com/teamJoongang/Hot-And-Funny}" class="text-secondary pe-3"><i class="bi bi-github"></i></a>
-                <a href="https://hyunsense.notion.site/hyunsense/fd8584dc0730455aa340d328dba8beb6" th:href="@{https://hyunsense.notion.site/hyunsense/fd8584dc0730455aa340d328dba8beb6}" class=""><img class="notion" src="/static/img/notion_icon2.png" th:src="@{/img/notion_icon2.png}" alt=""></a>
+                <a href="https://github.com/teamJoongang/Hot-And-Funny" class="text-secondary pe-3"><i class="bi bi-github"></i></a>
+                <a href="https://hyunsense.notion.site/hyunsense/fd8584dc0730455aa340d328dba8beb6" class=""><img class="notion" src="/static/img/notion_icon2.png" alt=""></a>
             </div>
         </div>
     </div>
 </footer>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js}" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 <!--푸터 끝-->
 
 <script>

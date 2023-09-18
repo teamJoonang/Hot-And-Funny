@@ -151,9 +151,9 @@ textarea:focus:-ms-input-placeholder { /* Internet Explorer 10+ */
 
 /* 회원가입 검증에러 출력 */
 
-#email_err , #pw_err , #repw_err ,  #addr_err , 
-#age_err , #name_err , #tel_err , #carrier_err ,
-#nickname_err
+#pw_err , #repw_err ,  #addr_err ,
+#age_err , #name_err , #tel_err ,
+#carrier_err , #nickname_err
 {
   display: none;
   /* color: #de29e6; */
@@ -186,12 +186,12 @@ textarea:focus:-ms-input-placeholder { /* Internet Explorer 10+ */
   border-radius: 0.5rem;
 }
 
-#idCheck , #nickNameCheck {
+#idCheck , #nickNameCheck , #checkEmail , #addrFinder{
   margin-top: 1.7rem;
   background-color: rgba(0, 0, 0, 0.938);
 }
 
-#idCheck:hover , #nickNameCheck:hover {
+#idCheck:hover , #nickNameCheck:hover , #checkEmail:hover , #addrFinder:hover {
   /* background-color: rgba(0, 0, 0, 0.658); */
   box-shadow: 0 0 0 0.25rem rgba(234, 16, 161, 0.476);
   color: white !important;

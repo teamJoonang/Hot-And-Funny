@@ -3,6 +3,10 @@ package com.choongang.concert.dto.user;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.UUID;
+
 
 @Getter
 @Setter
@@ -16,6 +20,7 @@ public class AddUserRequest {
     private String password;    // 비밀번호
     private String repeatPw;    // 비밀번호 확인
     private String name;        // 이름
+    private String oldNickname; // 기존 별명
     private String nickname;    // 별명
     private String address;     // 주소
     private Integer age;        // 나이
@@ -25,7 +30,6 @@ public class AddUserRequest {
         js에서의 값 : true = 남자 | false = 여자
         db에서의 값 : true = 남자 = 1 | false = 여자 = 0
      */
-
 }
 
 

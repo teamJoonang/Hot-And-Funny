@@ -89,6 +89,27 @@ public class UserService {
         return result;
     }
 
+    /**
+     *
+     * @param userReq - 새로운 유저 정보
+     * @return int - 업데이트  성공 레코드 수 row
+     */
+    public int updateUser(UserResponse userReq) {
+        int result = userMapper.updateUser(userReq);
+        log.info("UserService >> updateUser() 실행됨");
+        return result;
+    }
+
+    /**
+     * 회원 정보 수정시 , 닉네임 중복 체크
+     * @param userReq  - 새로운 닉네임 또는 기존 닉네임에 해당
+     * @return int - 조회된 레코드 수
+     */
+    public int checkModifyNickname(AddUserRequest userReq) {
+        int result = userMapper.checkModifyNickname(userReq);
+        return result;
+    }
+
 
     /**
      * 사용자 회원정보 조회

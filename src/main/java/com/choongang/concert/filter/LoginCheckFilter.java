@@ -15,7 +15,7 @@ public class LoginCheckFilter implements Filter, jakarta.servlet.Filter {
     // 세션없이도 입장가능한 view , api 들의 매핑주소를 whitelist에 담는다.
     private static final String[] whitelist =
             {"/" , "/user/signup" , "/user/login" , "/user/logout" , "/user/find" , "/css/*" , "/img/*" , "/js/*" , "/user/reset"
-            , "/user/findId" , "/user/findPw" , "/user/IdCheck" , "/user/nicknameCheck"};
+            , "/user/findId" , "/user/findPw" , "/user/IdCheck" , "/user/nicknameCheck" , "/user/mailConfirm" , "/favicon.ico" };
 
     @Override
     public void destroy(){
@@ -34,9 +34,9 @@ public class LoginCheckFilter implements Filter, jakarta.servlet.Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         String requestURI = httpRequest.getRequestURI();
         HttpServletResponse httpResponse = (HttpServletResponse) response;
-
         try {
             log.info("인증 체크 필터 시작 {}", requestURI);
+
             if (isLoginCheckPath(requestURI)) {
                 log.info("인증 체크 로직 실행 {}", requestURI);
                 // getSession(false)로 세션 생성 막고 있는지만 확인.
@@ -45,15 +45,16 @@ public class LoginCheckFilter implements Filter, jakarta.servlet.Filter {
                 if (session == null || session.getAttribute("loginId") == null) {
                     log.info("미인증 사용자 요청 {}", requestURI);
                     //로그인으로 redirect
-                    httpResponse.sendRedirect("/user/login?redirectURL=" +
-                            requestURI);
+                    httpResponse.sendRedirect("/user/login?redirectURL=" + requestURI);
                     return; //
                 }
             }
             chain.doFilter(request, response);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             throw e; //
-        } finally {
+        }
+        finally {
             log.info("인증 체크 필터 종료 {}", requestURI);
         }
     }

@@ -12,5 +12,6 @@ public class LoginRequest {
 
     private String loginId;     // 로그인 아이디 - 이메일
     private String password;    // 비밀번호
+    private String redirectURL; // 리다이렉트 url
 
 }

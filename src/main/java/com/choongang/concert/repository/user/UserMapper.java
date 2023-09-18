@@ -65,6 +65,20 @@ public interface UserMapper {
      */
     int checkNickname(String nickname);
 
+    /**
+     *
+     * @param userReq - 새로운 유저 정보
+     * @return int - 성공 레코드 수 row
+     */
+    int updateUser(UserResponse userReq);
+
+    /**
+     * 회원 정보 수정시 , 닉네임 중복 체크
+     * @param userReq  - 새로운 닉네임 또는 기존 닉네임에 해당
+     * @return int - 조회된 레코드 수
+     */
+    int checkModifyNickname(AddUserRequest userReq);
+
 
 //    /**
 //     * 사용자 정보 수정
