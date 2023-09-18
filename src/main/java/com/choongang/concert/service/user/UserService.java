@@ -4,7 +4,6 @@ import com.choongang.concert.dto.user.*;
 import com.choongang.concert.repository.user.UserMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 @Slf4j
 @RequiredArgsConstructor
@@ -86,6 +85,27 @@ public class UserService {
     public int checkNickname(String nickname) {
 
         int result = userMapper.checkNickname(nickname);
+        return result;
+    }
+
+    /**
+     *
+     * @param userReq - 새로운 유저 정보
+     * @return int - 업데이트  성공 레코드 수 row
+     */
+    public int updateUser(UserResponse userReq) {
+        int result = userMapper.updateUser(userReq);
+        log.info("UserService >> updateUser() 실행됨");
+        return result;
+    }
+
+    /**
+     * 회원 정보 수정시 , 닉네임 중복 체크
+     * @param nickname  - 새로운 닉네임 또는 기존 닉네임에 해당
+     * @return Integer - 조회된 레코드 수
+     */
+    public Integer checkModifyNickname(String nickname) {
+        Integer result = userMapper.checkModifyNickname(nickname);
         return result;
     }
 

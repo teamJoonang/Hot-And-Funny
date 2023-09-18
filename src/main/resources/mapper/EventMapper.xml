@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.choongang.concert.repository.board.EventMapper">
+
+  <insert id="eventCreatePost">
+        insert into event (admin_id, title, writer, content, category)
+        value (1, #{title}, #{writer}, #{content}, #{category})
+  </insert>
+
+    <update id="eventUpdatePost">
+        update event
+        set category = #{category}, title = #{title} , content = #{content}
+        where id = #{id}
+    </update>
+
+    <delete id="eventDeletePost">
+        delete from event
+        where id = #{id}
+    </delete>
+
+
+    <select id="eventFindAll" resultType="com.choongang.concert.dto.board.EventDto">
+        select id, category, title, created_at, writer, content, hit
+        from
+        event
+        <if test="keyword != null">
+            <choose>
+                <when test="type == 'title'">
+                    where title like concat('%', #{keyword}, '%')
+                </when>
+                <when test="type == 'content'">
+                    where content like concat('%', #{keyword}, '%')
+                </when>
+                <when test="type == 'writer'">
+                    where writer like concat('%', #{keyword}, '%')
+                </when>
+            </choose>
+        </if>
+        order by id desc
+        limit #{offset}, #{amount}
+    </select>
+
+    <select id="eventAllCount" resultType="java.lang.Integer" parameterType="com.choongang.concert.dto.board.PageDto">
+        select count(*) as count
+        from
+        event
+        <if test="keyword != null">
+            where
+                title
+            like
+            concat('%', #{keyword}, '%')
+        </if>
+    </select>
+    
+    <select id="eventFindById" resultType="com.choongang.concert.dto.board.EventDto">
+        select id, category, title, writer, created_at, content, hit
+        from
+        event
+        where id = #{id}
+    </select>
+    
+    	
+  <update id="eventUpdateViewCnt">
+  	UPDATE event
+  		SET hit = hit + 1
+  		where id = #{id}
+  </update>
+  
+  
+</mapper>

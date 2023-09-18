@@ -12,27 +12,48 @@ function drawCharts() {
   drawBar2Chart();
 }
 
-
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function drawAreaChart() {
-  var data = google.visualization.arrayToDataTable([
-    ['Day', '1일차 콘서트', '2일차 콘서트', '3일차 콘서트'],
-    ['09.01', 1000, 400, 800],
-    ['09.02', 1170, 460, 760],
-    ['09.03', 660, 1120, 1324],
-    ['09.04', 1030, 540, 1524]
-  ]);
+  // 연령대별 통계 데이터를 가져오는 AJAX 요청
+  $.ajax({
+    url: '/admin/stat/area',
+    method: 'GET',
+    dataType: 'json',
+    success: function (areaGroupJsonArray) {
+      // 데이터 배열 초기화
+      var data = [];
 
-  var options = {
-    title: '매출 추이',
-    curveType: 'function',
-    legend: { position: 'bottom' }
-  };
+      // 데이터 배열에 헤더 추가
+      data.push(['매출 현황', '']);
 
-  var chart = new google.visualization.AreaChart(document.getElementById('areaChart'));
+      // 데이터 배열에 통계 데이터 추가
+      for (var i = 0; i < areaGroupJsonArray.length; i++) {
+        data.push([areaGroupJsonArray[i].concertDate + '일차 콘서트', areaGroupJsonArray[i].totalPrice]);
+      }
 
-  chart.draw(data, options);
+
+
+      // 데이터 배열을 사용하여 차트 그리기
+      var chartData = google.visualization.arrayToDataTable(data);
+
+      var options = {
+        title: '매출 추이',
+        curveType: 'function',
+        bars: 'vertical', // 세로 바 차트로 설정
+        legend: { position: 'none' }
+      };
+
+      var chart = new google.visualization.BarChart(document.getElementById('areaChart'));
+      chart.draw(chartData, options);
+    },
+    error: function (error) {
+      console.error('데이터를 가져오는 중 오류 발생:', error);
+    }
+  });
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 
 
@@ -45,7 +66,7 @@ function drawAreaChart() {
 function drawBarChart() {
   // 연령대별 통계 데이터를 가져오는 AJAX 요청
   $.ajax({
-    url: '/stat/bar',
+    url: '/admin/stat/bar',
     method: 'GET',
     dataType: 'json',
     success: function (reservationGroupJsonArray) {
@@ -86,7 +107,7 @@ function drawBarChart() {
 
 
 
-function drawDonutChart() {
+/*function drawDonutChart() {
   var data = google.visualization.arrayToDataTable([
     ['성별', '티켓 예매 수'],
     ['남성', 10],
@@ -109,45 +130,7 @@ function drawDonutChart() {
   chart.draw(data, options);
 
   
-}
-
-
-
-
-
-
-
-
-
-
-			// AJAX 요청을 통해 데이터 가져오기
-//			$.ajax({
-//			  url: '/statistics-data',
-//			  method: 'GET',
-//			  dataType: 'JSON', // JSON 형식으로 데이터를 응답받음
-//			  success: function(data) {
-//			    // 데이터를 파싱하여 변수에 할당
-//			    let teen = data.Teen;
-//			    let twenty = data.Twenty;
-//			    let thirty = data.Thirty;
-//			    let forty = data.Forty;
-//			    
-//			    // 이제 이 변수들을 사용할 수 있음
-//			    console.log(teen, twenty, thirty, forty);
-//			    
-//			    // 그리고 원하는 함수(예: drawSecondDonutChart)를 호출하여 차트를 그릴 수 있음
-//			    drawSecondDonutChart(teen, twenty, thirty, forty);
-//			  },
-//			  error: function(error) {
-//			    console.error('데이터를 가져오는 중 오류 발생:', error);
-//			  }
-//			});
-//
-
-
-
-
-
+}*/
 
 
 
@@ -161,7 +144,7 @@ function drawDonutChart() {
 function drawSecondDonutChart() {
   // 연령대별 통계 데이터를 가져오는 AJAX 요청
   $.ajax({
-    url: '/stat/seconddonut',
+    url: '/admin/stat/seconddonut',
     method: 'GET',
     dataType: 'json',
     success: function (ageGroupJsonArray) {
@@ -201,32 +184,48 @@ function drawSecondDonutChart() {
   
 
 
-  // console.log(jsonData);
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function drawDonutChart() {
+  // 연령대별 통계 데이터를 가져오는 AJAX 요청
+  $.ajax({
+    url: '/admin/stat/donut',
+    method: 'GET',
+    dataType: 'json',
+    success: function (genderGroupJsonArray) {
+      // 데이터를 DataTable 형식으로 변환
+      console.log(genderGroupJsonArray);
+      var data = new google.visualization.DataTable();
+      
+      data.addColumn('string', '성비별');
+      data.addColumn('number', 'Count');
+      
+      
+            // 하드코딩된 레이블 배열
+      var genderLabels = ['여성', '남성'];
+      for (var i = 0; i < genderGroupJsonArray.length; i++) {
+        // '연령대별'은 숫자 배열의 인덱스로 표현하고, 'Count'는 해당 숫자 값을 사용합니다.
+        var genderLabel = genderLabels[i];
+        data.addRow([genderLabel, genderGroupJsonArray[i]]);
+      }
 
-  // var data1 = new google.visualization.DataTable(jsonData);
-  // console.log(data1);
-  // var data = google.visualization.arrayToDataTable([
-  //   ['연령대별', 'Count'],
-  //   ['10대', 10],
-  //   ['20대', 3],
-  //   ['30대', 1],
-  //   ['40대 이상', 2]
-  // ]);
-  // console.log(data);
+      var options = {
+        title: '성비별 통계',
+        pieHole: 1,
+        legend: { position: 'left' },
+        chartArea: { width: '80%', height: '80%' }
+      };
 
-  // var options = {
-  //   title: '연령대별',
-  //   pieHole: 0.4,
-  //   legend: { position: 'bottom' },
-  //   chartArea: { width: '80%', height: '80%'}
-  //
-  // };
+      // 차트 그리기
+      var chart = new google.visualization.PieChart(document.getElementById('donutChart'));
+      chart.draw(data, options);
+    },
+    error: function (error) {
+      console.error('데이터를 가져오는 중 오류 발생:', error);
+    }
+  });
+}
 
-  // var chart = new google.visualization.PieChart(document.getElementById('secondDonutChart'));
-  // chart.draw(data, options);
-
-
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -253,4 +252,60 @@ function drawSecondDonutChart() {
     chart.draw(data, options);
   }
 
+  
+  
+  
+  
+  
+  
+  
+  function drawBar2Chart() {
+  // 좌석현황 통계 데이터를 가져오는 AJAX 요청
+  $.ajax({
+    url: '/stat/bar2',
+    method: 'GET',
+    dataType: 'json',
+    success: function (seatGroupJsonArray) {
+      // 데이터를 원하는 형식으로 가공
+      var seatDates = [];
+      for (var i = 0; i < seatGroupJsonArray.length; i++) {
+        var concertData = seatGroupJsonArray[i];
+        seatDates.push({
+          concert_id: concertData.concert_id,
+          firstConDay: concertData.firstConDay,
+          secondConDay: concertData.secondConDay,
+          thirdConDay: concertData.thirdConDay
+        });
+      }
 
+      // 데이터를 DataTable 형식으로 변환
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', '콘서트');
+      data.addColumn('number', 'S석');
+      data.addColumn('number', 'R석');
+      data.addColumn('number', 'VIP석');
+      
+      for (var i = 0; i < seatDates.length; i++) {
+        var concertData = seatDates[i];
+        data.addRow([
+          '콘서트 ' + concertData.concert_id + '일차',
+          340 - concertData.firstConDay,
+          340 - concertData.secondConDay,
+          340 - concertData.thirdConDay
+        ]);
+      }
+
+      var options = {
+        title: '일자별 남은 좌석 수',
+        bars: 'vertical',
+        legend: { position: 'bottom' }
+      };
+
+      var chart = new google.visualization.BarChart(document.getElementById('bar2Chart'));
+      chart.draw(data, options);
+    },
+    error: function (error) {
+      console.error('데이터를 가져오는 중 오류 발생:', error);
+    }
+  });
+}

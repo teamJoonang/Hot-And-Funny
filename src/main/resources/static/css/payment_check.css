@@ -59,6 +59,7 @@ body {
     padding-left: 10px;
     border: 0px solid #eeeeee;
     height: 20px;
+    width: 769px;
     font-weight: bold;
 }
 
@@ -227,7 +228,7 @@ body {
     display: flex;
 }
 .button-box div {
-    border: 1px solid black;
+    border: 0px solid black;
     border-radius: 8px;
     width: 186px;
     height: 60px;
@@ -244,4 +245,17 @@ body {
 .button-box .next-view-btn {
     background-color: red;
     margin-left: 4px;
+}
+/* 애니메이션 정의 */
+@keyframes blinkAnimation {
+    0%, 100% {
+        background-color: red;
+    }
+    50% {
+        background-color: orange;
+    }
+}
+/* 버튼에 애니메이션 */
+.blinking-button {
+    animation: blinkAnimation 1s infinite;
 }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.choongang.concert.repository.mypage.MyPageMapper">
+
+    <select id="findMyQnaList" resultType="com.choongang.concert.dto.mypage.MyPageDto" parameterType="long">
+        SELECT
+            id, title, category ,created_at, response_yn
+        FROM
+            qna_board
+        WHERE user_id = #{id}
+        ORDER BY id desc
+    </select>
+
+
+    <select id="findMyTicketList" resultType="com.choongang.concert.dto.mypage.MyTicketDto" parameterType="long">
+        select t.uuid, c.concert_name, t.seat_number,date_format(c.concert_date, '%Y.%m.%d') as concert_date,
+               date_format(c.concert_date, '%h:%m') as concert_time,
+               c.concert_place, t.created_at, t.status
+        from ticket_sample t, concert c
+        where t.concert_id = c.id and t.user_id = #{id}
+    </select>
+
+    <select id="findMyTicketByUuid" resultType="com.choongang.concert.dto.mypage.MyTicketDto" parameterType="String">
+        select t.uuid, c.concert_name, t.seat_number,date_format(c.concert_date, '%Y.%m.%d') as concert_date,
+               date_format(c.concert_date, '%h:%m') as concert_time,
+               c.concert_place, t.created_at, t.status
+        from ticket_sample t, concert c
+        where t.concert_id = c.id and t.uuid = #{uuid}
+
+    </select>
+
+    <update id="updateMyTicketStatus" parameterType="String">
+        UPDATE ticket_sample
+        SET status = 'WAITING'
+        WHERE uuid = #{uuid}
+    </update>
+
+
+</mapper>

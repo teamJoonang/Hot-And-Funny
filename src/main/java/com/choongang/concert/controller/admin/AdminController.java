@@ -5,6 +5,7 @@ package com.choongang.concert.controller.admin;
 import java.util.List;
 
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,16 +13,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.choongang.concert.dto.admin.Bar2Dto;
 import com.choongang.concert.dto.admin.PageDto;
 import com.choongang.concert.dto.admin.PagingResponse;
+import com.choongang.concert.dto.admin.QnaPostDto;
 import com.choongang.concert.dto.admin.UserInfoDTO;
+import com.choongang.concert.service.admin.BoardControlService;
 import com.choongang.concert.service.admin.StatService;
 import com.choongang.concert.service.admin.UserInfoService;
 
 @Controller
+@RequestMapping("/admin")
 public class AdminController {
 
 	private static final Logger log = LoggerFactory.getLogger(AdminController.class);
@@ -31,6 +39,8 @@ public class AdminController {
 	private UserInfoService userInfoService;
 	@Autowired
 	private StatService statService;
+	@Autowired
+	private BoardControlService boardControlService;
 	
 //	public AdminController(UserInfoService userInfoService) {
 //		this.userInfoService = userInfoService;
@@ -42,18 +52,44 @@ public class AdminController {
 
 	
 	
-	@GetMapping("boardcontrol")
-	public String boardControl() {
+	@GetMapping("/boardcontrol")
+	public String boardControl(Model model) {
+		List<QnaPostDto> qnaPostList = boardControlService.qnaPostList();
+		model.addAttribute("qnaPostList", qnaPostList);
+		
+		log.info("qnaPostList : " + qnaPostList);
+		
 		return "admin/board_control";
 	}
 	
-	@GetMapping("userinfo")
+	
+
+
+	@PostMapping("/boardcontrol/delete")
+	public String deleteQnaPost(@RequestBody List<Long> ids) {
+		System.out.println(ids);
+	    boardControlService.deleteQna(ids);
+	    return "redirect:/boardcontrol";
+	}
+	
+	
+	
+	
+	@GetMapping("/userinfo")
 	public String userInfo(@ModelAttribute("params") final PageDto params, Model model) {
 		log.info("회원목록요청");	//로그
 //	    log.info("offset: {}", params.getOffset());
 		
         PagingResponse<UserInfoDTO> response = userInfoService.findAllUser(params);
-        model.addAttribute("response", response);		
+        model.addAttribute("response", response);
+        for (UserInfoDTO userInfoDTO : response.getList()) {
+            String gender = userInfoDTO.getGender();
+            if (gender.equals(0)) {
+                userInfoDTO.setGender("여성");
+            } else {
+                userInfoDTO.setGender("남성");
+            }
+        };
 
 //        log.info("response : " + response);
         model.addAttribute("pageDto", params); // "pageDto"는 Thymeleaf에서 사용할 이름
@@ -62,7 +98,7 @@ public class AdminController {
 		return "admin/user_info";
 	}
 	
-	@GetMapping("refund")
+	@GetMapping("/refund")
 	public String refund() {
 		return "admin/refund";
 	}
@@ -71,7 +107,7 @@ public class AdminController {
 	
 	
 	
-	@GetMapping("statistics")	
+	@GetMapping("/statistics")
 	public String statistics() {
 		
 //		int count = 4;
@@ -202,7 +238,101 @@ public class AdminController {
 		int count = 3;
 		
 		
+		for(int i = 0; count > i; i++) {
+			if (i < seatGroup.size()) {
+			seatGroupJsonArray.add(seatGroup.get(i));
+			}
+		};
+		
+		
+		
 		return seatGroupJsonArray;
 	}
+	
+	
+	
+	//	donut 차트(성비별 통계)
+	@GetMapping("/stat/donut")
+	@ResponseBody
+	public JSONArray donut() {
+		
+		List<Integer> genderGroup = statService.genderGroup();
+		log.info("성비별 통계 담은값 : " + genderGroup);
+		
+		//	js 구글차트 리턴 제이슨 객체
+		JSONArray genderGroupJsonArray = new JSONArray();
+		
+		int count = 2;
+		
+		for(int i = 0; count > i; i++) {
+			if(i < genderGroup.size()) {
+				genderGroupJsonArray.add(genderGroup.get(i));
+			}
+		};
+		
+		return genderGroupJsonArray;		
+	}
+	
+	//	매출 추이
+	@GetMapping("/stat/area")
+	@ResponseBody
+	public JSONArray area() {
+		
+		List<Integer> areaGroup = statService.areaGroup();
+		log.info("매출 현황 : " + areaGroup);
+		JSONArray areaGroupJsonArray = new JSONArray();
+		
+		int count = 3;
+		
+		for(int i = 0; count > i; i++) {
+			if(i < areaGroup.size()) {
+				areaGroupJsonArray.add(areaGroup.get(i));
+			}
+		};
+		
+	return areaGroupJsonArray;
+	}
 
+	
+	
+	
+	
+//	@GetMapping("/find")
+//	public String findUserAccount(HttpServletRequest request) throws ServletException{
+//
+//	    log.info("get >> /user/find | findUserAccount() 실행됨.");
+//	    // 세션이 만약 있고 세션 안에 loginId라는 속성도 갖고 있다면 index 페이지로 리다이렉트.
+//	    HttpSession session = request.getSession(false);
+//	    if(session != null && session.getAttribute("loginId") != null){
+//	        return "redirect:/";
+//	    }
+//	    return "redirect:/user/login";
+//	}
+	
+	
+	
+	@GetMapping("/boardCon")
+	@ResponseBody
+	public JSONObject qnaPostList() {
+
+		List<QnaPostDto> qnaPostList = boardControlService.qnaPostList();
+		
+		
+		JSONObject qnaPostListJsonObject = new JSONObject();
+		
+		
+	    // qnaPostList 데이터를 JSON 객체에 추가
+	    qnaPostListJsonObject.put("qnaPostList", qnaPostList);
+		
+		
+		log.info("qna 오브젝트 : " + qnaPostListJsonObject);
+		return qnaPostListJsonObject;
+		
+	}
+	
+	
+	
+	
+	
 }
+

@@ -114,6 +114,25 @@
             nickname = #{nickname}
     </select>
 
+    <update id="updateUser" parameterType="UserResponse">
+        UPDATE
+            user
+        SET
+            name = #{name} ,
+            nickname = #{nickname},
+            address = #{address},
+            age = #{age},
+            tel = #{tel},
+            gender = #{gender}
+        WHERE
+            id = #{id};
+    </update>
 
-
+<!--    <select id="checkModifyNickname" parameterType="String">-->
+<!--        SELECT-->
+<!--            ifnull(count(nickname) , 0) nickname-->
+<!--        FROM-->
+<!--            user-->
+<!--        WHERE-->
+<!--    </select>-->
 </mapper>

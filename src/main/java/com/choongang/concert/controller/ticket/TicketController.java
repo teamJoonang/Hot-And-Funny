@@ -1,10 +1,13 @@
 package com.choongang.concert.controller.ticket;
 
 import com.choongang.concert.dto.ticket.ConcertInfoDto;
+import com.choongang.concert.dto.ticket.RemainNumDto;
 import com.choongang.concert.dto.ticket.SeatListDto;
 import com.choongang.concert.service.ticket.TicketService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -56,9 +59,19 @@ public class TicketController {
     }
 
     @GetMapping("/payment/check")
-    public String paymentCheck() {
+    public String paymentCheck(HttpServletRequest req, Model model) {
+        HttpSession session = req.getSession();
+        long userId = (long)session.getAttribute("id");
+        model.addAttribute("userId", userId);
         return "ticket/payment_check";
     }
+
+//    @GetMapping("/payment/check")
+//    public String paymentCheck() {
+//        return "ticket/payment_check";
+//    }
+
+
 }
 
 

@@ -1,32 +1,100 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.choongang.concert.repository.board.BoardMapper">
 
-	<!-- Notice 게시판 -->
-	<!--<select id="noticeBoardFindAll" resultType="Notice">
-	<select id="noticeBoardFindAll" resultType="Notice">
-		select id, category, title, crated_at , view_cnt 
-		from 
-		notice_board 
-		order by id desc
-		LIMIT #{offset}, #{recordSize}
-	</select>
-	-->
-	
-	
+    <insert id="createPost">
+        insert into notice (admin_id, title, writer, content, category)
+        value (1, #{title}, #{writer}, #{content}, #{category})
+    </insert>
 
-	<select id="noticeFindAll" parameterType="com.choongang.concert.dto.board.PageNoticeDto" resultType="com.choongang.concert.entity.board.Notice">
-        SELECT
-        	*
-        FROM
-            notice_board
-        WHERE
-            delete_yn = 0
-       ORDER BY
-            id DESC
+    <update id="updatePost">
+        update notice
+        set category = #{category}, title = #{title} , content = #{content}
+        where id = #{id}
+    </update>
+
+    <delete id="deletePost">
+        delete from notice
+        where id = #{id}
+    </delete>
+
+
+    <select id="findAll" resultType="com.choongang.concert.dto.board.NoticeDto">
+        select id, category, title, created_at, writer, content, hit
+        from
+        notice
+        <if test="keyword != null">
+            <choose>
+                <when test="type == 'title'">
+                    where title like concat('%', #{keyword}, '%')
+                </when>
+                <when test="type == 'content'">
+                    where content like concat('%', #{keyword}, '%')
+                </when>
+                <when test="type == 'writer'">
+                    where writer like concat('%', #{keyword}, '%')
+                </when>
+            </choose>
+        </if>
+        order by id desc
+        limit #{offset}, #{amount}
     </select>
 
+    <select id="allCount" resultType="java.lang.Integer" parameterType="com.choongang.concert.dto.board.PageDto">
+        select count(*) as count
+        from
+        notice
+        <if test="keyword != null">
+            where
+                title
+            like
+            concat('%', #{keyword}, '%')
+        </if>
+    </select>
+    
+    <select id="findById" resultType="com.choongang.concert.dto.board.NoticeDto">
+        select id, category, title, writer, created_at, content, hit
+        from
+        notice
+        where id = #{id}
+    </select>
+    
+    	
+  <update id="updateViewCnt">
+  	UPDATE notice
+  		SET hit = hit + 1
+  		where id = #{id}
+  </update>
+  
 
+  
+<!--   
+카테고리별 종목모으기 
+   <select id="findCategoryAll" resultType="com.example.dto.NoticeDto">
+        SELECT * FROM notices
+        UNION ALL
+        SELECT * FROM events
+        UNION ALL
+        SELECT * FROM qnas
+    </select>
+    
+    <select id="findNotices" resultType="com.example.dto.NoticeDto">
+        SELECT * FROM notices;
+    </select>
+  
+    <select id="findEvents" resultType="com.example.dto.NoticeDto">
+        SELECT * FROM events;
+    </select>
+    
+    
+    <select id="findQnAs" resultType="com.example.dto.NoticeDto">
+        SELECT * FROM qnas;
+    </select> 
+    -->
+  
+  
+  
 </mapper>
 

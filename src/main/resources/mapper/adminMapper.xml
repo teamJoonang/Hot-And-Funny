@@ -49,7 +49,7 @@ SELECT COUNT(concert_id) AS reservationGroup FROM ticket WHERE concert_id = 1 un
 		SELECT COUNT(concert_id) FROM ticket WHERE concert_id = 3;
 	</select>
 	
-	<!-- Bar 차트 (예매율 통게) -->
+	<!-- Bar2 차트 (실시간 좌석 통게) -->
     <resultMap id="bar2DtoResultMap" type="com.choongang.concert.dto.admin.Bar2Dto">
         <id property="concert_id" column="concert_id"/>
         <result property="firstConDay" column="firstConDay"/>
@@ -63,8 +63,58 @@ SELECT COUNT(concert_id) AS reservationGroup FROM ticket WHERE concert_id = 1 un
                SUM(CASE WHEN s.seat_type = 'S' THEN 1 ELSE 0 END) AS secondConDay,
                SUM(CASE WHEN s.seat_type = 'Vip' THEN 1 ELSE 0 END) AS thirdConDay
         FROM ticket t 
-        LEFT OUTER JOIN seat s ON t.seat_num = s.seat_num
+        LEFT OUTER JOIN seat s ON t.seat_number = s.seat_number
         GROUP BY t.concert_id;
     </select>
 	
+	
+	<!-- Donut 차트 (성비별 통게) -->
+	<select id="genderGroup" parameterType="com.choongang.concert.dto.admin.DonutDto" resultType="int">
+		select count(id) as genderGroup from user where gender=0 union all
+		select count(id) from user where gender=1;
+	</select>
+	
+	
+	<!-- Area 차트 (매출 현황) -->
+	<select id="areaGroup" parameterType="com.choongang.concert.dto.admin.AreaDto" resultType="com.choongang.concert.dto.admin.AreaDto">
+		SELECT
+    		t.concert_id AS concertDate,
+    			SUM(CASE WHEN t.discount_yn = 1 THEN s.price * 0.7 ELSE s.price END) AS total_price
+		FROM
+		    ticket AS t
+		JOIN
+		    seat AS s ON t.seat_number = s.seat_number
+		GROUP BY
+		    t.concert_id
+	</select>
+	
+	
+	
+	<!-- qna 게시판 관리 -->
+	
+	<!-- qna 게시물 조회 -->
+	<select id="getQnaList" parameterType="com.choongang.concert.dto.admin.QnaPostDto" resultType="com.choongang.concert.dto.admin.QnaPostDto">
+		select q.id AS id, title, content, created_at AS Date, u.nickname AS writer
+		from qna_board q left outer join `user` u
+		on q.user_id = u.id;
+	</select>
+	
+	<!-- qna 게시물 수정 -->
+	<update id="updateQna" parameterType="com.choongang.concert.dto.admin.QnaPostDto">
+		update qna_board
+		set title =#{title} , content =#{content}
+		where id=#{id}
+	</update>
+	
+
+	
+	
+	<update id="deleteQna" parameterType="List">
+	    update qna_board
+	    set delete_yn = 1
+	    where id in
+	    <foreach collection="list" item="id" open="(" separator="," close=")">
+	        #{ids}
+	    </foreach>
+	</update>
 </mapper>
