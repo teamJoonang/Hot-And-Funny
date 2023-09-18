@@ -65,17 +65,15 @@
 --             password = #{password}
 
             select
-                login_id , password , id
+                login_id , password , id , nickname
             from
                 (
-                select login_id , password , id from user union all
-                select admin_login_id , admin_password , id from admin
+                select login_id , password , id , nickname from user union all
+                select admin_login_id , admin_password , id , admin_nickname from admin
                 )
                     as combined_data
             where
-                login_id = #{loginId}
-              and
-                password = #{password};
+                login_id = #{loginId};
     </select>
 
     <select id="findByEmail" resultType="UserResponse" parameterType="findEmailRequest">
@@ -156,8 +154,8 @@
 
     </select>
     <select id="findAllAdmin" resultType="com.choongang.concert.dto.user.AdminDto">
-            select id, admin_login_id, admin_password, admin_nickname, admin_name
-            from admin
+        select id, admin_login_id, admin_password, admin_nickname, admin_name
+        from admin
     </select>
 
 </mapper>

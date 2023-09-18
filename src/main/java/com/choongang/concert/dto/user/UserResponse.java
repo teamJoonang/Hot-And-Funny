@@ -22,5 +22,6 @@ public class UserResponse {
     private Integer age;        // 나이
     private String tel;         // 연락처
     private Boolean gender;     // 성별 : true = 남자 = 1 | false = 여자 = 0
+    private Boolean deleteYn;   // 탈퇴여부
 }
 

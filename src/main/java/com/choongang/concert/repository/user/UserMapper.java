@@ -96,5 +96,4 @@ public interface UserMapper {
 
     List<AdminDto> findAllAdmin();
 
-
 }

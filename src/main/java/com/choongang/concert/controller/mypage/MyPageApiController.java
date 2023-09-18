@@ -24,8 +24,6 @@ public class MyPageApiController {
     private final ResponseService responseService;
     private final MyPageService myPageService;
 
-
-
     @PostMapping("/nicknameModifyCk")
     public ResponseEntity<String> checkNicknameList(@RequestBody AddUserRequest userReq){
         // 실행로그 , dto의 nickname만 확인
@@ -79,8 +77,6 @@ public class MyPageApiController {
         log.info("Update Status -> {}", myTicketDto.getStatus().getValue());
         return myTicketDto.getStatus().getValue();
     }
-
-
 
 
 

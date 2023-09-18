@@ -1,13 +1,11 @@
 package com.choongang.concert.controller.account.config;
 
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import java.util.Properties;
-
 @Configuration
 public class MailConfig {
 
@@ -15,11 +13,10 @@ public class MailConfig {
     public JavaMailSender javaMailService() {
 
         JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
+        javaMailSender.setHost("smtp.naver.com");
 
-        javaMailSender.setHost("smtp.@naver.com");
-
-        javaMailSender.setUsername("");
-        javaMailSender.setPassword("");
+        javaMailSender.setUsername("firetrap5319");
+        javaMailSender.setPassword("dlatmdqja159357@");
 
         javaMailSender.setPort(465);
 
@@ -38,8 +35,5 @@ public class MailConfig {
         properties.setProperty("mail.smtp.ssl.enable","true"); // ssl 사용
         return properties;
     }
-
-
-
 
 }
