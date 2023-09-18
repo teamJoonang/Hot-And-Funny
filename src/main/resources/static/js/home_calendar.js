@@ -106,7 +106,7 @@ document.querySelector('.dates').addEventListener('click', (event) => {
 		// 서버에서 갖고온 ID값에 대한 ConcertId와 TicketCount 수 찾기
 		const concertIdCheck = selectedDate.number;
 		let impossibleId;
-		let ticketCountCheck;
+		let ticketCountCheck = 0;
 
 		for (let i = 0; i < tldList.length; i++) {
 			if (tldList[i].concertId === concertIdCheck) {

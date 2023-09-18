@@ -42,7 +42,7 @@ body {
     background-image: linear-gradient(currentcolor, currentcolor);
     background-position: calc(100% - 1em) calc(100% - 0.25em);
     background-repeat: no-repeat;
-    background-size: 0% 2px;
+    background-size: 0 2px;
     transition-duration: 0.4s, 0.2s;
     transition-timing-function: ease, ease-in-out;
     transition-delay: 0s, 0s;
@@ -59,6 +59,19 @@ body {
     color: #f517fe;
 
 }
+
+.custom-nav {
+    font-size: 1.0rem;
+    color: #FFFFFF;
+}
+
+.custom-nav:hover {
+    transition-duration: 0.2s, 0.2s;
+    transition-timing-function: ease-in-out;
+    transition-delay: 0s;
+    color: #7440ff;
+}
+
 
 .offcanvas-body ul .nav-item .sub-menu {
 
@@ -87,7 +100,6 @@ body {
 .sub-menu {
     min-width: 100px;
     background-color: #050505;
-    min-width: 100px;
     position: absolute;
     top: 100%;
     left: 0%;
