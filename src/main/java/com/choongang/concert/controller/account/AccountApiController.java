@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.websocket.SessionException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -134,30 +135,37 @@ public class AccountApiController {
         if(loginReq.getLoginId().isEmpty() || loginReq.getPassword().isEmpty()){
             return responseService.setBadResponse("모든 양식을 채워주세요.");
         }
+        UserResponse result = null;
 
-        // service를 이용해 db 조회해보고 userResponse정보 반환
-        UserResponse result = userService.login(loginReq);
+        try{
+            // service를 이용해 db 조회해보고 userResponse정보 반환
+            result = userService.login(loginReq);
+            // db의 loginId,pw 와 dto의 loginId,pw가 일치하면...
+            if(result.getLoginId().equals(loginReq.getLoginId()) &&
+                    bCryptPasswordEncoder.matches(loginReq.getPassword() , result.getPassword())){
 
-        // db의 loginId,pw 와 dto의 loginId,pw가 일치하면...
-        if(result.getLoginId().equals(loginReq.getLoginId()) &&
-                bCryptPasswordEncoder.matches(loginReq.getPassword() , result.getPassword())){
-
-            HttpSession session = req.getSession();
-            // 세션에 id , loginId 를 넣어준다.
-            log.info("session에 담을 id : " + result.getId());
-            log.info("session에 담을 loginId : " + result.getLoginId());
-            log.info("session에 담을 nickname : " + result.getNickname());
-            session.setAttribute("id" , result.getId());
-            session.setAttribute("loginId" , result.getLoginId());
-            session.setAttribute("nickname" ,  result.getNickname());
+                HttpSession session = req.getSession();
+                // 세션에 id , loginId 를 넣어준다.
+                log.info("session에 담을 id : " + result.getId());
+                log.info("session에 담을 loginId : " + result.getLoginId());
+                log.info("session에 담을 nickname : " + result.getNickname());
+                session.setAttribute("id" , result.getId());
+                session.setAttribute("loginId" , result.getLoginId());
+                session.setAttribute("nickname" ,  result.getNickname());
 //            if(loginReq.getRedirectURL() != null && !loginReq.getRedirectURL().isEmpty()){
 //                return responseService.setSuccesResponse(loginReq.getRedirectURL());
 //            }
-            return responseService.setSuccesResponse("로그인 성공");
+                return responseService.setSuccesResponse("로그인 성공");
+            }
+            else {
+                return responseService.setNotFoundResponse("존재하지 않는 사용자.");
+            }
         }
-        else {
-            return responseService.setNotFoundResponse("존재하지 않는 사용자.");
+        catch (NullPointerException e){
+            log.info("NPE 발생 : " + e.getMessage());
+            return responseService.setServerErrorResponse("로그인 중 오류 발생.");
         }
+
 
     }
 
