@@ -48,15 +48,15 @@ function execDaumPostcode() {
 
 
 // 패스워드 검증식 - 대소문자, 숫자 , 특수문자 무조건 하나 포함, 최소 8자 최대 30자
-const pwRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*#?&_-])[A-Za-z\d@$!%*#?&_-]{8,30}$/g;
+const pwRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*#?&_-])[A-Za-z\d@$!%*#?&_-]{8,30}$/;
 // // 이름 검증식 - 영어(대소문자), 한글 최소 1자~20자 , 숫자와 특수문자 제외.
-const nameRegex = /^[A-Za-z가-힝]{1,20}[^\d$!%*#?&_-]$/g;
+const nameRegex = /^[A-Za-z가-힝]{1,20}[^\d$!%*#?&_-]$/;
 // // 별명 - 언더바'_' 제외 특수문자 사용불가.
-const nicknameRegex =  /^[가-힣ㄱ-ㅎa-zA-z0-9]{2,20}[^$!%*#?&,-]$/g;
+const nicknameRegex =  /^[가-힣ㄱ-ㅎa-zA-z0-9]{2,20}[^$!%*#?&,-]$/;
 // // 연락처 - 숫자 11글자.
-const telRegex = /\d{7,11}/g;
+const telRegex = /\d{7,11}/;
 // // 나이 - 숫자만 가능 , 최소1글자 ~ 3글자.
-const ageRegex = /\d{1,3}/g;
+const ageRegex = /\d/;
 
 
 // err 에러메시지
