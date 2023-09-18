@@ -34,5 +34,26 @@
 		from ticket t  
 		join concert c on t.concert_id = c.id  
 		where t.user_id = #{userId};
-   </select>   		
+   </select>   
+   
+   <!-- 콘서트 정보 갖고오기 -->
+   <select id="concertInfo" parameterType="int" resultType="ConcertDto">
+   		select c.id as concertId, c.concert_name as concertName, c.concert_place as concertPlace, date_format(c.concert_date, '%Y-%m-%d %H:%i') as concertDate, c.concert_runtime as concertRuntime, c.concert_restrictedAge as concertRestrictedAge
+   		from concert c where c.id = #{concertId};
+   </select>		
+   
+   <!-- 자바스크립트에 콘서트 정보 담기 -->
+   <select id="javascriptConcertInfo" resultType="ConcertScriptDto">
+   		select 
+			c.id as concertId, 
+			c.concert_name as concertName, 
+			c.concert_place as concertPlace, 
+			date_format(c.concert_date, '%Y') as concertYear,
+			date_format(c.concert_date, '%m') as concertMonth,
+			date_format(c.concert_date, '%d') as concertDay,
+			date_format(c.concert_date, '%H:%i') as concertTime,
+			c.concert_runtime as concertRuntime, 
+			c.concert_restrictedAge as concertRestrictedAge
+		from concert c;
+   </select>
 </mapper>

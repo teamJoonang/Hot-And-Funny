@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.choongang.concert.dto.ticket.ChoiceDateDto;
+import com.choongang.concert.dto.ticket.ConcertDto;
+import com.choongang.concert.dto.ticket.ConcertScriptDto;
 import com.choongang.concert.dto.ticket.TicketCountDto;
 import com.choongang.concert.dto.ticket.TicketShowDto;
 
@@ -19,6 +21,13 @@ public interface ITicketDAO2 {
 	//	TicketShowDto ticketView(@Param("concertDate") String concertDate, @Param("seatNum")String SeatNum);
 	List<TicketShowDto> ticketView(@Param ("concertDate") String concertDate, @Param ("userId") String userId);
 	
+	
 	//	티켓 수 갖고 오기
 	List<TicketCountDto> ticketCountMapper(@Param("userId") String userId);
+	
+	//	콘서트 정보
+	List<ConcertDto> concertInfo (@Param("concertId") int concertId);
+	
+	//	javaScript에 콘서트 정보 보낼 DAO
+	List<ConcertScriptDto> javascriptConcertInfo();
 }

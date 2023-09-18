@@ -118,7 +118,7 @@
 			class="col-lg-7 col-md-8 offset-lg-1 offset-md-2 offset-sm-0 mt-5">
 			<h1>콘서트 타이틀</h1>
 			<hr>
-			<div>
+			<div id = "concert-title">
 				<ul class="list-unstyled row offset-xs-1 concert-list">
 					<li class="col-lg-6"><h4>&lt;콘서트 장소&gt;</h4>
 						<p class="concert-site offset-lg-1" id="concert-site"></p></li>
@@ -135,13 +135,13 @@
 					<div class="calendar">
 						<div class="calendar-header">
 							<div class="year-month"></div>
-							<!-- 버튼삭제
+							<!-- 버튼삭제 
                                 <div class="c-nav">
                                     <button class="c-nav-btn go-prev" onclick="prevMonth()">&lt;</button>
                                     <button class="c-nav-btn go-today" onclick="goToday()">Today</button>
                                     <button class="c-nav-btn go-next" onclick="nextMonth()">&gt;</button>
                                 </div> 
-                            -->
+                     		-->
 						</div>
 						<div class="calendar-main">
 							<div class="days">
@@ -166,7 +166,7 @@
 								<th>잔여석</th>
 							</tr>
 						</thead>
-						<tbody id="remainSeat">
+						<tbody id="remain-seat">
 							<tr>
 								<td class="col-lg-5"></td>
 								<td class="col-lg-5"></td>
@@ -210,6 +210,7 @@
 	<script th:inline="javascript">
 		const tldList = /*[[${tldList}]]*/[];
 		const userId = /*[[${userId}]]*/ [];
+		const concertDataList = /*[[${cdList}]]*/ [];
 	</script>
 	<script	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js">	</script>
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
