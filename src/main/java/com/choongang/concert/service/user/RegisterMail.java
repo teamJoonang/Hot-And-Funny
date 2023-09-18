@@ -47,9 +47,9 @@ public class RegisterMail implements MailServiceInter{
         msgg += "<div style='font-size:130%'>";
         msgg += "CODE : <strong>" + ePw + "</strong><div><br/> "; // 메일에 인증번호 넣기
         msgg += "</div>";
-        message.setText(msgg, "utf-8", "html");// 내용, charset 타입, subtype
+        message.setContent(msgg, "text/html; charset=utf-8");// 내용, charset 타입, subtype
         // 보내는 사람의 이메일 주소, 보내는 사람 이름
-        message.setFrom(new InternetAddress("firetrap5319@gmail.com", "HAF_Admin"));// 보내는 사람
+        message.setFrom(new InternetAddress("firetrap5319@naver.com", "HAF_Admin"));// 보내는 사람
 
 
         return message;

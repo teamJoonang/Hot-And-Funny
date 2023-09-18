@@ -6,20 +6,23 @@ import com.choongang.concert.service.user.RegisterMail;
 import com.choongang.concert.service.user.ResponseService;
 import com.choongang.concert.service.user.UserService;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.websocket.SessionException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.apache.catalina.User;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.io.Console;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 @Slf4j
 @Controller
@@ -32,18 +35,16 @@ public class AccountApiController {
     private final InputValidation inputValidation;
     private final ResponseService responseService;
     private final RegisterMail registerMail;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @PostMapping("/user/mailconfirm")
-    public String mailConfirm(@RequestBody String email) throws Exception{
+    @PostMapping("/mailConfirm")
+    public ResponseEntity<String> mailConfirm(@RequestBody String email) throws Exception{
         log.info("email = " + email);
         String code = registerMail.sendSimpleMessage(email);
         log.info("사용자에게 발송한 인증코드 ==> " + code );
 
-        return code;
+        return responseService.setSuccesResponse(code);
     }
-
-//    static final LoginRequest req = new LoginRequest();
-
 
     // 아이디 중복 체크 확인 (회원가입 등록)
     @PostMapping("/IdCheck")
@@ -96,12 +97,18 @@ public class AccountApiController {
             return responseService.setBadResponse("비밀번호가 일치하지 않습니다.");
         }
 
+        log.info("회원가입 사용자 비밀번호 : " + userReq.getPassword());
+        String encodedPw = bCryptPasswordEncoder.encode(userReq.getPassword());
+        log.info("암호화된 회원가입 사용자 비밀번호 : " + encodedPw);
+        userReq.setPassword(encodedPw);
+
         // db단에 넣고 return 레코드 갯수를 받는다.
         int result = 0;
         try {
             result = userService.saveUser(userReq);
         }
         catch (Exception e) {
+            log.info("db에 회원가입 정보 insert 실패.");
             throw new RuntimeException(e);
         }
         // 성공 레코드 갯수가 0 보다 많다면, 성공적.
@@ -117,11 +124,10 @@ public class AccountApiController {
          }
     }
 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    // 사용자 로그인 (아직 검증 없음 , session 고급지게 뭔가 추가 필요 , password 암호화 필요 )//
+
     @PostMapping("/login")
     public ResponseEntity<String> login(
-            @RequestBody LoginRequest loginReq , HttpSession session , HttpServletResponse res) throws SessionException, IOException {
+            @RequestBody LoginRequest loginReq , HttpServletRequest req, HttpServletResponse res) throws SessionException, IOException {
         log.info("Post >> /user/login | login() 실행됨.");
         log.info("loginReq::{}" , loginReq);
 
@@ -129,32 +135,37 @@ public class AccountApiController {
         if(loginReq.getLoginId().isEmpty() || loginReq.getPassword().isEmpty()){
             return responseService.setBadResponse("모든 양식을 채워주세요.");
         }
+        UserResponse result = null;
 
-        // service를 이용해 db 조회해보고 userResponse정보 반환
-        UserResponse result = userService.login(loginReq);
+        try{
+            // service를 이용해 db 조회해보고 userResponse정보 반환
+            result = userService.login(loginReq);
+            // db의 loginId,pw 와 dto의 loginId,pw가 일치하면...
+            if(result.getLoginId().equals(loginReq.getLoginId()) &&
+                    bCryptPasswordEncoder.matches(loginReq.getPassword() , result.getPassword())){
 
-        // db의 loginId,pw 와 dto의 loginId,pw가 일치하면...
-        if(result.getLoginId().equals(loginReq.getLoginId()) &&
-                result.getPassword().equals(loginReq.getPassword())){
-            // 세션에 id , loginId 를 넣어준다.
-            log.info("session에 담을 id : " + result.getId());
-            log.info("session에 담을 loginId : " + result.getLoginId());
-            session.setAttribute("id" , result.getId());
-            session.setAttribute("loginId" , result.getLoginId());
-
-
+                HttpSession session = req.getSession();
+                // 세션에 id , loginId 를 넣어준다.
+                log.info("session에 담을 id : " + result.getId());
+                log.info("session에 담을 loginId : " + result.getLoginId());
+                log.info("session에 담을 nickname : " + result.getNickname());
+                session.setAttribute("id" , result.getId());
+                session.setAttribute("loginId" , result.getLoginId());
+                session.setAttribute("nickname" ,  result.getNickname());
 //            if(loginReq.getRedirectURL() != null && !loginReq.getRedirectURL().isEmpty()){
-//                res.setStatus(200);
-//                PrintWriter writer = res.getWriter();
-//                writer.write("로그인 성공");
-//                res.sendRedirect(loginReq.getRedirectURL());
+//                return responseService.setSuccesResponse(loginReq.getRedirectURL());
 //            }
+                return responseService.setSuccesResponse("로그인 성공");
+            }
+            else {
+                return responseService.setNotFoundResponse("존재하지 않는 사용자.");
+            }
+        }
+        catch (NullPointerException e){
+            log.info("NPE 발생 : " + e.getMessage());
+            return responseService.setServerErrorResponse("로그인 중 오류 발생.");
+        }
 
-            return responseService.setSuccesResponse("로그인 성공");
-        }
-        else {
-            return responseService.setNotFoundResponse("존재하지 않는 사용자.");
-        }
 
     }
 
@@ -241,6 +252,10 @@ public class AccountApiController {
         if(!resetPwReq.getPassword().equals(resetPwReq.getRepeatPassword())){
             return responseService.setBadResponse("비밀번호가 일치하지 않습니다.");
         }
+
+        String encodePw = bCryptPasswordEncoder.encode(resetPwReq.getPassword());
+        resetPwReq.setPassword(encodePw);
+
         // db에 새로운 비밀번호 넣고 성공한 레코드 수 반환.
         int result = userService.resetPassword(resetPwReq);
         log.info("result::{}" , result);
@@ -251,6 +266,32 @@ public class AccountApiController {
         else {
             return responseService.setServerErrorResponse("서버에 문제 발생, 재설정 불가");
         }
+    }
+
+    // 로그아웃
+    @PostMapping("/logout")
+    public String logout(HttpServletRequest request , HttpServletResponse response) throws ServletException {
+
+        // 세션이 만약 있고 세션 안에 loginId라는 속성도 갖고 있다면 index 페이지로 리다이렉트.
+        HttpSession session = request.getSession(false);
+        if(session != null && session.getAttribute("loginId") != null){
+            session.removeAttribute("loginId");
+            session.removeAttribute("id");
+            session.removeAttribute("nickname");
+            session.setMaxInactiveInterval(0);
+            session.invalidate();
+        }
+
+        if(request.getCookies() != null ){
+            for (Cookie cookie : request.getCookies()){
+                if(cookie.getName().equals("JSESSIONID")){
+                    cookie.setMaxAge(0);
+                    response.addCookie(cookie);
+                    break;
+                }
+            }
+        }
+        return "redirect:/";
     }
 
 

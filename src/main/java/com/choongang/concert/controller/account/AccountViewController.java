@@ -29,11 +29,9 @@ public class AccountViewController {
 
 //    로그인 페이지
     @GetMapping("/login")
-    public String login(ServletRequest request ,
-                        @RequestParam(required = false , name = "redirectURL") String redirectURL ,
-                        Model model) throws ServletException {
+    public String login(ServletRequest request) throws ServletException {
 
-//        log.info("get >> /user/login | login() 실행됨.");
+        log.info("get >> /user/login | login() 실행됨.");
         // 세션이 만약 있고 세션 안에 loginId라는 속성도 갖고 있다면 index 페이지로 리다이렉트.
         HttpServletRequest httpReq = (HttpServletRequest) request;
 
@@ -41,7 +39,6 @@ public class AccountViewController {
         if(session != null && session.getAttribute("loginId") != null){
             return "redirect:/";
         }
-
 //        log.info("redirectURL : " + redirectURL);
 //        if(redirectURL != null){
 //            model.addAttribute("redirectURL" ,redirectURL);
@@ -103,7 +100,7 @@ public class AccountViewController {
     }
 
 
-    // 로그아웃 구현해야함.
+
     @GetMapping("/logout")
     public String logout(HttpServletRequest request , HttpServletResponse response) throws ServletException{
 
@@ -111,6 +108,8 @@ public class AccountViewController {
         HttpSession session = request.getSession(false);
         if(session != null && session.getAttribute("loginId") != null){
             session.removeAttribute("loginId");
+            session.removeAttribute("id");
+            session.removeAttribute("nickname");
             session.setMaxInactiveInterval(0);
             session.invalidate();
         }

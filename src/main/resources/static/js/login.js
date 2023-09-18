@@ -21,8 +21,10 @@ function sendLoginRequest() {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 // 로그인 성공 처리
-                // alert('로그인 성공!');
-                window.location="/"
+                // if(xhr.responseText !== '로그인 성공'){
+                //     window.location = xhr.responseText;
+                // }
+                window.location= document.referrer;
             } else if(xhr.status === 400) {
                 // 로그인 실패 처리
                 alert('로그인 실패 : 모든 양식을 채워주세요.');
@@ -33,12 +35,13 @@ function sendLoginRequest() {
             }
         }
     };
+    let lastpage = document.referrer;
 
-    if(hiddenBox != null && hiddenBox != undefined){
-        redirectURL = hiddenBox.value;
-        let data = JSON.stringify({
-            loginId: loginId, password: loginPassword , redirectURL : redirectURL});
-    }
+    // if(lastpage){
+    //     redirectURL = hiddenBox.value;
+    //     let data = JSON.stringify({
+    //         loginId: loginId, password: loginPassword , redirectURL : redirectURL});
+    // }
     // 요청 전송
     let data = JSON.stringify({
         loginId: loginId, password: loginPassword});

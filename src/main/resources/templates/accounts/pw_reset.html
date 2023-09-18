@@ -38,15 +38,15 @@
                                 
                                 <!-- 사용자 비밀번호 재설정 -->
                                 <div class="text-start">
-                                    <label class="form-label m-2" for="password">비밀번호</label>
-<!--                                    <span style="color:#ea10a0;"></span>-->
+                                    <label class="form-label m-2" for="password">새로운 비밀번호</label>
+                                    <span class="small" style="color: #ea10ac;" id="pw_err">8~30자의 영문 대/소문자, 숫자, 특수문자 반드시 사용해 주세요.</span>
                                     <input type="password" class="form-control form-control-lg input" id="password" name="password"
-                                           autocomplete="off" required="required"  placeholder="Password"/>
+                                           autocomplete="off" required="required"  placeholder="8~30자의 영문 대/소문자, 숫자, 특수문자를 반드시 사용해 주세요." maxlength="30" />
 
                                     <label class="form-label m-2" for="repeatPassword">비밀번호 확인</label>
-<!--                                     <span style="color: #ea10a0;" ></span>-->
+                                    <span class="small" style="color: #ea10ac;" id="repw_err">비밀번호를 일치 시켜주세요.</span>
                                     <input type="password" class="form-control form-control-lg input" id="repeatPassword" name="repeatPassword"
-                                           autocomplete="off" required="required"  placeholder="Repeat Password"/>
+                                           autocomplete="off" required="required"  placeholder="비밀번호 재확인"/>
                                 </div>
 
                                 <button class="btn btn-lg m-3 text-white border-0" type="button" id="loginBtn">Send</button>
@@ -64,6 +64,42 @@
     <!-- sweetalert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+
+        // 패스워드 검증식 - 대소문자, 숫자 , 특수문자 무조건 하나 포함, 최소 8자 최대 30자
+        const pwRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*#?&_-])[A-Za-z\d@$!%*#?&_-]{8,30}$/g;
+
+        let pw_err = document.getElementById('pw_err');
+        let repw_err = document.getElementById('repw_err');
+
+        let pwCk = false;
+        let repwCk = false;
+
+        document.getElementById('password').addEventListener('change' , function (){
+            let password = this.value;
+            if(pwRegex.test(password)){
+                pw_err.style.display = 'none';
+                pwCk = true;
+            }
+            else {
+                pw_err.style.display = 'inline-block';
+                pwCk = false;
+
+            }
+        });
+
+        document.getElementById('repeatPassword').addEventListener('keyup' , function () {
+            let password = document.getElementById('password').value;
+            let repeatPw = this.value;
+            if(password === repeatPw){
+                repw_err.style.display = 'none'
+                repwCk = true;
+            }
+            else{
+                repw_err.style.display = 'inline-block';
+                repwCk = false;
+            }
+        });
+
 
         document.getElementById('loginBtn').addEventListener('click', function () {
 
