@@ -4,9 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter @Setter
+@Getter
+@Setter
 @ToString
-public class NoticeEditDto {
+public class QnaEditDto {
 
     private Long id;
     private String title;
@@ -15,7 +16,7 @@ public class NoticeEditDto {
     private String category;
 
 
-    public NoticeEditDto() {
+    public QnaEditDto() {
 
         this.writer = "관리자";
     }

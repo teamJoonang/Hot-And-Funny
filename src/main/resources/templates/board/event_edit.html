@@ -16,7 +16,7 @@
 
 <main>
     <div class="container w-75 my-2 py-4">
-        <form action="" th:action="@{'/notice/edit/' + ${edit.id}}" method="post" class="edit-form">
+        <form action="" th:action="@{'/event/edit/' + ${eventEdit.id}}" method="post" class="edit-form">
             <div class="border-bottom-3 mb-3 text-black">
                 <h4 class="fw-bold">글쓰기</h4>
             </div>
@@ -29,18 +29,18 @@
                 </div>
                 <div class="d-flex border mb-1">
                     <div class="col-2 border-end text-center fw-bold">제목</div>
-                    <input type="text" name="title" id="title" style="outline: none;" class="flex-fill border-0" th:value="${edit.title}"/>
+                    <input type="text" name="title" id="title" style="outline: none;" class="flex-fill border-0" th:value="${eventEdit.title}"/>
                 </div>
                 <div>
                     <div>
                         <h5 class="fw-bold">내용</h5>
                     </div>
                     <div>
-                        <textarea style="width: 100%; height: 20rem; resize: none; outline: none;" class="border" name="content" id="edit-body" th:text="${edit.content}"></textarea>
+                        <textarea style="width: 100%; height: 20rem; resize: none; outline: none;" class="border" name="content" id="edit-body" th:text="${eventEdit.content}"></textarea>
                     </div>
                     <div class="d-flex justify-content-end">
-                        <input type="submit" class="btn btn-success me-2" name="edit" th:value="수정">
-                        <a class="btn btn-danger" th:href="@{'/notice/detail/'+ ${edit.id}}">취소</a>
+                        <input type="submit" class="btn btn-success me-2" name="eventEdit" th:value="수정">
+                        <a class="btn btn-danger" th:href="@{'/event/detail/'+ ${eventEdit.id}}">취소</a>
                     </div>
                 </div>
             </div>

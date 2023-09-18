@@ -1,30 +1,30 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.choongang.concert.repository.board.BoardMapper">
+<mapper namespace="com.choongang.concert.repository.board.EventMapper">
 
-    <insert id="createPost">
-        insert into notice (admin_id, title, writer, content, category)
+  <insert id="eventCreatePost">
+        insert into event (admin_id, title, writer, content, category)
         value (1, #{title}, #{writer}, #{content}, #{category})
-    </insert>
+  </insert>
 
-    <update id="updatePost">
-        update notice
+    <update id="eventUpdatePost">
+        update event
         set category = #{category}, title = #{title} , content = #{content}
         where id = #{id}
     </update>
 
-    <delete id="deletePost">
-        delete from notice
+    <delete id="eventDeletePost">
+        delete from event
         where id = #{id}
     </delete>
 
 
-    <select id="findAll" resultType="com.choongang.concert.dto.board.NoticeDto">
+    <select id="eventFindAll" resultType="com.choongang.concert.dto.board.EventDto">
         select id, category, title, created_at, writer, content, hit
         from
-        notice
+        event
         <if test="keyword != null">
             <choose>
                 <when test="type == 'title'">
@@ -42,10 +42,10 @@
         limit #{offset}, #{amount}
     </select>
 
-    <select id="allCount" resultType="java.lang.Integer" parameterType="com.choongang.concert.dto.board.PageDto">
+    <select id="eventAllCount" resultType="java.lang.Integer" parameterType="com.choongang.concert.dto.board.PageDto">
         select count(*) as count
         from
-        notice
+        event
         <if test="keyword != null">
             where
                 title
@@ -54,47 +54,19 @@
         </if>
     </select>
     
-    <select id="findById" resultType="com.choongang.concert.dto.board.NoticeDto">
+    <select id="eventFindById" resultType="com.choongang.concert.dto.board.EventDto">
         select id, category, title, writer, created_at, content, hit
         from
-        notice
+        event
         where id = #{id}
     </select>
     
     	
-  <update id="updateViewCnt">
-  	UPDATE notice
+  <update id="eventUpdateViewCnt">
+  	UPDATE event
   		SET hit = hit + 1
   		where id = #{id}
   </update>
   
-
-  
-<!--   
-카테고리별 종목모으기 
-   <select id="findCategoryAll" resultType="com.example.dto.NoticeDto">
-        SELECT * FROM notices
-        UNION ALL
-        SELECT * FROM events
-        UNION ALL
-        SELECT * FROM qnas
-    </select>
-    
-    <select id="findNotices" resultType="com.example.dto.NoticeDto">
-        SELECT * FROM notices;
-    </select>
-  
-    <select id="findEvents" resultType="com.example.dto.NoticeDto">
-        SELECT * FROM events;
-    </select>
-    
-    
-    <select id="findQnAs" resultType="com.example.dto.NoticeDto">
-        SELECT * FROM qnas;
-    </select> 
-    -->
-  
-  
   
 </mapper>
-
