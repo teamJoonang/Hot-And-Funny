@@ -27,6 +27,7 @@ import com.choongang.concert.dto.admin.RefundDto;
 import com.choongang.concert.dto.admin.ResponseTotalPostDto;
 import com.choongang.concert.dto.admin.TotalPostDto;
 import com.choongang.concert.dto.admin.UserInfoDTO;
+import com.choongang.concert.dto.admin.UserInfoSearchDto;
 import com.choongang.concert.service.admin.BoardControlService;
 import com.choongang.concert.service.admin.RefundService;
 import com.choongang.concert.service.admin.StatService;
@@ -65,7 +66,7 @@ public class AdminController {
 		
 		List<TotalPostDto> totalPostList = boardControlService.totalPostList();
 		model.addAttribute("totalPostList", totalPostList);
-//		log.info("totalPostList : {}", totalPostList);
+		log.info("totalPostList : {}", totalPostList);
 		
 //		log.info("qnaPostList : " + qnaPostList);
 		
@@ -85,18 +86,12 @@ public class AdminController {
 		log.info("데이터폼 :{}", dataForm);
 
 		boardControlService.resDelete(dataForm);
+
 	    
 		return "redirect:/admin/boardcontrol";
 	}
 	
-	@PostMapping("/boardcontrol/totalDelete")
-	public String totalDeletePost(@RequestBody List<Long> totalDataForm, Model model) {
-		log.info("토탈데이터폼:{}", totalDataForm);
-		
-		boardControlService.resTotalDelete(totalDataForm);
-		
-	    return "redirect:/admin/boardcontrol";
-	}
+	
 	
 	@PostMapping("/boardcontrol/totalDelete")
 	public String totalDeletePost(@RequestBody List<ResponseTotalPostDto> totalDataForm, Model model) {
@@ -106,9 +101,9 @@ public class AdminController {
 	        String boardType = postDto.getBoardType();
 	        if ("이벤트".equals(boardType)) {
 	            boardControlService.deleteEventBoard(Collections.singletonList(postDto));
-	        } else if ("qna".equals(boardType)) {
+	        } else if ("QNA".equals(boardType)) {
 	            boardControlService.deleteQnaBoard(Collections.singletonList(postDto));
-	        } else if ("노티스".equals(boardType)) {
+	        } else if ("NOTICE".equals(boardType)) {
 	            boardControlService.deleteNoticeBoard(Collections.singletonList(postDto));
 	        }
 	    }
@@ -127,6 +122,11 @@ public class AdminController {
 		log.info("회원목록요청");	//로그
 //	    log.info("offset: {}", params.getOffset());
 		
+		
+		
+		
+		
+		
         PagingResponse<UserInfoDTO> response = userInfoService.findAllUser(params);
         model.addAttribute("response", response);
         for (UserInfoDTO userInfoDTO : response.getList()) {
@@ -138,12 +138,23 @@ public class AdminController {
             }
         };
 
-//        log.info("response : " + response);
+        log.info("response : " + response);
         model.addAttribute("pageDto", params); // "pageDto"는 Thymeleaf에서 사용할 이름
 		log.info("파람::{}" , params);
 //		log.info("회원목록 개수: " + adminList.size());
 		return "admin/user_info";
 	}
+	
+	@PostMapping("/userinfo/search")
+	public String userSearch() {
+		
+		return "redirect:/admin/user_info";
+	}
+	
+	
+	
+	
+	
 	
 	@GetMapping("/refund")
 	public String refund(Model model) {
@@ -172,7 +183,9 @@ public class AdminController {
 	
 	@GetMapping("/statistics")
 	public String statistics() {
+		List<Bar2Dto> seatGroup = statService.seatGroup();
 		
+		log.info("시트그룹 : " + seatGroup);
 //		int count = 4;
 //		
 //		List<Integer> ageGroup = statService.ageGroup();
@@ -300,13 +313,13 @@ public class AdminController {
 		
 		int count = 3;
 		
-		
 		for(int i = 0; count > i; i++) {
 			if (i < seatGroup.size()) {
 			seatGroupJsonArray.add(seatGroup.get(i));
 			}
 		};
 		
+		log.info("시트그룹제이슨배열 :{}", seatGroupJsonArray);
 		
 		
 		return seatGroupJsonArray;

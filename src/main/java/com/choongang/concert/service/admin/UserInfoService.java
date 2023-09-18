@@ -10,6 +10,7 @@ import com.choongang.concert.dto.admin.PageDto;
 import com.choongang.concert.dto.admin.PaginationDTO;
 import com.choongang.concert.dto.admin.PagingResponse;
 import com.choongang.concert.dto.admin.UserInfoDTO;
+import com.choongang.concert.dto.admin.UserInfoSearchDto;
 import com.choongang.concert.mapper.admin.AdminMapper;
 
 @Service
@@ -30,7 +31,8 @@ public class UserInfoService {
 		return adminMapper.getUserList(params);
 	}
 	
-	
+
+
 	
 	
 	
@@ -59,5 +61,7 @@ public class UserInfoService {
         List<UserInfoDTO> list = adminMapper.getUserList(params);
         return new PagingResponse<>(list, paginationDto);
     }
+
+
 
 }

@@ -11,6 +11,7 @@ import com.choongang.concert.dto.admin.RefundDto;
 import com.choongang.concert.dto.admin.ResponseTotalPostDto;
 import com.choongang.concert.dto.admin.TotalPostDto;
 import com.choongang.concert.dto.admin.UserInfoDTO;
+import com.choongang.concert.dto.admin.UserInfoSearchDto;
 
 @Mapper
 public interface AdminMapper {
@@ -18,8 +19,6 @@ public interface AdminMapper {
 	// 회원 전체 목록 조회
 	public List<UserInfoDTO> getUserList(PageDto params);
 	
-	
-
 
     /**
      * 게시글 수 카운팅
@@ -83,4 +82,10 @@ public interface AdminMapper {
     
     //	refund 응답
     public List<RefundDto> getRefundData(RefundDto refundDto);
+
+
+
+
+
+
 }
