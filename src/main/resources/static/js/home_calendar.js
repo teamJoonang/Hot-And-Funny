@@ -283,7 +283,7 @@ function concertCheck() {
 			const concertArray = Array.from(concertElements);
 
 
-			const dateIndex = Number(concertDate.concertDay) - 1;
+			const dateIndex = Number(concertDate.concertDay);
 			const dateElement = concertArray[dateIndex];
 
 			if (dateElement) {
