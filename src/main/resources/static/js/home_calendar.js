@@ -238,20 +238,20 @@ function titleShow(data) {
 
 ////////////다음날, 이전날, 오늘날 구현 삭제///////////
 
-const prevMonth = () => {
-	date.setDate(1);
-	date.setMonth(date.getMonth() - 1);
-	renderCalendar();
-};
-const nextMonth = () => {
-	date.setDate(1);
-	date.setMonth(date.getMonth() + 1);
-	renderCalendar();
-};
-const goToday = () => {
-	date = new Date();
-	renderCalendar();
-};
+// const prevMonth = () => {
+// 	date.setDate(1);
+// 	date.setMonth(date.getMonth() - 1);
+// 	renderCalendar();
+// };
+// const nextMonth = () => {
+// 	date.setDate(1);
+// 	date.setMonth(date.getMonth() + 1);
+// 	renderCalendar();
+// };
+// const goToday = () => {
+// 	date = new Date();
+// 	renderCalendar();
+// };
 /////////////////////////////////////////////////////
 
 //  오늘 날짜 표시하기
