@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.choongang.concert.repository.board.BoardMapper">
+
+    <insert id="createPost">
+        insert into notice (admin_id, title, writer, content, category)
+        value (1, #{title}, #{writer}, #{content}, #{category})
+    </insert>
+
+    <update id="updatePost">
+        update notice
+        set category = #{category}, title = #{title} , content = #{content}
+        where id = #{id}
+    </update>
+
+<!--    <delete id="deletePost">-->
+<!--        delete from notice-->
+<!--        where id = #{id}-->
+<!--    </delete>-->
+
+    <update id="deletePost">
+        update notice set delete_yn = 1
+        where id = #{id}
+    </update>
+
+
+    <select id="findAll" resultType="com.choongang.concert.dto.board.NoticeDto">
+        select id, category, title, created_at, writer, content, hit
+        from
+        notice
+        <if test="keyword != null">
+            <choose>
+                <when test="type == 'title'">
+                    where delete_yn = 0 and title like concat('%', #{keyword}, '%')
+                </when>
+                <when test="type == 'content'">
+                    where delete_yn = 0 and content like concat('%', #{keyword}, '%')
+                </when>
+                <when test="type == 'writer'">
+                    where delete_yn = 0 and writer like concat('%', #{keyword}, '%')
+                </when>
+            </choose>
+        </if>
+        <if test="keyword == null">
+            where delete_yn = 0
+        </if>
+        order by id desc
+        limit #{offset}, #{amount}
+    </select>
+
+    <select id="allCount" resultType="java.lang.Integer" parameterType="com.choongang.concert.dto.board.PageDto">
+        select count(*) as count
+        from
+        notice
+        <if test="keyword != null">
+            where
+                title
+            like
+            concat('%', #{keyword}, '%')
+        </if>
+    </select>
+    
+    <select id="findById" resultType="com.choongang.concert.dto.board.NoticeDto">
+        select id, category, title, writer, created_at, content, hit
+        from
+        notice
+        where id = #{id}
+    </select>
+    
+    	
+  <update id="updateViewCnt">
+  	UPDATE notice
+  		SET hit = hit + 1
+  		where id = #{id}
+  </update>
+  
+
+ 
+  
+  
+  
+</mapper>
+

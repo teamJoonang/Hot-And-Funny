@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap cdn -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap icon cdn -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+    <!-- common.css -->
+    <link rel="stylesheet" href="../../static/css/common.css" th:href="@{/css/common.css}">
+    <!-- login.css -->
+    <link rel="stylesheet" href="../../static/css/login.css" th:href="@{/css/login.css}">
+    <!-- myinfo.css -->
+    <link rel="stylesheet" href="../../static/css/myinfo.css" th:href="@{/css/myinfo.css}">
+    
+    <title>문의내역</title>
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <!-- header -->
+    <header th:replace="fragment/header :: header"></header>
+
+    <!-- 컨텐츠 -->
+    <section id="wrap">
+        <div class="container px-5 h-100">
+            <div class="row d-flex py-5 h-100">
+                
+                <div class="col-xl-3">
+                    <div class="card">  
+                        <!-- 사이드 메뉴 -->
+                        <div class="card-header justify-content-center text-white bg-black">메뉴</div>
+                        <div class="card-body" id="mypage_menu">
+                            <a class="my-3 sidebar_link" href="myinfo.html" th:href="@{/user/myinfo}">회원정보</a>
+                            <a class="my-3 sidebar_link" href="myticket.html" th:href="@{/user/myticket}">구매내역</a>
+                            <a class="my-3 sidebar_link" href="myquestion.html" th:href="@{/user/myqna}">문의내역</a>
+                            <a class="my-3 sidebar_link" href="user_out.html" th:href="@{/user/out}">회원탈퇴</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 메인 -->
+                <div class="col-xl-9">
+                    <div class="card mb-4">
+                        <div class="card-header bg-black text-white" id="mypage_header">문의 내역</div>
+                        <div class="card-body">
+
+                            <!-- 문의내역 -->
+                            <div class="row table-responsive">
+                                <table class="table table-hover text-center table-striped" >
+                                    <caption style="display: none;">문의내역</caption>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" class="px-3">NO</th>
+                                            <th scope="col" class="px-3">카테고리</th>
+                                            <th scope="col" class="px-3">제목</th>
+                                            <th scope="col" class="px-3">작성일</th>
+                                            <th scope="col" class="px-3">답변여부</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr th:each="i : ${list}">
+                                            <td th:text="${i.id}">3</td>
+                                            <td th:text="${i.category}">환불</td>
+                                            <td th:text="${i.title}">입금이 아직 안된 것 같네요.</td>
+                                            <td th:text="${i.createdAt}">2023.09.05</td>
+                                            <td>답변 중</td>
+                                        </tr>
+<!--                                        <tr>-->
+<!--                                            <td>2</td>-->
+<!--                                            <td>일정</td>-->
+<!--                                            <td>공연장소는 모두 같나요?</td>-->
+<!--                                            <td>2023.09.03</td>-->
+<!--                                            <td>답변완료</td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>1</td>-->
+<!--                                            <td>기타</td>-->
+<!--                                            <td>완성할 수 있을까 두렵습니다..</td>-->
+<!--                                            <td>2023.09.01</td>-->
+<!--                                            <td>답변완료</td>-->
+<!--                                        </tr>-->
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- footer -->
+    <footer th:replace="fragment/white_footer :: white-footer"></footer>
+
+
+    <!-- bootstrap js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let genderMale = document.getElementById()
+    </script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<body>
+
+<footer class="bg-white mt-auto py-3 text-light-emphasis border-top" th:fragment="white-footer">
+    <div class="container-fluid row">
+        <div class="d-flex">
+            <div class="d-flex col-2 align-items-center justify-content-center">
+                <img src="/img/concert_logo_black.png" class="img-fluid footer-logo-img" alt="">
+            </div>
+            <div class="d-flex col-3 align-items-center justify-content-center footer-content small">
+                <div class="align-items-center">
+                    <div class="d-flex">
+                        <div class="">핫앤퍼니(주) | 대표이사 :</div>
+                        <div>현재훈,신현욱,신민기,고일봉,손준영,임승범</div>
+                    </div>
+                    <div class="d-flex">
+                        <div>주소 :</div>
+                        <div class="ms-1">서울시 마포구 신촌로 176 601호</div>
+                    </div>
+                    <div class="d-flex">
+                        <div>대표전화 :</div>
+                        <div class="ms-1">010-0000-0000</div>
+                    </div>
+                    <div class="d-flex">
+                        <div>사업자 등록번호 :</div>
+                        <div class="ms-1">120-00-00700</div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex col-2 align-items-center justify-content-center footer-content">
+                <div class="small">
+                    <div class="fs-5 fw-semibold">고객센터</div>
+                    <div>1577-112-119</div>
+                    <div>서울시 마포구 신촌로 176 601호</div>
+                    <div class="d-flex">
+                        <div>이메일:</div>
+                        <div class="ms-1">example@example.com</div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex col-2 align-items-center justify-content-center footer-content small">
+                <div>
+                    <div>이용약관</div>
+                    <div>개인정보처리방침</div>
+                    <div>홈페이지 이용약관</div>
+                    <div>회사소개</div>
+                </div>
+            </div>
+            <div class="col-2 d-flex justify-content-end fw-semibold">
+                <ul class="navbar-nav flex-row align-items-center">
+                    <li class="nav-item pe-2">
+                        <a href="/about.html" class="nav-link pb-1 pt-0">ABOUT</a>
+                    </li>
+                    <li class="nav-item pe-2">
+                        <a href="/ticket" class="nav-link pb-1 pt-0">TICKET</a>
+                    </li>
+                    <li class="nav-item pe-2">
+                        <a href="/notice" class="nav-link pb-1 pt-0">NOTICE</a>
+                    </li>
+                    <li class="nav-item pe-2">
+                        <a href="/qna" class="nav-link pb-1 pt-0">QNA</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/event" class="nav-link pb-1 pt-0">EVENT</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-1 d-flex align-items-center justify-content-end fs-2 footer-icon pb-2">
+                <a href="https://github.com/teamJoongang/Hot-And-Funny" class="text-secondary pe-3"><i class="bi bi-github"></i></a>
+                <a href="https://hyunsense.notion.site/hyunsense/fd8584dc0730455aa340d328dba8beb6" class=""><img class="notion" src="/static/img/notion_icon2.png" th:src="@{/img/notion_icon2.png}" alt=""></a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+</body>
+</html>

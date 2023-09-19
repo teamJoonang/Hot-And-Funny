@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}">
+    
+    <title>Hot & Funny</title>
+    
+</head>
+<body class="main-concert-bg">
+    <header th:replace="fragment/header_index :: header"></header>
+
+    <div>
+        <iframe src="https://player.vimeo.com/video/792619021?loop=true&amp;autoplay=true&amp;muted=false&amp;gesture=media&amp;playsinline=true&amp;byline=false&amp;portrait=false&amp;title=false&amp;speed=true&amp;transparent=false&amp;customControls=true" allowfullscreen="" allow="autoplay; fullscreen; picture-in-picture" title="Player for Tell your story" data-ready="true" tabindex="-1"></iframe>
+    </div>
+<!--    <main class="min-vh-100">-->
+<!--        <div class="container mt-5 pt-5">-->
+<!--            <div class="row gx-0 mt-4">-->
+<!--                <div class="col-12">-->
+<!--                    <iframe class="flex-fill" width="1296" height="657" src="https://www.youtube.com/embed/hZDJjSHHGok?si=i1PjiaRB8RkJDZcy&amp;controls=0&amp;start=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </main>-->
+
+    <footer th:replace="fragment/footer :: footer"></footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</body>
+</html>
