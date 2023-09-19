@@ -66,7 +66,7 @@
     <script>
 
         // 패스워드 검증식 - 대소문자, 숫자 , 특수문자 무조건 하나 포함, 최소 8자 최대 30자
-        const pwRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*#?&_-])[A-Za-z\d@$!%*#?&_-]{8,30}$/g;
+        const pwRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*#?&_-])[A-Za-z\d@$!%*#?&_-]{8,30}$/;
 
         let pw_err = document.getElementById('pw_err');
         let repw_err = document.getElementById('repw_err');
