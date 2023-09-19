@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.choongang.concert.repository.user.UserMapper">
+<!--    <![CDATA[]]>-->
+
+    <!-- 사용자 정보 저장 -->
+    <insert id="saveUser" useGeneratedKeys="true" keyProperty="id" parameterType="addUserRequest" >
+        INSERT INTO user
+            (
+             login_id,
+             password,
+             name,
+             nickname,
+             address,
+             age,
+             tel,
+             gender
+            )
+        VALUES (
+            #{loginId},
+            #{password},
+            #{name},
+            #{nickname},
+            #{address},
+            #{age},
+            #{tel},
+            #{gender}
+        )
+    </insert>
+
+<!--    <select id="findByUserId" parameterType="long" resultType="userResponse">-->
+<!--        SELECT-->
+<!--            login_id,-->
+<!--            password,-->
+<!--            name,-->
+<!--            nickname,-->
+<!--            address,-->
+<!--            age,-->
+<!--            tel-->
+<!--        FROM-->
+<!--            user-->
+<!--        WHERE-->
+<!--            id = #{value}-->
+<!--    </select>-->
+
+    <select id="login" resultType="userResponse" parameterType="loginRequest">
+--         SELECT
+--             id,
+--             login_id,
+--             password,
+--             name,
+--             nickname,
+--             address,
+--             age,
+--             tel,
+--             gender
+--         FROM
+--             user
+--         WHERE
+--             login_id = #{loginId}
+--             AND
+--             password = #{password}
+
+            select
+                login_id , password , id , nickname
+            from
+                (
+                select login_id , password , id , nickname from user union all
+                select admin_login_id , admin_password , id , admin_nickname from admin
+                )
+                    as combined_data
+            where
+                login_id = #{loginId};
+    </select>
+
+    <select id="findByEmail" resultType="UserResponse" parameterType="findEmailRequest">
+        SELECT
+            *
+        FROM
+            user
+        WHERE
+            login_id = #{loginId}
+    </select>
+
+    <select id="findByUser" resultType="UserResponse" parameterType="findPwRequest">
+        SELECT
+            *
+        FROM
+            user
+        WHERE
+            login_id = #{loginId}
+            AND
+            name = #{name}
+            AND
+            tel = #{tel}
+    </select>
+
+    <update id="resetPassword" parameterType="ResetPwRequest">
+        UPDATE
+            user
+        SET
+            password = #{password}
+        WHERE
+            login_id = #{loginId}
+    </update>
+
+    <select id="checkId" parameterType="String" >
+        SELECT
+            ifnull(count(login_id) , 0) login_id
+        FROM
+            user
+        WHERE
+            login_id = #{loginId}
+    </select>
+
+    <select id="checkNickname" parameterType="String" >
+        SELECT
+            ifnull(count(nickname) , 0) nickname
+        FROM
+            user
+        WHERE
+            nickname = #{nickname}
+    </select>
+
+    <update id="updateUser" parameterType="UserResponse">
+        UPDATE
+            user
+        SET
+            name = #{name} ,
+            nickname = #{nickname},
+            address = #{address},
+            age = #{age},
+            tel = #{tel},
+            gender = #{gender}
+        WHERE
+            login_id = #{loginId}
+    </update>
+
+    <select id="checkModifyNickname" parameterType="AddUserRequest">
+            SELECT
+                IFNULL(COUNT(nickname) , 0)
+            FROM
+                user
+            WHERE
+                <if test="oldNickname != null">
+                    nickname != #{oldNickname}
+                </if>
+                <if test="nickname != null">
+                    AND nickname = #{nickname}
+                </if>
+
+    </select>
+    <select id="findAllAdmin" resultType="com.choongang.concert.dto.user.AdminDto">
+        select id, admin_login_id, admin_password, admin_nickname, admin_name
+        from admin
+    </select>
+
+</mapper>

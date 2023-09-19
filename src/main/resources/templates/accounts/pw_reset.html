@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- font awesome cdn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+    <!-- bootstrap cdn -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- common.css -->
+    <link rel="stylesheet" href="../../static/css/common.css" th:href="@{/css/common.css}">
+    <!-- login.css -->
+    <link rel="stylesheet" href="../../static/css/login.css" th:href="@{/css/login.css}">
+
+    <title>재설정</title>
+</head>
+<body id="securityBody">
+
+
+    <section class="h-100">
+        <div class="container h-100 px-5">
+            <div class="row h-100 d-flex justify-content-center align-items-center">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                    <div class="card shadow-lg" >
+
+                        <div class="card-body p-4 shadow-lg text-center" >
+
+                            <a href="../../index.html" th:href="@{/}">
+                                <img src="../../static/img/concert_logo_final2_black1.png" alt="logo"
+                                th:src="@{/img/concert_logo_final2_black1.png}">
+                            </a>
+
+                            <form class="my-3">
+
+                                <h4>비밀번호 재설정</h4>
+                                <!-- 사용자 이메일 -->
+                                <span>사용자 이메일 :<span th:text="${user.getLoginId()}">test@gmail</span></span>
+                                
+                                <!-- 사용자 비밀번호 재설정 -->
+                                <div class="text-start">
+                                    <label class="form-label m-2" for="password">새로운 비밀번호</label>
+                                    <span class="small" style="color: #ea10ac;" id="pw_err">8~30자의 영문 대/소문자, 숫자, 특수문자 반드시 사용해 주세요.</span>
+                                    <input type="password" class="form-control form-control-lg input" id="password" name="password"
+                                           autocomplete="off" required="required"  placeholder="8~30자의 영문 대/소문자, 숫자, 특수문자를 반드시 사용해 주세요." maxlength="30" />
+
+                                    <label class="form-label m-2" for="repeatPassword">비밀번호 확인</label>
+                                    <span class="small" style="color: #ea10ac;" id="repw_err">비밀번호를 일치 시켜주세요.</span>
+                                    <input type="password" class="form-control form-control-lg input" id="repeatPassword" name="repeatPassword"
+                                           autocomplete="off" required="required"  placeholder="비밀번호 재확인"/>
+                                </div>
+
+                                <button class="btn btn-lg m-3 text-white border-0" type="button" id="loginBtn">Send</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!-- bootstrap.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- sweetalert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+
+        // 패스워드 검증식 - 대소문자, 숫자 , 특수문자 무조건 하나 포함, 최소 8자 최대 30자
+        const pwRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*#?&_-])[A-Za-z\d@$!%*#?&_-]{8,30}$/g;
+
+        let pw_err = document.getElementById('pw_err');
+        let repw_err = document.getElementById('repw_err');
+
+        let pwCk = false;
+        let repwCk = false;
+
+        document.getElementById('password').addEventListener('change' , function (){
+            let password = this.value;
+            if(pwRegex.test(password)){
+                pw_err.style.display = 'none';
+                pwCk = true;
+            }
+            else {
+                pw_err.style.display = 'inline-block';
+                pwCk = false;
+
+            }
+        });
+
+        document.getElementById('repeatPassword').addEventListener('keyup' , function () {
+            let password = document.getElementById('password').value;
+            let repeatPw = this.value;
+            if(password === repeatPw){
+                repw_err.style.display = 'none'
+                repwCk = true;
+            }
+            else{
+                repw_err.style.display = 'inline-block';
+                repwCk = false;
+            }
+        });
+
+
+        document.getElementById('loginBtn').addEventListener('click', function () {
+
+            let password = document.getElementById('password').value;
+            let repeatPassword = document.getElementById('repeatPassword').value;
+
+            let user = { password : password , repeatPassword : repeatPassword };
+
+            // AJAX 요청을 수행하고 서버로 userEmail을 전송
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '/user/reset', true);
+            xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+
+            xhr.onreadystatechange = function () {
+                let responseBody = xhr.responseText;
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        // 비밀번호 재설정 성공.
+                        window.location = '/user/login';
+                    }
+                    else if (xhr.status === 400 && responseBody == '양식을 모두 채워주세요') {
+                        // 칸을 다 채우지 않은 경우 또는 비밀번호 값이 일치하지 않을때.
+                        // 여기서 다시 if문 분류
+                        alert('양식을 모두 채워주세요.');
+                    }
+                    else if(responseBody == '비밀번호가 일치하지 않습니다.'){
+                        alert('비밀번호 일치하지 않습니다.');
+                    }
+                    else {
+                        alert('서버 오류 발생 , firetrap5319@gmail.com 으로 연락바랍니다.');
+                    }
+                }
+            };
+            // dto의 멤버와 자동파싱되도록 같은 이름으로.
+            xhr.send(JSON.stringify(user));
+        });
+
+
+
+    </script>
+</body>
+</html>
