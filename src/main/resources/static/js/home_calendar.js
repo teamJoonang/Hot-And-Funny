@@ -11,8 +11,10 @@ const clickableDates = generateClickableDates(concertDataList);
 
 const btnReservaiton = document.querySelector('.btn-reservation');
 
+
 const viewYear = date.getFullYear();
 const viewMonth = date.getMonth();
+
 
 // Ticket 필드값
 const ticketMaxCount = 4;
@@ -84,17 +86,14 @@ document.querySelector('.dates').addEventListener('click', (event) => {
 	const [clickedDay] = clickedDate.split('\n');
 
 	selectedDate = concertDataList.find(date => Number(date.concertDay) === Number(clickedDay));
-
-	const today = new Date();
-
-	//예매 가능한 날짜
-	const day = today.getDate();
+	// 오늘 날짜
+	const today = new Date().getDate();
 
 	//	예매 불가능한 날짜 표기
 
 	const concertId = selectedDate.concertId;
 
-	if (selectedDate !== null && selectedDate.concertDay > day) {
+	if (selectedDate !== null && selectedDate.concertDay > today) {
 
 		// 서버로 보낼 데이터 준비 : 파라미터로 만들기 . json 으로 만들기
 		// title 화면 띄우기
@@ -238,21 +237,21 @@ function titleShow(data) {
 
 
 ////////////다음날, 이전날, 오늘날 구현 삭제///////////
-////////////////////////////////////////////////////
-// const prevMonth = () => {
-//     date.setDate(1);
-//     date.setMonth(date.getMonth() - 1);
-//     renderCalendar();
-// };
-// const nextMonth = () => { 
-//     date.setDate(1);
-//     date.setMonth(date.getMonth() + 1);
-//    renderCalendar();
-// };
-// const goToday = () => {
-//     date = new Date();
-//     renderCalendar();
-// };
+
+const prevMonth = () => {
+	date.setDate(1);
+	date.setMonth(date.getMonth() - 1);
+	renderCalendar();
+};
+const nextMonth = () => {
+	date.setDate(1);
+	date.setMonth(date.getMonth() + 1);
+	renderCalendar();
+};
+const goToday = () => {
+	date = new Date();
+	renderCalendar();
+};
 /////////////////////////////////////////////////////
 
 //  오늘 날짜 표시하기
@@ -271,12 +270,12 @@ function todayCheck() {
 
 //  날짜 이벤트 표시하기 
 function concertCheck() {
-	
+
 	for (const concertDate of concertDataList) {
 		const viewMonth = new Date().getMonth() + 1;
 		const viewYear = new Date().getFullYear();
-		const day = new Date().getDate();
-		
+		const today = new Date().getDate();
+
 		if (Number(concertDate.concertMonth) === viewMonth && Number(concertDate.concertYear) === viewYear) {
 
 			const concertElements = document.querySelectorAll(`.this`);
@@ -284,13 +283,13 @@ function concertCheck() {
 
 
 			const dateIndex = Number(concertDate.concertDay);
-			const dateElement = concertArray[dateIndex];
+			const dateElement = concertArray[dateIndex - 1];
 
 			if (dateElement) {
 				dateElement.classList.add(`concert`);
 				dateElement.closest('.date').classList.add('selected');
 			}
-			if (day >= Number(concertDate.concertDay)) {
+			if (today >= Number(concertDate.concertDay)) {
 				dateElement.classList.remove(`concert`);
 				dateElement.closest('.date').classList.remove('selected');
 			}
@@ -316,13 +315,12 @@ function generateClickableDates(concertDataList) {
 //  날짜 클릭 시 색상 구분
 function concertDateColor() {
 	const choiceDates = document.querySelectorAll('.selected');
-	const today = new Date();
-	const day = today.getDate();
+	const today = new Date().getDate();
 
 	choiceDates.forEach(choiceDate => {
 		choiceDate.addEventListener('click', (event) => {
 			let choiceDateDay = choiceDate.textContent;	//	예매 불가능한 날짜 선택 불가능하게 만들기
-			if (day < choiceDateDay) {
+			if (today < choiceDateDay) {
 				choiceDates.forEach(element => element.classList.remove('choice'));
 				let existingChoice = document.querySelector('.choice');
 
