@@ -59,7 +59,7 @@
 
             <hr>
             <div class="d-flex justify-content-end">
-                <a href="/event/create" th:href="@{/event/create}" class="btn btn-primary">글쓰기</a>
+                <a href="/event/create" th:href="@{/event/create}"  th:if="${session.loginId != null && #strings.toString(session.loginId).contains('admin')}" class="btn btn-primary">글쓰기</a>
             </div>
 
             <div class="text-center mt-4">
