@@ -163,8 +163,8 @@ document.querySelector('.dates').addEventListener('click', (event) => {
 
 					if (impossibleId === selectedDate.concertId) {
 						allDiffernt = false;
-						brak;
-					};
+						break;
+					}
 				}
 				if (allDiffernt) {
 					console.log("impossibleIds: " + impossibleId);
