@@ -5,8 +5,8 @@
 <mapper namespace="com.choongang.concert.repository.board.QnaMapper">
 
 	  <insert id="qnaCreatePost">
-	        insert into qna (admin_id, title, writer, content, category)
-	        value (1, #{title}, #{writer}, #{content}, #{category})
+	        insert into qna (login_id, title, writer, content, category)
+	        value (#{loginId}, #{title}, #{writer}, #{content}, #{category})
 	  </insert>
 	
 	    <update id="qnaUpdatePost">
@@ -20,8 +20,8 @@
 <!--	        where id = #{id}-->
 <!--	    </delete>-->
 
-	<update id="deletePost">
-		update notice set delete_yn = 1
+	<update id="qnaDeletePost">
+		update qna set delete_yn = 1
 		where id = #{id}
 	</update>
 	
