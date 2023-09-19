@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.choongang.concert.dto.admin.QnaPostDto;
 import com.choongang.concert.dto.admin.ResponseTotalPostDto;
 import com.choongang.concert.dto.admin.TotalPostDto;
-import com.choongang.concert.mapper.admin.AdminMapper;
+import com.choongang.concert.repository.admin.AdminMapper;
 
 @Service
 public class BoardControlService {

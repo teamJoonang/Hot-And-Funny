@@ -101,9 +101,9 @@ public class AdminController {
 	        String boardType = postDto.getBoardType();
 	        if ("이벤트".equals(boardType)) {
 	            boardControlService.deleteEventBoard(Collections.singletonList(postDto));
-	        } else if ("QNA".equals(boardType)) {
+	        } else if ("QnA".equals(boardType)) {
 	            boardControlService.deleteQnaBoard(Collections.singletonList(postDto));
-	        } else if ("NOTICE".equals(boardType)) {
+	        } else if ("공지사항".equals(boardType)) {
 	            boardControlService.deleteNoticeBoard(Collections.singletonList(postDto));
 	        }
 	    }

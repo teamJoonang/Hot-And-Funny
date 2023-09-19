@@ -11,7 +11,7 @@ import com.choongang.concert.dto.admin.PaginationDTO;
 import com.choongang.concert.dto.admin.PagingResponse;
 import com.choongang.concert.dto.admin.UserInfoDTO;
 import com.choongang.concert.dto.admin.UserInfoSearchDto;
-import com.choongang.concert.mapper.admin.AdminMapper;
+import com.choongang.concert.repository.admin.AdminMapper;
 
 @Service
 @Transactional

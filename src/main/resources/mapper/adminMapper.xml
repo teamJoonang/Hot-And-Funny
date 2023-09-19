@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.choongang.concert.mapper.admin.AdminMapper">
+<mapper namespace="com.choongang.concert.repository.admin.AdminMapper">
 
 
 
@@ -132,19 +132,16 @@ SELECT COUNT(concert_id) AS reservationGroup FROM ticket WHERE concert_id = 1 un
 		<!-- 전체 게시물 조회 -->
 	
 	<select id="getTotalList" parameterType="com.choongang.concert.dto.admin.TotalPostDto" resultType="com.choongang.concert.dto.admin.TotalPostDto">
-		SELECT nb.id, title, content, category AS boardType, nb.id as boardId, created_at AS date, ad.admin_nickname as writer
-		FROM notice_board nb left outer join admin ad
-		on nb.admin_id = ad.id
+		SELECT nb.id, title, content, category AS boardType, nb.id as boardId, created_at AS date, nb.writer
+		FROM notice nb
 		WHERE nb.delete_yn = 0
 	UNION all
-		SELECT qb.id, title, content, category AS boardType, qb.id as boardId, created_at AS date, u.nickname
-		FROM qna_board qb left outer join `user` u
-		on qb.user_id = u.id 
+		SELECT qb.id, title, content, category AS boardType, qb.id as boardId, created_at AS date, qb.writer
+		FROM qna qb
 		WHERE qb.delete_yn = 0
 	UNION all
-		SELECT eb.id, title, content, category AS boardType, eb.id  as boardId, created_at As date, u.nickname 
-		FROM event_board eb left outer join `user` u
-		on eb.writer_id = u.id
+		SELECT eb.id, title, content, category AS boardType, eb.id  as boardId, created_at As date, eb.writer 
+		FROM event eb
 		WHERE eb.delete_yn = 0
 		ORDER BY id DESC;
 	</select>
@@ -155,8 +152,9 @@ SELECT COUNT(concert_id) AS reservationGroup FROM ticket WHERE concert_id = 1 un
 	
 	
 		<!-- 전체게시물삭제버튼디비까지 -->
+<!-- 이벤트 보드 업데이트 -->
 <update id="deleteEventBoard" parameterType="com.choongang.concert.dto.admin.TotalPostDto">
-    UPDATE event_board AS e
+    UPDATE event AS e
     SET e.delete_yn = CASE WHEN e.category = '이벤트' THEN 1 ELSE e.delete_yn END
     WHERE (e.id, e.category) IN
     <foreach collection="list" item="totalPost" open="(" separator="," close=")">
@@ -166,21 +164,21 @@ SELECT COUNT(concert_id) AS reservationGroup FROM ticket WHERE concert_id = 1 un
 
 <!-- Q&A 보드 업데이트 -->
 <update id="deleteQnaBoard" parameterType="com.choongang.concert.dto.admin.TotalPostDto">
-    UPDATE qna_board AS q
-    SET q.delete_yn = CASE WHEN q.category = 'QNA' THEN 1 ELSE q.delete_yn END
+    UPDATE qna AS q
+    SET q.delete_yn = CASE WHEN q.category = 'QnA' THEN 1 ELSE q.delete_yn END
     WHERE (q.id, q.category) IN
     <foreach collection="list" item="totalPost" open="(" separator="," close=")">
-        (#{totalPost.id}, 'QNA')
+        (#{totalPost.id}, 'QnA')
     </foreach>
 </update>
 
 <!-- 노티스 보드 업데이트 -->
 <update id="deleteNoticeBoard" parameterType="com.choongang.concert.dto.admin.TotalPostDto">
-    UPDATE notice_board AS n
-    SET n.delete_yn = CASE WHEN n.category = 'NOTICE' THEN 1 ELSE n.delete_yn END
+    UPDATE notice AS n
+    SET n.delete_yn = CASE WHEN n.category = '공지사항' THEN 1 ELSE n.delete_yn END
     WHERE (n.id, n.category) IN
     <foreach collection="list" item="totalPost" open="(" separator="," close=")">
-        (#{totalPost.id}, 'NOTICE')
+        (#{totalPost.id}, '공지사항')
     </foreach>
 </update>
 
@@ -190,9 +188,8 @@ SELECT COUNT(concert_id) AS reservationGroup FROM ticket WHERE concert_id = 1 un
 	
 	<!-- qna 게시물 조회 -->
 	<select id="getQnaList" parameterType="com.choongang.concert.dto.admin.QnaPostDto" resultType="com.choongang.concert.dto.admin.QnaPostDto">
-		select q.id AS id, title, content, created_at AS Date, u.nickname AS writer
-		from qna_board q left outer join `user` u
-		on q.user_id = u.id
+		select q.id AS id, title, content, created_at AS Date, q.writer
+		from qna q 
 		WHERE q.delete_yn = 0
 	</select>
 	
@@ -200,7 +197,7 @@ SELECT COUNT(concert_id) AS reservationGroup FROM ticket WHERE concert_id = 1 un
 
 	<!-- qna 게시물 삭제 -->
 	<update id="deleteQna" parameterType="List">
-	    update qna_board
+	    update qna
 	    set delete_yn = 1
 	    where id in
 	    <foreach collection="list" item="id" open="(" separator="," close=")">
@@ -209,7 +206,7 @@ SELECT COUNT(concert_id) AS reservationGroup FROM ticket WHERE concert_id = 1 un
 	</update>
 	
 	<update id="resDelete" parameterType="java.util.List">
-	    update qna_board
+	    update qna
 	    set delete_yn = 1
 	    where id in
 	    <foreach collection="list" item="id" open="(" separator="," close=")">
@@ -221,20 +218,20 @@ SELECT COUNT(concert_id) AS reservationGroup FROM ticket WHERE concert_id = 1 un
 	
 	
 	<!-- 				refund				 -->
+<!-- 환불 요청 정보 조회(status = 'ACTIVE') -->
 	<select id="getRefundList" parameterType="List">
-select t.ticket_name AS ticket, u.name AS name, u.nickname AS nickname, u.tel AS tel, t.seat_number as seatNumber
-from ticket_sample t
-left outer join user u on t.user_id = u.id 
-where t.status = 'WAITING'
-	</select>
-	
-<!-- where t.status = 'ACTIVE' -->	
-	<select id="getRefundData" parameterType="com.choongang.concert.dto.admin.RefundDto">
-		delete t
+		select t.ticket_name AS ticket, u.name AS name, u.nickname AS nickname, u.tel AS tel, t.seat_number as seatNumber
 		from ticket_sample t
 		left outer join user u on t.user_id = u.id 
-		WHERE u.nickname = '${nickname}' AND u.name = '${name}' AND t.status = 'WAITING' AND t.seat_number = '${seatNumber}';
+		where t.status = 'WAITING'
 	</select>
-	<!--  AND t.status = 'ACTIVE' -->
-	<!--u.nickname = ${nickname} AND u.name = ${name} AND -->
+	
+<!-- 환불 버튼 클릭시 환불 처리 -->	
+	<select id="getRefundData" parameterType="com.choongang.concert.dto.admin.RefundDto">
+		DELETE t
+		FROM ticket_sample t
+		LEFT OUTER JOIN user u ON t.user_id = u.id 
+		WHERE u.nickname = '${nickname}' AND u.name = '${name}' 
+		AND t.status = 'WAITING' AND t.seat_number = '${seatNumber}';
+	</select>
 </mapper>

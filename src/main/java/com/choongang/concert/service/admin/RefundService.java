@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.choongang.concert.dto.admin.RefundDto;
-import com.choongang.concert.mapper.admin.AdminMapper;
+import com.choongang.concert.repository.admin.AdminMapper;
 
 @Service
 public class RefundService {

@@ -1,4 +1,4 @@
-package com.choongang.concert.mapper.admin;
+package com.choongang.concert.repository.admin;
 
 import java.util.List;
 
