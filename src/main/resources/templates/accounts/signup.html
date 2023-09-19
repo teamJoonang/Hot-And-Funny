@@ -29,7 +29,7 @@
                             <!-- 홈으로 돌아가기 위한 로고 -->
                             <a href="../../index.html" th:href="@{/}">
                                 <img src="../../static/img/concert_logo_final2_black1.png" alt="logo"
-                                th:src="@{/img/concert_logo_final2_black1.png}">
+                                th:src="@{/img/concert_logo_black.png}">
                             </a>
                             
                             <p class="mb-4 mt-2" style="font-size: 1.2rem;">Hot and Funny에 오신 것을 환영합니다.</p>
@@ -126,7 +126,7 @@
                                         <div class="col-md-6">
                                             <label class="small mb-1" for="new_age">나이</label>
                                             <span class="small" style="color: #ea10ac;" id="age_err">숫자만 입력해주세요.</span>
-                                            <input class="form-control" id="new_age" type="number" placeholder="숫자만 입력해주세요." required="required">
+                                            <input class="form-control" id="new_age" type="text" placeholder="숫자만 입력해주세요." required="required" maxlength="2">
                                         </div>
                                         <!-- 성별 -->
                                         <div class="col-md-6 text-center mt-4">

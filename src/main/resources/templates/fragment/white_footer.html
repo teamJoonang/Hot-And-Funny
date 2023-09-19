@@ -2,17 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <body>
 
-<footer class="bg-white mt-auto py-3 text-light-emphasis border-top" th:fragment="white-footer">
+<footer class="bg-white mt-auto py-2 text-light-emphasis border-top" th:fragment="footer">
     <div class="container-fluid row">
         <div class="d-flex">
             <div class="d-flex col-2 align-items-center justify-content-center">
-                <img src="/img/concert_logo_black.png" class="img-fluid footer-logo-img" alt="">
+                <img src="/img/concert_logo_black.png" th:src="@{/img/concert_logo_black.png}" class="img-fluid footer-logo-img" alt="">
             </div>
             <div class="d-flex col-3 align-items-center justify-content-center footer-content small">
                 <div class="align-items-center">
                     <div class="d-flex">
-                        <div class="">핫앤퍼니(주) | 대표이사 :</div>
-                        <div>현재훈,신현욱,신민기,고일봉,손준영,임승범</div>
+                        <div class="">핫앤퍼니(주)|대표이사:</div>
+                        <div>재훈,현욱,민기,일봉,준영,승범</div>
                     </div>
                     <div class="d-flex">
                         <div>주소 :</div>
@@ -50,19 +50,19 @@
             <div class="col-2 d-flex justify-content-end fw-semibold">
                 <ul class="navbar-nav flex-row align-items-center">
                     <li class="nav-item pe-2">
-                        <a href="/about.html" class="nav-link pb-1 pt-0">ABOUT</a>
+                        <a href="/about" th:href="@{/about}" class="nav-link pb-1 pt-0">ABOUT</a>
                     </li>
                     <li class="nav-item pe-2">
-                        <a href="/ticket" class="nav-link pb-1 pt-0">TICKET</a>
+                        <a href="/ticket/home/calendar" th:href="@{/ticket/home/calendar}" class="nav-link pb-1 pt-0">TICKET</a>
                     </li>
                     <li class="nav-item pe-2">
-                        <a href="/notice" class="nav-link pb-1 pt-0">NOTICE</a>
+                        <a href="/notice" th:href="@{/notice}" class="nav-link pb-1 pt-0">NOTICE</a>
                     </li>
                     <li class="nav-item pe-2">
-                        <a href="/qna" class="nav-link pb-1 pt-0">QNA</a>
+                        <a href="/qna" th:href="@{/qna}" class="nav-link pb-1 pt-0">QNA</a>
                     </li>
                     <li class="nav-item">
-                        <a href="/event" class="nav-link pb-1 pt-0">EVENT</a>
+                        <a href="/event" th:href="@{/event}" class="nav-link pb-1 pt-0">EVENT</a>
                     </li>
                 </ul>
             </div>

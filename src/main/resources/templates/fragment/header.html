@@ -41,29 +41,33 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="/about.html" class="nav-link custom-atag px-3">ABOUT</a>
+                            <a href="/about" th:href="@{/about}" class="nav-link custom-atag px-3">ABOUT</a>
                         </li>
                         <li class="nav-item">
                             <a href="/ticket" class="nav-link custom-atag px-3">TICKET</a>
                             <ul class="sub-menu">
-                                <li><a href="">티켓예매</a></li>
-                                <li><a href="">구매내역</a></li>
+                                <li><a href="" th:href="@{/ticket/home/calendar}">티켓예매</a></li>
+                                <li><a href="" th:href="@{/user/myticket}">구매내역</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
                             <a href="/notice" class="nav-link custom-atag px-3">FORUM</a>
                             <ul class="sub-menu">
-                                <li><a href="">공지사항</a></li>
-                                <li><a href="">QNA</a></li>
-                                <li><a href="">이벤트</a></li>
+                                <li><a href="" th:href="@{/notice}">공지사항</a></li>
+                                <li><a href="" th:href="@{/qna}">QNA</a></li>
+                                <li><a href="" th:href="@{/event}">이벤트</a></li>
                             </ul>
                         </li>
+                        <li class="nav-item">
+                            <a href="/notice" class="nav-link custom-atag px-3">CONTACT</a>
+                        </li>
                     </ul>
-                    <div class="col-3 navbar-nav justify-content-end user-nav pe-3">
-                        <a href="/ticket" class="nav-link custom-atag">티켓예매</a>
-                        <a th:if="${!session.isEmpty()}" th:href="@{/user/myinfo}" class="nav-link custom-atag">마이페이지</a>
-                        <a th:if="${session.isEmpty()}" href="/accounts/login.html" th:href="@{/user/login}" class="nav-link custom-atag">로그인</a>
-                        <a th:if="${!session.isEmpty()}" th:href="@{/user/logout}" class="nav-link custom-atag">로그아웃</a>
+                    <div class="col-4 navbar-nav justify-content-end user-nav pe-3">
+                        <a href="/ticket" class="nav-link custom-nav" th:href="@{/ticket/home/calendar}">티켓예매</a>
+                        <a th:if="${!session.isEmpty()}" th:href="@{/user/myinfo}" class="nav-link custom-nav">마이페이지</a>
+                        <a th:if="${session.isEmpty()}" href="/accounts/login" th:href="@{/user/login}" class="nav-link custom-nav">로그인</a>
+                        <a th:if="${!session.isEmpty()}" th:href="@{/user/logout}" class="nav-link custom-nav">로그아웃</a>
+
 
                     </div>
                     <div class="col-1 d-flex align-items-center justify-content-end fs-2 pe-4 footer-icon user-nav">

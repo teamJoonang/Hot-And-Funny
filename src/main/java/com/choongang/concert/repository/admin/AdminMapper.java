@@ -1,4 +1,4 @@
-package com.choongang.concert.mapper.admin;
+package com.choongang.concert.repository.admin;
 
 import java.util.List;
 
@@ -7,8 +7,11 @@ import org.apache.ibatis.annotations.Mapper;
 import com.choongang.concert.dto.admin.Bar2Dto;
 import com.choongang.concert.dto.admin.PageDto;
 import com.choongang.concert.dto.admin.QnaPostDto;
+import com.choongang.concert.dto.admin.RefundDto;
+import com.choongang.concert.dto.admin.ResponseTotalPostDto;
+import com.choongang.concert.dto.admin.TotalPostDto;
 import com.choongang.concert.dto.admin.UserInfoDTO;
-import org.apache.ibatis.annotations.Param;
+import com.choongang.concert.dto.admin.UserInfoSearchDto;
 
 @Mapper
 public interface AdminMapper {
@@ -16,8 +19,6 @@ public interface AdminMapper {
 	// 회원 전체 목록 조회
 	public List<UserInfoDTO> getUserList(PageDto params);
 	
-	
-
 
     /**
      * 게시글 수 카운팅
@@ -50,11 +51,41 @@ public interface AdminMapper {
     
     ////////	게시판 관리		//////////////
     
+    ///	전체 게시판 관리
+    public List<TotalPostDto> getTotalList();
+    
+    
+    //	전체 게시판 삭제(서버단에서 동작)
+    public void deleteTotal(List<Long> totalDataForm);
+    //	전체 게시판 삭제(서버단에서 동작한 값을 디비에 저장)
+    public void resTotalDelete(List<ResponseTotalPostDto> totalDataForm);
+    public void deleteQnaBoard(List<ResponseTotalPostDto> totalDataForm);
+    public void deleteEventBoard(List<ResponseTotalPostDto> totalDataForm);
+    public void deleteNoticeBoard(List<ResponseTotalPostDto> totalDataForm);
+    
+    
+    
     ///	qna 게시판 관리
     public List<QnaPostDto> getQnaList();
     
     //	qna 게시판 수정
     public void updateQna(QnaPostDto qnaPostDto);
-    //	qna 게시판 삭제
-    public void deleteQna(List<Long> ids);
+    //	qna 게시판 삭제(서버단에서 동작)
+    public void deleteQna(List<Long> dataForm);
+    //	qna 게시판 삭제(서버단에서 동작한 값을 디비에 저장)
+    public void resDelete(List<Long> dataForm);
+    
+    
+    
+    //////	refund
+    public List<RefundDto> getRefundList();
+    
+    //	refund 응답
+    public List<RefundDto> getRefundData(RefundDto refundDto);
+
+
+
+
+
+
 }
