@@ -15,10 +15,15 @@
         where id = #{id}
     </update>
 
-    <delete id="eventDeletePost">
-        delete from event
-        where id = #{id}
-    </delete>
+<!--    <delete id="eventDeletePost">-->
+<!--        delete from event-->
+<!--        where id = #{id}-->
+<!--    </delete>-->
+
+<update id="deletePost">
+    update event set delete_yn = 1
+    where id = #{id}
+</update>
 
 
     <select id="eventFindAll" resultType="com.choongang.concert.dto.board.EventDto">
@@ -37,6 +42,9 @@
                     where writer like concat('%', #{keyword}, '%')
                 </when>
             </choose>
+        </if>
+        <if test="keyword == null">
+            where delete_yn = 0
         </if>
         order by id desc
         limit #{offset}, #{amount}

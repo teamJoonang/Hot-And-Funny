@@ -15,10 +15,15 @@
 	        where id = #{id}
 	    </update>
 	
-	    <delete id="qnaDeletePost">
-	        delete from qna
-	        where id = #{id}
-	    </delete>
+<!--	    <delete id="qnaDeletePost">-->
+<!--	        delete from qna-->
+<!--	        where id = #{id}-->
+<!--	    </delete>-->
+
+	<update id="deletePost">
+		update notice set delete_yn = 1
+		where id = #{id}
+	</update>
 	
 	
 	    <select id="qnaFindAll" resultType="com.choongang.concert.dto.board.QnaDto">
@@ -38,6 +43,9 @@
 	                </when>
 	            </choose>
 	        </if>
+			<if test="keyword == null">
+				where delete_yn = 0
+			</if>
 	        order by id desc
 	        limit #{offset}, #{amount}
 	    </select>

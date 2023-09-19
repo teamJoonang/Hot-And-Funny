@@ -18,19 +18,34 @@
             <table class="table  text-center border">
                 <thead>
                     <tr class="align-items-center">
-                        <th class="custom-hover bg-black">
+                      <th class="custom-hover bg-black">
                             <a href="#" class="text-decoration-none text-white nav-link custom-atag icon-link-hover  d-flex justify-content-center">전체</a>
                         </th>
                         <th class="custom-hover bg-black">
-                            <a href="#" class="text-decoration-none text-white nav-link custom-atag icon-link-hover  d-flex justify-content-center">티켓소식</a>
+                            <a href="#" class="text-decoration-none text-white nav-link custom-atag icon-link-hover  d-flex justify-content-center">공지사항</a>
                         </th>
                         <th class="custom-hover bg-black">
-                            <a href="#" class="text-decoration-none text-white nav-link custom-atag icon-link-hover  d-flex justify-content-center">시스템관련</a>
+                            <a href="#" class="text-decoration-none text-white nav-link custom-atag icon-link-hover  d-flex justify-content-center">이벤트</a>
                         </th>
                         <th class="custom-hover bg-black">
-                            <a href="#" class="text-decoration-none text-white nav-link custom-atag icon-link-hover  d-flex justify-content-center">배송관련</a>
-                        </th>
+                            <a href="#" class="text-decoration-none text-white nav-link custom-atag icon-link-hover  d-flex justify-content-center">Q&A</a>
+                        </th> 
                         
+						
+     <!--                  		 <tbody>
+            NoticeDto 리스트를 반복하며 각 항목을 표시
+            <tr th:each="notice : ${notices}">
+                <td th:text="${notice.id}"></td>
+                <td th:text="${notice.title}"></td>
+                <td th:text="${notice.content}"></td>
+                필요한 다른 열들 추가
+            </tr>
+        </tbody> -->
+                      		
+      
+                      
+                      
+                      
                     </tr>
                 </thead>
             </table>

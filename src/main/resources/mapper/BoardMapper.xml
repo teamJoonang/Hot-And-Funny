@@ -15,10 +15,15 @@
         where id = #{id}
     </update>
 
-    <delete id="deletePost">
-        delete from notice
+<!--    <delete id="deletePost">-->
+<!--        delete from notice-->
+<!--        where id = #{id}-->
+<!--    </delete>-->
+
+    <update id="deletePost">
+        update notice set delete_yn = 1
         where id = #{id}
-    </delete>
+    </update>
 
 
     <select id="findAll" resultType="com.choongang.concert.dto.board.NoticeDto">
@@ -28,15 +33,18 @@
         <if test="keyword != null">
             <choose>
                 <when test="type == 'title'">
-                    where title like concat('%', #{keyword}, '%')
+                    where delete_yn = 0 and title like concat('%', #{keyword}, '%')
                 </when>
                 <when test="type == 'content'">
-                    where content like concat('%', #{keyword}, '%')
+                    where delete_yn = 0 and content like concat('%', #{keyword}, '%')
                 </when>
                 <when test="type == 'writer'">
-                    where writer like concat('%', #{keyword}, '%')
+                    where delete_yn = 0 and writer like concat('%', #{keyword}, '%')
                 </when>
             </choose>
+        </if>
+        <if test="keyword == null">
+            where delete_yn = 0
         </if>
         order by id desc
         limit #{offset}, #{amount}
