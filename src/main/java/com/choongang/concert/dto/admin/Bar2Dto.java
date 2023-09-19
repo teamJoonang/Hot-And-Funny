@@ -6,7 +6,7 @@ import lombok.Data;
 public class Bar2Dto {
 	
     private int concert_id;
-	private int firstConDay;
-	private int secondConDay;
-	private int thirdConDay;
+	private int R;
+	private int S;
+	private int VIP;
 }

@@ -131,17 +131,16 @@
         </div>
             <div class="col-10 mx-auto w-75 mx-3 mt-5">
                 <h3>회원목록</h3>
-                <form action="" method="post">
+                <form id="searchForm" onsubmit="return false;" autocomplete="off">
                     <div class="d-flex justify-content-end">
                         <div class="d-flex me-1">
-                            <select class="form-select" id="inputSelect" aria-label="Example select with button addon">
-                              <option value="1">이름</option>
-                              <option value="2">등급</option>
-                              <option value="3">아이디</option>
+                            <select class="form-select" id="searchType" name="searchType" title="검색 유형 선택" aria-label="Example select with button addon">
+                              <option value="name">이름</option>
+                              <option value="nickname">닉네임</option>
                             </select>
                         </div>
-                        <input type="text" class="form-control w-25 me-2" id="search" name="search" value=""/>
-                        <input type="submit" class="btn btn-secondary" id="find_btn" name="find_btn" value="검색">
+                        <input type="text" class="form-control w-25 me-2" id="keyword" name="keyword" placeholder="검색어를 입력하세요" title="검색어 입력" value=""/>
+                        <button type="button" class="btn btn-secondary" onclick="movePage(1);" >검색</button>
                     </div>
                 </form>
                 <div>
@@ -169,7 +168,7 @@
                         <tbody>
 
                             <tr th:each="user, rowStat : ${response.list}">
-                                <td th:text="${rowStat.index + 1}"></td> <!-- 번호 -->
+                                <td th:text="${user.id}"></td> <!-- 유저 아이디 -->
                                 <td th:text="${user.gender}"></td>
                                 <td th:text="${user.name}"></td>
                                 <td th:text="${user.loginId}"></td>
@@ -201,17 +200,17 @@
 <div class="text-center mt-4">
     <ul class="pagination pagination-sm justify-content-center">
         <li th:if="${pageDto.paginationDto.existPrevPage}" class="page-item">
-            <a th:if="${pageDto.page > 1}" class="page-link text-black" th:href="@{'/userinfo?page=' + ${pageDto.page - 1}}">이전</a>
+            <a th:if="${pageDto.page > 1}" class="page-link text-black" th:href="@{'/admin/userinfo?page=' + ${pageDto.page - 1}}">이전</a>
             <a th:if="${pageDto.page == 1}" class="page-link text-black" href="?page=1">이전</a>
             
         </li>
         <th:block th:each="pageNum : ${#numbers.sequence(pageDto.paginationDto.startPage, pageDto.paginationDto.endPage)}">
             <li th:classappend="${pageDto.page} ? 'active' : ''" class="page-item">
-                <a class="page-link text-black bg-white border-secondary" th:href="@{'/userinfo?page=' + ${pageNum}}" th:text="${pageNum}">1</a>
+                <a class="page-link text-black bg-white border-secondary" th:href="@{'/admin/userinfo?page=' + ${pageNum}}" th:text="${pageNum}">1</a>
             </li>
         </th:block>
         <li th:if="${pageDto.paginationDto.existNextPage}" class="page-item">
-            <a class="page-link text-black" th:href="@{'/userinfo?page=' + ${pageDto.page + 1}}">다음</a>
+            <a class="page-link text-black" th:href="@{'/admin/userinfo?page=' + ${pageDto.page + 1}}">다음</a>
         </li>
     </ul>
 </div>
@@ -296,4 +295,31 @@
 
     <!--푸터 끝-->
 </body>
+
+
+<script>
+// 페이지 이동
+function movePage(page) {
+
+    // 1. 검색 폼
+    const form = document.getElementById('searchForm');
+
+    // 2. drawPage( )의 각 버튼에 선언된 onclick 이벤트를 통해 전달받는 page(페이지 번호)를 기준으로 객체 생성
+    const queryParams = {
+        page: (page) ? page : 1,
+        recordSize: 10,
+        pageSize: 10,
+        searchType: form.searchType.value,
+        keyword: form.keyword.value
+    }
+
+    /*
+     * 3. location.pathname : 리스트 페이지의 URI("/post/list.do")를 의미
+     *    new URLSearchParams(queryParams).toString() : queryParams의 모든 프로퍼티(key-value)를 쿼리 스트링으로 변환
+     *    URI + 쿼리 스트링에 해당하는 주소로 이동
+     *    (해당 함수가 리턴해주는 값을 브라우저 콘솔(console)에 찍어보시면 쉽게 이해하실 수 있습니다.)
+     */
+    location.href = location.pathname + '?' + new URLSearchParams(queryParams).toString();
+}
+</script>
 </html>

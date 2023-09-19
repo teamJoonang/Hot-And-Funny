@@ -3,22 +3,21 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.choongang.concert.mapper.admin.AdminMapper">
+<mapper namespace="com.choongang.concert.repository.admin.AdminMapper">
 
 
 
 
 
 <select id="getUserList" parameterType="com.choongang.concert.dto.admin.PageDto" resultType="com.choongang.concert.dto.admin.UserInfoDTO">
-    SELECT
-        *
+    SELECT id, name, gender, login_id, nickname, address, tel
     FROM
         user
-    ORDER BY
-        id DESC
+                <include refid="search" />
     LIMIT #{paginationDto.limitStart}, #{recordSize}
 </select>
     
+
 
 
     <!-- 게시글 수 카운팅 -->
@@ -27,7 +26,45 @@
             COUNT(*)
         FROM
             user
+        <include refid="search" />
     </select>
+
+
+
+<!-- 게시글 검색 -->
+    <sql id="search">
+        <!-- 검색 키워드가 있을 때 -->
+        <if test="keyword != null and keyword != ''">
+            <choose>
+                <!-- 검색 유형이 있을 때 -->
+                <when test="searchType != null and searchType != ''">
+                    <choose>
+                        <when test="'title'.equals( searchType )">
+                            AND title LIKE CONCAT('%', #{keyword}, '%')
+                        </when>
+                        <when test="'content'.equals( searchType )">
+                            AND content LIKE CONCAT('%', #{keyword}, '%')
+                        </when>
+                        <when test="'writer'.equals( searchType )">
+                            AND writer LIKE CONCAT('%', #{keyword}, '%')
+                        </when>
+                    </choose>
+                </when>
+                
+                <!-- 전체 검색일 때 -->
+                <otherwise>
+                    AND (
+                           title LIKE CONCAT('%', #{keyword}, '%')
+                        OR content LIKE CONCAT('%', #{keyword}, '%')
+                        OR writer LIKE CONCAT('%', #{keyword}, '%')
+                    )
+                </otherwise>
+            </choose>
+        </if>
+    </sql>
+
+
+
 
 
 
@@ -52,16 +89,16 @@ SELECT COUNT(concert_id) AS reservationGroup FROM ticket WHERE concert_id = 1 un
 	<!-- Bar2 차트 (실시간 좌석 통게) -->
     <resultMap id="bar2DtoResultMap" type="com.choongang.concert.dto.admin.Bar2Dto">
         <id property="concert_id" column="concert_id"/>
-        <result property="firstConDay" column="firstConDay"/>
-        <result property="secondConDay" column="secondConDay"/>
-        <result property="thirdConDay" column="thirdConDay"/>
+        <result property="R" column="R"/>
+        <result property="S" column="S"/>
+        <result property="VIP" column="VIP"/>
     </resultMap>
 
     <select id="seatGroup" resultMap="bar2DtoResultMap">
         SELECT t.concert_id,
-               SUM(CASE WHEN s.seat_type = 'R' THEN 1 ELSE 0 END) AS firstConDay,
-               SUM(CASE WHEN s.seat_type = 'S' THEN 1 ELSE 0 END) AS secondConDay,
-               SUM(CASE WHEN s.seat_type = 'Vip' THEN 1 ELSE 0 END) AS thirdConDay
+               SUM(CASE WHEN s.seat_type = 'R' THEN 1 ELSE 0 END) AS 'R',
+               SUM(CASE WHEN s.seat_type = 'S' THEN 1 ELSE 0 END) AS 'S',
+               SUM(CASE WHEN s.seat_type = 'VIP' THEN 1 ELSE 0 END) AS 'VIP'
         FROM ticket t 
         LEFT OUTER JOIN seat s ON t.seat_number = s.seat_number
         GROUP BY t.concert_id;
@@ -89,32 +126,112 @@ SELECT COUNT(concert_id) AS reservationGroup FROM ticket WHERE concert_id = 1 un
 	</select>
 	
 	
+	<!--				 보드 컨트롤 				-->
 	
-	<!-- qna 게시판 관리 -->
+	<!--		전체 게시판 관리		-->
+		<!-- 전체 게시물 조회 -->
 	
-	<!-- qna 게시물 조회 -->
-	<select id="getQnaList" parameterType="com.choongang.concert.dto.admin.QnaPostDto" resultType="com.choongang.concert.dto.admin.QnaPostDto">
-		select q.id AS id, title, content, created_at AS Date, u.nickname AS writer
-		from qna_board q left outer join `user` u
-		on q.user_id = u.id;
+	<select id="getTotalList" parameterType="com.choongang.concert.dto.admin.TotalPostDto" resultType="com.choongang.concert.dto.admin.TotalPostDto">
+		SELECT nb.id, title, content, category AS boardType, nb.id as boardId, created_at AS date, nb.writer
+		FROM notice nb
+		WHERE nb.delete_yn = 0
+	UNION all
+		SELECT qb.id, title, content, category AS boardType, qb.id as boardId, created_at AS date, qb.writer
+		FROM qna qb
+		WHERE qb.delete_yn = 0
+	UNION all
+		SELECT eb.id, title, content, category AS boardType, eb.id  as boardId, created_at As date, eb.writer 
+		FROM event eb
+		WHERE eb.delete_yn = 0
+		ORDER BY id DESC;
 	</select>
-	
-	<!-- qna 게시물 수정 -->
-	<update id="updateQna" parameterType="com.choongang.concert.dto.admin.QnaPostDto">
-		update qna_board
-		set title =#{title} , content =#{content}
-		where id=#{id}
-	</update>
+
+		<!-- 전체 게시물 삭제 버튼 -->
 	
 
 	
 	
+		<!-- 전체게시물삭제버튼디비까지 -->
+<!-- 이벤트 보드 업데이트 -->
+<update id="deleteEventBoard" parameterType="com.choongang.concert.dto.admin.TotalPostDto">
+    UPDATE event AS e
+    SET e.delete_yn = CASE WHEN e.category = '이벤트' THEN 1 ELSE e.delete_yn END
+    WHERE (e.id, e.category) IN
+    <foreach collection="list" item="totalPost" open="(" separator="," close=")">
+        (#{totalPost.id}, '이벤트')
+    </foreach>
+</update>
+
+<!-- Q&A 보드 업데이트 -->
+<update id="deleteQnaBoard" parameterType="com.choongang.concert.dto.admin.TotalPostDto">
+    UPDATE qna AS q
+    SET q.delete_yn = CASE WHEN q.category = 'QnA' THEN 1 ELSE q.delete_yn END
+    WHERE (q.id, q.category) IN
+    <foreach collection="list" item="totalPost" open="(" separator="," close=")">
+        (#{totalPost.id}, 'QnA')
+    </foreach>
+</update>
+
+<!-- 노티스 보드 업데이트 -->
+<update id="deleteNoticeBoard" parameterType="com.choongang.concert.dto.admin.TotalPostDto">
+    UPDATE notice AS n
+    SET n.delete_yn = CASE WHEN n.category = '공지사항' THEN 1 ELSE n.delete_yn END
+    WHERE (n.id, n.category) IN
+    <foreach collection="list" item="totalPost" open="(" separator="," close=")">
+        (#{totalPost.id}, '공지사항')
+    </foreach>
+</update>
+
+	<!--		qna 게시판 관리		-->
+
+	
+	
+	<!-- qna 게시물 조회 -->
+	<select id="getQnaList" parameterType="com.choongang.concert.dto.admin.QnaPostDto" resultType="com.choongang.concert.dto.admin.QnaPostDto">
+		select q.id AS id, title, content, created_at AS Date, q.writer
+		from qna q 
+		WHERE q.delete_yn = 0
+	</select>
+	
+
+
+	<!-- qna 게시물 삭제 -->
 	<update id="deleteQna" parameterType="List">
-	    update qna_board
+	    update qna
 	    set delete_yn = 1
 	    where id in
 	    <foreach collection="list" item="id" open="(" separator="," close=")">
-	        #{ids}
+	        #{dataForm}
 	    </foreach>
 	</update>
+	
+	<update id="resDelete" parameterType="java.util.List">
+	    update qna
+	    set delete_yn = 1
+	    where id in
+	    <foreach collection="list" item="id" open="(" separator="," close=")">
+	        #{id}
+	    </foreach>
+	</update>
+	
+	
+	
+	
+	<!-- 				refund				 -->
+<!-- 환불 요청 정보 조회(status = 'ACTIVE') -->
+	<select id="getRefundList" parameterType="List">
+		select t.ticket_name AS ticket, u.name AS name, u.nickname AS nickname, u.tel AS tel, t.seat_number as seatNumber
+		from ticket_sample t
+		left outer join user u on t.user_id = u.id 
+		where t.status = 'WAITING'
+	</select>
+	
+<!-- 환불 버튼 클릭시 환불 처리 -->	
+	<select id="getRefundData" parameterType="com.choongang.concert.dto.admin.RefundDto">
+		DELETE t
+		FROM ticket_sample t
+		LEFT OUTER JOIN user u ON t.user_id = u.id 
+		WHERE u.nickname = '${nickname}' AND u.name = '${name}' 
+		AND t.status = 'WAITING' AND t.seat_number = '${seatNumber}';
+	</select>
 </mapper>
