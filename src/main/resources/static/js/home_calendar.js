@@ -89,7 +89,7 @@ document.querySelector('.dates').addEventListener('click', (event) => {
 	// 오늘 날짜
 	const today = new Date().getDate();
 
-	//	예매 불가능한 날짜 표기
+	//   예매 불가능한 날짜 표기
 
 	const concertId = selectedDate.concertId;
 
@@ -103,10 +103,10 @@ document.querySelector('.dates').addEventListener('click', (event) => {
 			, method: 'GET'
 			, dataType: 'json'
 			, success: function(data) {
-				//	타이틀 화면 -> 장소, 시간, 등급, 날짜 띄우기
+				//   타이틀 화면 -> 장소, 시간, 등급, 날짜 띄우기
 				titleShow(data);
 
-				//	잔여석 띄우기
+				//   잔여석 띄우기
 				showSeatCount(data);
 			},
 			error: function(jqXHR, textStatus, errorThrown) {
@@ -120,7 +120,7 @@ document.querySelector('.dates').addEventListener('click', (event) => {
 
 	let ticketCountCheck = 0;
 	let impossibleId = null;
-
+	let impossibleIds = [];
 	if (userId !== null) {
 
 		// 서버에서 갖고온 ID값에 대한 ConcertId와 TicketCount 수 찾기
@@ -135,16 +135,18 @@ document.querySelector('.dates').addEventListener('click', (event) => {
 
 				ticketCountCheck = 0;
 			}
-			if (tldList[i].ticketCount === ticketMaxCount) {
+			if (tldList[i].ticketCount >= ticketMaxCount) {
 				impossibleId = tldList[i].concertId;
+				impossibleIds.push(impossibleId);
 			}
 		}
 
 	}
 	if (ticketCountCheck < ticketMaxCount) {
 
+		console.log("impossibleIds: " + impossibleIds);
+		console.log("selectedDate.concertId : " + selectedDate.concertId);
 		// 팝업창 주소
-
 		const concertDate = selectedDate.concertYear + "-" + selectedDate.concertMonth + "-" + selectedDate.concertDay;
 		const seatChoiceUrl = 'http://localhost:8080/ticket/seat/choice/' + concertDate;
 
@@ -154,7 +156,20 @@ document.querySelector('.dates').addEventListener('click', (event) => {
 		}
 		btnReservaiton.clickHandler = () => {
 			if (userId !== null) {
-				if (impossibleId !== selectedDate.concertId) {
+
+				let allDiffernt = true; // 초기값을 true로 설정
+
+				for (const impossibleId of impossibleIds) {
+
+					if (impossibleId === selectedDate.concertId) {
+						allDiffernt = false;
+						brak;
+					};
+				}
+				if (allDiffernt) {
+					console.log("impossibleIds: " + impossibleId);
+					console.log("TicketCount: " + ticketCountCheck);
+					console.log("selectedDate.concertId : " + selectedDate.concertId);
 					window.open(
 						seatChoiceUrl,
 						'seatChoice',
@@ -170,7 +185,7 @@ document.querySelector('.dates').addEventListener('click', (event) => {
 						//popupWindw.resizeTo(1250,900);
 						//})
 					);
-				};
+				}
 			} else {
 				const loginBtn = confirm("로그인이 필요합니다. \n로그인 페이지로 가시겠습니까?");
 				if (loginBtn) {
@@ -239,18 +254,18 @@ function titleShow(data) {
 ////////////다음날, 이전날, 오늘날 구현 삭제///////////
 
 // const prevMonth = () => {
-// 	date.setDate(1);
-// 	date.setMonth(date.getMonth() - 1);
-// 	renderCalendar();
+//    date.setDate(1);
+//    date.setMonth(date.getMonth() - 1);
+//    renderCalendar();
 // };
 // const nextMonth = () => {
-// 	date.setDate(1);
-// 	date.setMonth(date.getMonth() + 1);
-// 	renderCalendar();
+//    date.setDate(1);
+//    date.setMonth(date.getMonth() + 1);
+//    renderCalendar();
 // };
 // const goToday = () => {
-// 	date = new Date();
-// 	renderCalendar();
+//    date = new Date();
+//    renderCalendar();
 // };
 /////////////////////////////////////////////////////
 
@@ -268,7 +283,7 @@ function todayCheck() {
 }
 
 
-//  날짜 이벤트 표시하기 
+//  날짜 이벤트 표시하기
 function concertCheck() {
 
 	for (const concertDate of concertDataList) {
@@ -319,19 +334,19 @@ function concertDateColor() {
 
 	choiceDates.forEach(choiceDate => {
 		choiceDate.addEventListener('click', (event) => {
-			let choiceDateDay = choiceDate.textContent;	//	예매 불가능한 날짜 선택 불가능하게 만들기
+			let choiceDateDay = choiceDate.textContent;   //   예매 불가능한 날짜 선택 불가능하게 만들기
 			if (today < choiceDateDay) {
 				choiceDates.forEach(element => element.classList.remove('choice'));
 				let existingChoice = document.querySelector('.choice');
 
-				//	클릭한 이벤트 날짜가 있다면 색 제거			
+				//   클릭한 이벤트 날짜가 있다면 색 제거
 				if (existingChoice) {
 					existingChoice.classList.remove('choice');
 				}
 				// div 태그 선택하기위함
 				event.target.classList.add('choice');
 
-				// span 값도 선택시키기 위함			
+				// span 값도 선택시키기 위함
 				const subSpan = event.target.closest('.selected');
 				if (subSpan) {
 					subSpan.classList.add('choice');
@@ -340,5 +355,4 @@ function concertDateColor() {
 		});
 	});
 }
-
 
