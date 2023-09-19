@@ -1,21 +1,20 @@
 package com.choongang.concert.controller.ticket;
 
-import java.util.List;
-
+import com.choongang.concert.dto.ticket.ConcertScriptDto;
+import com.choongang.concert.dto.ticket.TicketLimitDto;
+import com.choongang.concert.dto.ticket.TicketShowDto;
+import com.choongang.concert.service.ticket.TicketService2;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.choongang.concert.dto.ticket.TicketLimitDto;
-import com.choongang.concert.dto.ticket.TicketShowDto;
-import com.choongang.concert.service.ticket.TicketService2;
-
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -37,9 +36,10 @@ public class TicketController2 {
 			String userId = String.valueOf(id);
 			List<TicketLimitDto> tldList = ticketService.ticketLimit(userId);
 			
+	
 			model.addAttribute("tldList", tldList);
 			model.addAttribute("userId", userId);
-			
+	
 			
 			
 //			List<TicketCountDto> tcdList = ticketService.ticketCountInfo(userId);
@@ -61,7 +61,10 @@ public class TicketController2 {
 //			return "redirect:/user/login";
 //			return "redirect:/ticket/home_calendar";
 		}
-
+		List<ConcertScriptDto> csdList = ticketService.javascriptConcertInfo(); 
+		log.info("-------------------1-----------"+csdList);
+		model.addAttribute("cdList", csdList);
+		
 		return "ticket/home_calendar";
 	}
 

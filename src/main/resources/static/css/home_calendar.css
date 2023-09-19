@@ -170,6 +170,10 @@ body {
 
 /* <-------Calendar 끝 ------->*/
 
+#remain-seat {
+	height : 123px;
+}
+
 .btn-reservation {
     width : 100px;
     height : 50px;
