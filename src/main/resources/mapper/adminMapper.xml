@@ -221,7 +221,7 @@ SELECT COUNT(concert_id) AS reservationGroup FROM ticket WHERE concert_id = 1 un
 <!-- 환불 요청 정보 조회(status = 'ACTIVE') -->
 	<select id="getRefundList" parameterType="List">
 		select t.ticket_name AS ticket, u.name AS name, u.nickname AS nickname, u.tel AS tel, t.seat_number as seatNumber
-		from ticket_sample t
+		from ticket t
 		left outer join user u on t.user_id = u.id 
 		where t.status = 'WAITING'
 	</select>
@@ -229,7 +229,7 @@ SELECT COUNT(concert_id) AS reservationGroup FROM ticket WHERE concert_id = 1 un
 <!-- 환불 버튼 클릭시 환불 처리 -->	
 	<select id="getRefundData" parameterType="com.choongang.concert.dto.admin.RefundDto">
 		DELETE t
-		FROM ticket_sample t
+		FROM ticket t
 		LEFT OUTER JOIN user u ON t.user_id = u.id 
 		WHERE u.nickname = '${nickname}' AND u.name = '${name}' 
 		AND t.status = 'WAITING' AND t.seat_number = '${seatNumber}';

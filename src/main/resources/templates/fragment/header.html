@@ -34,17 +34,17 @@
                         <li class="nav-item" th:if="${session.loginId != null && #strings.toString(session.loginId).contains('admin')}">
                             <a href="/admin" class="nav-link text-warning fw-semibold px-3">ADMIN</a>
                             <ul class="sub-menu">
-                                <li><a href="">회원조회</a></li>
-                                <li><a href="">게시글 관리</a></li>
-                                <li><a href="">환불관리</a></li>
-                                <li><a href="">통계자료</a></li>
+                                <li><a href="/admin/userinfo" th:href="@{/admin/userinfo}">회원조회</a></li>
+                                <li><a href="/admin/boardcontrol" th:href="@{/admin/boardcontrol}">게시글 관리</a></li>
+                                <li><a href="/admin/refund" th:href="@{/admin/refund}">환불관리</a></li>
+                                <li><a href="/admin/statistics" th:href="@{/admin/statistics}">통계자료</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
                             <a href="/about" th:href="@{/about}" class="nav-link custom-atag px-3">ABOUT</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/ticket" class="nav-link custom-atag px-3">TICKET</a>
+                            <a href="/ticket" th:href="@{/ticket/home/calendar}" class="nav-link custom-atag px-3">TICKET</a>
                             <ul class="sub-menu">
                                 <li><a href="" th:href="@{/ticket/home/calendar}">티켓예매</a></li>
                                 <li><a href="" th:href="@{/user/myticket}">구매내역</a></li>
@@ -59,12 +59,12 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="/notice" class="nav-link custom-atag px-3">CONTACT</a>
+                            <a href="/contact" th:href="@{/contact}" class="nav-link custom-atag px-3">CONTACT</a>
                         </li>
                     </ul>
                     <div class="col-4 navbar-nav justify-content-end user-nav pe-3">
                         <a href="/ticket" class="nav-link custom-nav" th:href="@{/ticket/home/calendar}">티켓예매</a>
-                        <a th:if="${!session.isEmpty()}" th:href="@{/user/myinfo}" class="nav-link custom-nav">마이페이지</a>
+                        <a th:if="${!session.isEmpty() && !#strings.toString(session.loginId).contains('admin')}" th:href="@{/user/myinfo}" class="nav-link custom-nav">마이페이지</a>
                         <a th:if="${session.isEmpty()}" href="/accounts/login" th:href="@{/user/login}" class="nav-link custom-nav">로그인</a>
                         <a th:if="${!session.isEmpty()}" th:href="@{/user/logout}" class="nav-link custom-nav">로그아웃</a>
 
