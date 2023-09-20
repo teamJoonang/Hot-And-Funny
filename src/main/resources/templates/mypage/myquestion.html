@@ -64,7 +64,7 @@
                                             <td th:text="${i.category}">환불</td>
                                             <td th:text="${i.title}">입금이 아직 안된 것 같네요.</td>
                                             <td th:text="${i.createdAt}">2023.09.05</td>
-                                            <td><a th:href="@{'/qna/detail' + ${i.id}}">답변 중</a></td>
+                                            <td><a th:href="@{'/qna/detail/' + ${i.id}}">답변 중</a></td>
                                         </tr>
 <!--                                        <tr>-->
 <!--                                            <td>2</td>-->
