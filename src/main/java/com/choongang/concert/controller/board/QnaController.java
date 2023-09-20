@@ -5,7 +5,10 @@ import com.choongang.concert.dto.board.PageDto;
 import com.choongang.concert.dto.board.QnaDto;
 import com.choongang.concert.dto.board.QnaEditDto;
 import com.choongang.concert.service.board.QnaService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.List;
 
 @Slf4j
+@Log4j2
 @Controller
 @RequiredArgsConstructor
 public class QnaController {
@@ -55,17 +59,23 @@ public class QnaController {
 	}
 
 	@PostMapping("/qna/create")
-	public String qnaCreatePost(@ModelAttribute QnaEditDto qnaEditDto){
+	public String qnaCreatePost(@ModelAttribute QnaEditDto qnaEditDto, HttpServletRequest request){
+		
+		HttpSession session = request.getSession(false);
+		if(session != null && session.getAttribute("loginId")!= null) {
+			qnaEditDto.setLoginId((Long)session.getAttribute("id"));
+			qnaEditDto.setWriter((String)session.getAttribute("nickname"));
+			log.info("QnaEditDto = {}", qnaEditDto);
+			// title입력 안할 경우 빈문자열 삽입됨, 클릭불가 현상 (임시조치)
+			if (qnaEditDto.getTitle() == null || qnaEditDto.getTitle().isEmpty()){
+				qnaEditDto.setTitle("제목없음");
+			}
+			int qnaRow = qnaService.qnaCreatePost(qnaEditDto);
 
-		log.info("QnaEditDto = {}", qnaEditDto);
-		// title입력 안할 경우 빈문자열 삽입됨, 클릭불가 현상 (임시조치)
-		if (qnaEditDto.getTitle() == null || qnaEditDto.getTitle().isEmpty()){
-			qnaEditDto.setTitle("제목없음");
+
+			log.info("INSERT ROW = {}", qnaRow);
 		}
-		int qnaRow = qnaService.qnaCreatePost(qnaEditDto);
-
-
-		log.info("INSERT ROW = {}", qnaRow);
+	
 		return "redirect:/qna";
 	}
 
@@ -74,6 +84,7 @@ public class QnaController {
 
 		log.info("GET ID = {}", id);
 		QnaDto qnaDetail = qnaService.findQnaDetail(id);
+		log.info("qnaDetail = {}", qnaDetail);
 		model.addAttribute("qnaEdit", qnaDetail);
 
 		return "/board/qna_edit";
@@ -82,7 +93,7 @@ public class QnaController {
 
 	@PostMapping("/qna/edit/{id}")
 	public String updateQnaEdit(@PathVariable Long id, @ModelAttribute QnaEditDto qnaEditDto, Model model){
-
+		
 		int qnaRow = qnaService.qnaEditPost(qnaEditDto);
 		log.info("UPDATE ROW = {}", qnaRow);
 
@@ -91,7 +102,7 @@ public class QnaController {
 
 	@PostMapping("/qna/delete/{id}")
 	public String deleteQna(@PathVariable Long id) {
-
+		
 		int qnaRow = qnaService.qnaDeletePost(id);
 		log.info("DELETE ROW = {} ID = {}", qnaRow, id);
 

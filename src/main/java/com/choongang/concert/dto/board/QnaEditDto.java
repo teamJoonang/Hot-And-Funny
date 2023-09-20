@@ -10,14 +10,15 @@ import lombok.ToString;
 public class QnaEditDto {
 
     private Long id;
+    private Long loginId;
     private String title;
     private String writer;
     private String content;
     private String category;
 
 
-    public QnaEditDto() {
-
-        this.writer = "관리자";
-    }
+//    public QnaEditDto() {
+//
+//        this.writer = "관리자";
+//    }
 }

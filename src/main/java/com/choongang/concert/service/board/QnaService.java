@@ -5,12 +5,14 @@ import com.choongang.concert.dto.board.QnaDto;
 import com.choongang.concert.dto.board.QnaEditDto;
 import com.choongang.concert.repository.board.QnaMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Log4j2
 public class QnaService {
 
 	private final QnaMapper qnaMapper;
@@ -27,12 +29,12 @@ public class QnaService {
     }
 
     public QnaDto findQnaDetail(Long id) {
-
+    	
         return qnaMapper.qnaFindById(id);
     }
 
     public int qnaCreatePost(QnaEditDto qnaEditDto) {
-
+    
         return qnaMapper.qnaCreatePost(qnaEditDto);
     }
 
@@ -41,6 +43,7 @@ public class QnaService {
     }
 
     public int qnaDeletePost(Long id) {
+    	log.info("********************1111" + id);
         return qnaMapper.qnaDeletePost(id);
     }
     

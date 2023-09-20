@@ -6,7 +6,7 @@
     <nav class="bg-black navbar navbar-expand-lg navbar-dark" aria-label="Offcanvas navbar large">
         <div class="container-fluid">
             <div class="col-3">
-                <a href="" class="d-flex">
+                <a th:href="@{/}" href="" class="d-flex">
                     <img src="/static/img/concert_logo.png" th:src="@{/img/concert_logo.png}" class="img-fluid header-img-logo" alt="콘서트_이미지_로고">
                 </a>
             </div>
@@ -32,7 +32,7 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-center flex-grow-1 pe-3 fs-5">
                         <li class="nav-item" th:if="${session.loginId != null && #strings.toString(session.loginId).contains('admin')}">
-                            <a href="/admin" class="nav-link text-warning fw-semibold px-3">ADMIN</a>
+                            <a href="/admin" th:href="@{/admin/userinfo}" class="nav-link text-warning fw-semibold px-3">ADMIN</a>
                             <ul class="sub-menu">
                                 <li><a href="/admin/userinfo" th:href="@{/admin/userinfo}">회원조회</a></li>
                                 <li><a href="/admin/boardcontrol" th:href="@{/admin/boardcontrol}">게시글 관리</a></li>

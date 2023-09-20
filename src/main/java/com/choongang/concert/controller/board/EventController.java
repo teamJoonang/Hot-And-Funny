@@ -6,6 +6,7 @@ import com.choongang.concert.dto.board.EventEditDto;
 import com.choongang.concert.dto.board.PageDto;
 import com.choongang.concert.service.board.EventService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,7 @@ import java.util.List;
 
 @Slf4j
 @Controller
+@Log4j2
 @RequiredArgsConstructor
 public class EventController {
 
