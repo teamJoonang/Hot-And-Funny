@@ -1,0 +1,20 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css');
+
+/* 부트스트랩 반응형 제거 */
+.container{width:1200px; max-width:none!important;}
+
+
+body {font-family: 'Pretendard', 'sans-serif';}
+
+
+.title {
+
+    font-size:  3.8rem !important;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.section-content {
+
+    color: #ffffff;
+}
