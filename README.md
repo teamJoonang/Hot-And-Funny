@@ -83,20 +83,20 @@
 
 <h1>💻화면 구성</h1>
 <div align="center">
-  <img width="33%" src="https://github.com/HyunSense/hyunsense/assets/130532597/c6d45349-0f26-47c6-861d-eb8f94993bc6" />
-  <img width="33%" src="https://github.com/HyunSense/hyunsense/assets/130532597/66936234-949f-4cb7-806f-c829e617b3a7">
-  <img width="33%" src="https://github.com/HyunSense/hyunsense/assets/130532597/c23f7839-8b34-4f88-8d8f-c0e2531c96c8">
-  <img width="33%"  src="https://github.com/HyunSense/hyunsense/assets/130532597/3dcfddf7-4a9c-407a-a155-b98b49ac11aa" />
-  <img width="33%"  src="https://github.com/HyunSense/hyunsense/assets/130532597/fbef31a6-a93b-48bc-bd4e-28a1197b9cf4" />
-  <img width="33%"  src="https://github.com/HyunSense/hyunsense/assets/130532597/774f9fd5-7715-42ee-bac2-5a20a89a6c10" />
-  <img width="33%"  src="https://github.com/HyunSense/hyunsense/assets/130532597/7472b94d-a30f-4291-8470-fcebc62bbb6a" />
-  <img width="33%"  src="https://github.com/HyunSense/hyunsense/assets/130532597/8ecd5aef-9eb6-46bd-9290-dc30c81bbece" />
-  <img width="33%"  src="https://github.com/HyunSense/hyunsense/assets/130532597/26512221-508b-4e1f-b4fd-596ad29f49ec" />
-  <img width="33%"  src="https://github.com/HyunSense/hyunsense/assets/130532597/9475dc84-aeb5-4204-ac05-c5e80d65417c" />
-  <img width="33%"  src="https://github.com/HyunSense/hyunsense/assets/130532597/7e24e72e-1523-4293-b02d-2e8382a0ab51" />
-  <img width="33%"  src="https://github.com/HyunSense/hyunsense/assets/130532597/3c363b5a-4447-43be-8e3e-da825a552153" />
-  <img width="33%"  src="https://github.com/HyunSense/hyunsense/assets/130532597/58178af7-df5d-4652-85b3-55a601a4a936" />
-  <img width="33%"  src="https://github.com/HyunSense/hyunsense/assets/130532597/598415de-2462-407a-b701-d6d0d580cd42" />
+  <img width="30%" src="https://github.com/HyunSense/hyunsense/assets/130532597/c6d45349-0f26-47c6-861d-eb8f94993bc6" />
+  <img width="30%" src="https://github.com/HyunSense/hyunsense/assets/130532597/66936234-949f-4cb7-806f-c829e617b3a7">
+  <img width="30%" src="https://github.com/HyunSense/hyunsense/assets/130532597/c23f7839-8b34-4f88-8d8f-c0e2531c96c8">
+  <img width="30%"  src="https://github.com/HyunSense/hyunsense/assets/130532597/3dcfddf7-4a9c-407a-a155-b98b49ac11aa" />
+  <img width="30%"  src="https://github.com/HyunSense/hyunsense/assets/130532597/fbef31a6-a93b-48bc-bd4e-28a1197b9cf4" />
+  <img width="30%"  src="https://github.com/HyunSense/hyunsense/assets/130532597/774f9fd5-7715-42ee-bac2-5a20a89a6c10" />
+  <img width="30%"  src="https://github.com/HyunSense/hyunsense/assets/130532597/7472b94d-a30f-4291-8470-fcebc62bbb6a" />
+  <img width="30%"  src="https://github.com/HyunSense/hyunsense/assets/130532597/8ecd5aef-9eb6-46bd-9290-dc30c81bbece" />
+  <img width="30%"  src="https://github.com/HyunSense/hyunsense/assets/130532597/26512221-508b-4e1f-b4fd-596ad29f49ec" />
+  <img width="30%"  src="https://github.com/HyunSense/hyunsense/assets/130532597/9475dc84-aeb5-4204-ac05-c5e80d65417c" />
+  <img width="30%"  src="https://github.com/HyunSense/hyunsense/assets/130532597/7e24e72e-1523-4293-b02d-2e8382a0ab51" />
+  <img width="30%"  src="https://github.com/HyunSense/hyunsense/assets/130532597/3c363b5a-4447-43be-8e3e-da825a552153" />
+  <img width="30%"  src="https://github.com/HyunSense/hyunsense/assets/130532597/58178af7-df5d-4652-85b3-55a601a4a936" />
+  <img width="30%"  src="https://github.com/HyunSense/hyunsense/assets/130532597/598415de-2462-407a-b701-d6d0d580cd42" />
 </div>
 
 
